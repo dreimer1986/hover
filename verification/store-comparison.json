@@ -1,0 +1,11 @@
+{
+  "files_first": 2665,
+  "files_second": 2665,
+  "differing_files": [
+    "AppxBlockMap.xml",
+    "AppxMetadata/CodeIntegrity.cat",
+    "AppxSignature.p7x",
+    "[Content_Types].xml"
+  ],
+  "identical_file_count": 2661
+}

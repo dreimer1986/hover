@@ -1,0 +1,198 @@
+[
+  {
+    "path": "images/ui/rethink-hover.c62bc05b.png",
+    "source": "http://mshovercdn.blob.core.windows.net/images/ui/rethink-hover.c62bc05b.png",
+    "capture": "20170923145856",
+    "sha256": "cd462a975e5178a79a98c6b93e5510ce1e3ed8c039d377600b4af1a2ed8600d2",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "DYUM7AI3UZBIIVUTWRQOTDWWY7Z4YU5G"
+  },
+  {
+    "path": "sounds/Modern/CLOAK_EN.8c472435.ogg",
+    "source": "http://cdn1.hover.ie/sounds/Modern/CLOAK_EN.8c472435.ogg",
+    "capture": "20131003051638",
+    "sha256": "28308f4a0c5e365ff1dc541153841839a73b70dc4b3325582866e5e7ed62d6b2",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "YMHBKI6C626LDDMSVWGGFQU23QP3ACNT"
+  },
+  {
+    "path": "sounds/Modern/CLOAK_ST.aaf875b1.ogg",
+    "failed": true
+  },
+  {
+    "path": "sounds/Modern/GAMEOVR.8567da1d.ogg",
+    "failed": true
+  },
+  {
+    "path": "sounds/Modern/HIT_ROBT.78a4b042.ogg",
+    "source": "http://cdn1.hover.ie/sounds/Modern/HIT_ROBT.78a4b042.ogg",
+    "capture": "20131003051639",
+    "sha256": "2d0bf19673ee62e5a50d7cad0ba3d0d3e4b53a63834f13f3000b6c758d900960",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "OCTXOWILK4RFJQ2PPYPFFDF5JLDF57D6"
+  },
+  {
+    "path": "sounds/Modern/HOLD_ST.6e8e6638.ogg",
+    "source": "http://cdn1.hover.ie/sounds/Modern/HOLD_ST.6e8e6638.ogg",
+    "capture": "20131003051644",
+    "sha256": "cd050efe58046e164e33e5d593ab0f71634699da82fc950c56b574ccc8c40367",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "6FCWLRX5QKCZWZTUUPH7WNOTOQFXXZUM"
+  },
+  {
+    "path": "sounds/Modern/JUMP_EN.d4b4ee76.ogg",
+    "source": "http://cdn1.hover.ie/sounds/Modern/JUMP_EN.d4b4ee76.ogg",
+    "capture": "20131003051640",
+    "sha256": "5e41b8f3ea5ba94cbdda499b8f3ebe2153f5d58d347d8091c9fd214ea07af594",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "LERIBL7V6PSE5FTA26YJ2SNVGTG4OF6L"
+  },
+  {
+    "path": "sounds/Modern/MUSIC.478589b8.ogg",
+    "source": "http://cdn1.hover.ie/sounds/Modern/MUSIC.478589b8.ogg",
+    "capture": "20131003051640",
+    "sha256": "43f3a3e1d3309c41817e44fe5667c4f929557f9c824d3a5d3c4d3e70a66c3a1f",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "ABFK4MYI34ER63OSAPKBOOXCUZGNNM34"
+  },
+  {
+    "path": "sounds/Modern/OBT_WALL.cc1091d7.ogg",
+    "source": "http://cdn2.hover.ie/sounds/Modern/OBT_WALL.cc1091d7.ogg",
+    "capture": "20131003051641",
+    "sha256": "3eadb732e7ed1e370ce4d1bc36b41a80e6d860a6520cc0ee8202d12ca5eb9e16",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "DBXA5FCQH3YMDNBYZBJPLUOFRXGBPRH6"
+  },
+  {
+    "path": "sounds/Modern/FLAGR_ST.c7d2ddf7.ogg",
+    "source": "http://cdn2.hover.ie/sounds/Modern/FLAGR_ST.c7d2ddf7.ogg",
+    "capture": "20131003051638",
+    "sha256": "21a29049f4d21f3e46ffe022127ec5efbeca0ee7cf0ba97c3053a847f482539c",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "UMEHF5D5PG7FD2TOZZRP2FNL3RPM5NQI"
+  },
+  {
+    "path": "sounds/Modern/HIT_MAPE.43fe1460.ogg",
+    "source": "http://cdn2.hover.ie/sounds/Modern/HIT_MAPE.43fe1460.ogg",
+    "capture": "20131003051638",
+    "sha256": "6c6f83dcf891affe86be3c692eb1149ee8ca6469022818f4c42593bbdb45d8f2",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "KHKVQZM3ZBSTDRMMWWNVR7UDMZ5CMLQK"
+  },
+  {
+    "path": "sounds/Modern/HOLD_EN.885919e2.ogg",
+    "source": "http://cdn2.hover.ie/sounds/Modern/HOLD_EN.885919e2.ogg",
+    "capture": "20131003051639",
+    "sha256": "7c17bf58a2c5c358113a8a28000b08aef22030ddfaa541153ff5f6a35e2e3499",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "7HFCKNETYI7JPZPKEUJ7UEK46P2AXZPV"
+  },
+  {
+    "path": "sounds/Modern/INVIN_ST.c839d5da.ogg",
+    "source": "http://cdn2.hover.ie/sounds/Modern/INVIN_ST.c839d5da.ogg",
+    "capture": "20131003051640",
+    "sha256": "adf9be558540ec220d1af4a6e2a62055d699c88abcd3a8c01aebf2bdec00e139",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "ZDKWQRDWSEUKCJFS4LUAL42QG67BAETM"
+  },
+  {
+    "path": "sounds/Modern/OBT_HFLG.6ead8b8e.ogg",
+    "source": "http://cdn2.hover.ie/sounds/Modern/OBT_HFLG.6ead8b8e.ogg",
+    "capture": "20131003051640",
+    "sha256": "9da7030afc7cdbc4db0b997fab82abd89104da16aa2b3af105ddb874d2dfb5a3",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "556DW4QVTTVQ73SVQJLHAMNC2YYSOOPS"
+  },
+  {
+    "path": "sounds/Modern/OBT_RFLG.ea3cb0b8.ogg",
+    "failed": true
+  },
+  {
+    "path": "sounds/Modern/SHIELD.de0ffacb.ogg",
+    "source": "http://cdn2.hover.ie/sounds/Modern/SHIELD.de0ffacb.ogg",
+    "capture": "20131003051641",
+    "sha256": "b4101caac66354212a5d6360c629e421f6324c73cbf3f684c76abdae8482adac",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "FHDLP6CCWMEOHAIWLTT5MVOQM666FQG4"
+  },
+  {
+    "path": "sounds/Modern/SPEED_EN.d283de67.ogg",
+    "failed": true
+  },
+  {
+    "path": "sounds/Modern/ATTKPING.af033ac7.ogg",
+    "source": "http://cdn3.hover.ie/sounds/Modern/ATTKPING.af033ac7.ogg",
+    "capture": "20131003051638",
+    "sha256": "89ddf157a193ad6c4d654d950b9953688b0e965aa233b5f9548cafaa9838379f",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "6R3QRJY4SKMEGQYTYCOMVEMEYWLHKWBZ"
+  },
+  {
+    "path": "sounds/Modern/FLAGR_DR.18a53859.ogg",
+    "source": "http://cdn3.hover.ie/sounds/Modern/FLAGR_DR.18a53859.ogg",
+    "capture": "20131003051642",
+    "sha256": "1db84e36175a0451ba674dc0a209eb0a542b17755535468cc24ada19513ed157",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "YBAKGRD4CX2W2T3OYHCROTMR35DSUQRU"
+  },
+  {
+    "path": "sounds/Modern/HIT_POD.cb5ba5e7.ogg",
+    "failed": true
+  },
+  {
+    "path": "sounds/Modern/HIT_SHLD.17267a02.ogg",
+    "source": "http://cdn3.hover.ie/sounds/Modern/HIT_SHLD.17267a02.ogg",
+    "capture": "20131003051639",
+    "sha256": "a5299b0ef1c86f462abfa7c61dc59460e6f3aafba35d1b4565ff3b48bdd99474",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "GIFGR7WQV7KTDJTAQAYUXIEUAJPOYZKT"
+  },
+  {
+    "path": "sounds/Modern/HIT_WALL.c1027a68.ogg",
+    "source": "http://cdn3.hover.ie/sounds/Modern/HIT_WALL.c1027a68.ogg",
+    "capture": "20131003051639",
+    "sha256": "c62b23568c0a81085284f7355652d1cdf3d521991bf224b408c51d3bf895e6f0",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "UKH3SQKEHER42JICAXASWYMPJXAZTSCK"
+  },
+  {
+    "path": "sounds/Modern/INVIN_EN.7696bb55.ogg",
+    "source": "http://cdn3.hover.ie/sounds/Modern/INVIN_EN.7696bb55.ogg",
+    "capture": "20131003051639",
+    "sha256": "4438df806ffe6fdc30c7df953a9a99c81c6a0223a27cffaaa6a5aac6f92c4b58",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "4A7GMJYV7P3C6HRDGFKZVDDB75SYT5PZ"
+  },
+  {
+    "path": "sounds/Modern/JUMP_ST.ef74e5fd.ogg",
+    "failed": true
+  },
+  {
+    "path": "sounds/Modern/LEVLSTRT.427ba016.ogg",
+    "source": "http://cdn3.hover.ie/sounds/Modern/LEVLSTRT.427ba016.ogg",
+    "capture": "20131003051640",
+    "sha256": "1c96a0e1a6009870c86d2b18ced215c7fcc9123386508d9b1c82b49a1af0f347",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "H35M2SMUCNKFQGUTBG3NSK66EJRRJRVH"
+  },
+  {
+    "path": "sounds/Modern/SKID_ST.ee4eddb0.ogg",
+    "source": "http://cdn3.hover.ie/sounds/Modern/SKID_ST.ee4eddb0.ogg",
+    "capture": "20131003051641",
+    "sha256": "bb30ce467710a5a17e11196e409b514b233eaea4aaea363dc6b2127199b4453c",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "GGLZULLGEMYEMJIMH4ZV4QMYLVUHFBGD"
+  },
+  {
+    "path": "sounds/Modern/SPEED_RE.f1c39155.ogg",
+    "failed": true
+  },
+  {
+    "path": "sounds/Modern/WINLEVEL.34b412b7.ogg",
+    "source": "http://cdn3.hover.ie/sounds/Modern/WINLEVEL.34b412b7.ogg",
+    "capture": "20131003051644",
+    "sha256": "621a8dd8d3c29931ad754dff9bfa452b62214aebe7337451a7eff44e1d873ee0",
+    "kind": "wayback-download",
+    "cdx_sha1_base32": "2V4NC5YWF42CUP6HJUJKZ2HJEL2HOUIF"
+  }
+]

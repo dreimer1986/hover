@@ -1,0 +1,555 @@
+[
+  {
+    "path": "sounds/reconstructed/Retro/WINLEVEL.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/WINLEVEL.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "9c0a59a3eb18b3ed4c4a76df570142ce288db00696f5be4abb53e0cfdf84d728"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/SPEED_RE.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/SPEED_RE.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "5181a9aa7250cfd686f10a798786ae2735527b1d570ddc4eb756c95d74f014f4"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/SPEED_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/SPEED_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "436dedc18d72edc9999e8c2816f651836a71512d3d388a14a124cd7e1104408d"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/SKID_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/SKID_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "65bbeb664f79a64b700db859477badd5973cd9201d741fff713f3ab4a7abf8d7"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/SHIELD.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/SHIELD.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "02227560d9221d6bc651e49df3d8f3f5dd8e9dbaad2baf62b660a0156de24943"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/OBT_WALL.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/OBT_WALL.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "47d3d04cc220bbd11ded55b2940c1fcaac5d920264651bb694edd109b2d9718a"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/OBT_RFLG.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/OBT_RFLG.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "216b00a241dcd822266572a6a8eb68cd441d77f83ee5ca3d064701a5b91d8aad"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/OBT_JUMP.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/OBT_JUMP.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "839b10350d4b15e94665835a530a50724114cbbdb5b714a7d562ceee54e9c336"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/OBT_HFLG.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/OBT_HFLG.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "36b75e02e1ec28cf41b17e79cb67b74686bce708fb1f7262da4611cb62e0913b"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/OBT_CLOA.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/OBT_CLOA.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "9d7a34fd9869aa8e5cb8fe47d7ee1cef84bbfd9ddfaa11848d54c2b1e1990088"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/LEVLSTRT.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/LEVLSTRT.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "28cedda971283a59a63d301c1ba802b903549c8c6b5a5a69800b7d83e5ba01ab"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/JUMP_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/JUMP_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "fa00697c6dd9c05a05acc94320fd47f3eb85e57393b0650d68fb53055c68b2a8"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/JUMP_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/JUMP_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "f78c425bddfe3f74998e1fa5cb0e6488954322779a94879e45b31695dcf774d0"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/INVIN_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/INVIN_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "129d0f14aa82d1ca8c4af1421f3890fb6dc9597f376918a74fb649759ed4c948"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/INVIN_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/INVIN_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "5fa966f6c2a4144c790e5af5468ce21aa76a5d71d85e89d63adf4cc6bf23cbe8"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/html5-audio-loop.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/html5-audio-loop.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "143f425854611c24058c5a800472e6fab3135d8fcb17bbc735ddd4531afd4c32"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/HOLD_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/HOLD_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "265f48ad941c1b9ed0500544f20c143cb7120559284a903933c09eab72a26dea"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/HOLD_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/HOLD_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "17cda70852d62ae91dd0cfc54734029236a08690f2247f4813225a4485dd6ed9"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/HIT_WALL.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/HIT_WALL.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "f2a6cc679f243a8f1d8b9de4b71466a5c1a1336067c419e8cbb139070ecf55e5"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/HIT_SHLD.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/HIT_SHLD.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "98b84e16eafea516a09ddd6814fdae8ef1b9fec4ac73a4f1481726567b00f100"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/HIT_ROBT.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/HIT_ROBT.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "21d0a3a703d9d3a6a2984b87631feee3c127608fe5d8e1544d4482bbe0acbd12"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/HIT_POD.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/HIT_POD.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "4e6eee790147d24adf2c89f4737ffa4805ed2fa1b31f17f8fcaef11f82cb9de4"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/HIT_MAPE.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/HIT_MAPE.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "2e89065dc1b941927e7053a7bc430c5156de798426030c1dbe3767396c646e33"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/GAMEOVR.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/GAMEOVR.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "61226cc1cea5e23c4edbae1e6b3c43500c3eb206257cabe7d9f1f38429859584"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/FLAGR_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/FLAGR_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "8bd1ac3c6448aaa77914d1f731c23099da3b593f21146de69a1f87814c981cd2"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/FLAGR_DR.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/FLAGR_DR.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "b05dbcb83b37dc9dcde6ebdee478a63c010c0ebac95cd52b0259f9949690b14f"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/ENG_NORM.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/ENG_NORM.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "da2f69d857c33c207704e40e1a08126752e8002ec1db977566e180accdca193a"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/ENG_LOW.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/ENG_LOW.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "17d3928d8e57c271cfe52cdf830e65a2b6f886e4e5be2159a2570b7b921fe4f4"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/ENG_IDLE.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/ENG_IDLE.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "a7baa9a2d0baa61268a821bdfaff9e91bf3b86ad366e3c5f8c171e757f602009"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/ENG_HIGH.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/ENG_HIGH.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "537ae424d69b3a13f77cad30e33b9359e919e62161b48adb025fc400a35eabd4"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/CLOAK_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/CLOAK_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "cfc0231b2eb5e42d71309bd8ec674da96292d3aed12078a7917e1d473af86555"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/CLOAK_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/CLOAK_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "84922d3e3d19974dccb81cd1d14a80e86ae373678a6829cd14f6058b71301448"
+  },
+  {
+    "path": "sounds/reconstructed/Retro/ATTKPING.ogg",
+    "source": "HoverWinRT APPX/sounds/Retro/ATTKPING.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "8d351113853d3601ed440186bd2da7cd8463740e499046430d6770c576613488"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/WINLEVEL.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/WINLEVEL.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "376107c317db46932554f0008f156e6bd551c3b8cab2b5c6b5b9a09392a82e67"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/SPEED_RE.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/SPEED_RE.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "7c026c0fdd97d628432b7c964a1b522e7d749956968fb7ff7ae1156b4d2d7f3f"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/SPEED_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/SPEED_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "f29a02dcee28565f1e3d72ff3f72c4b12b6e7bbf890740f0d04d22db4b6d86ea"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/SKID_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/SKID_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "e33dc9d1dfbb7d34340c35a826c15bd7219ef7d735819bf9827259ae1cb0b1de"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/SHIELD.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/SHIELD.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "8c4e96111069e914040ddda9eed109db593fae1497c7221cfa1e55216120f820"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/OBT_WALL.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/OBT_WALL.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "51200db2985be39aea329366f6ea375ff226564a5d6dc0faf3e5fd65db03f035"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/OBT_RFLG.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/OBT_RFLG.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "cd6fd8175acdc4d84dc579b7f9fa8d3ae7ef0680ac0480d17b0bafe1223e788c"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/OBT_JUMP.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/OBT_JUMP.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "2d3f3b45b2f4bba2666f8b6e53ec1376da144a26ce2b54bae1c0ece87086aeb0"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/OBT_HFLG.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/OBT_HFLG.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "6d692e9858164c3792dff06199dd66bf3e66b8054aa3caaf5dc65baa03def1e1"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/OBT_CLOA.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/OBT_CLOA.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "c309c67780d4ecf0be50486bc4eb44f086bc38cd3828a4ed5760dbb8630854b1"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/MUSIC.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/MUSIC.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "98d77cd3f9e55a0d9e43203f71018e43f209dcd62a136b452614b78c7fa6a143"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/LEVLSTRT.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/LEVLSTRT.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "ed3c08ac1a20834349cb908aa62d1f1df7d5818132749c53b70c238429b89b5e"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/JUMP_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/JUMP_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "ea74b6a0dfb5e25bbfa9f198d6d96fe3ae2b9e150319c4643bc2a619693c4bc7"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/JUMP_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/JUMP_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "199ff0b2a2aa35ec6fcc9944e0f96e4f0f3738ebdfa58f637db6bd26a19bd12e"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/INVIN_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/INVIN_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "65ece2a3c53c528d2fce359ac751709599318254b2be3c105858b03bc8469995"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/INVIN_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/INVIN_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "d57215c338306277f0f1f0a34c6472fe95f4c812723add7c89c72820b51e06f5"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/HOLD_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/HOLD_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "5b01a68e6ef970063c3cfa36b7314219961fc50906316ac15f23f5c1411ac68a"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/HOLD_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/HOLD_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "e536152dea8719dff56a2d6c6d76aea08fab48013f5239856172f1d242d519af"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/HIT_WALL.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/HIT_WALL.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "91780174c74cce58b0387179ac91eed35fe43170155c8fd50aa06d73d4fc1a14"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/HIT_SHLD.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/HIT_SHLD.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "ef97a12420f5b33728a3bc03a49ede77e49888c89053c0fd533f9ec166b39ac2"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/HIT_ROBT.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/HIT_ROBT.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "8967b7a84deef047a4334099d8b231bf344a0e2a1381dae6a009bc5888201bc8"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/HIT_POD.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/HIT_POD.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "2817a2709bb1b4b6b8c78de0d1431118190b8bbefb2065dd150a6e1b44edd95d"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/HIT_MAPE.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/HIT_MAPE.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "c5765960e3043ccbad6d44b6862416fe66c45d8cf14393187cebf8a4a02c861a"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/GAMEOVR.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/GAMEOVR.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "3e39c62dc5845d0897c77067b11898188afd7789addac1da0a48852fe70c7bc5"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/FLAGR_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/FLAGR_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "a4337e6df473d858e1b1aedfb5ab0ebd701a6678966262cf1570db085d7de6e0"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/FLAGR_DR.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/FLAGR_DR.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "66f31c45513bd3f306adb46e7508622ea9ea08bce8cb5e7bd8df3e81dba33018"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/CLOAK_ST.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/CLOAK_ST.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "aa122dc57be665539113a1b3c91f228ea6d6adf8b61b3f1fed6be124144e4496"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/CLOAK_EN.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/CLOAK_EN.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "a4d88f1a561ecbe108d206a8ef2bd1cdfd477b3bf861733404c6e6503dc03ff3"
+  },
+  {
+    "path": "sounds/reconstructed/Modern/ATTKPING.ogg",
+    "source": "HoverWinRT APPX/sounds/Modern/ATTKPING.m4a",
+    "kind": "transcoded-store-audio",
+    "sha256": "ed91a933029fcc831cabe9bb6e12d2bc8e8ed9e00d431914ea2a6391620927d0"
+  },
+  {
+    "version": "2013-10-02",
+    "kind": "sound-path-fallbacks",
+    "replacements": {
+      "Modern/CLOAK_ST.aaf875b1.ogg": "reconstructed/Modern/CLOAK_ST.ogg",
+      "Modern/GAMEOVR.8567da1d.ogg": "reconstructed/Modern/GAMEOVR.ogg",
+      "Modern/HIT_POD.cb5ba5e7.ogg": "reconstructed/Modern/HIT_POD.ogg",
+      "Modern/JUMP_ST.ef74e5fd.ogg": "reconstructed/Modern/JUMP_ST.ogg",
+      "Modern/OBT_CLOA.cc1091d7.ogg": "reconstructed/Modern/OBT_CLOA.ogg",
+      "Modern/OBT_JUMP.cc1091d7.ogg": "reconstructed/Modern/OBT_JUMP.ogg",
+      "Modern/OBT_RFLG.ea3cb0b8.ogg": "reconstructed/Modern/OBT_RFLG.ogg",
+      "Modern/SPEED_EN.d283de67.ogg": "reconstructed/Modern/SPEED_EN.ogg",
+      "Modern/SPEED_RE.f1c39155.ogg": "reconstructed/Modern/SPEED_RE.ogg",
+      "Retro/ATTKPING.505be4ec.m4a": "Retro/ATTKPING.m4a",
+      "Retro/CLOAK_EN.cad25d66.m4a": "Retro/CLOAK_EN.m4a",
+      "Retro/CLOAK_ST.97bdbb16.m4a": "Retro/CLOAK_ST.m4a",
+      "Retro/ENG_HIGH.08d00657.m4a": "Retro/ENG_HIGH.m4a",
+      "Retro/ENG_IDLE.612bff36.m4a": "Retro/ENG_IDLE.m4a",
+      "Retro/ENG_LOW.b6b0d4b3.m4a": "Retro/ENG_LOW.m4a",
+      "Retro/ENG_NORM.f46edc7c.m4a": "Retro/ENG_NORM.m4a",
+      "Retro/FLAGR_DR.51295c42.m4a": "Retro/FLAGR_DR.m4a",
+      "Retro/FLAGR_ST.31e441e5.m4a": "Retro/FLAGR_ST.m4a",
+      "Retro/GAMEOVR.c1598df1.m4a": "Retro/GAMEOVR.m4a",
+      "Retro/HIT_MAPE.96dc6d6e.m4a": "Retro/HIT_MAPE.m4a",
+      "Retro/HIT_POD.19f25923.m4a": "Retro/HIT_POD.m4a",
+      "Retro/HIT_ROBT.5fb7d87a.m4a": "Retro/HIT_ROBT.m4a",
+      "Retro/HIT_SHLD.d3d74732.m4a": "Retro/HIT_SHLD.m4a",
+      "Retro/HIT_WALL.04e8116f.m4a": "Retro/HIT_WALL.m4a",
+      "Retro/HOLD_EN.d3398967.m4a": "Retro/HOLD_EN.m4a",
+      "Retro/HOLD_ST.93ce694d.m4a": "Retro/HOLD_ST.m4a",
+      "Retro/INVIN_EN.17bf3b34.m4a": "Retro/INVIN_EN.m4a",
+      "Retro/INVIN_ST.0f358e86.m4a": "Retro/INVIN_ST.m4a",
+      "Retro/JUMP_EN.3f8b18d3.m4a": "Retro/JUMP_EN.m4a",
+      "Retro/JUMP_ST.0b24aaa7.m4a": "Retro/JUMP_ST.m4a",
+      "Retro/LEVLSTRT.a35620c8.m4a": "Retro/LEVLSTRT.m4a",
+      "Retro/OBT_CLOA.85a3bbfc.m4a": "Retro/OBT_CLOA.m4a",
+      "Retro/OBT_HFLG.43da27b1.m4a": "Retro/OBT_HFLG.m4a",
+      "Retro/OBT_JUMP.f1f79eb0.m4a": "Retro/OBT_JUMP.m4a",
+      "Retro/OBT_RFLG.a495fa41.m4a": "Retro/OBT_RFLG.m4a",
+      "Retro/OBT_WALL.4ad367bb.m4a": "Retro/OBT_WALL.m4a",
+      "Retro/SHIELD.d1b7d6de.m4a": "Retro/SHIELD.m4a",
+      "Retro/SKID_ST.f6cc31bc.m4a": "Retro/SKID_ST.m4a",
+      "Retro/SPEED_EN.8e05bf62.m4a": "Retro/SPEED_EN.m4a",
+      "Retro/SPEED_RE.9e916998.m4a": "Retro/SPEED_RE.m4a",
+      "Retro/WINLEVEL.69339935.m4a": "Retro/WINLEVEL.m4a",
+      "Retro/ATTKPING.1f7e0ea5.ogg": "reconstructed/Retro/ATTKPING.ogg",
+      "Retro/CLOAK_EN.3ce2fa05.ogg": "reconstructed/Retro/CLOAK_EN.ogg",
+      "Retro/CLOAK_ST.65826eeb.ogg": "reconstructed/Retro/CLOAK_ST.ogg",
+      "Retro/ENG_HIGH.0402b5a4.ogg": "reconstructed/Retro/ENG_HIGH.ogg",
+      "Retro/ENG_IDLE.6b472f63.ogg": "reconstructed/Retro/ENG_IDLE.ogg",
+      "Retro/ENG_LOW.4a2af30b.ogg": "reconstructed/Retro/ENG_LOW.ogg",
+      "Retro/ENG_NORM.e10d1d6d.ogg": "reconstructed/Retro/ENG_NORM.ogg",
+      "Retro/FLAGR_DR.75fb9740.ogg": "reconstructed/Retro/FLAGR_DR.ogg",
+      "Retro/FLAGR_ST.56deba42.ogg": "reconstructed/Retro/FLAGR_ST.ogg",
+      "Retro/GAMEOVR.282d8389.ogg": "reconstructed/Retro/GAMEOVR.ogg",
+      "Retro/HIT_MAPE.6adbb81e.ogg": "reconstructed/Retro/HIT_MAPE.ogg",
+      "Retro/HIT_POD.eef6b869.ogg": "reconstructed/Retro/HIT_POD.ogg",
+      "Retro/HIT_ROBT.9b007a02.ogg": "reconstructed/Retro/HIT_ROBT.ogg",
+      "Retro/HIT_SHLD.ed6317db.ogg": "reconstructed/Retro/HIT_SHLD.ogg",
+      "Retro/HIT_WALL.c8485790.ogg": "reconstructed/Retro/HIT_WALL.ogg",
+      "Retro/HOLD_EN.422f62c3.ogg": "reconstructed/Retro/HOLD_EN.ogg",
+      "Retro/HOLD_ST.1b9a5ab9.ogg": "reconstructed/Retro/HOLD_ST.ogg",
+      "Retro/INVIN_EN.1ce37170.ogg": "reconstructed/Retro/INVIN_EN.ogg",
+      "Retro/INVIN_ST.fd6db712.ogg": "reconstructed/Retro/INVIN_ST.ogg",
+      "Retro/JUMP_EN.73d1fff1.ogg": "reconstructed/Retro/JUMP_EN.ogg",
+      "Retro/JUMP_ST.15b7b763.ogg": "reconstructed/Retro/JUMP_ST.ogg",
+      "Retro/LEVLSTRT.22649c87.ogg": "reconstructed/Retro/LEVLSTRT.ogg",
+      "Retro/OBT_CLOA.fa8a0d59.ogg": "reconstructed/Retro/OBT_CLOA.ogg",
+      "Retro/OBT_HFLG.aea9e1f7.ogg": "reconstructed/Retro/OBT_HFLG.ogg",
+      "Retro/OBT_JUMP.96b54b63.ogg": "reconstructed/Retro/OBT_JUMP.ogg",
+      "Retro/OBT_RFLG.73435e1f.ogg": "reconstructed/Retro/OBT_RFLG.ogg",
+      "Retro/OBT_WALL.be263563.ogg": "reconstructed/Retro/OBT_WALL.ogg",
+      "Retro/SHIELD.6bcd9dcf.ogg": "reconstructed/Retro/SHIELD.ogg",
+      "Retro/SKID_ST.d5259bb3.ogg": "reconstructed/Retro/SKID_ST.ogg",
+      "Retro/SPEED_EN.44e9478f.ogg": "reconstructed/Retro/SPEED_EN.ogg",
+      "Retro/SPEED_RE.8556b54b.ogg": "reconstructed/Retro/SPEED_RE.ogg",
+      "Retro/WINLEVEL.db367462.ogg": "reconstructed/Retro/WINLEVEL.ogg"
+    }
+  },
+  {
+    "version": "2019-03-11",
+    "kind": "sound-path-fallbacks",
+    "replacements": {
+      "Modern/ATTKPING.16951572.m4a": "Modern/ATTKPING.m4a",
+      "Modern/CLOAK_EN.aa09d76d.m4a": "Modern/CLOAK_EN.m4a",
+      "Modern/CLOAK_ST.ce0e1e0e.m4a": "Modern/CLOAK_ST.m4a",
+      "Modern/FLAGR_DR.abde8df8.m4a": "Modern/FLAGR_DR.m4a",
+      "Modern/FLAGR_ST.db10e388.m4a": "Modern/FLAGR_ST.m4a",
+      "Modern/GAMEOVR.4330cf83.m4a": "Modern/GAMEOVR.m4a",
+      "Modern/HIT_MAPE.95571504.m4a": "Modern/HIT_MAPE.m4a",
+      "Modern/HIT_POD.6cda25f5.m4a": "Modern/HIT_POD.m4a",
+      "Modern/HIT_ROBT.4c5244ec.m4a": "Modern/HIT_ROBT.m4a",
+      "Modern/HIT_SHLD.6c7553c3.m4a": "Modern/HIT_SHLD.m4a",
+      "Modern/HIT_WALL.58a27679.m4a": "Modern/HIT_WALL.m4a",
+      "Modern/HOLD_EN.5ab0092e.m4a": "Modern/HOLD_EN.m4a",
+      "Modern/HOLD_ST.4050c745.m4a": "Modern/HOLD_ST.m4a",
+      "Modern/INVIN_EN.2fade336.m4a": "Modern/INVIN_EN.m4a",
+      "Modern/INVIN_ST.ab50bf9a.m4a": "Modern/INVIN_ST.m4a",
+      "Modern/JUMP_EN.044f7e1b.m4a": "Modern/JUMP_EN.m4a",
+      "Modern/JUMP_ST.be925c71.m4a": "Modern/JUMP_ST.m4a",
+      "Modern/LEVLSTRT.395af253.m4a": "Modern/LEVLSTRT.m4a",
+      "Modern/MUSIC.2a8d5917.m4a": "Modern/MUSIC.m4a",
+      "Modern/OBT_CLOA.8698f318.m4a": "Modern/OBT_CLOA.m4a",
+      "Modern/OBT_HFLG.5331f099.m4a": "Modern/OBT_HFLG.m4a",
+      "Modern/OBT_JUMP.8698f318.m4a": "Modern/OBT_JUMP.m4a",
+      "Modern/OBT_RFLG.da3f12a8.m4a": "Modern/OBT_RFLG.m4a",
+      "Modern/OBT_WALL.ca66e316.m4a": "Modern/OBT_WALL.m4a",
+      "Modern/SHIELD.b3739ebd.m4a": "Modern/SHIELD.m4a",
+      "Modern/SKID_ST.486068aa.m4a": "Modern/SKID_ST.m4a",
+      "Modern/SPEED_EN.fb90f239.m4a": "Modern/SPEED_EN.m4a",
+      "Modern/SPEED_RE.c6dbd0ce.m4a": "Modern/SPEED_RE.m4a",
+      "Modern/WINLEVEL.b5460545.m4a": "Modern/WINLEVEL.m4a",
+      "Modern/ATTKPING.e90f8dca.ogg": "reconstructed/Modern/ATTKPING.ogg",
+      "Modern/CLOAK_EN.e473c564.ogg": "reconstructed/Modern/CLOAK_EN.ogg",
+      "Modern/CLOAK_ST.baedb94e.ogg": "reconstructed/Modern/CLOAK_ST.ogg",
+      "Modern/FLAGR_DR.e96ef564.ogg": "reconstructed/Modern/FLAGR_DR.ogg",
+      "Modern/FLAGR_ST.555c35fb.ogg": "reconstructed/Modern/FLAGR_ST.ogg",
+      "Modern/GAMEOVR.83d4efc5.ogg": "reconstructed/Modern/GAMEOVR.ogg",
+      "Modern/HIT_MAPE.ba44d698.ogg": "reconstructed/Modern/HIT_MAPE.ogg",
+      "Modern/HIT_POD.f6c43d47.ogg": "reconstructed/Modern/HIT_POD.ogg",
+      "Modern/HIT_ROBT.ae2a52e4.ogg": "reconstructed/Modern/HIT_ROBT.ogg",
+      "Modern/HIT_SHLD.d37d9428.ogg": "reconstructed/Modern/HIT_SHLD.ogg",
+      "Modern/HIT_WALL.737cfb7f.ogg": "reconstructed/Modern/HIT_WALL.ogg",
+      "Modern/HOLD_EN.d9fa87d8.ogg": "reconstructed/Modern/HOLD_EN.ogg",
+      "Modern/HOLD_ST.069869b5.ogg": "reconstructed/Modern/HOLD_ST.ogg",
+      "Modern/INVIN_EN.ae0417c9.ogg": "reconstructed/Modern/INVIN_EN.ogg",
+      "Modern/INVIN_ST.5ed06eea.ogg": "reconstructed/Modern/INVIN_ST.ogg",
+      "Modern/JUMP_EN.3efb9b8a.ogg": "reconstructed/Modern/JUMP_EN.ogg",
+      "Modern/JUMP_ST.890e191b.ogg": "reconstructed/Modern/JUMP_ST.ogg",
+      "Modern/LEVLSTRT.3bf731f6.ogg": "reconstructed/Modern/LEVLSTRT.ogg",
+      "Modern/MUSIC.aa246c69.ogg": "reconstructed/Modern/MUSIC.ogg",
+      "Modern/OBT_CLOA.509a0928.ogg": "reconstructed/Modern/OBT_CLOA.ogg",
+      "Modern/OBT_HFLG.7ac000cd.ogg": "reconstructed/Modern/OBT_HFLG.ogg",
+      "Modern/OBT_JUMP.509a0928.ogg": "reconstructed/Modern/OBT_JUMP.ogg",
+      "Modern/OBT_RFLG.329beb7d.ogg": "reconstructed/Modern/OBT_RFLG.ogg",
+      "Modern/OBT_WALL.509a0928.ogg": "reconstructed/Modern/OBT_WALL.ogg",
+      "Modern/SHIELD.15795ef3.ogg": "reconstructed/Modern/SHIELD.ogg",
+      "Modern/SKID_ST.7b1f8945.ogg": "reconstructed/Modern/SKID_ST.ogg",
+      "Modern/SPEED_EN.52da27e0.ogg": "reconstructed/Modern/SPEED_EN.ogg",
+      "Modern/SPEED_RE.9dbd526a.ogg": "reconstructed/Modern/SPEED_RE.ogg",
+      "Modern/WINLEVEL.7cd9f6ee.ogg": "reconstructed/Modern/WINLEVEL.ogg",
+      "Retro/ATTKPING.d23ce83d.ogg": "reconstructed/Retro/ATTKPING.ogg",
+      "Retro/CLOAK_EN.0f92e393.ogg": "reconstructed/Retro/CLOAK_EN.ogg",
+      "Retro/CLOAK_ST.65826eeb.ogg": "reconstructed/Retro/CLOAK_ST.ogg",
+      "Retro/ENG_HIGH.0402b5a4.ogg": "reconstructed/Retro/ENG_HIGH.ogg",
+      "Retro/ENG_IDLE.e27efb7d.ogg": "reconstructed/Retro/ENG_IDLE.ogg",
+      "Retro/ENG_LOW.636e8870.ogg": "reconstructed/Retro/ENG_LOW.ogg",
+      "Retro/ENG_NORM.c098330f.ogg": "reconstructed/Retro/ENG_NORM.ogg",
+      "Retro/FLAGR_DR.f3dbd903.ogg": "reconstructed/Retro/FLAGR_DR.ogg",
+      "Retro/FLAGR_ST.73ff0d9f.ogg": "reconstructed/Retro/FLAGR_ST.ogg",
+      "Retro/GAMEOVR.282d8389.ogg": "reconstructed/Retro/GAMEOVR.ogg",
+      "Retro/HIT_MAPE.af079844.ogg": "reconstructed/Retro/HIT_MAPE.ogg",
+      "Retro/HIT_POD.eef6b869.ogg": "reconstructed/Retro/HIT_POD.ogg",
+      "Retro/HIT_ROBT.d9ec221a.ogg": "reconstructed/Retro/HIT_ROBT.ogg",
+      "Retro/HIT_SHLD.ed6317db.ogg": "reconstructed/Retro/HIT_SHLD.ogg",
+      "Retro/HIT_WALL.c8485790.ogg": "reconstructed/Retro/HIT_WALL.ogg",
+      "Retro/HOLD_EN.ccdfd8f3.ogg": "reconstructed/Retro/HOLD_EN.ogg",
+      "Retro/HOLD_ST.8fab829d.ogg": "reconstructed/Retro/HOLD_ST.ogg",
+      "Retro/INVIN_EN.426e3b69.ogg": "reconstructed/Retro/INVIN_EN.ogg",
+      "Retro/INVIN_ST.839ffad0.ogg": "reconstructed/Retro/INVIN_ST.ogg",
+      "Retro/JUMP_EN.8565f4dc.ogg": "reconstructed/Retro/JUMP_EN.ogg",
+      "Retro/JUMP_ST.392142cb.ogg": "reconstructed/Retro/JUMP_ST.ogg",
+      "Retro/LEVLSTRT.3e7e066e.ogg": "reconstructed/Retro/LEVLSTRT.ogg",
+      "Retro/OBT_CLOA.03383e45.ogg": "reconstructed/Retro/OBT_CLOA.ogg",
+      "Retro/OBT_HFLG.aea9e1f7.ogg": "reconstructed/Retro/OBT_HFLG.ogg",
+      "Retro/OBT_JUMP.b5fa2f40.ogg": "reconstructed/Retro/OBT_JUMP.ogg",
+      "Retro/OBT_RFLG.73435e1f.ogg": "reconstructed/Retro/OBT_RFLG.ogg",
+      "Retro/OBT_WALL.f19680e5.ogg": "reconstructed/Retro/OBT_WALL.ogg",
+      "Retro/SHIELD.6ac1ca57.ogg": "reconstructed/Retro/SHIELD.ogg",
+      "Retro/SKID_ST.589fb6c1.ogg": "reconstructed/Retro/SKID_ST.ogg",
+      "Retro/SPEED_EN.c7eea585.ogg": "reconstructed/Retro/SPEED_EN.ogg",
+      "Retro/SPEED_RE.e584da88.ogg": "reconstructed/Retro/SPEED_RE.ogg",
+      "Retro/WINLEVEL.7a259ec8.ogg": "reconstructed/Retro/WINLEVEL.ogg"
+    }
+  },
+  {
+    "path": "3d/Textures/HOVER_B_RED.jpg",
+    "source": "HoverWinRT APPX/3d/Textures/Hover_B_RED.jpg",
+    "kind": "store-supplement-unverified-version",
+    "sha256": "691cff2f8f9102ba9d9a9b1253f4f563829830d422603107f1d2c16b43b44adc"
+  }
+]

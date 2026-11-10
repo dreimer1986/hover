@@ -1,0 +1,173 @@
+[
+  {
+    "path": "images/Schemes/Maze2/FBASE_02.jpg",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_09.jpg",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_10.jpg",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_12.jpg",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_11.jpg",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/CBASE_01_GLOW_QUARTER.png",
+    "source": "images/BlankEmissive.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "7382f904cb9309b2f2966ffea4b2bc40d90f5ce9e1ee26a902e510d9e1d37081"
+  },
+  {
+    "path": "images/Schemes/Maze2/DECAL_04_NORMAL_HALF.png",
+    "source": "images/Schemes/Maze2/DECAL_04_NORMALS_HALF.png",
+    "kind": "store-alternate-texture-name",
+    "sha256": "7ec98d9d83d5899aafb8d09fe07ef4a1e73f3ab6023d072dfbf4cd3c813a1404"
+  },
+  {
+    "path": "images/Schemes/Maze2/FBASE_02_NORMAL_HALF.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/FBASE_02_GLOW_QUARTER.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_09_NORMAL_HALF.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_10_NORMAL_HALF.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_10_GLOW_QUARTER.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_11_NORMAL_HALF.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_09_GLOW_QUARTER.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_11_GLOW_QUARTER.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_12_NORMAL_HALF.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze2/WBASE_12_GLOW_QUARTER.png",
+    "action": "unused-preload-removed",
+    "reason": "Not referenced by any texture in maze 46; absent from both Store packages and successful Wayback captures."
+  },
+  {
+    "path": "images/Schemes/Maze3/BACKGRND_NORMAL_HALF.png",
+    "source": "images/BlankNormal.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "20cba84ecc82d9923ce3344c49a25422e6d1125ef7e43bff72d525eebb18ee1f"
+  },
+  {
+    "path": "images/Schemes/Maze3/BACKGRND_GLOW_QUARTER.png",
+    "source": "images/BlankEmissive.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "7382f904cb9309b2f2966ffea4b2bc40d90f5ce9e1ee26a902e510d9e1d37081"
+  },
+  {
+    "path": "images/Schemes/Maze3/CBASE_01_GLOW_QUARTER.png",
+    "source": "images/BlankEmissive.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "7382f904cb9309b2f2966ffea4b2bc40d90f5ce9e1ee26a902e510d9e1d37081"
+  },
+  {
+    "path": "images/Schemes/Maze3/DECAL_04_NORMAL_HALF.png",
+    "source": "images/Schemes/Maze3/DECAL_04_NORMALS_HALF.png",
+    "kind": "store-alternate-texture-name",
+    "sha256": "b2669aae95f52742fc35212c71afbe75f96626da37d3e8f1ffdcc16f0a6a58a9"
+  },
+  {
+    "path": "images/Schemes/Maze3/FBASE_02_NORMAL_HALF.png",
+    "source": "images/BlankNormal.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "20cba84ecc82d9923ce3344c49a25422e6d1125ef7e43bff72d525eebb18ee1f"
+  },
+  {
+    "path": "images/Schemes/Maze3/FORCE_FIELD_NORMAL_HALF.png",
+    "source": "images/BlankNormal.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "20cba84ecc82d9923ce3344c49a25422e6d1125ef7e43bff72d525eebb18ee1f"
+  },
+  {
+    "path": "images/Schemes/Maze3/FORCE_FIELD_GLOW_QUARTER.png",
+    "source": "images/BlankEmissive.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "7382f904cb9309b2f2966ffea4b2bc40d90f5ce9e1ee26a902e510d9e1d37081"
+  },
+  {
+    "path": "images/Schemes/Maze3/FBASE_02_GLOW_QUARTER.png",
+    "source": "images/BlankEmissive.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "7382f904cb9309b2f2966ffea4b2bc40d90f5ce9e1ee26a902e510d9e1d37081"
+  },
+  {
+    "path": "images/Schemes/Maze3/WBASE_06_NORMAL_HALF.png",
+    "source": "images/BlankNormal.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "20cba84ecc82d9923ce3344c49a25422e6d1125ef7e43bff72d525eebb18ee1f"
+  },
+  {
+    "path": "images/Schemes/Maze3/WBASE_08_GLOW_QUARTER.png",
+    "source": "images/BlankEmissive.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "7382f904cb9309b2f2966ffea4b2bc40d90f5ce9e1ee26a902e510d9e1d37081"
+  },
+  {
+    "path": "images/Schemes/Maze3/WBASE_06_GLOW_QUARTER.png",
+    "source": "images/BlankEmissive.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "7382f904cb9309b2f2966ffea4b2bc40d90f5ce9e1ee26a902e510d9e1d37081"
+  },
+  {
+    "path": "images/Schemes/Maze3/WBASE_08_NORMAL_HALF.png",
+    "source": "images/BlankNormal.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "20cba84ecc82d9923ce3344c49a25422e6d1125ef7e43bff72d525eebb18ee1f"
+  },
+  {
+    "path": "images/Schemes/Maze3/WBASE_07_GLOW_QUARTER.png",
+    "source": "images/BlankEmissive.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "7382f904cb9309b2f2966ffea4b2bc40d90f5ce9e1ee26a902e510d9e1d37081"
+  },
+  {
+    "path": "images/Schemes/Maze3/WBASE_07_NORMAL_HALF.png",
+    "source": "images/BlankNormal.png",
+    "kind": "original-engine-neutral-fallback",
+    "sha256": "20cba84ecc82d9923ce3344c49a25422e6d1125ef7e43bff72d525eebb18ee1f"
+  }
+]

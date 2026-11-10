@@ -1,0 +1,49 @@
+[
+  {
+    "identifier": "HoverWinRT",
+    "original_filename": "Microsoft.Hover_2013.1016.2233.1156_neutral_~_8wekyb3d8bbwe.zip",
+    "source": "https://archive.org/download/HoverWinRT/Microsoft.Hover_2013.1016.2233.1156_neutral_~_8wekyb3d8bbwe.zip",
+    "size": 105014490,
+    "sha1": "eb328d44b17e9053b2aab9791a9dfc92f1901245",
+    "archive_sha1": "eb328d44b17e9053b2aab9791a9dfc92f1901245",
+    "sha256": "b9b10a582f771c148f7e8141280e80f731d285eab3f6f531068cc72ace1d5cf3",
+    "parts": [
+      {
+        "file": "HoverWinRT.zip.part01",
+        "size": 52428800,
+        "sha256": "ab1557f0d8a27706597fb6208c14c16489f61be292797c6050c9c4414c44961c"
+      },
+      {
+        "file": "HoverWinRT.zip.part02",
+        "size": 52428800,
+        "sha256": "eac8ffc086e4295ecb5e4f7ec1ec55457d81bafb5ec5bc48e88e590400d02b87"
+      },
+      {
+        "file": "HoverWinRT.zip.part03",
+        "size": 156890,
+        "sha256": "d63f10c853dab8b80bdf2f32225839498ba29512fb57dd1c73f93f6d2f3721af"
+      }
+    ]
+  },
+  {
+    "identifier": "hover_202508",
+    "original_filename": "Hover.zip",
+    "source": "https://archive.org/download/hover_202508/Hover.zip",
+    "size": 103788649,
+    "sha1": "10a8d70e66d3f63f792645a3cf7c21c3031d99c4",
+    "archive_sha1": "10a8d70e66d3f63f792645a3cf7c21c3031d99c4",
+    "sha256": "40599c77f9e32886865b88a55002f5dae120b41b03be2a44c8233aeb55b9edb2",
+    "parts": [
+      {
+        "file": "hover_202508.zip.part01",
+        "size": 52428800,
+        "sha256": "bc654ce16a05c279f3879d45debf735480a9fb455f3b5dbd3213801e5ea5e909"
+      },
+      {
+        "file": "hover_202508.zip.part02",
+        "size": 51359849,
+        "sha256": "91fbfcff3876a767480b56f08be2e4ce5df5e4d94b2c5e6e2dc6eb801819a32a"
+      }
+    ]
+  }
+]

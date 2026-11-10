@@ -1,0 +1,372 @@
+[
+  {
+    "version": "2019-03-11",
+    "mode": "44",
+    "before": {
+      "playing": true,
+      "frames": 16,
+      "position": {
+        "x": 1440,
+        "y": 96,
+        "z": 2720
+      },
+      "mazeId": 44,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 17,
+      "position": {
+        "x": 2344.934605215999,
+        "y": 96,
+        "z": 3479.330293476301
+      },
+      "mazeId": 44,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": [
+      "http://rethinkbar.azurewebsites.net/hover/ieflyout.css"
+    ]
+  },
+  {
+    "version": "2019-03-11",
+    "mode": "46",
+    "before": {
+      "playing": true,
+      "frames": 45,
+      "position": {
+        "x": 10091,
+        "y": 96,
+        "z": 1904
+      },
+      "mazeId": 46,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 2,
+      "position": {
+        "x": 10971.507954793971,
+        "y": 96,
+        "z": 2642.8339001162926
+      },
+      "mazeId": 46,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/FBASE_02.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_09.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_10.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_12.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_11.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/CBASE_01_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/DECAL_04_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/FBASE_02_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/FBASE_02_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_09_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_10_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_10_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_11_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_09_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_11_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_12_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_12_GLOW_QUARTER.png"
+    ],
+    "external": [
+      "http://rethinkbar.azurewebsites.net/hover/ieflyout.css"
+    ]
+  },
+  {
+    "version": "2019-03-11",
+    "mode": "47",
+    "before": {
+      "playing": true,
+      "frames": 35,
+      "position": {
+        "x": 3968,
+        "y": 96,
+        "z": 4096
+      },
+      "mazeId": 47,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 1,
+      "position": {
+        "x": 4855.382568001283,
+        "y": 96,
+        "z": 4840.6023855230305
+      },
+      "mazeId": 47,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/BACKGRND_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/BACKGRND_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/CBASE_01_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/DECAL_04_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/FBASE_02_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/FORCE_FIELD_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/FORCE_FIELD_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/FBASE_02_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_06_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_08_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_06_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_08_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_07_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_07_NORMAL_HALF.png"
+    ],
+    "external": [
+      "http://rethinkbar.azurewebsites.net/hover/ieflyout.css"
+    ]
+  },
+  {
+    "version": "2019-03-11",
+    "mode": "retro",
+    "before": {
+      "playing": true,
+      "frames": 59,
+      "position": {
+        "x": 1440,
+        "y": 96,
+        "z": 2720
+      },
+      "mazeId": 44,
+      "retro": true,
+      "canvasCount": 11,
+      "soundCount": 32
+    },
+    "after": {
+      "playing": true,
+      "frames": 1,
+      "position": {
+        "x": 2312.639004553561,
+        "y": 96,
+        "z": 3452.231066871801
+      },
+      "mazeId": 44,
+      "retro": true,
+      "canvasCount": 11,
+      "soundCount": 32
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": [
+      "http://rethinkbar.azurewebsites.net/hover/ieflyout.css"
+    ]
+  },
+  {
+    "version": "2013-10-02",
+    "mode": "44",
+    "before": {
+      "playing": true,
+      "frames": 31,
+      "position": {
+        "x": 1440,
+        "y": 96,
+        "z": 2720
+      },
+      "mazeId": 44,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 2,
+      "position": {
+        "x": 2328.887213989577,
+        "y": 96,
+        "z": 3465.8649334168545
+      },
+      "mazeId": 44,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": [
+      "http://img.youtube.com/vi/HKj4afxzANg/maxresdefault.jpg",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Normal/latest.woff",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Bold/latest.woff",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Normal/latest.ttf",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Bold/latest.ttf"
+    ]
+  },
+  {
+    "version": "2013-10-02",
+    "mode": "46",
+    "before": {
+      "playing": true,
+      "frames": 43,
+      "position": {
+        "x": 10091,
+        "y": 96,
+        "z": 1904
+      },
+      "mazeId": 46,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 47,
+      "position": {
+        "x": 10962.314799092948,
+        "y": 96,
+        "z": 2635.1199265581954
+      },
+      "mazeId": 46,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/FBASE_02.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_09.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_10.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_11.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_12.jpg",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/CBASE_01_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/DECAL_04_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/FBASE_02_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/FBASE_02_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_09_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_09_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_10_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_10_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_11_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_11_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_12_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE2/WBASE_12_GLOW_QUARTER.png"
+    ],
+    "external": [
+      "http://img.youtube.com/vi/HKj4afxzANg/maxresdefault.jpg",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Normal/latest.woff",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Bold/latest.woff",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Normal/latest.ttf",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Bold/latest.ttf"
+    ]
+  },
+  {
+    "version": "2013-10-02",
+    "mode": "47",
+    "before": {
+      "playing": true,
+      "frames": 33,
+      "position": {
+        "x": 3968,
+        "y": 96,
+        "z": 4096
+      },
+      "mazeId": 47,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 1,
+      "position": {
+        "x": 4861.482883397263,
+        "y": 96,
+        "z": 4845.721157921853
+      },
+      "mazeId": 47,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/BACKGRND_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/BACKGRND_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/CBASE_01_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/DECAL_04_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/FBASE_02_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/FORCE_FIELD_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/FBASE_02_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/FORCE_FIELD_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_08_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_07_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_06_GLOW_QUARTER.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_06_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_07_NORMAL_HALF.png",
+      "404 http://127.0.0.1:8765/Images/Schemes/MAZE3/WBASE_08_GLOW_QUARTER.png"
+    ],
+    "external": [
+      "http://img.youtube.com/vi/HKj4afxzANg/maxresdefault.jpg",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Normal/latest.woff",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Bold/latest.woff",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Normal/latest.ttf",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Bold/latest.ttf"
+    ]
+  },
+  {
+    "version": "2013-10-02",
+    "mode": "retro",
+    "before": {
+      "playing": true,
+      "frames": 60,
+      "position": {
+        "x": 1440,
+        "y": 96,
+        "z": 2720
+      },
+      "mazeId": 44,
+      "retro": true,
+      "canvasCount": 11,
+      "soundCount": 32
+    },
+    "after": {
+      "playing": true,
+      "frames": 1,
+      "position": {
+        "x": 2307.316135327029,
+        "y": 96,
+        "z": 3447.764649267015
+      },
+      "mazeId": 44,
+      "retro": true,
+      "canvasCount": 11,
+      "soundCount": 32
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": [
+      "http://img.youtube.com/vi/HKj4afxzANg/maxresdefault.jpg",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Normal/latest.woff",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Bold/latest.woff",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Normal/latest.ttf",
+      "http://i.s-microsoft.com/fonts/Segoe-UI/West-European/Bold/latest.ttf"
+    ]
+  }
+]

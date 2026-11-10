@@ -1,0 +1,14 @@
+const {chromium}=require('playwright-core');const fs=require('fs');
+const root=require('path').resolve(__dirname,'..');
+const baseURL=(process.env.HOVER_URL||'http://127.0.0.1:8000/').replace(/\/?$/, '/');
+(async()=>{const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,headless:true,args:['--no-sandbox','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});const reports=process.env.MODES ? JSON.parse(fs.readFileSync(root+'/verification/pages-browser-results.json','utf8')).filter(x=>!(process.env.MODES.split(',').includes(x.mode))) : [];
+for(const version of ['2019-03-11','2013-10-02'])for(const mode of (process.env.MODES||'44,46,47,retro').split(',')){
+ const p=await browser.newPage({viewport:{width:1280,height:800}});const errors=[],missing=[],external=[];p.on('pageerror',e=>errors.push(e.stack));p.on('response',r=>{if(r.status()>=400)missing.push(r.status()+' '+r.url())});await p.route('**/*',r=>{if(r.request().url().startsWith(baseURL))return r.continue();external.push(r.request().url());return r.abort()});
+ try{await p.goto(baseURL+'play/'+(version==='2019-03-11'?'latest':'early')+'/');await p.waitForSelector('#singlePlayer');await p.evaluate(()=>Hover.settings.setIntroMessageShown(true));
+ if(mode==='44'){await p.locator('#singlePlayer').click();await p.waitForTimeout(1200);await p.locator('.playButton').click()}else{await p.evaluate(mode=>{if(mode==='retro')Hover.router.retro();else Hover.router.setCurrentView(new Hover.views.GameView({mazeId:Number(mode)}))},mode)}
+ await p.waitForFunction(()=>Hover.router.currentView.playing===true,{},{timeout:30000});await p.waitForTimeout(3000);
+ const state=()=>p.evaluate(()=>{const v=Hover.router.currentView,g=v.game;return {playing:v.playing,frames:g.frames,position:g.craft.position,mazeId:g.mazeId,retro:Hover.retro,canvasCount:document.querySelectorAll('canvas').length,soundCount:Object.keys(Hover.audio.sounds||{}).length}});
+ const before=await state();await p.keyboard.down('ArrowUp');await p.waitForTimeout(2000);await p.keyboard.up('ArrowUp');const after=await state();
+ await p.screenshot({path:root+'/verification/'+version+'-'+mode+'.png'});reports.push({version,mode,before,after,moved:JSON.stringify(before.position)!==JSON.stringify(after.position),errors,missing,external});
+ }catch(e){reports.push({version,mode,failure:e.message,errors,missing,external})}console.log(JSON.stringify({version,mode,errors:errors.length,missing:missing.length,external:external.length,moved:reports.at(-1).moved,failure:reports.at(-1).failure}));fs.writeFileSync(root+'/verification/pages-browser-results.json',JSON.stringify(reports,null,2)+'\n');await p.close();
+}await browser.close();if(reports.some(r=>r.failure||r.errors.length||r.missing.length||r.external.length||!r.moved))process.exitCode=1})().catch(e=>{console.error(e);process.exitCode=1});

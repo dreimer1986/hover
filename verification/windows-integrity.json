@@ -1,0 +1,47 @@
+[
+  {
+    "archive": "HoverWinRT.zip",
+    "files": 1,
+    "crc_error": null
+  },
+  {
+    "archive": "HoverWinRT.zip/Microsoft.Hover_2013.1016.2233.1156_neutral_~_8wekyb3d8bbwe.AppxBundle",
+    "files": 7,
+    "crc_error": null,
+    "blocks_checked": 1,
+    "block_errors": []
+  },
+  {
+    "archive": "HoverWinRT.zip/Microsoft.Hover_2013.1016.2233.1156_neutral_~_8wekyb3d8bbwe.AppxBundle/HoverIE-XAML_1.1.0.3_AnyCPU.appx",
+    "files": 2665,
+    "crc_error": null,
+    "blocks_checked": 3724,
+    "block_errors": []
+  },
+  {
+    "archive": "HoverWinRT.zip/Microsoft.Hover_2013.1016.2233.1156_neutral_~_8wekyb3d8bbwe.AppxBundle/HoverIE-XAML_1.1.0.3_scale-140.appx",
+    "files": 11,
+    "crc_error": null,
+    "blocks_checked": 15,
+    "block_errors": []
+  },
+  {
+    "archive": "HoverWinRT.zip/Microsoft.Hover_2013.1016.2233.1156_neutral_~_8wekyb3d8bbwe.AppxBundle/HoverIE-XAML_1.1.0.3_scale-180.appx",
+    "files": 11,
+    "crc_error": null,
+    "blocks_checked": 17,
+    "block_errors": []
+  },
+  {
+    "archive": "hover_202508.zip",
+    "files": 5,
+    "crc_error": null
+  },
+  {
+    "archive": "hover_202508.zip/Hover/Microsoft.Hover_1.1.0.3_neutral__8wekyb3d8bbwe.appx",
+    "files": 2665,
+    "crc_error": null,
+    "blocks_checked": 3724,
+    "block_errors": []
+  }
+]

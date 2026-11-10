@@ -1,0 +1,840 @@
+{
+  "2013-10-02": {
+    "refs": 213,
+    "missing": [
+      {
+        "path": "3d/Textures/HOVER_B_RED.jpg",
+        "store_candidate": "3d/Textures/Hover_B_RED.jpg"
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Bold/latest.eot",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Bold/latest.svg",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Bold/latest.ttf",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Bold/latest.woff",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Light/latest.eot",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Light/latest.svg",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Light/latest.ttf",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Light/latest.woff",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Normal/latest.eot",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Normal/latest.svg",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Normal/latest.ttf",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Normal/latest.woff",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/SemiBold/latest.eot",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/SemiBold/latest.svg",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/SemiBold/latest.ttf",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/SemiBold/latest.woff",
+        "store_candidate": null
+      },
+      {
+        "path": "images/ui/hoverfb.png",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/ATTKPING.af033ac7.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/CLOAK_ST.aaf875b1.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/FLAGR_DR.18a53859.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/GAMEOVR.8567da1d.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HIT_POD.cb5ba5e7.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HIT_SHLD.17267a02.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HIT_WALL.c1027a68.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/INVIN_EN.7696bb55.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/JUMP_ST.ef74e5fd.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/LEVLSTRT.427ba016.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/OBT_CLOA.cc1091d7.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/OBT_JUMP.cc1091d7.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/OBT_RFLG.ea3cb0b8.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/SKID_ST.ee4eddb0.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/SPEED_EN.d283de67.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/SPEED_RE.f1c39155.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/WINLEVEL.34b412b7.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ATTKPING.1f7e0ea5.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ATTKPING.505be4ec.m4a",
+        "store_candidate": "sounds/Retro/ATTKPING.m4a"
+      },
+      {
+        "path": "sounds/Retro/CLOAK_EN.3ce2fa05.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/CLOAK_EN.cad25d66.m4a",
+        "store_candidate": "sounds/Retro/CLOAK_EN.m4a"
+      },
+      {
+        "path": "sounds/Retro/CLOAK_ST.65826eeb.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/CLOAK_ST.97bdbb16.m4a",
+        "store_candidate": "sounds/Retro/CLOAK_ST.m4a"
+      },
+      {
+        "path": "sounds/Retro/ENG_HIGH.0402b5a4.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ENG_HIGH.08d00657.m4a",
+        "store_candidate": "sounds/Retro/ENG_HIGH.m4a"
+      },
+      {
+        "path": "sounds/Retro/ENG_IDLE.612bff36.m4a",
+        "store_candidate": "sounds/Retro/ENG_IDLE.m4a"
+      },
+      {
+        "path": "sounds/Retro/ENG_IDLE.6b472f63.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ENG_LOW.4a2af30b.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ENG_LOW.b6b0d4b3.m4a",
+        "store_candidate": "sounds/Retro/ENG_LOW.m4a"
+      },
+      {
+        "path": "sounds/Retro/ENG_NORM.e10d1d6d.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ENG_NORM.f46edc7c.m4a",
+        "store_candidate": "sounds/Retro/ENG_NORM.m4a"
+      },
+      {
+        "path": "sounds/Retro/FLAGR_DR.51295c42.m4a",
+        "store_candidate": "sounds/Retro/FLAGR_DR.m4a"
+      },
+      {
+        "path": "sounds/Retro/FLAGR_DR.75fb9740.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/FLAGR_ST.31e441e5.m4a",
+        "store_candidate": "sounds/Retro/FLAGR_ST.m4a"
+      },
+      {
+        "path": "sounds/Retro/FLAGR_ST.56deba42.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/GAMEOVR.282d8389.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/GAMEOVR.c1598df1.m4a",
+        "store_candidate": "sounds/Retro/GAMEOVR.m4a"
+      },
+      {
+        "path": "sounds/Retro/HIT_MAPE.6adbb81e.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HIT_MAPE.96dc6d6e.m4a",
+        "store_candidate": "sounds/Retro/HIT_MAPE.m4a"
+      },
+      {
+        "path": "sounds/Retro/HIT_POD.19f25923.m4a",
+        "store_candidate": "sounds/Retro/HIT_POD.m4a"
+      },
+      {
+        "path": "sounds/Retro/HIT_POD.eef6b869.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HIT_ROBT.5fb7d87a.m4a",
+        "store_candidate": "sounds/Retro/HIT_ROBT.m4a"
+      },
+      {
+        "path": "sounds/Retro/HIT_ROBT.9b007a02.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HIT_SHLD.d3d74732.m4a",
+        "store_candidate": "sounds/Retro/HIT_SHLD.m4a"
+      },
+      {
+        "path": "sounds/Retro/HIT_SHLD.ed6317db.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HIT_WALL.04e8116f.m4a",
+        "store_candidate": "sounds/Retro/HIT_WALL.m4a"
+      },
+      {
+        "path": "sounds/Retro/HIT_WALL.c8485790.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HOLD_EN.422f62c3.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HOLD_EN.d3398967.m4a",
+        "store_candidate": "sounds/Retro/HOLD_EN.m4a"
+      },
+      {
+        "path": "sounds/Retro/HOLD_ST.1b9a5ab9.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HOLD_ST.93ce694d.m4a",
+        "store_candidate": "sounds/Retro/HOLD_ST.m4a"
+      },
+      {
+        "path": "sounds/Retro/INVIN_EN.17bf3b34.m4a",
+        "store_candidate": "sounds/Retro/INVIN_EN.m4a"
+      },
+      {
+        "path": "sounds/Retro/INVIN_EN.1ce37170.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/INVIN_ST.0f358e86.m4a",
+        "store_candidate": "sounds/Retro/INVIN_ST.m4a"
+      },
+      {
+        "path": "sounds/Retro/INVIN_ST.fd6db712.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/JUMP_EN.3f8b18d3.m4a",
+        "store_candidate": "sounds/Retro/JUMP_EN.m4a"
+      },
+      {
+        "path": "sounds/Retro/JUMP_EN.73d1fff1.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/JUMP_ST.0b24aaa7.m4a",
+        "store_candidate": "sounds/Retro/JUMP_ST.m4a"
+      },
+      {
+        "path": "sounds/Retro/JUMP_ST.15b7b763.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/LEVLSTRT.22649c87.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/LEVLSTRT.a35620c8.m4a",
+        "store_candidate": "sounds/Retro/LEVLSTRT.m4a"
+      },
+      {
+        "path": "sounds/Retro/OBT_CLOA.85a3bbfc.m4a",
+        "store_candidate": "sounds/Retro/OBT_CLOA.m4a"
+      },
+      {
+        "path": "sounds/Retro/OBT_CLOA.fa8a0d59.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/OBT_HFLG.43da27b1.m4a",
+        "store_candidate": "sounds/Retro/OBT_HFLG.m4a"
+      },
+      {
+        "path": "sounds/Retro/OBT_HFLG.aea9e1f7.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/OBT_JUMP.96b54b63.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/OBT_JUMP.f1f79eb0.m4a",
+        "store_candidate": "sounds/Retro/OBT_JUMP.m4a"
+      },
+      {
+        "path": "sounds/Retro/OBT_RFLG.73435e1f.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/OBT_RFLG.a495fa41.m4a",
+        "store_candidate": "sounds/Retro/OBT_RFLG.m4a"
+      },
+      {
+        "path": "sounds/Retro/OBT_WALL.4ad367bb.m4a",
+        "store_candidate": "sounds/Retro/OBT_WALL.m4a"
+      },
+      {
+        "path": "sounds/Retro/OBT_WALL.be263563.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/SHIELD.6bcd9dcf.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/SHIELD.d1b7d6de.m4a",
+        "store_candidate": "sounds/Retro/SHIELD.m4a"
+      },
+      {
+        "path": "sounds/Retro/SKID_ST.d5259bb3.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/SKID_ST.f6cc31bc.m4a",
+        "store_candidate": "sounds/Retro/SKID_ST.m4a"
+      },
+      {
+        "path": "sounds/Retro/SPEED_EN.44e9478f.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/SPEED_EN.8e05bf62.m4a",
+        "store_candidate": "sounds/Retro/SPEED_EN.m4a"
+      },
+      {
+        "path": "sounds/Retro/SPEED_RE.8556b54b.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/SPEED_RE.9e916998.m4a",
+        "store_candidate": "sounds/Retro/SPEED_RE.m4a"
+      },
+      {
+        "path": "sounds/Retro/WINLEVEL.69339935.m4a",
+        "store_candidate": "sounds/Retro/WINLEVEL.m4a"
+      },
+      {
+        "path": "sounds/Retro/WINLEVEL.db367462.ogg",
+        "store_candidate": null
+      }
+    ]
+  },
+  "2019-03-11": {
+    "refs": 210,
+    "missing": [
+      {
+        "path": "3d/Textures/HOVER_B_RED.jpg",
+        "store_candidate": "3d/Textures/Hover_B_RED.jpg"
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Bold/latest.eot",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Bold/latest.svg",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Bold/latest.ttf",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Bold/latest.woff",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Light/latest.eot",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Light/latest.svg",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Light/latest.ttf",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Light/latest.woff",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Normal/latest.eot",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Normal/latest.svg",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Normal/latest.ttf",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/Normal/latest.woff",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/SemiBold/latest.eot",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/SemiBold/latest.svg",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/SemiBold/latest.ttf",
+        "store_candidate": null
+      },
+      {
+        "path": "fonts/Segoe-UI/West-European/SemiBold/latest.woff",
+        "store_candidate": null
+      },
+      {
+        "path": "images/ui/hoverfb.png",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/ATTKPING.16951572.m4a",
+        "store_candidate": "sounds/Modern/ATTKPING.m4a"
+      },
+      {
+        "path": "sounds/Modern/ATTKPING.e90f8dca.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/CLOAK_EN.aa09d76d.m4a",
+        "store_candidate": "sounds/Modern/CLOAK_EN.m4a"
+      },
+      {
+        "path": "sounds/Modern/CLOAK_EN.e473c564.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/CLOAK_ST.baedb94e.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/CLOAK_ST.ce0e1e0e.m4a",
+        "store_candidate": "sounds/Modern/CLOAK_ST.m4a"
+      },
+      {
+        "path": "sounds/Modern/FLAGR_DR.abde8df8.m4a",
+        "store_candidate": "sounds/Modern/FLAGR_DR.m4a"
+      },
+      {
+        "path": "sounds/Modern/FLAGR_DR.e96ef564.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/FLAGR_ST.555c35fb.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/FLAGR_ST.db10e388.m4a",
+        "store_candidate": "sounds/Modern/FLAGR_ST.m4a"
+      },
+      {
+        "path": "sounds/Modern/GAMEOVR.4330cf83.m4a",
+        "store_candidate": "sounds/Modern/GAMEOVR.m4a"
+      },
+      {
+        "path": "sounds/Modern/GAMEOVR.83d4efc5.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HIT_MAPE.95571504.m4a",
+        "store_candidate": "sounds/Modern/HIT_MAPE.m4a"
+      },
+      {
+        "path": "sounds/Modern/HIT_MAPE.ba44d698.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HIT_POD.6cda25f5.m4a",
+        "store_candidate": "sounds/Modern/HIT_POD.m4a"
+      },
+      {
+        "path": "sounds/Modern/HIT_POD.f6c43d47.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HIT_ROBT.4c5244ec.m4a",
+        "store_candidate": "sounds/Modern/HIT_ROBT.m4a"
+      },
+      {
+        "path": "sounds/Modern/HIT_ROBT.ae2a52e4.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HIT_SHLD.6c7553c3.m4a",
+        "store_candidate": "sounds/Modern/HIT_SHLD.m4a"
+      },
+      {
+        "path": "sounds/Modern/HIT_SHLD.d37d9428.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HIT_WALL.58a27679.m4a",
+        "store_candidate": "sounds/Modern/HIT_WALL.m4a"
+      },
+      {
+        "path": "sounds/Modern/HIT_WALL.737cfb7f.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HOLD_EN.5ab0092e.m4a",
+        "store_candidate": "sounds/Modern/HOLD_EN.m4a"
+      },
+      {
+        "path": "sounds/Modern/HOLD_EN.d9fa87d8.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HOLD_ST.069869b5.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/HOLD_ST.4050c745.m4a",
+        "store_candidate": "sounds/Modern/HOLD_ST.m4a"
+      },
+      {
+        "path": "sounds/Modern/INVIN_EN.2fade336.m4a",
+        "store_candidate": "sounds/Modern/INVIN_EN.m4a"
+      },
+      {
+        "path": "sounds/Modern/INVIN_EN.ae0417c9.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/INVIN_ST.5ed06eea.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/INVIN_ST.ab50bf9a.m4a",
+        "store_candidate": "sounds/Modern/INVIN_ST.m4a"
+      },
+      {
+        "path": "sounds/Modern/JUMP_EN.044f7e1b.m4a",
+        "store_candidate": "sounds/Modern/JUMP_EN.m4a"
+      },
+      {
+        "path": "sounds/Modern/JUMP_EN.3efb9b8a.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/JUMP_ST.890e191b.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/JUMP_ST.be925c71.m4a",
+        "store_candidate": "sounds/Modern/JUMP_ST.m4a"
+      },
+      {
+        "path": "sounds/Modern/LEVLSTRT.395af253.m4a",
+        "store_candidate": "sounds/Modern/LEVLSTRT.m4a"
+      },
+      {
+        "path": "sounds/Modern/LEVLSTRT.3bf731f6.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/MUSIC.2a8d5917.m4a",
+        "store_candidate": "sounds/Modern/MUSIC.m4a"
+      },
+      {
+        "path": "sounds/Modern/MUSIC.aa246c69.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/OBT_CLOA.509a0928.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/OBT_CLOA.8698f318.m4a",
+        "store_candidate": "sounds/Modern/OBT_CLOA.m4a"
+      },
+      {
+        "path": "sounds/Modern/OBT_HFLG.5331f099.m4a",
+        "store_candidate": "sounds/Modern/OBT_HFLG.m4a"
+      },
+      {
+        "path": "sounds/Modern/OBT_HFLG.7ac000cd.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/OBT_JUMP.509a0928.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/OBT_JUMP.8698f318.m4a",
+        "store_candidate": "sounds/Modern/OBT_JUMP.m4a"
+      },
+      {
+        "path": "sounds/Modern/OBT_RFLG.329beb7d.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/OBT_RFLG.da3f12a8.m4a",
+        "store_candidate": "sounds/Modern/OBT_RFLG.m4a"
+      },
+      {
+        "path": "sounds/Modern/OBT_WALL.509a0928.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/OBT_WALL.ca66e316.m4a",
+        "store_candidate": "sounds/Modern/OBT_WALL.m4a"
+      },
+      {
+        "path": "sounds/Modern/SHIELD.15795ef3.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/SHIELD.b3739ebd.m4a",
+        "store_candidate": "sounds/Modern/SHIELD.m4a"
+      },
+      {
+        "path": "sounds/Modern/SKID_ST.486068aa.m4a",
+        "store_candidate": "sounds/Modern/SKID_ST.m4a"
+      },
+      {
+        "path": "sounds/Modern/SKID_ST.7b1f8945.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/SPEED_EN.52da27e0.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/SPEED_EN.fb90f239.m4a",
+        "store_candidate": "sounds/Modern/SPEED_EN.m4a"
+      },
+      {
+        "path": "sounds/Modern/SPEED_RE.9dbd526a.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/SPEED_RE.c6dbd0ce.m4a",
+        "store_candidate": "sounds/Modern/SPEED_RE.m4a"
+      },
+      {
+        "path": "sounds/Modern/WINLEVEL.7cd9f6ee.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Modern/WINLEVEL.b5460545.m4a",
+        "store_candidate": "sounds/Modern/WINLEVEL.m4a"
+      },
+      {
+        "path": "sounds/Retro/ATTKPING.d23ce83d.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/CLOAK_EN.0f92e393.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/CLOAK_ST.65826eeb.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ENG_HIGH.0402b5a4.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ENG_IDLE.e27efb7d.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ENG_LOW.636e8870.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/ENG_NORM.c098330f.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/FLAGR_DR.f3dbd903.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/FLAGR_ST.73ff0d9f.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/GAMEOVR.282d8389.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HIT_MAPE.af079844.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HIT_POD.eef6b869.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HIT_ROBT.d9ec221a.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HIT_SHLD.ed6317db.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HIT_WALL.c8485790.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HOLD_EN.ccdfd8f3.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/HOLD_ST.8fab829d.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/INVIN_EN.426e3b69.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/INVIN_ST.839ffad0.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/JUMP_EN.8565f4dc.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/JUMP_ST.392142cb.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/LEVLSTRT.3e7e066e.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/OBT_CLOA.03383e45.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/OBT_HFLG.aea9e1f7.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/OBT_JUMP.b5fa2f40.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/OBT_RFLG.73435e1f.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/OBT_WALL.f19680e5.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/SHIELD.6ac1ca57.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/SKID_ST.589fb6c1.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/SPEED_EN.c7eea585.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/SPEED_RE.e584da88.ogg",
+        "store_candidate": null
+      },
+      {
+        "path": "sounds/Retro/WINLEVEL.7a259ec8.ogg",
+        "store_candidate": null
+      }
+    ]
+  }
+}

@@ -1,1 +1,69 @@
-# hover
+# Hover! — The Archive
+
+Das Web-Remake von 2013, aus dem Internet Archive gesichert und lokal spielbar wiederhergestellt.
+
+**Website:** https://dreimer1986.github.io/hover/
+
+| Sicherung | Inhalt |
+| --- | --- |
+| Frühe Webfassung | Frühester gefundener Snapshot vom **02.10.2013**, Spielcode vom selben Tag |
+| Späte Webfassung | Letzter erfolgreicher Startseiten-Snapshot vom **11.03.2019**, Spielcode vom **28.07.2017** |
+| Windows AppxBundle | Original-ZIP aus `HoverWinRT`, Spielversion **1.1.0.3**, einschließlich Skalierungsressourcen |
+| Windows Appx-Paket | Original-ZIP aus `hover_202508`, Spielversion **1.1.0.3**, einschließlich mitgelieferter Zertifikatsdateien |
+
+Die zwei Store-Downloads sind unterschiedliche Pakete **derselben Spielversion**. Beide enthalten identische Spielressourcen.
+
+## Spielen und herunterladen
+
+Auf der Website eine Webfassung starten oder eines der vollständigen ZIP-Pakete herunterladen. Der Einzelspieler-Modus funktioniert ohne die ehemaligen Spielserver. Im Spiel-Hauptmenü `bambi` eingeben, um den Retro-Modus zu öffnen.
+
+Lokal genügt Python 3.10 oder neuer:
+
+```sh
+python3 scripts/build_site.py
+python3 -m http.server 8000 --bind 127.0.0.1 --directory _site
+```
+
+Danach http://127.0.0.1:8000/ öffnen. Kein npm-Schritt und keine Build-Abhängigkeiten erforderlich.
+
+Alternativ nur die wiederhergestellten Webfassungen ohne Auswahlseite starten:
+
+```sh
+python3 scripts/serve.py
+```
+
+Die lokalen Quellfassungen verwenden relative symbolische Links. Der Website-Build erzeugt ausschließlich normale Dateien und funktioniert auch unter dem GitHub-Pages-Projektpfad `/hover/`.
+
+## Store-ZIPs wieder zusammensetzen
+
+Die Original-ZIPs sind verlustfrei in maximal 50 MiB große Teile zerlegt, damit keine Git-Datei die GitHub-Grenze von 100 MiB überschreitet.
+
+```sh
+python3 scripts/restore_windows.py
+```
+
+Die beiden vollständigen Original-ZIPs erscheinen in `downloads/`; SHA-256 wird beim Zusammensetzen geprüft. Der Website-Build führt denselben Schritt automatisch aus. Nutzer der Website erhalten direkt eine vollständige ZIP-Datei, keine Einzelteile.
+
+## Aufbau
+
+- `archive/web/`: unveränderte HTML-, CSS- und JavaScript-Originale beider Webstände.
+- `archive/windows/`: verlustfreie ZIP-Teile und Originalprüfsummen.
+- `archive/metadata/`: CDX-Indizes, Downloadquellen und dateigenaue Herkunfts-/Ergänzungsnachweise.
+- `web/`: lokale Spielfassungen und gemeinsam gespeicherte, tatsächliche Ressourcen.
+- `site/`: Startseite und Spielbilder.
+- `scripts/`: Build, lokaler Server, ZIP-Rekonstruktion und Integritätsprüfung.
+- `verification/`: Browserberichte, Spielbilder, Paketvergleich und Integritätsprüfungen.
+
+```sh
+python3 scripts/verify_archive.py
+```
+
+[Wiederherstellung, Ersatzdateien und Grenzen](RESTORATION.md) · [Rechte und Originalquellen](THIRD_PARTY.md)
+
+## GitHub Pages
+
+`.github/workflows/pages.yml` baut die Seite bei Pushes auf `master` und veröffentlicht sie über GitHub Actions. In den Repository-Einstellungen ist **Pages → Source → GitHub Actions** erforderlich. Die beiden ZIPs werden im Build aus den geprüften Archivteilen hergestellt.
+
+Die Browserprüfung kann mit `scripts/browser_smoke.cjs` wiederholt werden (Node.js, `playwright-core`; `CHROMIUM_PATH` für einen vorhandenen Chromium-Browser und `HOVER_URL` für die laufende Seite setzen).
+
+Die Store-Pakete wurden auf ZIP-CRC und Appx-Blockprüfsummen geprüft, jedoch nicht unter Windows installiert. Die ehemaligen Multiplayer-Server sind nicht enthalten.
