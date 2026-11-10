@@ -42,7 +42,7 @@ Die Original-ZIPs sind verlustfrei in maximal 50 MiB große Teile zerlegt, damit
 python3 scripts/restore_windows.py
 ```
 
-Die beiden vollständigen Original-ZIPs erscheinen in `downloads/`; SHA-256 wird beim Zusammensetzen geprüft. Der Website-Build führt denselben Schritt automatisch aus. Nutzer der Website erhalten direkt eine vollständige ZIP-Datei, keine Einzelteile.
+Die beiden vollständigen Original-ZIPs erscheinen in `downloads/`; SHA-256 wird beim Zusammensetzen geprüft. Auf der Website führen die Downloadbuttons zu den vollständigen Dateien im [GitHub Release](https://github.com/dreimer1986/hover/releases/tag/archive-2013). Für eine lokale Website einschließlich beider ZIPs: `python3 scripts/build_site.py --include-downloads`.
 
 ## Aufbau
 
@@ -62,7 +62,7 @@ python3 scripts/verify_archive.py
 
 ## GitHub Pages
 
-`.github/workflows/pages.yml` baut die Seite bei Pushes auf `master` und veröffentlicht sie über GitHub Actions. In den Repository-Einstellungen ist **Pages → Source → GitHub Actions** erforderlich. Die beiden ZIPs werden im Build aus den geprüften Archivteilen hergestellt.
+`.github/workflows/pages.yml` baut die Seite bei Pushes auf `master` und veröffentlicht sie über GitHub Actions. In den Repository-Einstellungen ist **Pages → Source → GitHub Actions** erforderlich. Die Store-ZIPs werden über GitHub Releases angeboten. Pages enthält beide Spiele gemeinsam, aber nur deren benötigte Texturvarianten. Die vollständigen Originaldateien bleiben im Repository erhalten; der lokale Build mit `--include-downloads` ergänzt die ZIPs.
 
 Die Browserprüfung kann mit `scripts/browser_smoke.cjs` wiederholt werden (Node.js, `playwright-core`; `CHROMIUM_PATH` für einen vorhandenen Chromium-Browser und `HOVER_URL` für die laufende Seite setzen).
 

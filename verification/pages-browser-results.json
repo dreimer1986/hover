@@ -4,7 +4,7 @@
     "mode": "44",
     "before": {
       "playing": true,
-      "frames": 31,
+      "frames": 30,
       "position": {
         "x": 1440,
         "y": 96,
@@ -17,11 +17,11 @@
     },
     "after": {
       "playing": true,
-      "frames": 31,
+      "frames": 33,
       "position": {
-        "x": 2353.6362231027592,
+        "x": 2337.8839916327356,
         "y": 96,
-        "z": 3486.631817835728
+        "z": 3473.414126219013
       },
       "mazeId": 44,
       "retro": false,
@@ -38,7 +38,7 @@
     "mode": "46",
     "before": {
       "playing": true,
-      "frames": 42,
+      "frames": 45,
       "position": {
         "x": 10091,
         "y": 96,
@@ -51,11 +51,11 @@
     },
     "after": {
       "playing": true,
-      "frames": 2,
+      "frames": 1,
       "position": {
-        "x": 10977.096201248376,
+        "x": 10975.318023778995,
         "y": 96,
-        "z": 2647.522995655092
+        "z": 2646.03092759638
       },
       "mazeId": 46,
       "retro": false,
@@ -72,7 +72,7 @@
     "mode": "47",
     "before": {
       "playing": true,
-      "frames": 33,
+      "frames": 34,
       "position": {
         "x": 3968,
         "y": 96,
@@ -87,9 +87,9 @@
       "playing": true,
       "frames": 1,
       "position": {
-        "x": 4873.418457044361,
+        "x": 4859.659957823064,
         "y": 96,
-        "z": 4855.73629336703
+        "z": 4844.191541744882
       },
       "mazeId": 47,
       "retro": false,
@@ -106,7 +106,7 @@
     "mode": "retro",
     "before": {
       "playing": true,
-      "frames": 58,
+      "frames": 59,
       "position": {
         "x": 1440,
         "y": 96,
@@ -119,11 +119,11 @@
     },
     "after": {
       "playing": true,
-      "frames": 1,
+      "frames": 60,
       "position": {
-        "x": 2308.976379143204,
+        "x": 2308.286739701525,
         "y": 96,
-        "z": 3449.157759240832
+        "z": 3448.579083039675
       },
       "mazeId": 44,
       "retro": true,
@@ -155,9 +155,9 @@
       "playing": true,
       "frames": 1,
       "position": {
-        "x": 2337.8451363277113,
+        "x": 2333.846990617773,
         "y": 96,
-        "z": 3473.381522746897
+        "z": 3470.0266801562952
       },
       "mazeId": 44,
       "retro": false,
@@ -174,7 +174,7 @@
     "mode": "46",
     "before": {
       "playing": true,
-      "frames": 43,
+      "frames": 46,
       "position": {
         "x": 10091,
         "y": 96,
@@ -187,11 +187,11 @@
     },
     "after": {
       "playing": true,
-      "frames": 45,
+      "frames": 2,
       "position": {
-        "x": 10962.225956880948,
+        "x": 10973.01655345953,
         "y": 96,
-        "z": 2635.0453790908737
+        "z": 2644.099764700153
       },
       "mazeId": 46,
       "retro": false,
@@ -208,7 +208,7 @@
     "mode": "47",
     "before": {
       "playing": true,
-      "frames": 32,
+      "frames": 34,
       "position": {
         "x": 3968,
         "y": 96,
@@ -221,11 +221,11 @@
     },
     "after": {
       "playing": true,
-      "frames": 31,
+      "frames": 1,
       "position": {
-        "x": 4845.0697136449235,
+        "x": 4856.259611292456,
         "y": 96,
-        "z": 4831.948873236217
+        "z": 4841.338312225177
       },
       "mazeId": 47,
       "retro": false,
@@ -242,7 +242,7 @@
     "mode": "retro",
     "before": {
       "playing": true,
-      "frames": 58,
+      "frames": 59,
       "position": {
         "x": 1440,
         "y": 96,
@@ -255,16 +255,220 @@
     },
     "after": {
       "playing": true,
-      "frames": 1,
+      "frames": 60,
       "position": {
-        "x": 2308.3930885780146,
+        "x": 2307.3753526155415,
         "y": 96,
-        "z": 3448.668320342712
+        "z": 3447.814338471964
       },
       "mazeId": 44,
       "retro": true,
       "canvasCount": 11,
       "soundCount": 32
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "version": "2019-03-11",
+    "mode": "arm46",
+    "before": {
+      "playing": true,
+      "frames": 58,
+      "position": {
+        "x": 10091,
+        "y": 96,
+        "z": 1904
+      },
+      "mazeId": 46,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 60,
+      "position": {
+        "x": 10947.449112234874,
+        "y": 96,
+        "z": 2622.646134198386
+      },
+      "mazeId": 46,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "version": "2019-03-11",
+    "mode": "arm47",
+    "before": {
+      "playing": true,
+      "frames": 60,
+      "position": {
+        "x": 3968,
+        "y": 96,
+        "z": 4096
+      },
+      "mazeId": 47,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 1,
+      "position": {
+        "x": 4832.809700718274,
+        "y": 96,
+        "z": 4821.661500911238
+      },
+      "mazeId": 47,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "version": "2013-10-02",
+    "mode": "arm46",
+    "before": {
+      "playing": true,
+      "frames": 59,
+      "position": {
+        "x": 10091,
+        "y": 96,
+        "z": 1904
+      },
+      "mazeId": 46,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 59,
+      "position": {
+        "x": 10945.793013019607,
+        "y": 96,
+        "z": 2621.256501957673
+      },
+      "mazeId": 46,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "version": "2013-10-02",
+    "mode": "arm47",
+    "before": {
+      "playing": true,
+      "frames": 59,
+      "position": {
+        "x": 3968,
+        "y": 96,
+        "z": 4096
+      },
+      "mazeId": 47,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 1,
+      "position": {
+        "x": 4837.866917162311,
+        "y": 96,
+        "z": 4825.9050093642145
+      },
+      "mazeId": 47,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "version": "2019-03-11",
+    "mode": "arm44",
+    "before": {
+      "playing": true,
+      "frames": 59,
+      "position": {
+        "x": 1440,
+        "y": 96,
+        "z": 2720
+      },
+      "mazeId": 44,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 58,
+      "position": {
+        "x": 2294.7936247154353,
+        "y": 96,
+        "z": 3437.2570152314124
+      },
+      "mazeId": 44,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "moved": true,
+    "errors": [],
+    "missing": [],
+    "external": []
+  },
+  {
+    "version": "2013-10-02",
+    "mode": "arm44",
+    "before": {
+      "playing": true,
+      "frames": 59,
+      "position": {
+        "x": 1440,
+        "y": 96,
+        "z": 2720
+      },
+      "mazeId": 44,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
+    },
+    "after": {
+      "playing": true,
+      "frames": 59,
+      "position": {
+        "x": 2294.8182718054313,
+        "y": 96,
+        "z": 3437.2776965955395
+      },
+      "mazeId": 44,
+      "retro": false,
+      "canvasCount": 7,
+      "soundCount": 29
     },
     "moved": true,
     "errors": [],

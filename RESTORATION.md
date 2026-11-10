@@ -70,3 +70,20 @@ Die JSON-Berichte und Screenshots unter `verification/` dokumentieren die Ergebn
 - Bytegenaue Vollständigkeit sämtlicher Webressourcen zum jeweiligen Veröffentlichungszeitpunkt ist wegen der genannten Ergänzungen nicht behauptet.
 - Die Store-Pakete sind vollständig erhalten und auf Integrität geprüft, aber nicht unter Windows 8.1, RT oder heutigen Windows-Versionen installiert/getestet.
 - Browserprüfung ist ein Start-, Ressourcen- und Steuerungstest, kein vollständiger Spieldurchlauf oder Test jedes Items und jedes Geräts.
+
+## Kompaktes Pages-Paket und Release-Downloads
+
+Der erste Pages-Auftrag blieb bei `syncing_files` stehen und endete mit einem Timeout. Das Log nennt kein explizites Größenlimit. Der Build wurde deshalb von rund 379 MB auf rund 63,4 MB verkleinert; die vollständige Sicherung im Git-Repository bleibt unverändert.
+
+Die beiden Original-ZIPs liegen als GitHub-Release-Assets vor. GitHubs serverseitige SHA-256-Digests und Dateigrößen stimmen mit den Originaldownloads überein. `archive/windows/release-downloads.json` ordnet ursprüngliche Dateinamen, Release-Namen und URLs zu. Das Bundle hat im Release den vereinfachten Namen `Hover-AppxBundle-1.1.0.3.zip`; sein Inhalt bleibt bytegleich.
+
+Die Veröffentlichung entfernt ausschließlich:
+
+- 654 bytegleiche Dateien unter dem abweichend geschriebenen Ordner `Images/`. Die Website verwendet die identischen Dateien unter `images/`.
+- Zusätzliche exportierte Texturvarianten, die der vorhandene Loader nicht auswählt. Der Loader verwendet reguläre JPG-Diffuse-Texturen, PNG-Decals, halbe Normalmaps und Viertel-Glowmaps. PNG-Viertelauflösungen für den ARM-Codepfad bleiben ebenfalls vorhanden. Sämtliche Retro-Ressourcen bleiben enthalten.
+
+Die Liste der nur aus Pages ausgeschlossenen Dateien steht in `verification/pages-asset-selection.json`. Es werden keine Ressourcen aus dem Quellarchiv gelöscht oder neu komprimiert. Der Browser-Smoketest wird gegen den verkleinerten Build erneut ausgeführt. Der zusätzliche ARM-Test erzwingt nur den vorhandenen Textur-Ladezweig; er ist kein Test auf echter ARM-Hardware.
+
+Beim zusätzlichen ARM-Ladepfadtest fehlte `Maze1/FBASE_02_QUARTER.png` bereits im vollständigen Quellarchiv. Beide Webfassungen verwenden für genau diesen Fall nun die vorhandene Originaltextur `Maze1/FBASE_02.jpg` desselben Levels. Es findet weder eine Neuzeichnung noch eine verlustbehaftete Umwandlung statt.
+
+Abschlussprüfung des kompakten Builds: 14/14 Szenarien bestanden (acht reguläre und sechs erzwungene ARM-Texturladepfade), jeweils ohne JavaScript-Fehler, fehlende Ressourcen oder externe Laufzeitanfragen. Bewegung wurde in allen Szenarien bestätigt.

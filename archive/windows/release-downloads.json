@@ -1,0 +1,16 @@
+[
+  {
+    "original_filename": "Microsoft.Hover_2013.1016.2233.1156_neutral_~_8wekyb3d8bbwe.zip",
+    "release_filename": "Hover-AppxBundle-1.1.0.3.zip",
+    "url": "https://github.com/dreimer1986/hover/releases/download/archive-2013/Hover-AppxBundle-1.1.0.3.zip",
+    "size": 105014490,
+    "sha256": "b9b10a582f771c148f7e8141280e80f731d285eab3f6f531068cc72ace1d5cf3"
+  },
+  {
+    "original_filename": "Hover.zip",
+    "release_filename": "Hover.zip",
+    "url": "https://github.com/dreimer1986/hover/releases/download/archive-2013/Hover.zip",
+    "size": 103788649,
+    "sha256": "40599c77f9e32886865b88a55002f5dae120b41b03be2a44c8233aeb55b9edb2"
+  }
+]

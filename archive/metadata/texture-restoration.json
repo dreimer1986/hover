@@ -169,5 +169,11 @@
     "source": "images/BlankNormal.png",
     "kind": "original-engine-neutral-fallback",
     "sha256": "20cba84ecc82d9923ce3344c49a25422e6d1125ef7e43bff72d525eebb18ee1f"
+  },
+  {
+    "path": "images/Schemes/Maze1/FBASE_02_QUARTER.png",
+    "source": "images/Schemes/Maze1/FBASE_02.jpg",
+    "action": "arm-diffuse-path-fallback",
+    "reason": "Quarter PNG absent in preserved packages and indices; use the original full-resolution diffuse JPEG of the same texture without transcoding."
   }
 ]
