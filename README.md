@@ -42,6 +42,8 @@ Mobilgeräte werden von der Startseite dorthin geleitet; Touch und Großansicht 
 
 Über **Archiv** oder [diesen Link](https://dreimer1986.github.io/hover/?view=archive) lassen sich auch mobil beide bisherigen Fassungen und Store-Downloads auswählen. Die Originalfassungen und Archive werden nicht verändert. Der Zusatzcode liegt getrennt unter `modifications/`; der Build erzeugt daraus `play/modified/` mit gemeinsam genutzten Spielressourcen.
 
+Die Archivseite und die neue Bedienoberfläche wählen anhand der bevorzugten Browsersprache automatisch Deutsch (`de-*`) oder Englisch (alle übrigen Sprachen). Auch laufende Statusanzeigen und Vollbild-Hinweise sind übersetzt; die beiden erhaltenen Originalfassungen bleiben unberührt. Die Übersetzungen liegen in `site/locale.js`. Sprachtests: `scripts/locale_smoke.cjs`.
+
 Browser-Basistests: `scripts/modified_smoke.cjs` mit denselben Umgebungsvariablen wie `browser_smoke.cjs`. Mobile Touch-Ereignisse werden in Chromium emuliert; Tests auf echter Android-/iOS-Hardware stehen noch aus.
 
 ## Store-ZIPs wieder zusammensetzen

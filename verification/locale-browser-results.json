@@ -1,0 +1,39 @@
+{
+  "base": "http://127.0.0.1:8767/hover/",
+  "results": [
+    {
+      "locale": "de-DE",
+      "language": "de",
+      "archive": true,
+      "launcher": true,
+      "game": true,
+      "fullscreenFeedback": true
+    },
+    {
+      "locale": "en-US",
+      "language": "en",
+      "archive": true,
+      "launcher": true,
+      "game": true,
+      "fullscreenFeedback": true
+    },
+    {
+      "locale": "fr-FR",
+      "language": "en",
+      "archive": true,
+      "launcher": true,
+      "game": true,
+      "fullscreenFeedback": true
+    },
+    {
+      "locale": "en-GB",
+      "mobileRedirect": true,
+      "toolbarWidths": [
+        320,
+        390,
+        844
+      ]
+    }
+  ],
+  "errors": []
+}

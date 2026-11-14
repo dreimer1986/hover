@@ -84,7 +84,7 @@ shutil.copytree(output / 'play/latest', modified)
 shutil.copytree(ROOT / 'modifications', modified, dirs_exist_ok=True)
 index = modified / 'index.html'
 html = index.read_text().replace('<title>Hover!</title>', '<title>Hover! — Touch + Vollbild</title>')
-html = html.replace('</head>', '<link rel="stylesheet" href="modern.css">\n<script src="../../mobile.js"></script>\n</head>')
+html = html.replace('</head>', '<link rel="stylesheet" href="modern.css">\n<script src="../../locale.js"></script>\n<script src="../../mobile.js"></script>\n</head>')
 html = html.replace('</body>', '<script src="modern.js"></script>\n</body>')
 html = html.replace('width=device-width"', 'width=device-width,viewport-fit=cover"')
 index.write_text(html)

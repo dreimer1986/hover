@@ -10,7 +10,7 @@ const root = path.resolve(__dirname, '..');
     args: ['--no-sandbox', '--enable-unsafe-swiftshader', '--autoplay-policy=no-user-gesture-required']});
   const results = [], errors = [], missing = [];
   async function page(options = {}) {
-    const p = await browser.newPage(options);
+    const p = await browser.newPage({locale:'de-DE', ...options});
     p.on('pageerror', e => errors.push(e.message));
     p.on('response', r => { if (r.status() >= 400) missing.push(r.status() + ' ' + r.url()); });
     await p.route('**/*', r => r.request().url().startsWith(base) ? r.continue() : (missing.push('external ' + r.request().url()), r.abort()));

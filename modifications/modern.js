@@ -2,6 +2,7 @@
 (function () {
   'use strict';
   const mobile = window.hoverMobile;
+  const t = window.hoverLocale.t;
   const root = document.documentElement;
   let wide = mobile, touch = mobile, currentGame = null, originalDimensions = null;
   let controller = null, view = null, lastSize = '', fullWasWide = null;
@@ -47,6 +48,7 @@
       </div>
     </div>
     <p id="modern-status" role="status" aria-live="polite"></p>`;
+  window.hoverLocale.translate(ui);
   document.body.appendChild(ui);
   const $ = id => document.getElementById(id);
   function release() {
@@ -63,10 +65,10 @@
   }
   $('modern-wide').onclick = () => { wide = !wide; sync(); };
   $('modern-touch').onclick = () => { release(); touch = !touch; sync(); };
-  function status(text) { $('modern-status').textContent = text; }
+  function status(text) { $('modern-status').textContent = t(text); }
   function fullscreenChanged() {
     const full = !!(document.fullscreenElement || document.webkitFullscreenElement);
-    $('modern-full').textContent = full ? '⛶ Beenden' : '⛶ Vollbild';
+    $('modern-full').textContent = t(full ? '⛶ Beenden' : '⛶ Vollbild');
     if (!full && fullWasWide !== null) { wide = fullWasWide; fullWasWide = null; sync(); }
     lastSize = '';
   }
@@ -204,8 +206,8 @@
     readout.hidden = !inGame || !wide || Hover.retro;
     if (!readout.hidden) {
       const value = id => { const el = $(id); return el ? el.textContent : '0'; };
-      const text = 'Sprung ' + value('dash-bounce-number') + ' · Wand ' + value('dash-wall-number') +
-        ' · Tarnung ' + value('dash-cloak-number') + ' · Schild ' + value('dash-shields-number-big') +
+      const text = t('Sprung') + ' ' + value('dash-bounce-number') + ' · ' + t('Wand') + ' ' + value('dash-wall-number') +
+        ' · ' + t('Tarnung') + ' ' + value('dash-cloak-number') + ' · ' + t('Schild') + ' ' + value('dash-shields-number-big') +
         ' · Booster ' + value('dash-boost-number-big');
       if (readout.textContent !== text) readout.textContent = text;
     }
