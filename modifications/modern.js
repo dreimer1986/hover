@@ -36,6 +36,18 @@
       </div>
     </section>
     <div id="modern-readout" aria-label="Spielstatus" hidden></div>
+    <div id="modern-retro-hud" hidden aria-label="Retro-Status">
+      <div class="retro-inventory">
+        <div class="retro-meter" data-meter="height"><span class="retro-meter-label">Sprunghöhe</span><div class="retro-track"><i></i></div><span class="retro-count">A · <b>0</b></span></div>
+        <div class="retro-meter" data-meter="wall"><span class="retro-meter-label">Wanddauer</span><div class="retro-track"><i></i></div><span class="retro-count">S · <b>0</b></span></div>
+        <div class="retro-meter" data-meter="cloak"><span class="retro-meter-label">Tarnung</span><div class="retro-track"><i></i></div><span class="retro-count">D · <b>0</b></span></div>
+      </div>
+      <div class="retro-radar-space" aria-hidden="true"></div>
+      <div class="retro-durations">
+        <div class="retro-meter" data-meter="shield"><span>Schilddauer</span><div class="retro-track"><i></i></div></div>
+        <div class="retro-meter" data-meter="boost"><span>Tempo-Effekt</span><div class="retro-track"><i></i></div></div>
+      </div>
+    </div>
     <div id="modern-controls" hidden>
       <div id="modern-pad" role="group" aria-label="Steuerkreuz: ziehen zum Fahren und Lenken">
         <span class="pad-up">▲</span><span class="pad-left">◀</span><span class="pad-center">✦</span><span class="pad-right">▶</span><span class="pad-down">▼</span>
@@ -94,6 +106,7 @@
     if (retro) Hover.router.retro();
     else {
       Hover.retro = false;
+      Hover.router.navigate('single-player', {trigger: false});
       Hover.router.setCurrentView(new Hover.views.GameView({
         mazeId: Number($('modern-arena').value), craftProfile: Hover.Profiles[$('modern-craft').value]
       }));
@@ -180,10 +193,57 @@
     game.dimensions = Object.assign({}, originalDimensions, {
       WIDTH: Math.round(width * scale), HEIGHT: Math.round(height * scale), ASPECT: width / height
     });
+    // This old Three.js multiplies setSize() by DPR, but the game passes raw
+    // pixel dimensions to setViewport(). Keep both in the same pixel space.
+    game.renderer.devicePixelRatio = 1;
     game.renderer.setSize(game.dimensions.WIDTH, game.dimensions.HEIGHT);
     [game.camera, game.shortCamera].forEach(camera => { camera.aspect = width / height; camera.updateProjectionMatrix(); });
     game.renderer.domElement.style.width = width + 'px';
     game.renderer.domElement.style.height = height + 'px';
+  }
+  function prepareRetro(game) {
+    if (!Hover.retro || game.modernRetroPrepared) return;
+    game.modernRetroPrepared = true;
+    const stop = game.stop;
+    game.stop = function () {
+      // A win may stop/dispose the world during the physics update, before the
+      // final draw. Preserve a complete frame instead of rendering the torn-down
+      // scene (sky and black floor). This is local to this derivative's instance.
+      if (wide && !game.modernFrozen && game.renderer) {
+        game.draw(0);
+        const source = game.renderer.domElement;
+        const frozen = document.createElement('canvas');
+        frozen.className = 'modern-frozen-scene';
+        frozen.width = source.width; frozen.height = source.height;
+        frozen.getContext('2d').drawImage(source, 0, 0);
+        source.after(frozen); game.modernFrozen = frozen;
+      }
+      return stop.apply(this, arguments);
+    };
+    const button = game.domElement.querySelector('.msgButton');
+    button.setAttribute('role', 'button'); button.tabIndex = 0;
+    button.setAttribute('aria-label', t('Fortsetzen'));
+    button.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); button.click(); }
+    });
+  }
+  function updateRetroHud(game, shown) {
+    const panel = $('modern-retro-hud');
+    panel.hidden = !shown;
+    if (!shown || !game.craft) return;
+    const craft = game.craft, walls = craft.world.tempWalls;
+    const values = {
+      height: [craft.position.y / 768, craft.getSpringCount()],
+      wall: [(walls.length ? walls[walls.length - 1].life : 0) / 10, craft.getWallCount()],
+      cloak: [craft.cloakTime * 1.1 / 10, craft.getCloakCount()],
+      shield: [craft.protectionTime / 20], boost: [craft.maxSpeedModifierTime / 20]
+    };
+    for (const [name, [fraction, count]] of Object.entries(values)) {
+      const meter = panel.querySelector('[data-meter=' + name + ']');
+      meter.querySelector('i').style.setProperty('--fill', Math.max(0, Math.min(1, fraction)) * 100 + '%');
+      if (count !== undefined) meter.querySelector('b').textContent = count;
+    }
+    panel.querySelector('[data-meter=boost] i').style.background = craft.maxSpeedModifier < 1 ? '#ff5555' : '#5cff73';
   }
   function tick() {
     const next = window.Hover && Hover.router && Hover.router.currentView;
@@ -201,7 +261,9 @@
       // Reuse the game's independent touch controller, leaving physical keys intact.
       controller = game.craftControllers.find(c => typeof c.dpadStart === 'function');
       resizeGame(game);
+      prepareRetro(game);
     }
+    updateRetroHud(game, inGame && wide && !!Hover.retro && !!game);
     const readout = $('modern-readout');
     readout.hidden = !inGame || !wide || Hover.retro;
     if (!readout.hidden) {

@@ -1,0 +1,264 @@
+{
+  "base": "http://127.0.0.1:8767/hover/",
+  "audioEnabled": false,
+  "results": [
+    {
+      "name": "pixel-like",
+      "retro": false,
+      "state": {
+        "buffer": [
+          1300,
+          600
+        ],
+        "viewport": [
+          0,
+          0,
+          1300,
+          600
+        ],
+        "dimensions": [
+          1300,
+          600
+        ],
+        "rect": [
+          0,
+          0,
+          1300,
+          600
+        ],
+        "screen": [
+          1300,
+          600
+        ],
+        "dpr": 2.4000000953674316
+      },
+      "passed": true
+    },
+    {
+      "name": "pixel-like",
+      "retro": true,
+      "state": {
+        "buffer": [
+          1300,
+          600
+        ],
+        "viewport": [
+          0,
+          0,
+          1300,
+          600
+        ],
+        "dimensions": [
+          1300,
+          600
+        ],
+        "rect": [
+          0,
+          0,
+          1300,
+          600
+        ],
+        "screen": [
+          1300,
+          600
+        ],
+        "dpr": 2.4000000953674316
+      },
+      "passed": true
+    },
+    {
+      "name": "iphone-like",
+      "retro": false,
+      "state": {
+        "buffer": [
+          844,
+          390
+        ],
+        "viewport": [
+          0,
+          0,
+          844,
+          390
+        ],
+        "dimensions": [
+          844,
+          390
+        ],
+        "rect": [
+          0,
+          0,
+          844,
+          390
+        ],
+        "screen": [
+          844,
+          390
+        ],
+        "dpr": 3
+      },
+      "passed": true
+    },
+    {
+      "name": "iphone-like",
+      "retro": true,
+      "state": {
+        "buffer": [
+          844,
+          390
+        ],
+        "viewport": [
+          0,
+          0,
+          844,
+          390
+        ],
+        "dimensions": [
+          844,
+          390
+        ],
+        "rect": [
+          0,
+          0,
+          844,
+          390
+        ],
+        "screen": [
+          844,
+          390
+        ],
+        "dpr": 3
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop",
+      "retro": false,
+      "state": {
+        "buffer": [
+          1440,
+          810
+        ],
+        "viewport": [
+          0,
+          0,
+          1440,
+          810
+        ],
+        "dimensions": [
+          1440,
+          810
+        ],
+        "rect": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "screen": [
+          1920,
+          1080
+        ],
+        "dpr": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "desktop",
+      "retro": true,
+      "state": {
+        "buffer": [
+          1440,
+          810
+        ],
+        "viewport": [
+          0,
+          0,
+          1440,
+          810
+        ],
+        "dimensions": [
+          1440,
+          810
+        ],
+        "rect": [
+          0,
+          0,
+          1920,
+          1080
+        ],
+        "screen": [
+          1920,
+          1080
+        ],
+        "dpr": 1
+      },
+      "passed": true
+    },
+    {
+      "name": "fractional-high",
+      "retro": false,
+      "state": {
+        "buffer": [
+          900,
+          500
+        ],
+        "viewport": [
+          0,
+          0,
+          900,
+          500
+        ],
+        "dimensions": [
+          900,
+          500
+        ],
+        "rect": [
+          0,
+          0,
+          900,
+          500
+        ],
+        "screen": [
+          900,
+          500
+        ],
+        "dpr": 3.5
+      },
+      "passed": true
+    },
+    {
+      "name": "fractional-high",
+      "retro": true,
+      "state": {
+        "buffer": [
+          900,
+          500
+        ],
+        "viewport": [
+          0,
+          0,
+          900,
+          500
+        ],
+        "dimensions": [
+          900,
+          500
+        ],
+        "rect": [
+          0,
+          0,
+          900,
+          500
+        ],
+        "screen": [
+          900,
+          500
+        ],
+        "dpr": 3.5
+      },
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "missing": []
+}

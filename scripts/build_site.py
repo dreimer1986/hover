@@ -96,6 +96,15 @@ else:
     for download in json.loads((ROOT / 'archive/windows/release-downloads.json').read_text()):
         html = html.replace('href="downloads/' + download['original_filename'] + '"', 'href="' + download['url'] + '"')
     index.write_text(html)
+# Version the new UI files so a refreshed page cannot reuse an older cached UI.
+for page in [output / 'index.html', modified / 'index.html']:
+    html = page.read_text()
+    for url in ['style.css', 'locale.js', 'mobile.js', '../../locale.js', '../../mobile.js', 'modern.js', 'modern.css']:
+        asset = (page.parent / url).resolve()
+        if asset.is_file() and asset.is_relative_to(output):
+            version = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
+            html = html.replace('"' + url + '"', '"' + url + '?v=' + version + '"')
+    page.write_text(html)
 (output / '.nojekyll').touch()
 (output / 'asset-selection.json').write_text(json.dumps({'omitted_from_pages_only': omitted}, indent=2) + '\n')
 manifest = {str(p.relative_to(output)): {'size': p.stat().st_size, 'sha256': hashlib.sha256(p.read_bytes()).hexdigest()}

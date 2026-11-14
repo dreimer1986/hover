@@ -99,3 +99,14 @@ Final compact-build verification: 14/14 scenarios passed (eight regular and six 
 The added features were tested with Chromium and emulated mobile multi-touch input (`scripts/modified_smoke.cjs`, results in `verification/modified-*`). This does not replace testing on actual mobile hardware.
 
 After the first successful deployment of the addition, a German/English interface was introduced. `site/locale.js` translates only the archive page and third edition according to the primary browser language: German for `de-*`, English otherwise. Asset paths, game logic and original releases remain unchanged. `scripts/locale_smoke.cjs` checks German, English and French browser preferences (English fallback), live HUD text, fullscreen messages and mobile entry.
+
+
+### Fixes following tests on actual devices
+
+The first touch edition was reported to show a small game image in the lower-left corner on Android WebView/Chrome (Pixel 7 Pro) and iPhone Safari. Cause: the old Three.js version multiplies `setSize()` by device pixel ratio, while the game passes unscaled pixel dimensions to `setViewport()`. The additional code now sets `devicePixelRatio = 1` only on its own renderer instance; CSS dimensions and camera aspect ratio still fill the screen. The existing resolution cap remains. Original engine files and the two existing game releases are unchanged.
+
+Retro full-window mode positions flags in the upper-left corner and provides labeled indicators for jump height, wall duration, cloak, shield duration and speed effects. Vertical labels appear to the left of their respective bars; inventory counts and radar remain visible. The previously unlabeled `speed_bar`, which the original code does not update, is not presented as an active indicator. Turning off full-window mode restores the classic retro layout.
+
+Retro result dialogs receive an explicit viewport-relative position instead of the old cockpit coordinates. A complete game frame is captured before the retro scene is disposed, avoiding a sky-only image and black floor when victory occurs during a physics update. The original also displays its result dialog over the game image. The centered button remains accessible; both victory and defeat return to the menu.
+
+`scripts/display_smoke.cjs` checks the drawing buffer, WebGL viewport and CSS image size at device pixel ratios 1, 2.4, 3 and 3.5, modern graphics including glow, retro flags and labels, and actual win/loss callbacks with clickable dialogs. These focused display tests run with audio disabled; results are in `verification/display-browser-results.json`. Retesting on the actual Android/iOS devices is still required.

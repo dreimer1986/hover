@@ -72,3 +72,43 @@ html, body { width:100%; height:100%; margin:0; overscroll-behavior:none; }
   .modern-wide .modern #radar { bottom:172px; width:150px; height:81px; }
   #modern-readout { top:100px; bottom:auto; font-size:12px; padding:6px; }
 }
+/* Retro overlays use viewport coordinates, independent of the old 800x600 cockpit. */
+.modern-wide .retro #hud { inset:0 !important; margin:0 !important; width:100% !important; height:100% !important; transform:none !important; }
+.modern-wide .retro #dash_top { inset:0; width:100%; height:100%; background:none; }
+.modern-wide .retro #dash_top #flag_counts { left:calc(12px + env(safe-area-inset-left,0px)); top:calc(56px + env(safe-area-inset-top,0px)); width:151px; height:51px; background:#000b; }
+.modern-wide .retro #dash_bottom, .modern-wide .retro #velocity_overlay { display:none; }
+.modern-wide .retro #radar { left:50%; top:auto; bottom:calc(22px + env(safe-area-inset-bottom,0px)); width:130px; height:90px; transform:translateX(-50%); z-index:10000; }
+#modern-retro-hud { position:fixed; bottom:calc(8px + env(safe-area-inset-bottom,0px)); left:50%; transform:translateX(-50%); width:min(640px,calc(100% - 24px)); height:116px; box-sizing:border-box; display:grid; grid-template-columns:1fr 140px 1fr; gap:8px; padding:8px 12px; background:#111c; border:1px solid #777; color:#fff; font:12px/1.2 monospace; z-index:9998; pointer-events:none; }
+.retro-inventory { display:flex; justify-content:space-around; }
+.retro-inventory .retro-meter { position:relative; width:45px; padding-left:18px; box-sizing:border-box; }
+.retro-meter-label { position:absolute; bottom:26px; left:3px; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; font-size:11px; }
+.retro-track { position:relative; background:#000; border:1px solid #8b8b8b; overflow:hidden; }
+.retro-inventory .retro-track { height:70px; width:12px; }
+.retro-track i { display:block; position:absolute; background:#ffe649; }
+.retro-inventory .retro-track i { bottom:0; left:0; right:0; height:var(--fill,0%); }
+.retro-count { position:absolute; left:0; bottom:0; white-space:nowrap; font-size:11px; }
+.retro-count b { color:#5cff73; }
+.retro-durations { display:flex; flex-direction:column; justify-content:space-around; }
+.retro-durations .retro-track { height:12px; margin-top:3px; }
+.retro-durations .retro-track i { left:0; top:0; bottom:0; width:var(--fill,0%); }
+.modern-wide.modern-touch #modern-retro-hud { width:min(640px,calc(100% - 340px)); }
+.modern-wide .retro #gameMessageView { position:absolute !important; inset:0 !important; width:100% !important; height:100% !important; margin:0 !important; transform:none !important; z-index:10; }
+.modern-wide .retro #gameMessageView .msgLarge { transform:scale(1.5); transform-origin:center; }
+.modern-wide .retro #gameMessageView .msgButton { touch-action:manipulation; cursor:pointer !important; }
+.modern-wide .retro #gameMessageView .msgButton:focus-visible { outline:2px solid #111; outline-offset:3px; }
+.retro .modern-frozen-scene { position:absolute; left:4px; top:48px; width:800px; height:600px; pointer-events:none; }
+.modern-wide .retro .modern-frozen-scene { inset:0; width:100%; height:100%; object-fit:cover; }
+@media(max-width:700px) {
+  #modern-retro-hud, .modern-wide.modern-touch #modern-retro-hud { width:calc(100% - 24px); grid-template-columns:1fr 110px 1fr; gap:4px; padding:8px; }
+  .modern-wide.modern-touch #modern-retro-hud { bottom:calc(164px + env(safe-area-inset-bottom,0px)); }
+  .modern-wide .retro #radar { width:100px; }
+  .modern-wide.modern-touch .retro #radar { bottom:calc(178px + env(safe-area-inset-bottom,0px)); }
+  .retro-inventory .retro-meter { width:34px; padding-left:16px; }
+  .retro-meter-label { left:1px; font-size:10px; }
+  .retro-durations { font-size:10px; }
+  .modern-wide .retro #gameMessageView .msgLarge { transform:scale(1); }
+}
+/* Leave the radar's column unobscured by the separate UI layer. */
+#modern-retro-hud { background:none; border:0; }
+.retro-inventory, .retro-durations { background:#111d; border:1px solid #777; padding:4px; }
+.modern-wide .retro #radar { background:#000c; border:1px solid #777; }

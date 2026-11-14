@@ -99,3 +99,14 @@ Abschlussprüfung des kompakten Builds: 14/14 Szenarien bestanden (acht regulär
 Die Zusatzfunktionen wurden mit Chromium und emulierten mobilen Mehrfinger-Eingaben geprüft (`scripts/modified_smoke.cjs`, Ergebnisse unter `verification/modified-*`). Ein Test auf echter Mobilhardware ist damit nicht ersetzt.
 
 Nach dem ersten erfolgreichen Deployment der Erweiterung wurde eine deutsche/englische Oberfläche ergänzt. `site/locale.js` übersetzt ausschließlich Archivseite und dritte Fassung entsprechend der primären Browsersprache: Deutsch bei `de-*`, sonst Englisch. Links, Asset-Pfade, Spiellogik und Originalfassungen werden dadurch nicht verändert. `scripts/locale_smoke.cjs` prüft deutsche, englische und französische Browserpräferenzen (englischer Fallback), laufende HUD-Texte, Vollbild-Hinweise und den mobilen Einstieg.
+
+
+### Korrekturen nach Tests auf echten Geräten
+
+Die erste Touch-Fassung wurde auf Android-WebView/Chrome (Pixel 7 Pro) und iPhone-Safari mit einem zu kleinen Spielbild unten links gemeldet. Ursache: Die alte Three.js-Version multipliziert `setSize()` mit der Geräte-Pixeldichte, während der Spielcode für `setViewport()` unskalierte Pixelmaße verwendet. Der Zusatzcode setzt jetzt nur für seine Renderer-Instanz `devicePixelRatio = 1`; CSS-Ausdehnung und Kameraseitenverhältnis bleiben bildschirmfüllend. Die vorhandene Auflösungsbegrenzung bleibt bestehen. Die Originaldateien der Engine und die beiden bisherigen Spielfassungen werden nicht geändert.
+
+Die Retro-Großansicht richtet Flaggen oben links aus und zeigt beschriftete Anzeigen für Sprunghöhe, Wanddauer, Tarnung, Schilddauer und Tempo-Effekt. Die vertikalen Beschriftungen stehen links neben den jeweiligen Balken; Bestände und Radar bleiben sichtbar. Der zuvor unbeschriftete und vom Originalcode nicht aktualisierte `speed_bar` wird nicht als aktive Anzeige übernommen. Die klassische Retro-Ansicht bleibt beim Abschalten der Großansicht erhalten.
+
+Die Retro-Ergebnisdialoge bekommen eine explizite, bildschirmbezogene Position statt der alten Cockpit-Koordinaten. Vor dem Aufräumen der Retro-Szene wird ein vollständiges Spielbild festgehalten, sodass beim Sieg während eines Physikschritts nicht nur Himmel und schwarzer Boden zurückbleiben. Das Original zeigt seinen Ergebnisdialog ebenfalls über dem Spielbild. Die Dialogtaste ist mittig erreichbar; Sieg und Niederlage führen wieder zum Menü.
+
+`scripts/display_smoke.cjs` prüft Zeichenpuffer, WebGL-Viewport und CSS-Bildgröße mit Pixeldichten 1, 2,4, 3 und 3,5, moderne Grafik einschließlich Glow, Retro-Flaggen und Beschriftungen sowie echte Sieg-/Niederlage-Callbacks einschließlich anklickbarer Dialoge. Diese gezielten Darstellungstests laufen ohne Audio; die Resultate stehen in `verification/display-browser-results.json`. Die Nachprüfung auf den tatsächlichen Android-/iOS-Geräten bleibt erforderlich.
