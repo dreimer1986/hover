@@ -1,0 +1,18 @@
+{
+  "base": "http://127.0.0.1:8767/hover/",
+  "checks": [
+    "Desktop keeps archive and original default",
+    "Mobile redirects; archive and original releases remain reachable",
+    "Mobile landscape fills viewport and intro remains dismissible",
+    "Real multi-touch drives, steers, holds the fire input and releases",
+    "All three extras reach the actual craft once per press",
+    "Blur releases held movement; changing orientation resizes camera",
+    "Fullscreen unavailable: large view and understandable feedback",
+    "Modified desktop options start off; fullscreen exits to classic layout",
+    "Menu, all arenas and craft profiles survive repeated starts",
+    "Retro and return to modern retain working controls and layout",
+    "No missing resources or JavaScript errors"
+  ],
+  "errors": [],
+  "missing": []
+}

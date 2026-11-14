@@ -34,6 +34,16 @@ python3 scripts/serve.py
 
 Die lokalen Quellfassungen verwenden relative symbolische Links. Der Website-Build erzeugt ausschließlich normale Dateien und funktioniert auch unter dem GitHub-Pages-Projektpfad `/hover/`.
 
+## Modifizierte Fassung: Touch und Vollbild
+
+[Touch + Vollbild starten](https://dreimer1986.github.io/hover/play/modified/). Die dritte Fassung basiert auf dem späten Webstand. Sie bietet einen mobilen Startbildschirm, Steuerkreuz mit diagonalen Eingaben sowie Sprung, Wand, Tarnung und der originalen Feuerfunktion (nur mit Waffe). Am PC funktionieren weiterhin Pfeiltasten, Leertaste und A/S/D.
+
+Mobilgeräte werden von der Startseite dorthin geleitet; Touch und Großansicht sind dort voreingestellt. Am PC bleibt der bisherige Einstieg erhalten, und beide Optionen sind in der modifizierten Fassung zunächst aus. **Großansicht** füllt das Browserfenster und zeigt ein kompaktes HUD. **Vollbild** blendet nach einem Tastendruck zusätzlich die Browseroberfläche aus, sofern der Browser dies unterstützt. Andernfalls bleibt die Großansicht verfügbar. Querformat wird empfohlen.
+
+Über **Archiv** oder [diesen Link](https://dreimer1986.github.io/hover/?view=archive) lassen sich auch mobil beide bisherigen Fassungen und Store-Downloads auswählen. Die Originalfassungen und Archive werden nicht verändert. Der Zusatzcode liegt getrennt unter `modifications/`; der Build erzeugt daraus `play/modified/` mit gemeinsam genutzten Spielressourcen.
+
+Browser-Basistests: `scripts/modified_smoke.cjs` mit denselben Umgebungsvariablen wie `browser_smoke.cjs`. Mobile Touch-Ereignisse werden in Chromium emuliert; Tests auf echter Android-/iOS-Hardware stehen noch aus.
+
 ## Store-ZIPs wieder zusammensetzen
 
 Die Original-ZIPs sind verlustfrei in maximal 50 MiB große Teile zerlegt, damit keine Git-Datei die GitHub-Grenze von 100 MiB überschreitet.

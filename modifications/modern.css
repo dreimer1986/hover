@@ -1,0 +1,74 @@
+html, body { width:100%; height:100%; margin:0; overscroll-behavior:none; }
+#modern-ui { font-family:proxima-nova,Arial,sans-serif; color:#eee9ff; }
+#modern-ui [hidden] { display:none !important; }
+#modern-ui button, #modern-ui select, #modern-ui a { -webkit-tap-highlight-color:transparent; }
+#modern-ui button, #modern-toolbar a, #modern-ui select { font:inherit; color:#eee9ff; background:#211839ed; border:1px solid #8070ac; border-radius:8px; padding:10px 12px; cursor:pointer; }
+#modern-ui button:hover, #modern-ui button[aria-pressed=true], #modern-ui button.pressed { background:#fcb649; color:#170d28; border-color:#ffd8a0; }
+#modern-ui :focus-visible { outline:3px solid #fcb649; outline-offset:3px; }
+#modern-toolbar { position:fixed; top:env(safe-area-inset-top,0px); left:env(safe-area-inset-left,0px); right:env(safe-area-inset-right,0px); z-index:10002; display:flex; justify-content:center; gap:6px; padding:5px; pointer-events:none; }
+#modern-toolbar > * { pointer-events:auto; text-decoration:none; font-size:13px; min-height:40px; box-sizing:border-box; }
+#modern-launcher { position:fixed; inset:0; z-index:10001; overflow:auto; background:radial-gradient(ellipse at 70% 20%,#402257,#100c22 70%); padding:70px 20px 30px; box-sizing:border-box; }
+.modern-card { max-width:620px; margin:0 auto; text-align:center; line-height:1.5; }
+.modern-card > img { width:220px; max-width:65%; height:auto; }
+.modern-card h1 { font-size:clamp(26px,5vw,42px); margin:12px 0; line-height:1.1; }
+.modern-kicker { font-size:12px; letter-spacing:2px; color:#fcb649; }
+.modern-options { display:flex; gap:12px; text-align:left; margin:20px 0; }
+.modern-options label { flex:1; }
+#modern-ui select { display:block; width:100%; margin-top:4px; }
+#modern-ui .modern-primary { background:#fcb649; color:#170d28; font-weight:bold; }
+.modern-card > button { margin:0 3px 8px; min-height:48px; }
+.modern-card a { color:#dac6ff; }
+.modern-help { font-size:14px; color:#bdb1d0; }
+#modern-status { position:fixed; top:52px; left:50%; transform:translateX(-50%); z-index:10003; margin:0; background:#211839ed; color:#fff; font:14px/1.4 Arial; max-width:90%; width:max-content; border-radius:8px; }
+#modern-status:not(:empty) { padding:10px; }
+.archive-back, #footer, #dpad, #gameButtons, #hudButtons { display:none !important; }
+#modern-controls { position:fixed; inset:0; pointer-events:none; z-index:10000; }
+#modern-pad, #modern-actions { position:absolute; bottom:calc(22px + env(safe-area-inset-bottom,0px)); pointer-events:auto; touch-action:none; user-select:none; -webkit-user-select:none; }
+#modern-pad { left:calc(16px + env(safe-area-inset-left,0px)); width:144px; height:144px; border-radius:50%; background:#211839a8; border:2px solid #bda5dd; display:grid; grid-template:repeat(3,1fr)/repeat(3,1fr); align-items:center; justify-items:center; font-size:25px; color:#f6d9b6; box-shadow:0 0 20px #130a22a0; }
+#modern-pad.pressed { background:#49315bc9; border-color:#fcb649; }
+.pad-up { grid-area:1/2; } .pad-left { grid-area:2/1; } .pad-center { grid-area:2/2; font-size:14px; } .pad-right { grid-area:2/3; } .pad-down { grid-area:3/2; }
+#modern-actions { right:calc(16px + env(safe-area-inset-right,0px)); display:grid; grid-template-columns:repeat(2,74px); gap:8px; }
+#modern-actions button { height:62px; padding:6px 3px; background:#211839bd; font-size:14px; touch-action:none; }
+#modern-actions small { display:block; opacity:.7; font-size:11px; }
+/* The camera fills the viewport; original HUD elements retain their own scale. */
+.modern-wide.modern-in-game #gameContainer { position:fixed !important; inset:0 !important; width:100% !important; height:100% !important; margin:0 !important; transform:none !important; background:none !important; }
+.modern-wide #gameContainer .gameCanvas { left:0 !important; top:0 !important; }
+.modern-wide #gameContainer #frame, .modern-wide #gameContainer #header { display:none !important; }
+.modern-wide #gameContainer #hud { inset:0; width:100%; height:100%; pointer-events:none; }
+.modern-wide .modern #dash-bottom { left:50%; bottom:0; margin-left:-714px; width:1428px; height:195px; transform:scale(var(--hud-scale, .6)); transform-origin:50% 100%; }
+.modern-wide .modern #dash-bottom-bg { display:none; }
+.modern-wide .modern #dash-top { top:52px; transform:scale(var(--hud-scale,.6)); transform-origin:50% 0; }
+.modern-wide #gameContainer #gameMessageBackground, .modern-wide #gameContainer #cloakOverlay { inset:0; width:100%; height:100%; }
+.modern-wide #gameMessageView { left:50% !important; top:50% !important; width:1080px !important; height:575px !important; margin-left:-540px; margin-top:-287.5px; transform:scale(var(--message-scale, .6)); transform-origin:center; }
+.modern-wide #gameMessage { position:static !important; }
+.modern-wide .retro #hud { width:800px !important; height:600px !important; left:50% !important; top:auto !important; bottom:0 !important; margin-left:-400px; transform:scale(var(--retro-scale,.6)); transform-origin:50% 100%; }
+.modern-wide .retro #dash_top, .modern-wide .retro #dash_bottom { background-image:none; }
+.modern-wide.modern-touch #modern-pad, .modern-wide.modern-touch #modern-actions { bottom:calc(110px * var(--hud-scale,.6) + 16px + env(safe-area-inset-bottom,0px)); }
+@media (max-width:600px) {
+  #modern-toolbar { gap:3px; }
+  #modern-toolbar > * { font-size:11px; padding:10px 6px; }
+  #modern-pad { width:128px; height:128px; left:10px; }
+  #modern-actions { right:10px; grid-template-columns:repeat(2,64px); gap:6px; }
+  #modern-actions button { height:58px; font-size:12px; }
+  .modern-options { gap:8px; }
+  .modern-wide.modern-touch .modern #dash-bottom { bottom:160px; }
+  .modern-wide.modern-touch #modern-pad, .modern-wide.modern-touch #modern-actions { bottom:calc(16px + env(safe-area-inset-bottom,0px)); }
+}
+@media (max-height:450px) and (min-width:601px) {
+  #modern-pad { width:124px; height:124px; }
+  #modern-actions button { height:52px; }
+  .modern-wide.modern-touch #modern-pad, .modern-wide.modern-touch #modern-actions { bottom:calc(12px + env(safe-area-inset-bottom,0px)); }
+}
+/* A readable compact HUD replaces decorative dials only in the large view. */
+#modern-ui #modern-toolbar button, #modern-ui #modern-toolbar a { font-size:13px; white-space:nowrap; }
+.modern-wide .modern #dash-top { transform:scale(var(--flags-scale,1)); filter:brightness(2); }
+.modern-wide .modern #dash-bottom { left:0; bottom:0; margin:0; width:100%; height:100%; transform:none; }
+.modern-wide .modern #dash-bottom > :not(#radar) { visibility:hidden; }
+.modern-wide .modern #radar { left:50%; top:auto; bottom:42px; width:180px; height:97px; transform:translateX(-50%); background:#150b2890; border-radius:12px; }
+#modern-readout { position:fixed; bottom:calc(7px + env(safe-area-inset-bottom,0px)); left:50%; transform:translateX(-50%); z-index:9999; padding:6px 10px; border-radius:7px; background:#1c112bd9; color:#fff1db; font:13px/1.4 proxima-nova,Arial,sans-serif; white-space:nowrap; pointer-events:none; }
+@media (max-width:600px) {
+  #modern-ui #modern-toolbar button, #modern-ui #modern-toolbar a { font-size:11px; padding:10px 5px; }
+  .modern-wide .modern #dash-bottom { bottom:0; }
+  .modern-wide .modern #radar { bottom:172px; width:150px; height:81px; }
+  #modern-readout { top:100px; bottom:auto; font-size:12px; padding:6px; }
+}

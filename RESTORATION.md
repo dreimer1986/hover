@@ -87,3 +87,11 @@ Die Liste der nur aus Pages ausgeschlossenen Dateien steht in `verification/page
 Beim zusätzlichen ARM-Ladepfadtest fehlte `Maze1/FBASE_02_QUARTER.png` bereits im vollständigen Quellarchiv. Beide Webfassungen verwenden für genau diesen Fall nun die vorhandene Originaltextur `Maze1/FBASE_02.jpg` desselben Levels. Es findet weder eine Neuzeichnung noch eine verlustbehaftete Umwandlung statt.
 
 Abschlussprüfung des kompakten Builds: 14/14 Szenarien bestanden (acht reguläre und sechs erzwungene ARM-Texturladepfade), jeweils ohne JavaScript-Fehler, fehlende Ressourcen oder externe Laufzeitanfragen. Bewegung wurde in allen Szenarien bestätigt.
+
+## Optionale Touch-/Vollbild-Fassung (14.11.2026)
+
+`play/modified/` wird als dritte Fassung aus dem bereits wiederhergestellten späten Webstand gebaut. `modifications/modern.js` und `modern.css` ergänzen Startmenü, Pointer-Events-Steuerkreuz, Aktionstasten und eine umschaltbare Großansicht. Die Eingaben verwenden den vorhandenen Touch-Controller; der Tastatur-Controller bleibt erhalten. Abbruch, Fokusverlust und Ansichtswechsel lösen gehaltene Eingaben. Die Großansicht passt Rendergröße und Kamera-Seitenverhältnis an, blendet die dekorative Umrandung aus und erhält Radar, Flaggen sowie lesbare Inventar-/Statuswerte. Browser-Vollbild benötigt einen Tastendruck; ohne entsprechende Browser-Unterstützung bleibt die Großansicht nutzbar.
+
+`site/mobile.js` leitet mobile Aufrufe der Startseite zur dritten Fassung. `?view=archive` sowie direkte Abschnittslinks umgehen diese Weiterleitung. Desktop-Aufrufe und direkte Links auf die beiden bisherigen Spielfassungen behalten ihr Verhalten. Die ursprünglichen Archive, wiederhergestellten Spielfassungen und gemeinsamen Texturen werden für diese Erweiterung nicht verändert. Die dritte Fassung lädt dieselben gemeinsamen Assets; Store-Pakete bleiben Downloads über Releases.
+
+Die Zusatzfunktionen wurden mit Chromium und emulierten mobilen Mehrfinger-Eingaben geprüft (`scripts/modified_smoke.cjs`, Ergebnisse unter `verification/modified-*`). Ein Test auf echter Mobilhardware ist damit nicht ersetzt.

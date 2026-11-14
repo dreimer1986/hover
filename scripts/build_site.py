@@ -78,6 +78,16 @@ for date, name in [('2013-10-02', 'early'), ('2019-03-11', 'latest')]:
             # Keep the old information panel local; its external YouTube player is not archived.
             text = re.sub(r'http://img\.youtube\.com/vi/.*?/maxresdefault\.jpg', '../../assets/images/UI/hover_fb.png', text)
         dest.write_text(text)
+# A third opt-in derivative shares assets; both restored releases stay unchanged.
+modified = output / 'play/modified'
+shutil.copytree(output / 'play/latest', modified)
+shutil.copytree(ROOT / 'modifications', modified, dirs_exist_ok=True)
+index = modified / 'index.html'
+html = index.read_text().replace('<title>Hover!</title>', '<title>Hover! — Touch + Vollbild</title>')
+html = html.replace('</head>', '<link rel="stylesheet" href="modern.css">\n<script src="../../mobile.js"></script>\n</head>')
+html = html.replace('</body>', '<script src="modern.js"></script>\n</body>')
+html = html.replace('width=device-width"', 'width=device-width,viewport-fit=cover"')
+index.write_text(html)
 if args.include_downloads:
     subprocess.run([sys.executable, str(ROOT / 'scripts/restore_windows.py'), '--output', str(output / 'downloads')], check=True)
 else:

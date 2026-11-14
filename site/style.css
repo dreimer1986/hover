@@ -5,3 +5,5 @@
 /* The decorative orbital ring may extend beyond the hero without widening the page. */
 body{overflow-x:clip}
 .orbital{inset:-45px -15px;transform:none}
+
+@media(min-width:1100px){.versions{grid-template-columns:repeat(3,minmax(0,1fr))}.versions h3{font-size:25px}.versions .version-meta{flex-wrap:wrap;gap:8px}.versions .button{gap:10px;padding-inline:16px}}
