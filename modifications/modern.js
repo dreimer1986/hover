@@ -17,6 +17,7 @@
       <button id="modern-menu" type="button">Menü</button>
       <button id="modern-wide" type="button">Großansicht</button>
       <button id="modern-touch" type="button">Touch</button>
+      <button id="modern-sound" type="button" aria-label="Ton an" title="Ton an">♪</button>
       <button id="modern-full" type="button">⛶ Vollbild</button>
     </nav>
     <section id="modern-launcher" aria-label="Hover starten">
@@ -100,9 +101,27 @@
   };
   document.addEventListener('fullscreenchange', fullscreenChanged);
   document.addEventListener('webkitfullscreenchange', fullscreenChanged);
+  $('modern-sound').onclick = () => {
+    const enabled = !Hover.settings.getSoundEnabled();
+    if (window.HoverAudio) HoverAudio.unlock();
+    Hover.settings.setSoundEnabled(enabled); Hover.audio.setEnabled(enabled);
+    const game = Hover.router.currentView && Hover.router.currentView.game;
+    if (game) game.toggleSound(enabled);
+  };
+  window.addEventListener('hover-audio-error', () => status('Einige Töne konnten nicht geladen werden. Bitte die Seite neu laden.'));
   $('modern-menu').onclick = () => { release(); Hover.router.home(); };
-  function start(retro) {
+  let starting = false;
+  async function start(retro) {
+    if (starting) return;
+    starting = true;
     release();
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+    if (window.HoverAudio) HoverAudio.unlock();
+    Hover.retro = retro;
+    // Craft objects capture their sound references during construction. Select
+    // and decode the correct bank first, including on modern/retro switches.
+    if (window.HoverAudio) await new Promise(resolve => Hover.audio.loadSounds(resolve));
+    starting = false;
     if (retro) Hover.router.retro();
     else {
       Hover.retro = false;
@@ -169,7 +188,7 @@
   $('modern-toolbar').addEventListener('click', e => { if (e.detail || e.pointerType) e.target.blur(); });
   // Keep the game's global key handler from swallowing toolbar/select key presses.
   ['keydown', 'keyup'].forEach(type => ui.addEventListener(type, e => {
-    if ($('modern-launcher').contains(e.target) || ['Tab', 'Enter', ' '].includes(e.key)) e.stopPropagation();
+    if ((!$('modern-launcher').hidden && $('modern-launcher').contains(e.target)) || ['Tab', 'Enter', ' '].includes(e.key)) e.stopPropagation();
   }));
   window.addEventListener('blur', release);
   window.addEventListener('pagehide', release);
@@ -251,6 +270,13 @@
     if (next !== view) { release(); view = next; }
     if (game !== currentGame) {
       release(); currentGame = game; controller = null; originalDimensions = null; lastSize = '';
+    }
+    if (window.Hover && Hover.settings) {
+      const sound = Hover.settings.getSoundEnabled();
+      $('modern-sound').setAttribute('aria-pressed', sound);
+      $('modern-sound').setAttribute('aria-label', t(sound ? 'Ton an' : 'Ton aus'));
+      $('modern-sound').title = t(sound ? 'Ton an' : 'Ton aus');
+      $('modern-sound').textContent = sound ? '♪' : '♪̸';
     }
     const inGame = !!document.getElementById('gameView');
     root.classList.toggle('modern-in-game', inGame);

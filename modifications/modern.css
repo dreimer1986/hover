@@ -112,3 +112,8 @@ html, body { width:100%; height:100%; margin:0; overscroll-behavior:none; }
 #modern-retro-hud { background:none; border:0; }
 .retro-inventory, .retro-durations { background:#111d; border:1px solid #777; padding:4px; }
 .modern-wide .retro #radar { background:#000c; border:1px solid #777; }
+#modern-ui #modern-toolbar #modern-sound { min-width:32px; font-size:16px; }
+@media(max-width:600px) {
+  #modern-toolbar { gap:2px; }
+  #modern-ui #modern-toolbar button, #modern-ui #modern-toolbar a { font-size:10px; padding:10px 4px; }
+}

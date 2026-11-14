@@ -46,6 +46,8 @@ Mobilgeräte werden von der Startseite dorthin geleitet; Touch und Großansicht 
 
 Die Archivseite und die neue Bedienoberfläche wählen anhand der bevorzugten Browsersprache automatisch Deutsch (`de-*`) oder Englisch (alle übrigen Sprachen). Auch laufende Statusanzeigen und Vollbild-Hinweise sind übersetzt; die beiden erhaltenen Originalfassungen bleiben unberührt. Die Übersetzungen liegen in `site/locale.js`. Sprachtests: `scripts/locale_smoke.cjs`.
 
+Die modifizierte Fassung bietet zusätzlich einen Ton-Schalter und eine gemeinsame Web-Audio-Ausgabe für Musik, Motor und Effekte. Im normalen Modus werden die erhaltenen Retro-Motorgeräusche ergänzt; Herkunft und Audiotests sind im [Restaurierungsbericht](RESTORATION.md#audio-in-der-modifizierten-fassung) dokumentiert.
+
 Browser-Basistests: `scripts/modified_smoke.cjs` mit denselben Umgebungsvariablen wie `browser_smoke.cjs`. Mobile Touch-Ereignisse werden in Chromium emuliert; Tests auf echter Android-/iOS-Hardware stehen noch aus.
 
 ## Store-ZIPs wieder zusammensetzen
@@ -72,7 +74,7 @@ Die beiden vollständigen Original-ZIPs erscheinen in `downloads/`; SHA-256 wird
 python3 scripts/verify_archive.py
 ```
 
-[Wiederherstellung, Ersatzdateien und Grenzen](RESTORATION.md) · [Rechte und Originalquellen](THIRD_PARTY.md)
+[Wiederherstellung, Ersatzdateien und Grenzen](RESTORATION.md) · [Rechte und Originalquellen](THIRD_PARTY.md) · [Multiplayer: Analyse und Machbarkeit](MULTIPLAYER.md)
 
 ## GitHub Pages
 

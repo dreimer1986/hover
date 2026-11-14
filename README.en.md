@@ -46,6 +46,8 @@ Use **Archive** or [this link](https://dreimer1986.github.io/hover/?view=archive
 
 The archive page and new controls automatically select German (`de-*`) or English (all other languages) from the preferred browser language. Live status displays and fullscreen messages are translated too; the two preserved original releases remain untouched. Translations live in `site/locale.js`. Language tests: `scripts/locale_smoke.cjs`.
 
+The modified edition also provides a sound toggle and shared Web Audio output for music, engine and effects. Normal mode reuses the preserved retro engine sounds; provenance and audio tests are documented in the [restoration report](RESTORATION.en.md#audio-in-the-modified-edition).
+
 Browser smoke tests: `scripts/modified_smoke.cjs`, using the same environment variables as `browser_smoke.cjs`. Mobile touch events are emulated in Chromium; this does not replace testing on actual Android/iOS hardware.
 
 ## Reassemble the Store ZIPs
@@ -72,7 +74,7 @@ Both complete original ZIPs appear in `downloads/`; SHA-256 is checked during re
 python3 scripts/verify_archive.py
 ```
 
-[Restoration, replacement files and limitations](RESTORATION.en.md) · [Rights and original sources](THIRD_PARTY.en.md)
+[Restoration, replacement files and limitations](RESTORATION.en.md) · [Rights and original sources](THIRD_PARTY.en.md) · [Multiplayer: analysis and feasibility](MULTIPLAYER.en.md)
 
 ## GitHub Pages
 

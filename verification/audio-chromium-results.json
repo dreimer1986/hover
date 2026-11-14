@@ -1,0 +1,71 @@
+{
+  "base": "http://127.0.0.1:8767/hover/",
+  "engine": "chromium",
+  "autoplayPolicy": "browser default",
+  "results": [
+    {
+      "retro": false,
+      "engines": [
+        {
+          "name": "ENG_IDLE",
+          "rms": 0.10266208329574879
+        },
+        {
+          "name": "ENG_NORM",
+          "rms": 0.08741637546859006
+        },
+        {
+          "name": "ENG_LOW",
+          "rms": 0.08928941369629835
+        },
+        {
+          "name": "ENG_HIGH",
+          "rms": 0.08179675674688315
+        }
+      ],
+      "music": {
+        "present": true,
+        "playing": true
+      },
+      "wallRms": 0.199162161109136,
+      "item": "OBT_JUMP",
+      "itemRms": 0.1736203463426279,
+      "mute": true,
+      "resume": "running",
+      "menuSilent": true
+    },
+    {
+      "retro": true,
+      "engines": [
+        {
+          "name": "ENG_IDLE",
+          "rms": 0.09299506196469878
+        },
+        {
+          "name": "ENG_NORM",
+          "rms": 0.08899356911936634
+        },
+        {
+          "name": "ENG_LOW",
+          "rms": 0.0987378844773318
+        },
+        {
+          "name": "ENG_HIGH",
+          "rms": 0.09066866124086677
+        }
+      ],
+      "music": {
+        "present": false,
+        "playing": false
+      },
+      "wallRms": 0.34019251184258503,
+      "item": "OBT_JUMP",
+      "itemRms": 0.1089228089202391,
+      "mute": true,
+      "resume": "running",
+      "menuSilent": true
+    }
+  ],
+  "errors": [],
+  "missing": []
+}
