@@ -1,5 +1,7 @@
 # Hover! — The Archive
 
+**Deutsch** · [English](README.en.md)
+
 Das Web-Remake von 2013, aus dem Internet Archive gesichert und lokal spielbar wiederhergestellt.
 
 **Website:** https://dreimer1986.github.io/hover/
@@ -36,7 +38,7 @@ Die lokalen Quellfassungen verwenden relative symbolische Links. Der Website-Bui
 
 ## Modifizierte Fassung: Touch und Vollbild
 
-[Touch + Vollbild starten](https://dreimer1986.github.io/hover/play/modified/). Die dritte Fassung basiert auf dem späten Webstand. Sie bietet einen mobilen Startbildschirm, Steuerkreuz mit diagonalen Eingaben sowie Sprung, Wand, Tarnung und der originalen Feuerfunktion (nur mit Waffe). Am PC funktionieren weiterhin Pfeiltasten, Leertaste und A/S/D.
+[Touch + Vollbild starten](https://dreimer1986.github.io/hover/play/modified/). Die dritte Fassung basiert auf dem späten Webstand. Sie bietet einen mobilen Startbildschirm, Steuerkreuz mit diagonalen Eingaben sowie Sprung, Wand, Tarnung und die originale Feuerfunktion (nur mit Waffe). Am PC funktionieren weiterhin Pfeiltasten, Leertaste und A/S/D.
 
 Mobilgeräte werden von der Startseite dorthin geleitet; Touch und Großansicht sind dort voreingestellt. Am PC bleibt der bisherige Einstieg erhalten, und beide Optionen sind in der modifizierten Fassung zunächst aus. **Großansicht** füllt das Browserfenster und zeigt ein kompaktes HUD. **Vollbild** blendet nach einem Tastendruck zusätzlich die Browseroberfläche aus, sofern der Browser dies unterstützt. Andernfalls bleibt die Großansicht verfügbar. Querformat wird empfohlen.
 

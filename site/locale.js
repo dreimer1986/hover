@@ -109,6 +109,7 @@
   function t(text) { return lang === 'en' && Object.prototype.hasOwnProperty.call(english, text) ? english[text] : text; }
   function translate(element) {
     if (lang !== 'en') return;
+    element.querySelectorAll('[data-english-href]').forEach(link => { link.href = link.dataset.englishHref; });
     const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
     let node;
     while ((node = walker.nextNode())) {

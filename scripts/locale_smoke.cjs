@@ -16,6 +16,7 @@ const base = (process.env.HOVER_URL || 'http://127.0.0.1:8767/hover/').replace(/
       assert.equal(await p.locator('html').getAttribute('lang'),lang);
       assert.equal((await p.locator('.hero .button.primary').innerText()).replace('↗','').trim(),lang==='de'?'Jetzt spielen':'Play now');
       assert.equal(await p.locator('.versions article').count(),3);
+      assert.equal(await p.locator('[data-english-href]').getAttribute('href'),'https://github.com/dreimer1986/hover/blob/master/RESTORATION'+(lang==='en'?'.en':'')+'.md');
       assert.equal((await p.locator('.download-row a').first().innerText()).replace(/\s+/g,' '),lang==='de'?'Bundle herunterladen ↓':'Download bundle ↓');
       assert.match(await p.locator('.archive-note details').innerText(),lang==='de'?/Was wurde ergänzt/:/What was restored/);
       assert.equal(await p.locator('nav').getAttribute('aria-label'),lang==='de'?'Hauptnavigation':'Main navigation');

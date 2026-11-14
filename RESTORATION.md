@@ -1,6 +1,8 @@
 # Wiederherstellungsbericht
 
-Stand: 10. November 2026.
+**Deutsch** · [English](RESTORATION.en.md)
+
+Stand: 14. November 2026.
 
 ## Welche Fassungen wurden gesichert?
 

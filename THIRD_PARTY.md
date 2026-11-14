@@ -1,5 +1,7 @@
 # Originalinhalte und Herkunft
 
+**Deutsch** · [English](THIRD_PARTY.en.md)
+
 Hover!, die ursprünglichen Spielgrafiken, Sounds und der Spielcode stammen von Microsoft und den jeweiligen beteiligten Rechteinhabern. Die vorhandene MIT-Lizenz dieses Repositories erteilt **keine neue Lizenz für diese Drittinhalte**. Ursprüngliche Copyright- und Lizenzhinweise bleiben erhalten; Bibliotheken wie jQuery und Three.js enthalten ihre eigenen Hinweise.
 
 Primärquellen der Sicherung:
