@@ -76,6 +76,10 @@ python3 scripts/verify_archive.py
 
 [Wiederherstellung, Ersatzdateien und Grenzen](RESTORATION.md) · [Rechte und Originalquellen](THIRD_PARTY.md) · [Multiplayer: Analyse und Machbarkeit](MULTIPLAYER.md)
 
+## Multiplayer-Server für die NAS
+
+Ein optionaler Python-/WebSocket-Server ist als Docker-Container für Synology vorbereitet. Er enthält auch die Website und verwendet **8080/TCP**. [Installation, Caddy und Spielablauf](SERVER.md) · [Container herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.1.0).
+
 ## GitHub Pages
 
 `.github/workflows/pages.yml` baut die Seite bei Pushes auf `master` und veröffentlicht sie über GitHub Actions. In den Repository-Einstellungen ist **Pages → Source → GitHub Actions** erforderlich. Die Store-ZIPs werden über GitHub Releases angeboten. Pages enthält beide Spiele gemeinsam, aber nur deren benötigte Texturvarianten. Die vollständigen Originaldateien bleiben im Repository erhalten; der lokale Build mit `--include-downloads` ergänzt die ZIPs.

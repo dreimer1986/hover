@@ -2,6 +2,8 @@
 
 [Deutsch](MULTIPLAYER.md) · **English**
 
+**Update November 15, 2026:** A replacement implementation and Docker packaging now exist; see [installation and current limitations](SERVER.en.md). The following is the historical pre-implementation analysis.
+
 Updated: November 14, 2026. This is a code analysis, not an implemented or tested multiplayer service.
 
 ## Conclusion

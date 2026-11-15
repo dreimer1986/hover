@@ -1,0 +1,23 @@
+services:
+  hover:
+    image: hover-multiplayer:0.1.0
+    container_name: hover-multiplayer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ALLOWED_ORIGINS: "https://dreimer1986.github.io,https://hover.dreimer.de"
+      MAX_ROOMS: "32"
+      MAX_CLIENTS: "256"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=16m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

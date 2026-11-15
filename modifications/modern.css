@@ -117,3 +117,11 @@ html, body { width:100%; height:100%; margin:0; overscroll-behavior:none; }
   #modern-toolbar { gap:2px; }
   #modern-ui #modern-toolbar button, #modern-ui #modern-toolbar a { font-size:10px; padding:10px 4px; }
 }
+#mp-panel { text-align:left; margin:22px 0; padding:16px; border:1px solid #8070ac; border-radius:12px; background:#211839; }
+#mp-panel summary { cursor:pointer; color:#fcb649; font-size:20px; }
+#mp-panel input { display:block; box-sizing:border-box; width:100%; min-width:0; margin:4px 0 12px; padding:10px; border:1px solid #8070ac; border-radius:8px; background:#100c22; color:#eee9ff; font:inherit; }
+#mp-panel .modern-options > label { min-width:0; }
+#mp-panel .mp-join { display:flex; gap:10px; align-items:center; margin-top:12px; }
+#mp-panel .mp-join input { width:120px; margin:0; text-transform:uppercase; }
+#mp-panel button:disabled, #modern-ui button:disabled { opacity:.5; cursor:default; }
+#mp-status { overflow-wrap:anywhere; color:#fcb649; }

@@ -1,0 +1,14 @@
+*
+!Dockerfile
+!scripts/
+!scripts/build_site.py
+!site/**
+!modifications/**
+!server/
+!server/app.py
+!server/maps.json
+!server/requirements.txt
+!web/**
+!archive/
+!archive/windows/
+!archive/windows/release-downloads.json

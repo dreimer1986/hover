@@ -1,0 +1,56 @@
+name: Build multiplayer containers
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing draft release to receive Docker archives
+        required: true
+        default: multiplayer-v0.1.0
+permissions:
+  contents: write
+jobs:
+  image:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-latest
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Server tests and archive integrity
+        run: |
+          pip install -r server/requirements.txt
+          python -m unittest server.test_server -v
+          python scripts/verify_archive.py
+      - name: Build and run image
+        run: |
+          docker build -t hover-multiplayer:0.1.0 .
+          docker run -d --name hover-test --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1:8080:8080 hover-multiplayer:0.1.0
+          for i in $(seq 1 30); do
+            if curl --fail http://127.0.0.1:8080/healthz; then break; fi
+            sleep 1
+          done
+          curl --fail http://127.0.0.1:8080/play/modified/ -o /dev/null
+          docker exec hover-test python -c "import os; assert os.getuid() == 10001"
+          docker stop hover-test
+          docker save hover-multiplayer:0.1.0 | gzip > hover-multiplayer-${{ matrix.arch }}.tar.gz
+          sha256sum hover-multiplayer-${{ matrix.arch }}.tar.gz > hover-multiplayer-${{ matrix.arch }}.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hover-multiplayer-${{ matrix.arch }}
+          path: |
+            hover-multiplayer-*.tar.gz
+            hover-multiplayer-*.sha256
+          compression-level: 0
+      - name: Attach to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: gh release upload "$RELEASE_TAG" hover-multiplayer-${{ matrix.arch }}.tar.gz hover-multiplayer-${{ matrix.arch }}.sha256 --clobber

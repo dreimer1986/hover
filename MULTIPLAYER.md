@@ -2,6 +2,8 @@
 
 **Deutsch** · [English](MULTIPLAYER.en.md)
 
+**Update 15. November 2026:** Ein Ersatzserver samt Docker-Paket ist jetzt implementiert; siehe [Installation und aktuelle Grenzen](SERVER.md). Der folgende Text dokumentiert die historische Analyse vor der Implementierung.
+
 Stand: 14. November 2026. Dies ist eine Codeanalyse, kein implementierter oder getesteter Mehrspielerbetrieb.
 
 ## Ergebnis
