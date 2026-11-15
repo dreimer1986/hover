@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "maxBytes": 1500000,
+  "maxVertices": 8192,
+  "maxTriangles": 4096,
+  "maxMaterials": 16,
+  "maxTexture": 512,
+  "maxStored": 24,
+  "maxShared": 8,
+  "maxRoomBytes": 8000000,
+  "bounds": [
+    224,
+    77,
+    237
+  ],
+  "budget": 40,
+  "steps": 10,
+  "parameters": {
+    "maxSpeed": [
+      50.000762951094835,
+      75.00114442664226
+    ],
+    "acceleration": [
+      1.375020981155108,
+      5.0000762951094835
+    ],
+    "turnSpeed": [
+      0.07363108220726527,
+      0.1840777055181632
+    ],
+    "drag": [
+      3275,
+      64
+    ],
+    "turnDrag": [
+      26214,
+      13107
+    ]
+  }
+}

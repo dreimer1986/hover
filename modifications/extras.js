@@ -6,6 +6,7 @@
   let preview=null,scene,camera,renderer,previewGeneration=0;
   const crafts={Easy:['Chicago','a','A_YELLOW'],Normal:['Wizard','c','C_YELLOW'],Hard:['Bambi','b','B_RED']};
   function loadCraft(key){
+    if(window.HoverCrafts?.entry(key))return HoverCrafts.preview(key);
     if(!cache.has(key))cache.set(key,new Promise((resolve,reject)=>{
       const data=crafts[key];
       new THREE.JSONLoader().load('../../assets/3d/Models/hover_'+data[1]+'.js',geometry=>{
@@ -23,7 +24,7 @@
   }
   async function showCraft(){
     const generation=++previewGeneration,key=select.value;
-    preview.querySelector('figcaption').textContent=crafts[key][0];
+    preview.querySelector('figcaption').textContent=window.HoverCrafts?.entry(key)?.name||crafts[key][0];
     const labels=[t('Tempo','Speed'),t('Kraft','Power'),t('Stabilität','Stability'),t('Wendigkeit','Agility')];
     preview.querySelector('dl').replaceChildren(...Hover.Profiles.getStats(Hover.Profiles[key]).flatMap((value,i)=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=labels[i];dd.textContent=(value*10).toFixed(1)+' / 10';return [dt,dd];}));
     try{

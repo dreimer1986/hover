@@ -1,0 +1,10 @@
+{
+  "formats": [
+    "OBJ+MTL+PNG",
+    "GLTF+BIN+PNG",
+    "GLB"
+  ],
+  "textureAtlas": true,
+  "invalidPackagesRejected": 6,
+  "errors": []
+}

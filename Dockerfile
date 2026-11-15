@@ -14,7 +14,8 @@ LABEL org.opencontainers.image.source="https://github.com/dreimer1986/hover" \
 WORKDIR /app
 COPY server/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-COPY server/app.py server/maps.json ./
+COPY server/app.py server/crafts.py server/maps.json ./
+COPY modifications/craft-policy.json ./
 COPY --from=site /build/_site /app/site
 ENV SITE_DIR=/app/site PORT=8080 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 USER 10001:10001

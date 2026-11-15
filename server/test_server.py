@@ -34,6 +34,32 @@ class MultiplayerTests(unittest.IsolatedAsyncioTestCase):
             if message.get('id') == ident:
                 return message
 
+    async def test_public_directory_and_shared_craft_validation(self):
+        import json
+        from server.test_crafts import fixture
+        from server.crafts import validate
+        host, guest = await self.connect(), await self.connect()
+        code=(await self.rpc(host, 'createGame', 44, 3, 2, {'name':'Public pilots','public':True}))['result']
+        await self.rpc(host,'join',code,0,'Host')
+        rooms=(await self.rpc(guest,'listRooms'))['result']
+        self.assertEqual(rooms[0]['name'],'Public pilots')
+        await self.rpc(guest,'join',code,1,'Guest')
+        raw=json.dumps(fixture());entry=validate(raw)
+        self.assertIn('error',await self.rpc(guest,'shareCraft',raw))
+        self.assertIn('result',await self.rpc(host,'shareCraft',raw))
+        self.assertEqual((await self.rpc(guest,'getCraft',entry['hash']))['result'],raw)
+        await self.rpc(host,'shareCraft',raw)
+        self.assertEqual(len(self.server.app['service'].rooms[code]['crafts']),1)
+        self.assertIn('result',await self.rpc(guest,'selectCraft',entry['id']))
+        self.assertIn('error',await self.rpc(guest,'selectCraft',99999))
+        bad=fixture();bad['points']={k:10 for k in bad['points']}
+        self.assertIn('error',await self.rpc(host,'shareCraft',json.dumps(bad)))
+        self.assertIn('error',await self.rpc(guest,'renameLobby','Changed',False))
+        await self.rpc(host,'renameLobby','Private pilots',False)
+        self.assertEqual((await self.rpc(guest,'listRooms'))['result'],[])
+        await self.rpc(host,'beginRoom')
+        self.assertIn('error',await self.rpc(host,'shareCraft',raw))
+
     async def test_eight_players_limits_start_states_and_disconnect(self):
         sockets = [await self.connect() for _ in range(9)]
         code = (await self.rpc(sockets[0], 'createGame', 44, 4, 4))['result']

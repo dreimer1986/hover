@@ -1,4 +1,4 @@
-"""Hover replacement multiplayer service. Protocol v2, no Microsoft services.
+"""Hover replacement multiplayer service. Protocol v3, no Microsoft services.
 
 Movement remains client-simulated. Rooms, teams, flags and item ownership are
 server-managed; this is intended for casual play, not authoritative anti-cheat.
@@ -16,7 +16,11 @@ import time
 from aiohttp import web, WSMsgType
 
 MAPS = json.loads(Path(__file__).with_name('maps.json').read_text())
-VERSION = '0.2.0'
+VERSION = '0.3.0'
+try:
+    from .crafts import validate as validate_craft, POLICY as CRAFT_POLICY
+except ImportError:
+    from crafts import validate as validate_craft, POLICY as CRAFT_POLICY
 
 
 def number(value, limit=100000):
@@ -66,8 +70,10 @@ class Service:
     def info(self, room):
         return {'code': room['code'], 'maze': room['maze'], 'capacity': room['capacity'],
                 'host': room['host'], 'phase': room['phase'], 'round': room['round'],
+                'name': room['name'], 'public': room['public'],
+                'crafts': [{k: m[k] for k in ('hash', 'id', 'name')} for m in room['crafts'].values()],
                 'flagCount': room['flagCount'], 'retro': room['retro'], 'lastResult': room['lastResult'],
-                'players': [{'id': c.id, 'name': c.name, 'team': c.team, 'ready': c.ready} for c in room['players']]}
+                'players': [{'id': c.id, 'name': c.name, 'team': c.team, 'ready': c.ready, 'profile': c.profile} for c in room['players']]}
 
     async def leave(self, client):
         room, client.room = client.room, None
@@ -95,8 +101,15 @@ class Service:
         return client.room
 
     async def call(self, c, method, args):
+        if method == 'listRooms':
+            return [{'code': r['code'], 'name': r['name'], 'players': len(r['players']), 'capacity': r['capacity'], 'maze': r['maze'], 'retro': r['retro'], 'flagCount': r['flagCount']} for r in self.rooms.values() if r['public'] and r['players'] and r['phase'] == 'waiting' and len(r['players']) < r['capacity']]
         if method == 'createGame':
-            maze, flags, team_size = args
+            maze, flags, team_size = args[:3]
+            settings = args[3] if len(args) > 3 else {}
+            name = settings.get('name', 'Hover lobby')
+            public = settings.get('public', False)
+            if not isinstance(name, str) or not 1 <= len(name.strip()) <= 40 or not name.isprintable() or type(public) is not bool:
+                raise ValueError('Invalid lobby name or visibility')
             if str(maze) not in MAPS or type(team_size) is not int or not 1 <= team_size <= 4 or type(flags) is not int or not 3 <= flags <= 6:
                 raise ValueError('Invalid room settings')
             if c.room:
@@ -110,6 +123,7 @@ class Service:
                 code = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(6))
             room = {'code': code, 'maze': maze, 'capacity': team_size * 2, 'host': c.id,
                     'players': [], 'phase': 'waiting', 'created': time.monotonic(), 'flags': [], 'pods': [], 'bullets': {},
+                    'name': name.strip(), 'public': public, 'crafts': {},
                     'round': 0, 'flagCount': flags, 'retro': False, 'lastResult': None,
                     'scores': {}, 'teamWins': {'RED': 0, 'BLUE': 0}}
             # An unjoined reservation is bound to this socket and expires too.
@@ -137,6 +151,32 @@ class Service:
                 room['host'] = c.id
             await self.broadcast(room, 'lobby', self.info(room))
             return {'id': c.id, 'room': self.info(room)}
+        if method in ('shareCraft', 'getCraft', 'selectCraft', 'renameLobby'):
+            room = c.room
+            if not room:
+                raise ValueError('Join a lobby first')
+            if method == 'getCraft':
+                if args[0] not in room['crafts']: raise ValueError('Unknown craft')
+                return room['crafts'][args[0]]['json']
+            if room['phase'] != 'waiting': raise ValueError('Wait until the round ends')
+            if method == 'selectCraft':
+                ident = args[0]
+                if type(ident) is not int or ident not in [0,1,2]+[m['id'] for m in room['crafts'].values()]: raise ValueError('Unknown craft')
+                c.profile = ident
+            else:
+                if room['host'] != c.id: raise ValueError('Only the host may share crafts or rename the lobby')
+                if method == 'renameLobby':
+                    name, public = args
+                    if not isinstance(name,str) or not 1<=len(name.strip())<=40 or not name.isprintable() or type(public) is not bool: raise ValueError('Invalid lobby settings')
+                    room.update(name=name.strip(), public=public)
+                else:
+                    model = validate_craft(args[0])
+                    if model['hash'] in room['crafts']: return model['hash']
+                    if len(room['crafts']) >= CRAFT_POLICY['maxShared'] or sum(m['bytes'] for m in room['crafts'].values())+model['bytes']>CRAFT_POLICY['maxRoomBytes']: raise ValueError('Lobby craft storage limit reached')
+                    if any(m['id']==model['id'] for m in room['crafts'].values()): raise ValueError('Craft identifier collision')
+                    room['crafts'][model['hash']] = model
+            await self.broadcast(room, 'lobby', self.info(room))
+            return True
         if method == 'leave':
             await self.leave(c)
             return True
@@ -314,7 +354,7 @@ class Service:
             raise web.HTTPForbidden(text='Origin not allowed')
         if len(self.clients) >= self.max_clients:
             raise web.HTTPServiceUnavailable(text='Server is full')
-        ws = web.WebSocketResponse(heartbeat=20, max_msg_size=16384, compress=False)
+        ws = web.WebSocketResponse(heartbeat=20, max_msg_size=2000000, compress=False)
         await ws.prepare(request)
         c = Client(ws); self.clients.add(c)
         try:
@@ -331,11 +371,13 @@ class Service:
                     ident = data['id']
                     if type(ident) is not int or not isinstance(data['method'], str) or not isinstance(data.get('args'), list):
                         raise ValueError('Invalid message')
-                    if data['method'] not in ('createGame', 'join', 'leave', 'chooseTeam', 'configureRoom', 'closeLobby', 'beginRoom') and c.room and data.get('round') != c.room['round']:
+                    if len(msg.data.encode()) > 16384 and data['method'] != 'shareCraft':
+                        raise ValueError('Message too large')
+                    if data['method'] not in ('listRooms', 'shareCraft', 'getCraft', 'selectCraft', 'renameLobby', 'createGame', 'join', 'leave', 'chooseTeam', 'configureRoom', 'closeLobby', 'beginRoom') and c.room and data.get('round') != c.room['round']:
                         raise ValueError('Stale round')
                     result = await self.call(c, data['method'], data['args'])
                     await c.send({'id': ident, 'result': result})
-                except (ValueError, KeyError, TypeError, IndexError, OverflowError) as error:
+                except (ValueError, KeyError, TypeError, IndexError, OverflowError, RecursionError) as error:
                     await c.send({'id': ident, 'error': str(error)[:120]})
         finally:
             await self.leave(c)
@@ -370,7 +412,7 @@ def create_app(site_dir=None):
     app.cleanup_ctx.append(service.lifecycle)
     app.router.add_get('/ws', service.websocket)
     async def health(request):
-        return web.json_response({'status': 'ok', 'version': VERSION, 'protocol': 2, 'rooms': len(service.rooms), 'players': len(service.clients)})
+        return web.json_response({'status': 'ok', 'version': VERSION, 'protocol': 3, 'rooms': len(service.rooms), 'players': len(service.clients)})
     app.router.add_get('/healthz', health)
     root = Path(site_dir or os.getenv('SITE_DIR', Path(__file__).resolve().parents[1] / '_site')).resolve()
     async def static(request):

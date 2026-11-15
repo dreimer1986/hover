@@ -1,0 +1,123 @@
+{
+  "originals": [
+    {
+      "name": "Chicago",
+      "model": "web/assets/3d/Models/hover_a.js",
+      "vertices": 280,
+      "source_faces": 290,
+      "dimensions": [
+        223.143174,
+        56.345234,
+        202.692291
+      ],
+      "profile": {
+        "maxSpeed": 50.000762951094835,
+        "acceleration": 1.375020981155108,
+        "turnSpeed": 0.07363108220726527,
+        "drag": 3275,
+        "turnDrag": 13107
+      },
+      "normalized_points": {
+        "maxSpeed": 0.0,
+        "acceleration": 0.0,
+        "turnSpeed": 0.0,
+        "drag": -0.0,
+        "turnDrag": 10.0
+      },
+      "total_points": 10.0
+    },
+    {
+      "name": "Wizard",
+      "model": "web/assets/3d/Models/hover_c.js",
+      "vertices": 265,
+      "source_faces": 310,
+      "dimensions": [
+        161.052704,
+        76.01537,
+        236.575622
+      ],
+      "profile": {
+        "maxSpeed": 65.00099183642328,
+        "acceleration": 3.00004577706569,
+        "turnSpeed": 0.08590292924180949,
+        "drag": 654,
+        "turnDrag": 19660
+      },
+      "normalized_points": {
+        "maxSpeed": 5.999999999999998,
+        "acceleration": 4.482758620689655,
+        "turnSpeed": 1.1111111111111116,
+        "drag": 8.16256617876051,
+        "turnDrag": 5.000381475547417
+      },
+      "total_points": 24.756817386108693
+    },
+    {
+      "name": "Bambi",
+      "model": "web/assets/3d/Models/hover_b.js",
+      "vertices": 202,
+      "source_faces": 240,
+      "dimensions": [
+        138.556458,
+        76.88920200000001,
+        234.66815200000002
+      ],
+      "profile": {
+        "maxSpeed": 75.00114442664226,
+        "acceleration": 5.0000762951094835,
+        "turnSpeed": 0.1840777055181632,
+        "drag": 64,
+        "turnDrag": 26214
+      },
+      "normalized_points": {
+        "maxSpeed": 10.0,
+        "acceleration": 10.0,
+        "turnSpeed": 10.0,
+        "drag": 10.0,
+        "turnDrag": -0.0
+      },
+      "total_points": 40.0
+    }
+  ],
+  "policy": {
+    "schema": 1,
+    "maxBytes": 1500000,
+    "maxVertices": 8192,
+    "maxTriangles": 4096,
+    "maxMaterials": 16,
+    "maxTexture": 512,
+    "maxStored": 24,
+    "maxShared": 8,
+    "maxRoomBytes": 8000000,
+    "bounds": [
+      224,
+      77,
+      237
+    ],
+    "budget": 40,
+    "steps": 10,
+    "parameters": {
+      "maxSpeed": [
+        50.000762951094835,
+        75.00114442664226
+      ],
+      "acceleration": [
+        1.375020981155108,
+        5.0000762951094835
+      ],
+      "turnSpeed": [
+        0.07363108220726527,
+        0.1840777055181632
+      ],
+      "drag": [
+        3275,
+        64
+      ],
+      "turnDrag": [
+        26214,
+        13107
+      ]
+    }
+  },
+  "note": "Physics ranges/budget and size bounds derive from originals. Mesh complexity limits are conservative extension limits, not engine maxima. Original profiles remain unchanged."
+}

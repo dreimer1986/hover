@@ -187,3 +187,10 @@ html:not(.input-gate) #input-start { display:none; }
 .enhanced-changes { margin:16px auto; max-width:760px; color:#eee9ff; font-size:14px; }
 .enhanced-changes summary { cursor:pointer; color:#ffca71; }
 .enhanced-changes li { margin:7px 0; }
+#craft-points { display:grid; gap:10px; }
+#craft-points label { display:grid; grid-template-columns:140px 1fr 28px; align-items:center; gap:8px; }
+#craft-points input { min-height:24px; padding:0; }
+.over-budget { color:#ff7979; }
+#modern-launcher .mp-checkbox { display:flex; align-items:center; gap:8px; margin:10px 0; }
+#modern-launcher .mp-checkbox input { width:20px; min-height:20px; margin:0; }
+#mp-directory { list-style:none; padding:0; }

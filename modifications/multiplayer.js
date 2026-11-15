@@ -1,4 +1,4 @@
-/* Extended edition multiplayer protocol v2. Archived clients remain unchanged. */
+/* Extended edition multiplayer protocol v3. Archived clients remain unchanged. */
 (function () {
   'use strict';
   const de=hoverLocale.lang==='de', t=(a,b)=>de?a:b;
@@ -15,6 +15,9 @@
       <label>${t('Server-Adresse','Server address')}<input id="mp-server" type="url" spellcheck="false" placeholder="https://hover.dreimer.de"></label>
       <div class="modern-options"><label>${t('Dein Name','Your name')}<input id="mp-name" maxlength="24" autocomplete="nickname" value="Player"></label>
       <label>${t('Spieler maximal','Player limit')}<select id="mp-size"><option>2</option><option>4</option><option>6</option><option>8</option></select></label></div>
+      <label>${t('Lobbyname','Lobby name')}<input id="mp-lobby-name" maxlength="40" value="Hover lobby"></label>
+      <label class="mp-checkbox"><input id="mp-public" type="checkbox">${t('Öffentlich in der Lobbyliste anzeigen','Show publicly in the lobby list')}</label>
+      <button id="mp-list" type="button">${t('Öffentliche Lobbys suchen','Find public lobbies')}</button><ul id="mp-directory"></ul>
       <button id="mp-create" type="button">${t('Lobby erstellen','Create lobby')}</button>
       <div class="mp-join"><input id="mp-code" maxlength="6" aria-label="${t('Raumcode','Room code')}" placeholder="ABC123" spellcheck="false"><button id="mp-join" type="button">${t('Beitreten','Join')}</button></div>
     </div>
@@ -23,6 +26,8 @@
       <label>Arena<select id="mp-arena"><option value="44">1 · ${t('Stadt','City')}</option><option value="46">2 · ${t('Kanalisation','Sewer')}</option><option value="47">3 · ${t('Burg','Castle')}</option></select></label>
       <label>${t('Grafik','Graphics')}<select id="mp-mode"><option value="modern">Modern</option><option value="retro">Retro</option></select></label>
       <label>${t('Flaggen pro Team','Flags per team')}<select id="mp-flags"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label></div>
+      <label>Hovercraft<select id="mp-craft"></select></label>
+      <div id="mp-host-settings"><label>${t('Lobbyname','Lobby name')}<input id="mp-edit-name" maxlength="40"></label><label class="mp-checkbox"><input id="mp-edit-public" type="checkbox">${t('Öffentlich','Public')}</label><button id="mp-update-name" type="button">${t('Lobbydaten speichern','Save lobby settings')}</button><button id="mp-share" type="button">${t('Eigene Schiffe teilen / aktualisieren','Share / refresh custom crafts')}</button></div>
       <label>${t('Einladungslink','Invitation link')}<input id="mp-invite" readonly></label>
       <button id="mp-begin" type="button">${t('Runde starten','Start round')}</button>
       <button id="mp-finish" type="button">${t('Lobby beenden · Punkte','End lobby · Scores')}</button>
@@ -39,6 +44,7 @@
   $('mp-name').value=localStorage.getItem('hover-mp-name')||'Player';
   if(params.has('room')){$('mp-code').value=params.get('room').slice(0,6).toUpperCase();panel.hidden=false;}
   let socket=null,sequence=0,game=null,room=null,playerId=null,intentional=false,busy=false,launchGeneration=0;
+  const downloads=new Map();
   const pending=new Map(),status=text=>{$('mp-status').textContent=text;};
   function endpoint(){
     const url=new URL($('mp-server').value);
@@ -48,7 +54,8 @@
     url.pathname='/ws';url.search='';url.hash='';url.protocol=url.protocol==='https:'?'wss:':'ws:';return url;
   }
   async function connect(){
-    if(socket?.readyState===WebSocket.OPEN)return;
+    if(socket?.readyState===WebSocket.OPEN&&socket.url===endpoint().href)return;
+    if(socket){intentional=true;socket.close();socket=null;}
     intentional=false;const ws=socket=new WebSocket(endpoint());
     ws.onmessage=event=>{
       const message=JSON.parse(event.data);
@@ -107,11 +114,17 @@
     $('enhanced-single-options').hidden=!!room;
     if(!room)return;
     panel.hidden=false;
-    $('mp-room').textContent=`${t('Lobby','Lobby')} ${room.code} · ${room.players.length}/${room.capacity} · ${t('Runde','Round')} ${room.round+1}`;
+    $('mp-room').textContent=`${room.name||t('Lobby','Lobby')} · ${room.code} · ${room.players.length}/${room.capacity} · ${t('Runde','Round')} ${room.round+1}`;
     $('mp-players').replaceChildren(...room.players.map(p=>{const li=document.createElement('li');li.textContent=`${p.name} · ${p.team==='RED'?t('Rot','Red'):t('Blau','Blue')}${p.id===room.host?' ★':''}`;return li;}));
     const waiting=room.phase==='waiting',host=room.host===playerId;
+    $('mp-host-settings').hidden=!host;
+    $('mp-edit-name').value=room.name||'';$('mp-edit-public').checked=!!room.public;
+    $('mp-share').disabled=$('mp-update-name').disabled=!waiting||busy;
     $('mp-team').disabled=!waiting||busy;
     const own=room.players.find(p=>p.id===playerId);if(own)$('mp-team').value=own.team;
+    const craftOptions=[[0,'Chicago'],[1,'Wizard'],[2,'Bambi'],...(room.crafts||[]).map(m=>[m.id,m.name])];
+    $('mp-craft').replaceChildren(...craftOptions.map(([id,name])=>{const o=document.createElement('option');o.value=id;o.textContent=name;return o;}));
+    if(own)$('mp-craft').value=own.profile;$('mp-craft').disabled=!waiting||busy;
     for(const id of ['mp-arena','mp-flags','mp-mode'])$(id).disabled=!host||!waiting||busy;
     $('mp-arena').value=String(room.maze);$('mp-flags').value=String(room.flagCount);$('mp-mode').value=room.retro?'retro':'modern';
     $('mp-begin').disabled=!host||!waiting||busy||new Set(room.players.map(p=>p.team)).size!==2;
@@ -121,11 +134,33 @@
   async function guarded(action){if(busy)return;busy=true;renderLobby();try{await action();}catch(error){if(!intentional)status(error.message);if(!room)disconnect();}finally{busy=false;renderLobby();}}
   async function join(code){
     const name=$('mp-name').value.trim();if(!name)throw Error(t('Bitte einen Namen eingeben.','Please enter a name.'));
-    const result=await rpc('join',code,Hover.Profiles[$('modern-craft').value].id,name);playerId=result.id;room=result.room;
+    await HoverCrafts.ready;const chosen=Hover.Profiles[$('modern-craft').value].id;
+    const result=await rpc('join',code,chosen<=2?chosen:0,name);playerId=result.id;room=result.room;
+    await syncCrafts(room);if(room.host===playerId)await shareCrafts();
+    if((room.crafts||[]).some(c=>c.id===chosen))await rpc('selectCraft',chosen);
     $('mp-scores').hidden=true;localStorage.setItem('hover-mp-name',name);status(t('Team wählen. Der Gastgeber startet die Runde.','Choose a team. The host starts the round.'));
   }
-  $('mp-create').onclick=()=>guarded(async()=>{window.HoverAudio?.unlock();await connect();const code=await rpc('createGame',44,4,Number($('mp-size').value)/2);await join(code);});
+  $('mp-create').onclick=()=>guarded(async()=>{window.HoverAudio?.unlock();await connect();const code=await rpc('createGame',44,4,Number($('mp-size').value)/2,{name:$('mp-lobby-name').value.trim(),public:$('mp-public').checked});await join(code);});
   $('mp-join').onclick=()=>guarded(async()=>{window.HoverAudio?.unlock();await connect();await join($('mp-code').value.trim().toUpperCase());});
+  async function syncCrafts(snapshot){
+    await HoverCrafts.ready;
+    if((snapshot.crafts||[]).length>8)throw Error('Too many shared crafts');
+    for(const offered of snapshot.crafts||[]){
+      if(HoverCrafts.list().some(e=>e.hash===offered.hash))continue;
+      if(!downloads.has(offered.hash))downloads.set(offered.hash,(async()=>{const raw=await rpc('getCraft',offered.hash);const entry=await HoverCraftFormat.validate(raw);if(entry.hash!==offered.hash||entry.id!==offered.id)throw Error('Craft checksum mismatch');return HoverCrafts.add(raw);})().catch(e=>{downloads.delete(offered.hash);throw e;}));
+      await downloads.get(offered.hash);
+    }
+  }
+  async function shareCrafts(){
+    const policy=await HoverCraftFormat.policyReady,local=HoverCrafts.list().filter(e=>e.persistent),selected=HoverCrafts.selected();
+    if(selected){const i=local.indexOf(selected);if(i>=0)local.splice(i,1);local.unshift(selected);}
+    for(const e of local.slice(0,policy.maxShared))if(!(room.crafts||[]).some(m=>m.hash===e.hash))await rpc('shareCraft',e.json);
+    if(local.length>policy.maxShared)status(t('Die ersten acht Schiffe wurden geteilt.','The first eight crafts were shared.'));
+  }
+  $('mp-share').onclick=()=>guarded(shareCrafts);
+  $('mp-update-name').onclick=()=>{const values=[$('mp-edit-name').value.trim(),$('mp-edit-public').checked];guarded(()=>rpc('renameLobby',...values));};
+  $('mp-craft').onchange=()=>{const id=Number($('mp-craft').value);guarded(async()=>{await rpc('selectCraft',id);const e=HoverCrafts.list().find(e=>e.id===id);$('modern-craft').value=e?'custom_'+e.hash:['Easy','Normal','Hard'][id];$('modern-craft').dispatchEvent(new Event('change'));});};
+  $('mp-list').onclick=()=>guarded(async()=>{await connect();const rooms=await rpc('listRooms');$('mp-directory').replaceChildren(...rooms.map(r=>{const li=document.createElement('li'),button=document.createElement('button');button.type='button';button.textContent=`${r.name} · ${r.players}/${r.capacity} · ${r.retro?'Retro':'Modern'} · ${r.flagCount}`;button.onclick=()=>guarded(()=>join(r.code));li.appendChild(button);return li;}));status(rooms.length?t('Lobby zum Beitreten auswählen.','Select a lobby to join.'):t('Keine öffentliche Lobby verfügbar.','No public lobby available.'));});
   $('mp-team').onchange=()=>{const team=$('mp-team').value;guarded(()=>rpc('chooseTeam',team));};
   for(const id of ['mp-arena','mp-flags','mp-mode'])$(id).onchange=()=>{
     const settings=[Number($('mp-arena').value),Number($('mp-flags').value),$('mp-mode').value==='retro'];guarded(()=>rpc('configureRoom',...settings));
@@ -140,16 +175,17 @@
   function abort(message){disconnect();HoverEnhanced.showHome();panel.hidden=false;status(message);}
   function showLobby(message){stopScene();HoverEnhanced.showHome();panel.hidden=false;renderLobby();status(message);}
   async function dispatch(event,args){
-    if(event==='lobby'){room=args[0];renderLobby();return;}
+    if(event==='lobby'){room=args[0];renderLobby();await syncCrafts(room);return;}
     if(event==='roundAborted'){room=args[0];showLobby(t('Runde abgebrochen: Ein Spieler hat die Verbindung getrennt. Die Lobby bleibt offen.','Round aborted: a player disconnected. The lobby remains open.'));return;}
     if(event==='launch'){
       room=args[0];renderLobby();const generation=++launchGeneration;
+      await syncCrafts(room);
       if(document.activeElement instanceof HTMLElement)document.activeElement.blur();
       Hover.retro=room.retro;window.HoverAudio?.unlock();
       if(window.HoverAudio)await new Promise(resolve=>Hover.audio.loadSounds(resolve));
       if(generation!==launchGeneration||!room)return;
       Hover.router.navigate('multiplayer-room',{trigger:false});
-      Hover.router.setCurrentView(new Hover.views.GameView({gameId:room.code,mazeId:room.maze,retro:room.retro,playerName:$('mp-name').value.trim(),craftProfile:Hover.Profiles[$('modern-craft').value]}));
+      Hover.router.setCurrentView(new Hover.views.GameView({gameId:room.code,mazeId:room.maze,retro:room.retro,playerName:$('mp-name').value.trim(),craftProfile:Hover.Profiles.fromId(room.players.find(p=>p.id===playerId).profile)}));
       setTimeout(()=>{if(game&&generation===launchGeneration)game.useMazeId(room.maze);},0);return;
     }
     if(event==='roundEnded'){
