@@ -22,6 +22,34 @@ const base=(process.env.HOVER_URL||'http://127.0.0.1:8767/hover/').replace(/\/?$
       const engines=[];
       await p.waitForFunction(()=>Hover.router.currentView.game.craft.enginePlaying.name==='ENG_IDLE',null,{timeout:10000});
       engines.push({name:'ENG_IDLE',rms:await audible()});
+      const loopChecks=await p.evaluate(async()=>{
+        const results=[];
+        for(const name of ['ENG_IDLE','ENG_NORM','ENG_LOW','ENG_HIGH']) {
+          const sound=Hover.audio.getSound(name);
+          if(!sound.file.endsWith('.pcm-v1.wav')||sound.loopStart!==0)throw Error('Prepared PCM loop not selected: '+name);
+          for(const rate of [44100,48000]) {
+            const offline=new OfflineAudioContext(sound.buffer.numberOfChannels,Math.ceil(sound.buffer.duration*4*rate),rate);
+            const source=offline.createBufferSource();source.buffer=sound.buffer;source.loop=true;source.loopStart=sound.loopStart;source.loopEnd=sound.buffer.duration;
+            source.connect(offline.destination);source.start();const rendered=await offline.startRendering();
+            const size=Math.round(rate*.010);let minRms=Infinity;
+            for(let start=0;start+size<=rendered.length;start+=size) {
+              let sum=0;
+              for(let ch=0;ch<rendered.numberOfChannels;ch++){const data=rendered.getChannelData(ch);for(let i=start;i<start+size;i++)sum+=data[i]*data[i];}
+              minRms=Math.min(minRms,Math.sqrt(sum/(size*rendered.numberOfChannels)));
+            }
+            if(minRms<.001)throw Error('Silent loop window: '+name+' '+rate+' '+minRms);
+            results.push({name,rate,cycles:4,min10msRms:minRms,duration:sound.buffer.duration});
+          }
+        }
+        return results;
+      });
+      const continuousIdle=await p.evaluate(async()=>{
+        const sound=Hover.audio.getSound('ENG_IDLE'),source=sound.source,a=HoverAudio.analyser;
+        const end=performance.now()+sound.buffer.duration*3200,values=[];
+        while(performance.now()<end){const data=new Float32Array(a.fftSize);a.getFloatTimeDomainData(data);values.push(Math.sqrt(data.reduce((sum,x)=>sum+x*x,0)/data.length));await new Promise(resolve=>setTimeout(resolve,25));}
+        return {samples:values.length,minRms:Math.min(...values),sameSource:source===sound.source};
+      });
+      assert(continuousIdle.samples>30&&continuousIdle.minRms>.001&&continuousIdle.sameSource);
       await p.keyboard.down('ArrowUp');
       for(const [name,factor] of [['ENG_NORM',1],['ENG_LOW',.5],['ENG_HIGH',1.5]]) {
         await p.evaluate(factor=>{const c=Hover.router.currentView.game.craft;c.maxSpeedModifier=factor;c.maxSpeedModifierTime=20;},factor);
@@ -49,7 +77,7 @@ const base=(process.env.HOVER_URL||'http://127.0.0.1:8767/hover/').replace(/\/?$
       await p.locator('#modern-wide').tap();await p.waitForFunction(()=>HoverAudio.context.state==='running');await audible();
       const contextState=await p.evaluate(()=>HoverAudio.context.state);
       await p.locator('#modern-menu').tap();await p.waitForSelector('#modern-play');await p.waitForTimeout(2200);assert(await energy()<.00001);
-      results.push({retro,engines,music,wallRms,item,itemRms,mute:true,resume:contextState,menuSilent:true});console.log('PASS '+engine+' '+(retro?'retro':'modern')+' engine/effects/mute/resume/menu');
+      results.push({retro,engines,loopChecks,continuousIdle,music,wallRms,item,itemRms,mute:true,resume:contextState,menuSilent:true});console.log('PASS '+engine+' '+(retro?'retro':'modern')+' engine/effects/mute/resume/menu');
     }
     assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);
     fs.writeFileSync(path.resolve(__dirname,'../verification/audio-'+engine+'-results.json'),JSON.stringify({base,engine,autoplayPolicy:'browser default',results,errors,missing},null,2)+'\n');

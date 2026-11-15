@@ -58,7 +58,13 @@
     }
     async load() {
       for (const url of this.urls) {
-        try { this.buffer = await decode(url); this.file = url; this.loaded = true; return; }
+        try {
+          this.buffer = await decode(url); this.file = url;
+          // Prepared PCM loops already contain a blended wrap. Starting at zero
+          // avoids the old AAC skip offset and repeats without a per-cycle fade.
+          if (url.endsWith('.pcm-v1.wav')) this.loopStart = 0;
+          this.loaded = true; return;
+        }
         catch (_) { /* Try the archived alternate format before reporting failure. */ }
       }
       this.loaded = true;
@@ -114,6 +120,7 @@
       for (const name of names) {
         const source = name.startsWith('ENG_') && !files.m4a[name] && !files.ogg[name] ? Hover.retroSoundFiles : files;
         const urls = [source.m4a[name], source.ogg[name]].filter(Boolean).map(file => Hover.cdn.getSoundUrl(file));
+        if (name.startsWith('ENG_')) urls.unshift('engine-loops/' + name + '.pcm-v1.wav');
         sounds[name] = new Sound(name, [...new Set(urls)]);
       }
       const bank = {sounds, ready:null};

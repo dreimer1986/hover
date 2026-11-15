@@ -78,7 +78,7 @@ python3 scripts/verify_archive.py
 
 ## Multiplayer server for your NAS
 
-An optional Python/WebSocket server is packaged as a Docker container for Synology. It includes the website and uses **TCP 8080**. [Installation, Caddy and playing](SERVER.en.md) · [Download containers](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.1.0).
+An optional Python/WebSocket server is packaged as a Docker container for Synology. It includes the website and uses **TCP 8080**. [Installation, Caddy and playing](SERVER.en.md) · [Download containers](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.1.1).
 
 ## GitHub Pages
 

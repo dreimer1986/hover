@@ -1,0 +1,53 @@
+{
+  "method": "Decode AAC to native-rate stereo PCM; 30 ms equal-power tail/head overlap; PCM16 WAV. Optional edition only.",
+  "files": [
+    {
+      "source": "web/assets/sounds/Retro/ENG_IDLE.691e705d.m4a",
+      "source_sha256": "d238633d2274b58f221e444b8367df69906844599e56a254d4dbcb32b76bd0de",
+      "output": "modifications/engine-loops/ENG_IDLE.pcm-v1.wav",
+      "output_sha256": "14d90a6f01656e6c154207695f7b2f5a708afff476e67d50ccaec106716de124",
+      "sample_rate": 11025,
+      "channels": 2,
+      "source_frames": 21951,
+      "output_frames": 21620,
+      "overlap_frames": 331,
+      "duration_seconds": 1.960997732426304
+    },
+    {
+      "source": "web/assets/sounds/Retro/ENG_NORM.3e25c46d.m4a",
+      "source_sha256": "4a88a51c1dd82726ff904a9d5ba2f3f359c506cfc4fb29cbea8944e7c8e4fc85",
+      "output": "modifications/engine-loops/ENG_NORM.pcm-v1.wav",
+      "output_sha256": "f99f599fbd8b521ce96951afd5e1fd2456d796554f3a5799a82515eb335f36ea",
+      "sample_rate": 11025,
+      "channels": 2,
+      "source_frames": 20231,
+      "output_frames": 19900,
+      "overlap_frames": 331,
+      "duration_seconds": 1.8049886621315192
+    },
+    {
+      "source": "web/assets/sounds/Retro/ENG_LOW.83da01f2.m4a",
+      "source_sha256": "3cd2fd3b7a77c6fc323eb72e4badc2fa463a6b81069a5bf324e835f9e05037c8",
+      "output": "modifications/engine-loops/ENG_LOW.pcm-v1.wav",
+      "output_sha256": "3f1396bb2c605916b683b9514300e9c95e34679258dcc0d1881116edd80c2b38",
+      "sample_rate": 11025,
+      "channels": 2,
+      "source_frames": 14949,
+      "output_frames": 14618,
+      "overlap_frames": 331,
+      "duration_seconds": 1.3258956916099773
+    },
+    {
+      "source": "web/assets/sounds/Retro/ENG_HIGH.7b103777.m4a",
+      "source_sha256": "8906395414a8e4eed8d33096a59e51fd831c1a28850b672e836b8f54c922d22b",
+      "output": "modifications/engine-loops/ENG_HIGH.pcm-v1.wav",
+      "output_sha256": "b0850e5b969030c93e8338ba7be33a6c11c58383a362cb3b743c72009ab7efd1",
+      "sample_rate": 11025,
+      "channels": 2,
+      "source_frames": 15148,
+      "output_frames": 14817,
+      "overlap_frames": 331,
+      "duration_seconds": 1.3439455782312926
+    }
+  ]
+}

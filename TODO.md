@@ -1,4 +1,4 @@
-# Nächste Aufgabe / Next task
+# Audio-Nachtest / Audio retest
 
-- **iPhone: Motorgeräusch ohne Pause in der Schleife.** Nutzerbericht vom 15.11.2026: Android spielt jetzt alle Geräusche korrekt. Auf dem iPhone folgen auf ungefähr zwei Sekunden Motorgeräusch kurze Pausen. Nach dem Multiplayer-Container die decodierten Loop-Grenzen und Safari-Wiedergabe untersuchen; Original-Samples und Archivfassungen erhalten.
-- **iPhone: remove gaps in the engine loop.** User report dated November 15, 2026: Android audio now works correctly. On iPhone, roughly two seconds of engine sound are followed by a short pause. After completing the multiplayer container, investigate decoded loop boundaries and Safari playback while preserving original samples and archived editions.
+- **Umgesetzt am 15.11.2026:** Die modifizierte Fassung verwendet vorbereitete PCM-Motorschleifen mit geglättetem Übergang. Original-Samples und Archivfassungen bleiben unverändert. Automatisierte Tests prüfen wiederholte Schleifen; der Hörtest auf dem betroffenen iPhone steht noch aus. Android-Audio wurde vor dieser Änderung vom Nutzer als korrekt bestätigt.
+- **Implemented November 15, 2026:** The modified edition uses prepared PCM engine loops with a blended transition. Original samples and archived editions remain unchanged. Automated tests check repeated loops; listening on the affected iPhone still needs confirmation. The user confirmed correct Android audio before this change.

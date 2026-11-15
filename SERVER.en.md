@@ -6,11 +6,11 @@ The container includes the Python game server **and the website**. It needs only
 
 ## Installing on Synology
 
-1. Download the matching image from [release multiplayer-v0.1.0](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.1.0):
+1. Download the matching image from [release multiplayer-v0.1.1](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.1.1):
    - **amd64** for Synology NAS with Intel/AMD processors.
    - **arm64** for supported NAS with 64-bit ARM processors. The NAS must support Container Manager/Docker; not every ARM model does. 32-bit ARM is not included.
 2. In **Container Manager → Image → Add → Add from File**, import `hover-multiplayer-….tar.gz`. If DSM rejects compressed files, decompress it to `.tar` first.
-3. Create a container from **hover-multiplayer:0.1.0**, enable automatic restart and map **NAS port 8080 → container port 8080, TCP**. No folder mappings or privileged mode are needed.
+3. Create a container from **hover-multiplayer:0.1.1**, enable automatic restart and map **NAS port 8080 → container port 8080, TCP**. No folder mappings or privileged mode are needed.
 4. Open `http://NAS-IP:8080/play/modified/`. The **Multiplayer** panel defaults to the current website address when served by the container.
 
 Menu names vary between the older Docker package and newer Container Manager. Alternatively, import [compose.yaml](compose.yaml) as a Container Manager project after loading the image. If NAS port 8080 is occupied, use a mapping such as `18080:8080` and point the proxy at port 18080.
@@ -27,7 +27,7 @@ Older DSM without Compose:
 ```sh
 sudo docker run -d --name hover-multiplayer --restart unless-stopped \
   --read-only --cap-drop ALL --security-opt no-new-privileges:true \
-  -p 8080:8080 hover-multiplayer:0.1.0
+  -p 8080:8080 hover-multiplayer:0.1.1
 ```
 
 ## Caddy 2: hover.dreimer.de
@@ -78,7 +78,7 @@ Original archives and Store packages are unchanged. [Historical interface analys
 ## Building the image yourself
 
 ```sh
-docker build -t hover-multiplayer:0.1.0 .
+docker build -t hover-multiplayer:0.1.1 .
 docker compose up -d
 ```
 

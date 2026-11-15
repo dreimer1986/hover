@@ -16,7 +16,7 @@ import time
 from aiohttp import web, WSMsgType
 
 MAPS = json.loads(Path(__file__).with_name('maps.json').read_text())
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 
 
 def number(value, limit=100000):

@@ -1,5 +1,5 @@
 {
-  "base": "http://127.0.0.1:8767/hover/",
+  "base": "http://127.0.0.1:8770/",
   "engine": "chromium",
   "autoplayPolicy": "browser default",
   "results": [
@@ -8,28 +8,91 @@
       "engines": [
         {
           "name": "ENG_IDLE",
-          "rms": 0.10266208329574879
+          "rms": 0.08744014492850197
         },
         {
           "name": "ENG_NORM",
-          "rms": 0.08741637546859006
+          "rms": 0.07010015390617892
         },
         {
           "name": "ENG_LOW",
-          "rms": 0.08928941369629835
+          "rms": 0.06951136939881093
         },
         {
           "name": "ENG_HIGH",
-          "rms": 0.08179675674688315
+          "rms": 0.07316181778011834
         }
       ],
+      "loopChecks": [
+        {
+          "name": "ENG_IDLE",
+          "rate": 44100,
+          "cycles": 4,
+          "min10msRms": 0.03363384315555508,
+          "duration": 1.9609791666666667
+        },
+        {
+          "name": "ENG_IDLE",
+          "rate": 48000,
+          "cycles": 4,
+          "min10msRms": 0.03366223624426734,
+          "duration": 1.9609791666666667
+        },
+        {
+          "name": "ENG_NORM",
+          "rate": 44100,
+          "cycles": 4,
+          "min10msRms": 0.042193854581043584,
+          "duration": 1.8049791666666666
+        },
+        {
+          "name": "ENG_NORM",
+          "rate": 48000,
+          "cycles": 4,
+          "min10msRms": 0.04221765889093252,
+          "duration": 1.8049791666666666
+        },
+        {
+          "name": "ENG_LOW",
+          "rate": 44100,
+          "cycles": 4,
+          "min10msRms": 0.0374565573264435,
+          "duration": 1.325875
+        },
+        {
+          "name": "ENG_LOW",
+          "rate": 48000,
+          "cycles": 4,
+          "min10msRms": 0.03748590496686192,
+          "duration": 1.325875
+        },
+        {
+          "name": "ENG_HIGH",
+          "rate": 44100,
+          "cycles": 4,
+          "min10msRms": 0.04168281334806665,
+          "duration": 1.3439375
+        },
+        {
+          "name": "ENG_HIGH",
+          "rate": 48000,
+          "cycles": 4,
+          "min10msRms": 0.04171405058928248,
+          "duration": 1.3439375
+        }
+      ],
+      "continuousIdle": {
+        "samples": 117,
+        "minRms": 0.0631685308383621,
+        "sameSource": true
+      },
       "music": {
         "present": true,
         "playing": true
       },
-      "wallRms": 0.199162161109136,
+      "wallRms": 0.17570973193351314,
       "item": "OBT_JUMP",
-      "itemRms": 0.1736203463426279,
+      "itemRms": 0.36717257865272274,
       "mute": true,
       "resume": "running",
       "menuSilent": true
@@ -39,28 +102,91 @@
       "engines": [
         {
           "name": "ENG_IDLE",
-          "rms": 0.09299506196469878
+          "rms": 0.08934247319179456
         },
         {
           "name": "ENG_NORM",
-          "rms": 0.08899356911936634
+          "rms": 0.08815096711374275
         },
         {
           "name": "ENG_LOW",
-          "rms": 0.0987378844773318
+          "rms": 0.06951136939881093
         },
         {
           "name": "ENG_HIGH",
-          "rms": 0.09066866124086677
+          "rms": 0.0730327270654073
         }
       ],
+      "loopChecks": [
+        {
+          "name": "ENG_IDLE",
+          "rate": 44100,
+          "cycles": 4,
+          "min10msRms": 0.03363384315555508,
+          "duration": 1.9609791666666667
+        },
+        {
+          "name": "ENG_IDLE",
+          "rate": 48000,
+          "cycles": 4,
+          "min10msRms": 0.03366223624426734,
+          "duration": 1.9609791666666667
+        },
+        {
+          "name": "ENG_NORM",
+          "rate": 44100,
+          "cycles": 4,
+          "min10msRms": 0.042193854581043584,
+          "duration": 1.8049791666666666
+        },
+        {
+          "name": "ENG_NORM",
+          "rate": 48000,
+          "cycles": 4,
+          "min10msRms": 0.04221765889093252,
+          "duration": 1.8049791666666666
+        },
+        {
+          "name": "ENG_LOW",
+          "rate": 44100,
+          "cycles": 4,
+          "min10msRms": 0.0374565573264435,
+          "duration": 1.325875
+        },
+        {
+          "name": "ENG_LOW",
+          "rate": 48000,
+          "cycles": 4,
+          "min10msRms": 0.03748590496686192,
+          "duration": 1.325875
+        },
+        {
+          "name": "ENG_HIGH",
+          "rate": 44100,
+          "cycles": 4,
+          "min10msRms": 0.04168281334806665,
+          "duration": 1.3439375
+        },
+        {
+          "name": "ENG_HIGH",
+          "rate": 48000,
+          "cycles": 4,
+          "min10msRms": 0.04171405058928248,
+          "duration": 1.3439375
+        }
+      ],
+      "continuousIdle": {
+        "samples": 144,
+        "minRms": 0.06542155769275157,
+        "sameSource": true
+      },
       "music": {
         "present": false,
         "playing": false
       },
-      "wallRms": 0.34019251184258503,
+      "wallRms": 0.334990928408316,
       "item": "OBT_JUMP",
-      "itemRms": 0.1089228089202391,
+      "itemRms": 0.12330790373829514,
       "mute": true,
       "resume": "running",
       "menuSilent": true
