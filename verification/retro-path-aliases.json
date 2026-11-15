@@ -1,0 +1,1070 @@
+{
+  "reason": "Case-only URL correction; original bytes unchanged; no substitute textures",
+  "files": [
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/BACKGRND.png",
+      "published": "assets/images/Schemes/Maze3/Retro/BACKGRND.png",
+      "sha256": "9303350bbf9141b2879140687a1a0be261b36a854e2f50c128626a08839ec016"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/CBASE_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/CBASE_00.png",
+      "sha256": "a5c2eab1dca8de608a629807f1f3fc742857ffadec1caee4b727c09495b01674"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/CBASE_00_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/CBASE_00_GLOW.png",
+      "sha256": "e9c4a470ad900801f7de4f9402eb27af8a1cc00eac80d618ef16bac39fb27d33"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/CBASE_00_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/CBASE_00_NORMAL.png",
+      "sha256": "52f23ffeb7b9caba374f7d054ab20bbd0b60ef7a21c1aa085af67986e73c692a"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/CBASE_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/CBASE_01.png",
+      "sha256": "19db2769116b8a3b6669d1634f64be0568d6229507deb82985326ab925c6dfba"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/CBASE_01VRayMtlRefractGlossiness.png",
+      "published": "assets/images/Schemes/Maze3/Retro/CBASE_01VRayMtlRefractGlossiness.png",
+      "sha256": "e9c4a470ad900801f7de4f9402eb27af8a1cc00eac80d618ef16bac39fb27d33"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/CBASE_01_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/CBASE_01_NORMAL.png",
+      "sha256": "35905b99cd9f04082a9b6b52e0c9f6e576f3b92f39d7a5be77b9842d713f3bfb"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_00.png",
+      "sha256": "6adbd810d96b1643575062013f44693de56817172add41d59312a15e231d9311"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_00_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_00_GLOW.png",
+      "sha256": "0586232f4f937fd33a6fce6a33d386725d60b901614e8bcdefd24a827a7bada6"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_00_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_00_NORMAL.png",
+      "sha256": "7bd3e69402d9798a8f181af4f0edb9c9b770aa2c9fc56c0d9b76ada35c0757c3"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_01.png",
+      "sha256": "f13003397cd9c51c18ad4aeba0966e461dab0b680ad40dc438d32e3f1b8ab26c"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_01_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_01_GLOW.png",
+      "sha256": "4f9b58592579cf19ca32a5ee4295e826faa1c64b27250a96b280ae1b774eefe3"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_01_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_01_NORMAL.png",
+      "sha256": "1d0677b75c82aa413727132f90567959e27eb00c6d81ed4094721fd4966c6d6e"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_02.png",
+      "sha256": "be18289ec60cf22dc3c4f6728d41ea4b3c729fc79a68f4990bb89eb11e4b3428"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_02_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_02_GLOW.png",
+      "sha256": "24c9913717eaf66d761bd262bde198c0aec03502a01669dfa9157aad2fbf3a2c"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_02_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_02_NORMAL.png",
+      "sha256": "0ca42d891ba683ffc4dc6f7239f179aa69251aab35326f49155ad20e766bd9c0"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_03.png",
+      "sha256": "704d59be17dde372e87a3d004009270eba97d8dc88167e9059d1324247213ae4"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_03_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_03_GLOW.png",
+      "sha256": "2cdd63f22c8bdaae6cc7aa2f0b094d31ebcf06439f6417417f58030c7df3c65b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_03_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_03_NORMAL.png",
+      "sha256": "fd98c7bd5a014714c896e7f7175cca9207a4517277e0bb48316493435c5223d1"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_04.png",
+      "sha256": "37df82f5954ecbf436254168b2ed8a532fab356dde41660f87fb27ef0c7be39d"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_04_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_04_GLOW.png",
+      "sha256": "96370f828843095a95ef0be59eee93b48a194700da46e04341563c72efc88f25"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_04_NORMALS.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_04_NORMALS.png",
+      "sha256": "b84f3dd420bb645764f8c5d559fda0f5c50e1c894342a124e06670e5fca9d313"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_05.png",
+      "sha256": "63f6030adefd335df03e8838288763ea8fa32d70e84f457a7d034400ecceaac9"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_05_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_05_GLOW.png",
+      "sha256": "ec4f037785597410183ba571c1a16c279b0df172dc6ea5ed2506bb0479f3f7de"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_05_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_05_NORMAL.png",
+      "sha256": "c1b4302d33fb0c07954e9ec9648119e35ddc6430f70385ca07749bc4e866dfcc"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_06.png",
+      "sha256": "43db6cd336f6d40ea5db55592592874d61a133beb0cabf47c05eee74608bd2b2"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_06_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_06_GLOW.png",
+      "sha256": "e9c4a470ad900801f7de4f9402eb27af8a1cc00eac80d618ef16bac39fb27d33"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_06_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_06_NORMAL.png",
+      "sha256": "ceda716fec1ec2e1a678a48a1d83810998097f7791138878d1d4e359b61435c1"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_07.png",
+      "sha256": "e6e87f5ff90e278680b7c4811181f91a168584d722616145e80c892e94963bbe"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_07_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_07_GLOW.png",
+      "sha256": "e9c4a470ad900801f7de4f9402eb27af8a1cc00eac80d618ef16bac39fb27d33"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_07_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_07_NORMAL.png",
+      "sha256": "9a1fb472b5352154ea86dc913bcf0f88a79a3e9deee1b5152ab028570f97c707"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_08.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_08.png",
+      "sha256": "78ba9653e7a21977138b5c792c087dcbdfe209989ef84ed399059a6bc089d4e4"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_08_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_08_GLOW.png",
+      "sha256": "e9c4a470ad900801f7de4f9402eb27af8a1cc00eac80d618ef16bac39fb27d33"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_08_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_08_NORMAL.png",
+      "sha256": "90401e151da5d903dfadf22cf0834a7fad07e926b25a9985073ce7d7c419505d"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_09.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_09.png",
+      "sha256": "879d0210d38e3e8be02240f274d34453fa0e0c68d32ac1a114aef5b984586079"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_09_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_09_GLOW.png",
+      "sha256": "e9c4a470ad900801f7de4f9402eb27af8a1cc00eac80d618ef16bac39fb27d33"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_09_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_09_NORMAL.png",
+      "sha256": "19209069cb5362c9906353025df1a9f3c14948bb179c58c46129be9624f79664"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_10.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_10.png",
+      "sha256": "5856c2f51be89b3b83097025302769b4916b63ec8ef33b80ba6e6cb86b91e5e8"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_10_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_10_GLOW.png",
+      "sha256": "e9c4a470ad900801f7de4f9402eb27af8a1cc00eac80d618ef16bac39fb27d33"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DECAL_10_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DECAL_10_NORMAL.png",
+      "sha256": "6718cebf45a1595365f6138907dbfec49fd9e4cddf2aa951cee4f5618959671b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_00.png",
+      "sha256": "300676e3836031d03e60385078b1106347d162620a0a2f7bede0928a0d6e4f75"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_01.png",
+      "sha256": "6d67d8b399fd0fb7e16c72907854be30d587a362fdb115a370b12ac32987e7e3"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_02.png",
+      "sha256": "fb1dae0be85e9e252f0984b5852fe9ad3444b54e8f27ef71b4027e6cf413c591"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_03.png",
+      "sha256": "6ac81b9359ea90441d8504c5cd90fd80490fd46e1f0676482b79e5c5fdbe2d67"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_04.png",
+      "sha256": "b2f6ac04cbebbf3005ae492b079b0afc4d59b19e22a65b7473a06417b44dcdb0"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_05.png",
+      "sha256": "ca4db24797b5a1991fd792662bf1ceba374e8b0710ef1270021c2793b8429846"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_06.png",
+      "sha256": "018926b67402fc21b413129200644c3325f9730eb58cc100beaf19c5401e4b85"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_07.png",
+      "sha256": "7829a60703f08b6372fcad4394245863b0fd05c3b36c22512a93e90e5de35e20"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_08.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_08.png",
+      "sha256": "61b19158ded03d01cf53d07bb33f64a0f7c1dcad7e0260ced7ad103bc78bda81"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_09.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_09.png",
+      "sha256": "d00df0beca29e412659c34f5039f6467ae4137c9ccf8e3efd2670df269583671"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_10.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_10.png",
+      "sha256": "0097661e57ade5826f93a6d2b3963ce9f73bf695a44ce67da883f565f11060ad"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_11.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_11.png",
+      "sha256": "fdc2511c7aab67d88a0b14bf67d005fe01248ad62cfd31b3427b509ceac7c86d"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_12.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_12.png",
+      "sha256": "bc3bd8760f64e66a574600e1a0d4cadc2390e8d0f6e806b711c6309c7aa0f999"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_13.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_13.png",
+      "sha256": "385b7e041103ecbf4471206ddb05a1a339ee3afed2a2f13593cca592699390f8"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_14.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_14.png",
+      "sha256": "89ed19eb1723f152008e76d9b42933680bded4faf7f8ca54c157fb9878dfe991"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_15.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_15.png",
+      "sha256": "21dac264854415772c7657fc6c06b2ed10b5a7ed33d3e7af16219f5ffd05266d"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_16.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_16.png",
+      "sha256": "f8d1f9a76db5c5ba46de2d0a7e55e1c2fd3fa56c0b25a806e0324fed29393990"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_17.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_17.png",
+      "sha256": "951cf3eff2e6d979de3c8c0ee5c24a4db2a3966fc2111f012c3d2bb15b7bc934"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_18.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_18.png",
+      "sha256": "3e2f15b7db4544745fbe6eeaf5069748c41910378db7baeacb384d78b140641f"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_19.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_19.png",
+      "sha256": "40008132964b54391bc4fd3555a76b6002e79dcf9de245b29aa863d161488958"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_20.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_20.png",
+      "sha256": "dc9b6582a43b5a9cd8d734453e39561fca184222ad86a402f4942f38a68b1abb"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_21.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_21.png",
+      "sha256": "333ba22ca2360bea14ab7420d145f44a70326e35559370faf6958f711e05d3ab"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_22.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_22.png",
+      "sha256": "839e6a271f1b5756e0d140e55848f9a23d14e24ecb7e4e4a5f01fd652cfd2899"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_23.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_23.png",
+      "sha256": "454462f67e608b2db338d398a71706df72705382e34a31a66f4da3bebb4789cf"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_24.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_24.png",
+      "sha256": "c2ae5577934d6ddf22dee6fcdbec6fd17a79fab67acc11e08eba83e079d40dae"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_25.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_25.png",
+      "sha256": "3bf026ee31a95911334aba5f16d91d7d73fde34385afadcca76f67a7194b3c78"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_26.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_26.png",
+      "sha256": "cc2dcd5cbcc34e450d7f97cf9049cb8f12b0fc68b8871033cc1e57b67ff1bca0"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_27.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_27.png",
+      "sha256": "ddeb7f0405969eeac13337da0d8155f79cd33f645dae9145f1b520dc586436fc"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_28.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_28.png",
+      "sha256": "986b9dbe96b5ef869fa3c65026cbef2e112dc4d3d7733339e12c7a42f013f161"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_29.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_29.png",
+      "sha256": "9116c4fa0708ae049f818a7b7fd9349c3e810ffba6f996a663c8aca40a2f8663"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_30.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_30.png",
+      "sha256": "a1eaf1b9837242f3ec954a09610528db527d131db049226857a9888dc06a1161"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_31.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_31.png",
+      "sha256": "5539b6d363b215f6853ffaebf185ab61e2c9c0f9a0897c5dda3835803c98f25a"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/DRONE_32.png",
+      "published": "assets/images/Schemes/Maze3/Retro/DRONE_32.png",
+      "sha256": "250656a4f271b0ec7730c300f2e44fc410dbc477630f4a065fd73e734ac2db47"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FBASE_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FBASE_00.png",
+      "sha256": "5d5b7f00b4a10a0e2193efc146facddd688d9e63214634be171c16c31cb28932"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FBASE_00_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FBASE_00_GLOW.png",
+      "sha256": "1f4529fb2040748460edcec7e6ceaa57f26f4bbe86cc58667586a875be7efb5b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FBASE_00_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FBASE_00_NORMAL.png",
+      "sha256": "c6612656559d977ce6a72e969399c0ddc0ca550a08f11089178b5b62f267b632"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FBASE_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FBASE_01.png",
+      "sha256": "fd4158a6376d415c48d7fd7ab12dd494e47182f81e2beb40c5aa8523503ff00c"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FBASE_01_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FBASE_01_GLOW.png",
+      "sha256": "ad849a0fb76d01d45dfbfbe0ab1af004f716dbbb849251923402b97023d9c8aa"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FBASE_01_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FBASE_01_NORMAL.png",
+      "sha256": "26ee9ba1f5bf32466d70bf61a0577b6fb17b4f0f6c9298133c503ecacd749efc"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FBASE_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FBASE_02.png",
+      "sha256": "1ef65ec297633f23e66e2c042ff7ff9c666931d8dd1d5c764561452c526fdfd8"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLAG_PAD.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLAG_PAD.png",
+      "sha256": "9d14a793ba7d8087e3cab57560e41aad3d436af511521b10586ba4739b91258f"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLAG_PAD_BLUE.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLAG_PAD_BLUE.png",
+      "sha256": "2483c930861683f61f78ebcd63f7a8fa966bb8e51b446bdf73a75b60e90efc9b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLAG_PAD_BLUE_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLAG_PAD_BLUE_GLOW.png",
+      "sha256": "578d6ea6ea578cc5bab6c60e24ece4a1242b42bc2d7770dbc405ec73176b8c64"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLAG_PAD_BLUE_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLAG_PAD_BLUE_NORMAL.png",
+      "sha256": "d0152e8df93290186a0505d19fa1d9022d0e5f22d119477b86aa3a43b88d45ff"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLAG_PAD_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLAG_PAD_GLOW.png",
+      "sha256": "578d6ea6ea578cc5bab6c60e24ece4a1242b42bc2d7770dbc405ec73176b8c64"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLAG_PAD_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLAG_PAD_NORMAL.png",
+      "sha256": "d0152e8df93290186a0505d19fa1d9022d0e5f22d119477b86aa3a43b88d45ff"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLAG_PAD_RED.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLAG_PAD_RED.png",
+      "sha256": "3c1c636fa8727eff24d8129eeee68dfdace36b16b87702f33e88f9e431991bc5"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLAG_PAD_RED_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLAG_PAD_RED_GLOW.png",
+      "sha256": "d9c7f184eeb7fa3ff99af64a5c56a62ad2ec659461cf098fff721b585a7547b6"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLAG_PAD_RED_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLAG_PAD_RED_NORMAL.png",
+      "sha256": "a3cb71a5ed1cd158a8263c404f78b3f41eb894a452fb0a5b3402dbf66990b2d5"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_00.png",
+      "sha256": "2642da0e05efabd303e0f416ff71127bbdc2247a195a598f8173c5d18f090283"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_01.png",
+      "sha256": "da212071d251afe361a5eecf40fefec1fd3f5103458024abddab0a8ab2cc58ea"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_02.png",
+      "sha256": "2c82d13b679f917790c3f1d2a0ec34609ca59c9098f1ccf230a202ee4e15a627"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_03.png",
+      "sha256": "70b54fbbc59bfacecd9105110f3b3f33c96226235ea5d6643498d2cd54fe838f"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_04.png",
+      "sha256": "fc0345895ad8559c95d797a2d164ca6aabd68ac13a41452c9f131cdc0a5f2d6c"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_05.png",
+      "sha256": "94578063c0ce82187f767d79a436f60bc4558f8c0a5f2620dfcdd2d63489560d"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_06.png",
+      "sha256": "55f33b87d04a01ca07688398c95bc2d2567da63a23c8903cd9d454a11d3c775f"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_07.png",
+      "sha256": "8b156285b0341add850ae3e61b38b2b6e515d5b7c36652527dc9ab8492d604c9"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_08.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_08.png",
+      "sha256": "afae34c2d53c2d34aab2f933ad712d7d724ffafbf27318bd3fbee958c18a5ef0"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG00_09.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG00_09.png",
+      "sha256": "e0273384bc0a4898a939f8e795cc7c6cd3a46bc2c22f9bdccbca16c589bdd4d2"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_00.png",
+      "sha256": "155cfecce4aa6f74d7863aade1e1e3d44aa4c166cce6a0099c51ee57a025365b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_01.png",
+      "sha256": "61e750a05a42f3e55818e73cc7a9150356b38827183f2eecabda6e3dc15c92d8"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_02.png",
+      "sha256": "ec23ac26be2970d6405b273060e168c1577f18da855ef840f5cd0fb4d19f2b97"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_03.png",
+      "sha256": "d5afed039b237b73e43650a4710d302482102236fde411a0d9a4aa649a3e3630"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_04.png",
+      "sha256": "c3d4137d8bb5e79f2fc00235a1bdfa0eac50ef52cacab8b29a5ec0e53db10b1b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_05.png",
+      "sha256": "606a2d3ae2a08befcdb1a6084ac6b514ebb7d9b135166d448385076a6351e130"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_06.png",
+      "sha256": "f3ae3709d2cc4e3209e0c458b800b53b804c381deef39026d7dd9c1bf0bd19b5"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_07.png",
+      "sha256": "7177a2857abd07f5992a6e8bdb5397ee85d01fe90c67441d45d2de660120ea0b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_08.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_08.png",
+      "sha256": "131e68d6e97e7fb38112567d8d4188e7a80f7b5c56f7e6a54f711ae2a7561bd2"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FLG01_09.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FLG01_09.png",
+      "sha256": "fb112325cfb7cf0dd1f33e716f11ebca40e5dba79ca809329987bcf782c88ee5"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/FORCE_FIELD.png",
+      "published": "assets/images/Schemes/Maze3/Retro/FORCE_FIELD.png",
+      "sha256": "d4af9729589cef7fdb06d9b256e5700a77d7c8ed96f6ade84223e0c0576cc77d"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/HOLD_PAD.png",
+      "published": "assets/images/Schemes/Maze3/Retro/HOLD_PAD.png",
+      "sha256": "ac9863df0c13a4edd2bd9d10c27b31084f78fab4f09d7f0b8aea912a16acbab8"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/HOLD_PAD_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/HOLD_PAD_GLOW.png",
+      "sha256": "6a344b723da16f225fcfae0a791ef62defc7fe408aabedbb54763f9fa2778981"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/HOLD_PAD_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/HOLD_PAD_NORMAL.png",
+      "sha256": "c75c56f4284d7e9dae452d7ea6da80dad4e3df79ab0f85b5a5db02f1c451c0fd"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD00_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD00_00.png",
+      "sha256": "e3edfb744316edff4909eb8afeab5ff6c5c4f00b367c7cfebc2af24f19abcfbe"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD00_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD00_01.png",
+      "sha256": "6ea823cca99acc062ac1ade15adc8ca10fc9ed47dc088e93f073fceeeb3e2e77"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD00_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD00_02.png",
+      "sha256": "6d5415fb19d5374dcf88bffa80fb23270693fee230da75e584bc11edeaea1bf9"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD00_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD00_03.png",
+      "sha256": "251c11e36e5a897641faf5e7f7ccf76637638b97e0df08284ef3e756e0a18744"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD00_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD00_04.png",
+      "sha256": "488094393ab0df575a70e3f8cc250f4783eba9123654fa9bb9f00cdf0bcd55a5"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD00_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD00_05.png",
+      "sha256": "8c78cdd82c485b7f6f879a3a965d271552e6cdd20ae15546ad744f4872e3e37b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD00_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD00_06.png",
+      "sha256": "098c434e1b7497d91fd46b301a2f04ebe417dc946d3fa7119841a56c7dfe4f36"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD00_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD00_07.png",
+      "sha256": "7d842227fa11d2ce8aa9abe0ba43aede30ce859b611d7b754d28be3feb0842b9"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD01_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD01_00.png",
+      "sha256": "05e8d4485f69818de66b18c2fa28eb4df93a2b9c3b09a946374be43d13f66013"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD01_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD01_01.png",
+      "sha256": "2c71e7e9db9c5d9e631b0d5edecefba2606fb15c8e8f052c5bc83b163455dd91"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD01_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD01_02.png",
+      "sha256": "c561d41363c39574a0ff7feb379c4caa34375b5201cf143d8ab0eeadeeb6b023"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD01_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD01_03.png",
+      "sha256": "98d875c07cf1721762ffa3df7021429d16788f0506bb50d86c94b22e45eb4dea"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD01_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD01_04.png",
+      "sha256": "7167a3c8bca9e3f28eb821a49481f6f101d316b77031f09da888852fae488454"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD01_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD01_05.png",
+      "sha256": "5d34f9d43b2087600b75b816ee4445c504e5bc22e8fef20a5b0f528ddb091930"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD01_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD01_06.png",
+      "sha256": "bf15f5abd9811972ec345f16c1c584d021cf254e5cf54a651af91f9c73dea5ca"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD01_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD01_07.png",
+      "sha256": "12188dc7f64875cc14cd657abad7972e1c7ce26a1947b21b3ebb287f1552ef84"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD02_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD02_00.png",
+      "sha256": "a7aa67a8e6d03d92b13e5065597b5bb6baec1aef311545b18c534fe2d8527398"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD02_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD02_01.png",
+      "sha256": "84d7f574e604d418317af8a5b236933a5205e1a79750ab29184b656caad492d1"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD02_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD02_02.png",
+      "sha256": "3c23c9be9e4323e94e824c72d4ad92150130ed4590608d9da36c0ef035e19718"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD02_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD02_03.png",
+      "sha256": "838ed7b8084958630ec21af3e452d1e5cd9f1ffb408bb86b62096ae32ad13a19"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD02_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD02_04.png",
+      "sha256": "749817ff93f5e2a36ab6cc1119d84e85c8508ab472b3678a23f025d2ae8e51d3"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD02_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD02_05.png",
+      "sha256": "51a3e10eb721c66d18cb9f6e210b46bd186121c9fd9c9f1c4e176ddf63495bfb"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD02_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD02_06.png",
+      "sha256": "0f16defa037964ae4c2b6fa2c74051c151cbefab917e83eaf7b7d8f1d135b940"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD02_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD02_07.png",
+      "sha256": "7028972ce0018ff15faec8eae6f6c13bae9efbd2bbb10100e7d38045663d9bc8"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD03_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD03_00.png",
+      "sha256": "23d315e1f8c96c280c0022053903e8d5d93c65160633ac241e7f9fdb4c6867d4"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD03_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD03_01.png",
+      "sha256": "09f0f04843101ef0e29ee0e246ddf70e3eafb4e4b2a150df5cb4e7d446334a73"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD03_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD03_02.png",
+      "sha256": "bed19ce4d1230713f967c06c2a47ab05ac2e56fe7aec2eb15c86a22b06bc12a2"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD03_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD03_03.png",
+      "sha256": "14a2e27cfa7c9e34dba99954106faaf32ba59767e9f852ab7b1d3bc5e86c4c86"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD03_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD03_04.png",
+      "sha256": "b2c052fc80d464fdc4227b3407c600ac86de0976d9a61cb54612bd40db984450"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD03_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD03_05.png",
+      "sha256": "29513c376d22189e010229d8d0887084f814fc077cb9794e105a71595c6d6120"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD03_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD03_06.png",
+      "sha256": "17f0784bbe41bc8296e61f3c5021b96776aef1d1788548c43432c609a58c3238"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD03_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD03_07.png",
+      "sha256": "8e09c02709c4bdf96a95b9da7d55aa077c67d9037bbe9a9e5168b694212f3b58"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD04_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD04_00.png",
+      "sha256": "a120848b0c1b21af873d9958cf88ef88e53df6da4cb44169d705a19c351c2ae0"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD04_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD04_01.png",
+      "sha256": "27a6ee065dcd83894f05f197614b00dce8946a419194354fa8e2bbe37511616e"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD04_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD04_02.png",
+      "sha256": "940013a30afcf013f0a773d731f4433d3db62a3c9fd0c6900966001bf6768ea0"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD04_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD04_03.png",
+      "sha256": "1845b329b3d12b58db1f9576de9ba5e03dad845d5155c701e34c8e209b3e422a"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD04_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD04_04.png",
+      "sha256": "0689d156f824a790355ddfea630b3aa29e5593548692df2aa382d3b11d0da797"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD04_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD04_05.png",
+      "sha256": "ae3b93a2fa97f3e4dad32cca5ba99f6f3c0ae3b836575048e07d5a72c451ae54"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD04_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD04_06.png",
+      "sha256": "1ef70c4214bc972722733b24b604d082e4428fb72959bd18693b725e277ea744"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD04_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD04_07.png",
+      "sha256": "88996842621b47547c29f050bf13a51321b172fa9314f074c58e506ec6d101f5"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD05_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD05_00.png",
+      "sha256": "b578738f98fa6b0ba91ae3ccc62270b73b551f6a59eaf590184dea67624feced"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD05_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD05_01.png",
+      "sha256": "b1c6aa3e0df3dfc36a04e22e5a273ddc7d9491fd1a24b0dc0017db63c27d71ea"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD05_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD05_02.png",
+      "sha256": "1777202b34f7ec3013ce22152de1474841416689d83d46d28fcacf07e6a92688"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD05_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD05_03.png",
+      "sha256": "293f8e45d36b15907e2d05f27a278212e82537bee8750443d16a31599d0543cd"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD05_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD05_04.png",
+      "sha256": "bf457e6f9030758db0f2cc864bc0e81501a911144e5d67cc4e3da5fffa3f249c"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD05_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD05_05.png",
+      "sha256": "15a48c927cf6f7cb75488c4a4c42c79a43998f6151eac8ecf51244b6b0755ab3"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD05_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD05_06.png",
+      "sha256": "01ea5e8f2071700fcf0aff921bc5b86445916bd8436c88e5e96f9f6f5bf07ff0"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD05_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD05_07.png",
+      "sha256": "7192df4db487651e30ac80c300956587df0b54de0dea6c59b5504a2ed6b267d4"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD06_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD06_00.png",
+      "sha256": "4c87b06ef04ebb612e26d201f8a81a8067f16d1e303673d1d5fd89f15e2f5429"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD06_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD06_01.png",
+      "sha256": "2f9134a18c9b2194bd102677c11f7972f5f260ab211cbd95286cb8aaf640047f"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD06_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD06_02.png",
+      "sha256": "c29906d9ff6c0b5449a6ad3f063f7fa17c42d274a41cee9ef545816e82a00c63"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD06_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD06_03.png",
+      "sha256": "e37dbf6dd3d70b29c69b2385509c031bf335e5f94783fa43a39add77ab4bac3a"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD06_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD06_04.png",
+      "sha256": "9c13efa80a762c571b10b91d8de53600191e345bb8406e2b0e0319ec63c21ef8"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD06_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD06_05.png",
+      "sha256": "5eab18a78234b368e724a71c40950dce913ce4676028fa09c7cdfb23e1fcd610"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD06_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD06_06.png",
+      "sha256": "8421a476b1cb5c75fec01b362e63c174c295e1f43005a80d20d7a3901fd3669e"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD06_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD06_07.png",
+      "sha256": "727c894242699981d28f8f52edfed323c5176fc196b7d2d3bfeeb81e9094952b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD07_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD07_00.png",
+      "sha256": "2f11f8c6c3ecf63af575533ecfb7dc3ee0ccbfb64b910ebccee14befdca8a663"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD07_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD07_01.png",
+      "sha256": "4ca61e4a550cc00566fc1be4130d6f96e5e8195a65a465760fb0de2e52dd54d6"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD07_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD07_02.png",
+      "sha256": "6ecb5ca176104a39bccc8e97fde85a923ac0b0104ad9b6763f245ad650daf80f"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD07_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD07_03.png",
+      "sha256": "81f3235bd2a7953d2f089f65febda8a0c50a28e3c6cc98b50f82d26911205c08"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD07_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD07_04.png",
+      "sha256": "25178b027ef3e5f02e78cbed15526f881d72d727db9dbd7decc38804c19ec6b7"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD07_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD07_05.png",
+      "sha256": "5c67ac1d223ad776040377cbc05f2ebfcd35696f0dc0983f85dbb88623df9392"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD07_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD07_06.png",
+      "sha256": "8e78107c6788796d3e65c31c0a5e03b165919cc6c1e05530649a0a9e70061b66"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/POD07_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/POD07_07.png",
+      "sha256": "c5d7704dcc286d3c02a4a11c728d694a472459c8721e6c137f0111dbb9f4e7b3"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_D.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_D.png",
+      "sha256": "33bc1d20ce7f59c96b75a219d0865ebaa1d564d337881c82ce67c915de383859"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_D_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_D_GLOW.png",
+      "sha256": "c2a2cce20f8783c9256c20337ef3c52c02a0913ef7b98e3394c74105a7a80b1e"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_D_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_D_NORMAL.png",
+      "sha256": "97ae832de26f9d9b7e686d59f5933ea1c79abeba1aa0180178c61357b36e505f"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_L.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_L.png",
+      "sha256": "cbd562c49a530c03ae20b618cd0e116bb8ddd4edec1d445673f246ebd7bf7a21"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_L_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_L_GLOW.png",
+      "sha256": "453b4ed408b16db191de15085df81d27d92c25ecc02e0f81ebb48cf83369cd81"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_L_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_L_NORMAL.png",
+      "sha256": "fd7e8a5b2d12b405b4c5b0c17637029ca5196261ec546074192fe44f8fea7a77"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_R.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_R.png",
+      "sha256": "3929d347a88c3a281001781327b84f63a5ce47f8796a4786efa7ba796cad1eb8"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_R_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_R_GLOW.png",
+      "sha256": "69284d89a3708c62900860a5750e8b122cc9a0bdb16b479f008bad7312f6ec7e"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_R_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_R_NORMAL.png",
+      "sha256": "821408b79573740c6c128c2bbf969fffbdcab07b3ceb9215ea48d0aa336e85c9"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_U.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_U.png",
+      "sha256": "d3221ffefcd00b92dc378dbdc7de14098343630fade192b02ab01438ac5324f0"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_U_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_U_GLOW.png",
+      "sha256": "7a54f7d4f74e4080a57553c7d7e57bd626a1934847edd19e986228b47854203e"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/SLED_U_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/SLED_U_NORMAL.png",
+      "sha256": "be94de7e1a5b222f004571ba144daad800ee080927aa0e11e35ea7e9d43fcc5b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/STEPS_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/STEPS_00.png",
+      "sha256": "96d2e0ff88b2fe7f148d4ec1ccf17fc18225784f3317c9ddc1419b9c2034b747"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/STEPS_00_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/STEPS_00_GLOW.png",
+      "sha256": "ca2cbd7946ffcc11d99302bdbf1d6243547298a939cf24ceced30d13ea675a3f"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/STEPS_00_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/STEPS_00_NORMAL.png",
+      "sha256": "e58509379b68c19a78dd122f97592cd48e44cc7c3c56ecf59ef84927cc4b1320"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_00.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_00.png",
+      "sha256": "ec7232d1698b4b00f1c9c400d105823a2762a73d33392bc03d77c4bbf7142f3b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_00_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_00_GLOW.png",
+      "sha256": "66332c50a308cd858617bb16b66db1f4c8b2770c2122b1db085e0d94472e26ab"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_00_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_00_NORMAL.png",
+      "sha256": "e751f5042f29145caae37ece7c674198c4a2aabf284e812f45ab898c54411c8f"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_01.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_01.png",
+      "sha256": "985d5507d1d7800c6db164bab9b45304f119a902768abf0a706386302690279c"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_01_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_01_GLOW.png",
+      "sha256": "26fb717fa647d75209e78a73fbaf19951dbfae134d4b594f3609cd3a6cfee824"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_01_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_01_NORMAL.png",
+      "sha256": "20ba1417dc673e7c1d712515c06f21da405b8f6df193901f6b77306840a25549"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_02.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_02.png",
+      "sha256": "e6a62de6deca1041940e94b15e4607c2dcbb3cb4fc89452fce0fb06c61e0d584"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_02_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_02_GLOW.png",
+      "sha256": "bfb576de681168916be906241b798d2b07cbc31d97a486d5c33934526faaa0c6"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_02_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_02_NORMAL.png",
+      "sha256": "1027032451aff1d4fa26c9822c957c9a4d1eaa15697e05356605367233b92f6c"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_03.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_03.png",
+      "sha256": "09f4185147d877d75b59a860441c911b38faec0b80282e9b3de78818ab84b700"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_03_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_03_GLOW.png",
+      "sha256": "1acb80d8e5fcb58910fce18e1bbd32124712c40a1b65149dda1b9e017b2cfd21"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_03_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_03_NORMAL.png",
+      "sha256": "98354d63430541ef7b40d6b97aaf8075b0bd51f71f034d32de21cb66f1e37674"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_04.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_04.png",
+      "sha256": "1ba0a26b548f953f1685a26051df97046a70e1cb3ea75816e187a62e5a782e3b"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_04_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_04_GLOW.png",
+      "sha256": "b88703fd04574d6411383ac607f0c8af2ea3c1c4bfb11b7d9def722bcfe2128c"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_04_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_04_NORMAL.png",
+      "sha256": "d15553166c50be215d58a5031d5f3841494390dfa1e4b2a88650ad071934264d"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_05.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_05.png",
+      "sha256": "1838f0a1d26f09a6af38a0a602869a80ca985e7db7bb5a6414e15a74575c2f56"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_05_GLOW.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_05_GLOW.png",
+      "sha256": "335e2f558cea4a3a216bf610ccef46bb5b0a1d3a2cbb10c177f49d4cfcba36df"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_05_NORMAL.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_05_NORMAL.png",
+      "sha256": "2ff9345bfce304da05cba5f001926323f8ccd5e4b52186e34c5c29784efb9e97"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_06.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_06.png",
+      "sha256": "721eb3ebd4a8a2dc35f38d7c483a080df55093dfb8c10765ecc2c832aad381f1"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_07.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_07.png",
+      "sha256": "c19b965a9cfb8a81fea20d84517614683989bc5b64c8506810429064ee7863c9"
+    },
+    {
+      "source": "web/assets/images/Schemes/Maze3/retro/WBASE_08.png",
+      "published": "assets/images/Schemes/Maze3/Retro/WBASE_08.png",
+      "sha256": "b6284dab8bda63dd635f846b69474e4a120d394eef34f82a051eb30401a245ac"
+    }
+  ]
+}

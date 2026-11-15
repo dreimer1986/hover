@@ -16,6 +16,7 @@ const screenshots=process.env.SCREENSHOT_DIR||'/home/dreimer/.cache/hover-previe
       await p.evaluate(()=>{Hover.settings.setIntroMessageShown(true);Hover.settings.setSoundEnabled(false);Hover.audio.setEnabled(false);});
       if(!mobile)await p.click('#modern-wide');
       for(const retro of [false,true]) {
+        if(retro){await p.click('#enhanced-unlock');await p.selectOption('#modern-arena','47');}
         await p.click(retro?'#modern-retro':'#modern-play');await p.waitForFunction(()=>Hover.router.currentView.playing);await p.waitForTimeout(250);
         const checkFrame=()=>p.evaluate(()=>{const g=Hover.router.currentView.game,gl=g.renderer.getContext(),r=g.renderer.domElement.getBoundingClientRect();return{buffer:[gl.drawingBufferWidth,gl.drawingBufferHeight],viewport:Array.from(gl.getParameter(gl.VIEWPORT)),dimensions:[g.dimensions.WIDTH,g.dimensions.HEIGHT],rect:[r.x,r.y,r.width,r.height],screen:[innerWidth,innerHeight],dpr:devicePixelRatio};});
         let state=await checkFrame();assert.deepEqual(state.buffer,state.dimensions);assert.deepEqual(state.viewport,[0,0,...state.buffer]);assert.deepEqual(state.rect,[0,0,...state.screen]);
@@ -47,7 +48,7 @@ const screenshots=process.env.SCREENSHOT_DIR||'/home/dreimer/.cache/hover-previe
           await p.locator('.msgButton').click();await p.waitForSelector('#modern-play');
           // Losing must also leave a usable centered retry/return button.
           await p.click('#modern-retro');await p.waitForFunction(()=>Hover.router.currentView.playing);await p.waitForTimeout(100);
-          await p.evaluate(()=>Hover.router.currentView.onGameLost());await p.waitForSelector('.msg-level-lost .msgButton');await p.locator('.msgButton').click();await p.waitForSelector('#modern-play');
+          await p.evaluate(()=>Hover.router.currentView.onGameLost());await p.waitForSelector('.msg-level-lost .msgButton');await p.locator('.msgButton').click();await p.waitForFunction(()=>Hover.router.currentView.playing);await p.click('#modern-menu');await p.waitForSelector('#modern-play');
         } else await p.click('#modern-menu');
         results.push({name,retro,state,passed:true});console.log('PASS '+name+' '+(retro?'retro + win/loss':'modern + glow'));
       }

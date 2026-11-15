@@ -1,89 +1,52 @@
-# Hover! — The Archive
+# Hover! — Erweiterte Fassung und Archiv
 
 **Deutsch** · [English](README.en.md)
 
-Das Web-Remake von 2013, aus dem Internet Archive gesichert und lokal spielbar wiederhergestellt.
+Das Browser-Remake von Hover! mit einer erweiterten Fassung und erhaltenen Originalversionen.
 
-**Website:** https://dreimer1986.github.io/hover/
+**Spielen mit Multiplayer: [hover.dreimer.de](https://hover.dreimer.de/)**
 
-| Sicherung | Inhalt |
-| --- | --- |
-| Frühe Webfassung | Frühester gefundener Snapshot vom **02.10.2013**, Spielcode vom selben Tag |
-| Späte Webfassung | Letzter erfolgreicher Startseiten-Snapshot vom **11.03.2019**, Spielcode vom **28.07.2017** |
-| Windows AppxBundle | Original-ZIP aus `HoverWinRT`, Spielversion **1.1.0.3**, einschließlich Skalierungsressourcen |
-| Windows Appx-Paket | Original-ZIP aus `hover_202508`, Spielversion **1.1.0.3**, einschließlich mitgelieferter Zertifikatsdateien |
+[GitHub-Pages-Alternative](https://dreimer1986.github.io/hover/) · [Originalfassungen und Store-Downloads](https://dreimer1986.github.io/hover/?view=archive)
 
-Die zwei Store-Downloads sind unterschiedliche Pakete **derselben Spielversion**. Beide enthalten identische Spielressourcen.
+Die erweiterte Fassung startet standardmäßig auf PC und Mobilgeräten. Sie bietet:
 
-## Spielen und herunterladen
+- Den ursprünglichen Startbildschirm mit Einzelspieler, Multiplayer und Retro-Modus.
+- Optionales Touch-Steuerkreuz, Aktionstasten, Großansicht und Vollbild; mobil sind Touch und Großansicht voreingestellt.
+- Drei Arenen in Modern und Retro, drei bis sechs Flaggen pro Team und automatischen Kartenfortschritt im Einzelspieler.
+- Freischaltbare Einzelspieler-Kartenauswahl: in die Mitte des **O** im Hover-Logo drücken. Ohne Freischaltung beginnt eine Partie mit Karte 1.
+- Multiplayer-Lobbys für bis zu acht Spieler mit Teamwahl, wechselnden Arenen, Modern/Retro und abschließenden Punkten über mehrere Runden.
+- Deutsche oder englische Bedienoberfläche entsprechend der Browsersprache und gemeinsame Audioausgabe für Musik, Motor und Effekte.
 
-Auf der Website eine Webfassung starten oder eines der vollständigen ZIP-Pakete herunterladen. Der Einzelspieler-Modus funktioniert ohne die ehemaligen Spielserver. Im Spiel-Hauptmenü `bambi` eingeben, um den Retro-Modus zu öffnen.
+Am PC: Pfeiltasten, Leertaste und A/S/D. Vollbild erfordert einen Tastendruck und Browser-Unterstützung; Großansicht funktioniert auch ohne Vollbild-API. Querformat wird auf Handys empfohlen.
 
-Lokal genügt Python 3.10 oder neuer:
+## Multiplayer und NAS
+
+Auf [hover.dreimer.de](https://hover.dreimer.de/) **Multiplayer** wählen, Namen eingeben, Lobby erstellen oder per Raumcode beitreten. Teams selbst wählen; der Gastgeber legt Arena, Grafik und Flaggenzahl fest. Nach jeder Runde bleibt die Lobby geöffnet. **Lobby beenden · Punkte** zeigt die Endabrechnung.
+
+Der Python-/WebSocket-Server läuft ohne Microsoft-Dienste im Docker-Container auf **8080/TCP**, öffentlich hinter einem HTTPS-Reverse-Proxy. [Installation und Aktualisierung auf Synology](SERVER.md) · [Container v0.2.0 herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.2.0).
+
+## Lokal starten
+
+Python 3.10 oder neuer; für die statische Website keine zusätzlichen Build-Abhängigkeiten:
 
 ```sh
 python3 scripts/build_site.py
 python3 -m http.server 8000 --bind 127.0.0.1 --directory _site
 ```
 
-Danach http://127.0.0.1:8000/ öffnen. Kein npm-Schritt und keine Build-Abhängigkeiten erforderlich.
+Anschließend http://127.0.0.1:8000/ öffnen. Für lokalen Multiplayer siehe [SERVER.md](SERVER.md).
 
-Alternativ nur die wiederhergestellten Webfassungen ohne Auswahlseite starten:
+## Erhaltene Fassungen
 
-```sh
-python3 scripts/serve.py
-```
+| Sicherung | Inhalt |
+| --- | --- |
+| Frühe Webfassung | Snapshot vom 02.10.2013 |
+| Späte Webfassung | Snapshot vom 11.03.2019, Spielcode vom 28.07.2017 |
+| Windows AppxBundle | Vollständiges Originalpaket aus HoverWinRT, Version 1.1.0.3 |
+| Windows Appx-Paket | Vollständiges Originalpaket aus hover_202508, Version 1.1.0.3 |
 
-Die lokalen Quellfassungen verwenden relative symbolische Links. Der Website-Build erzeugt ausschließlich normale Dateien und funktioniert auch unter dem GitHub-Pages-Projektpfad `/hover/`.
+Die Store-Pakete sind unterschiedliche Verpackungen derselben Spielversion. Originalarchive und Store-Pakete bleiben unverändert; Erweiterungen liegen getrennt in `modifications/`. Vollständige ZIPs stehen im [Archiv-Release](https://github.com/dreimer1986/hover/releases/tag/archive-2013); `python3 scripts/restore_windows.py` setzt sie lokal mit Prüfsummenprüfung zusammen.
 
-## Modifizierte Fassung: Touch und Vollbild
+[Restaurierung und dokumentierte Änderungen](RESTORATION.md) · [Server und Betrieb](SERVER.md) · [Ursprünglicher Multiplayer](MULTIPLAYER.md) · [Originalquellen und Rechte](THIRD_PARTY.md)
 
-[Touch + Vollbild starten](https://dreimer1986.github.io/hover/play/modified/). Die dritte Fassung basiert auf dem späten Webstand. Sie bietet einen mobilen Startbildschirm, Steuerkreuz mit diagonalen Eingaben sowie Sprung, Wand, Tarnung und die originale Feuerfunktion (nur mit Waffe). Am PC funktionieren weiterhin Pfeiltasten, Leertaste und A/S/D.
-
-Mobilgeräte werden von der Startseite dorthin geleitet; Touch und Großansicht sind dort voreingestellt. Am PC bleibt der bisherige Einstieg erhalten, und beide Optionen sind in der modifizierten Fassung zunächst aus. **Großansicht** füllt das Browserfenster und zeigt ein kompaktes HUD. **Vollbild** blendet nach einem Tastendruck zusätzlich die Browseroberfläche aus, sofern der Browser dies unterstützt. Andernfalls bleibt die Großansicht verfügbar. Querformat wird empfohlen.
-
-Über **Archiv** oder [diesen Link](https://dreimer1986.github.io/hover/?view=archive) lassen sich auch mobil beide bisherigen Fassungen und Store-Downloads auswählen. Die Originalfassungen und Archive werden nicht verändert. Der Zusatzcode liegt getrennt unter `modifications/`; der Build erzeugt daraus `play/modified/` mit gemeinsam genutzten Spielressourcen.
-
-Die Archivseite und die neue Bedienoberfläche wählen anhand der bevorzugten Browsersprache automatisch Deutsch (`de-*`) oder Englisch (alle übrigen Sprachen). Auch laufende Statusanzeigen und Vollbild-Hinweise sind übersetzt; die beiden erhaltenen Originalfassungen bleiben unberührt. Die Übersetzungen liegen in `site/locale.js`. Sprachtests: `scripts/locale_smoke.cjs`.
-
-Die modifizierte Fassung bietet zusätzlich einen Ton-Schalter und eine gemeinsame Web-Audio-Ausgabe für Musik, Motor und Effekte. Im normalen Modus werden die erhaltenen Retro-Motorgeräusche ergänzt; Herkunft und Audiotests sind im [Restaurierungsbericht](RESTORATION.md#audio-in-der-modifizierten-fassung) dokumentiert.
-
-Browser-Basistests: `scripts/modified_smoke.cjs` mit denselben Umgebungsvariablen wie `browser_smoke.cjs`. Mobile Touch-Ereignisse werden in Chromium emuliert; Tests auf echter Android-/iOS-Hardware stehen noch aus.
-
-## Store-ZIPs wieder zusammensetzen
-
-Die Original-ZIPs sind verlustfrei in maximal 50 MiB große Teile zerlegt, damit keine Git-Datei die GitHub-Grenze von 100 MiB überschreitet.
-
-```sh
-python3 scripts/restore_windows.py
-```
-
-Die beiden vollständigen Original-ZIPs erscheinen in `downloads/`; SHA-256 wird beim Zusammensetzen geprüft. Auf der Website führen die Downloadbuttons zu den vollständigen Dateien im [GitHub Release](https://github.com/dreimer1986/hover/releases/tag/archive-2013). Für eine lokale Website einschließlich beider ZIPs: `python3 scripts/build_site.py --include-downloads`.
-
-## Aufbau
-
-- `archive/web/`: unveränderte HTML-, CSS- und JavaScript-Originale beider Webstände.
-- `archive/windows/`: verlustfreie ZIP-Teile und Originalprüfsummen.
-- `archive/metadata/`: CDX-Indizes, Downloadquellen und dateigenaue Herkunfts-/Ergänzungsnachweise.
-- `web/`: lokale Spielfassungen und gemeinsam gespeicherte, tatsächliche Ressourcen.
-- `site/`: Startseite und Spielbilder.
-- `scripts/`: Build, lokaler Server, ZIP-Rekonstruktion und Integritätsprüfung.
-- `verification/`: Browserberichte, Spielbilder, Paketvergleich und Integritätsprüfungen.
-
-```sh
-python3 scripts/verify_archive.py
-```
-
-[Wiederherstellung, Ersatzdateien und Grenzen](RESTORATION.md) · [Rechte und Originalquellen](THIRD_PARTY.md) · [Multiplayer: Analyse und Machbarkeit](MULTIPLAYER.md)
-
-## Multiplayer-Server für die NAS
-
-Ein optionaler Python-/WebSocket-Server ist als Docker-Container für Synology vorbereitet. Er enthält auch die Website und verwendet **8080/TCP**. [Installation, Caddy und Spielablauf](SERVER.md) · [Container herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.1.1).
-
-## GitHub Pages
-
-`.github/workflows/pages.yml` baut die Seite bei Pushes auf `master` und veröffentlicht sie über GitHub Actions. In den Repository-Einstellungen ist **Pages → Source → GitHub Actions** erforderlich. Die Store-ZIPs werden über GitHub Releases angeboten. Pages enthält beide Spiele gemeinsam, aber nur deren benötigte Texturvarianten. Die vollständigen Originaldateien bleiben im Repository erhalten; der lokale Build mit `--include-downloads` ergänzt die ZIPs.
-
-Die Browserprüfung kann mit `scripts/browser_smoke.cjs` wiederholt werden (Node.js, `playwright-core`; `CHROMIUM_PATH` für einen vorhandenen Chromium-Browser und `HOVER_URL` für die laufende Seite setzen).
-
-Die Store-Pakete wurden auf ZIP-CRC und Appx-Blockprüfsummen geprüft, jedoch nicht unter Windows installiert. Die ehemaligen Multiplayer-Server sind nicht enthalten.
+GitHub Actions baut und veröffentlicht die Website bei Pushes auf `master`. `python3 scripts/verify_archive.py` prüft die erhaltenen Originaldateien. Browser- und Servertests liegen unter `scripts/` und `server/`.

@@ -71,11 +71,11 @@
       errors.push({name:this.name, urls:this.urls});
       window.dispatchEvent(new CustomEvent('hover-audio-error'));
     }
-    play() {
+    play(menuCue = false) {
       // The original game has delayed music timers. A timer from a departed
       // game must not start music on the launch screen or in the next game.
       const view = Hover.router && Hover.router.currentView;
-      if (!player.enabled || !this.buffer || document.hidden || !view || !view.game || this.playing) return;
+      if (!player.enabled || !this.buffer || document.hidden || !view || (!view.game && !menuCue) || this.playing) return;
       if (player.sounds[this.name] !== this) return;
       const ctx = ensureContext(), source = ctx.createBufferSource(), gain = ctx.createGain();
       source.buffer = this.buffer; source.loop = this.loop;
@@ -103,6 +103,7 @@
     fadeIn() { this.play(); }
     isLoaded() { return this.loaded; }
   }
+  api.playCue = name => { if (name === 'WINLEVEL') player.getSound(name).play(true); };
   player.stopAll();
   player.modernSounds = null; player.retroSounds = null; player.sounds = {};
   player.nonsound = new Sound('', []);

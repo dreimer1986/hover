@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "locale": "de-DE",
+      "mobile": false,
+      "originalHome": true,
+      "secretUnlock": true,
+      "flags": [
+        3,
+        6
+      ],
+      "retroProgression": true,
+      "modernProgression": true,
+      "archive": true
+    },
+    {
+      "locale": "en-US",
+      "mobile": true,
+      "originalHome": true,
+      "secretUnlock": true,
+      "flags": [
+        3,
+        6
+      ],
+      "retroProgression": true,
+      "modernProgression": true,
+      "archive": true
+    }
+  ],
+  "errors": [],
+  "missing": []
+}

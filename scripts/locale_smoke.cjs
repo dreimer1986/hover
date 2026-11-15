@@ -23,7 +23,7 @@ const base = (process.env.HOVER_URL || 'http://127.0.0.1:8767/hover/').replace(/
       assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
       await p.goto(base+'play/modified/');await p.waitForSelector('#modern-play');
       assert.equal(await p.locator('html').getAttribute('lang'),lang);
-      assert.equal(await p.locator('#modern-play').innerText(),lang==='de'?'Spiel starten →':'Start game →');
+      assert.equal(await p.locator('#modern-play').innerText(),lang==='de'?'Einzelspieler':'Single player');
       assert.equal(await p.locator('#modern-craft option').first().innerText(),lang==='de'?'Einfach':'Easy');
       await p.click('#modern-play');await p.waitForFunction(()=>Hover.router.currentView.playing);
       await p.locator('.msgButton').click();await p.click('#modern-wide');await p.click('#modern-touch');

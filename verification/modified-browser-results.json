@@ -1,7 +1,7 @@
 {
-  "base": "http://127.0.0.1:8768/",
+  "base": "http://127.0.0.1:8772/",
   "checks": [
-    "Desktop keeps archive and original default",
+    "Desktop defaults to extended; archive remains accessible",
     "Mobile redirects; archive and original releases remain reachable",
     "Mobile landscape fills viewport and intro remains dismissible",
     "Real multi-touch drives, steers, holds the fire input and releases",

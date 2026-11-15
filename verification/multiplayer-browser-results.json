@@ -1,13 +1,25 @@
 {
-  "base": "http://127.0.0.1:8769/",
+  "base": "http://127.0.0.1:8773/",
   "players": 2,
-  "lobby": true,
+  "rounds": [
+    {
+      "maze": "44",
+      "count": "3",
+      "mode": "modern"
+    },
+    {
+      "maze": "47",
+      "count": "6",
+      "mode": "retro"
+    }
+  ],
+  "teamChoice": true,
+  "persistentLobby": true,
   "movement": true,
   "items": true,
   "walls": true,
   "flags": true,
-  "roundEnd": true,
-  "restartAndDisconnect": true,
+  "finalScores": true,
   "errors": [],
   "missing": []
 }

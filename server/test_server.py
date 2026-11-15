@@ -27,7 +27,8 @@ class MultiplayerTests(unittest.IsolatedAsyncioTestCase):
     async def rpc(self, ws, method, *args):
         self.ident += 1
         ident = self.ident
-        await ws.send_json({'id': ident, 'method': method, 'args': args})
+        room = next(iter(self.server.app['service'].rooms.values()), None)
+        await ws.send_json({'id': ident, 'method': method, 'args': args, 'round': room['round'] if room else None})
         while True:
             message = await ws.receive_json(timeout=5)
             if message.get('id') == ident:
@@ -52,7 +53,7 @@ class MultiplayerTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn('error', await self.rpc(sockets[0], 'setCraftState', {'Position': {'X': float('nan'), 'Y': 0, 'Z': 0}}))
         await sockets[1].close()
         await asyncio.sleep(.05)
-        self.assertEqual(room['phase'], 'finished')
+        self.assertEqual(room['phase'], 'waiting')
 
     async def test_flags_items_and_duplicate_events(self):
         a, b = await self.connect(), await self.connect()
@@ -74,7 +75,34 @@ class MultiplayerTests(unittest.IsolatedAsyncioTestCase):
         for f in [f for f in room['flags'] if f['Team'] != player.team]:
             player.state['Position'] = {k: f[k] for k in ('X','Y','Z')}
             self.assertTrue((await self.rpc(a, 'capturedFlag', f))['result'])
-        self.assertEqual(room['phase'], 'finished')
+        self.assertEqual(room['phase'], 'waiting')
+
+    async def test_persistent_lobby_teams_six_flags_retro_and_final_scores(self):
+        a, b = await self.connect(), await self.connect()
+        code = (await self.rpc(a, 'createGame', 44, 3, 2))['result']
+        await self.rpc(a, 'join', code, 0, 'A'); await self.rpc(b, 'join', code, 1, 'B')
+        self.assertIn('error', await self.rpc(b, 'configureRoom', 47, 6, True))
+        await self.rpc(b, 'chooseTeam', 'RED')
+        self.assertIn('error', await self.rpc(a, 'beginRoom'))
+        await self.rpc(a, 'chooseTeam', 'BLUE')
+        for maze, flags, retro in [(44, 3, False), (47, 6, True)]:
+            self.assertTrue((await self.rpc(a, 'configureRoom', maze, flags, retro))['result'])
+            await self.rpc(a, 'beginRoom'); await self.rpc(a, 'spawnMe'); await self.rpc(b, 'spawnMe')
+            room = self.server.app['service'].rooms[code]
+            self.assertEqual(len(room['flags']), flags * 2)
+            self.assertEqual(room['retro'], retro)
+            self.assertIn('error', await self.rpc(a, 'chooseTeam', 'RED'))
+            player = room['players'][0]
+            for f in [f for f in room['flags'] if f['Team'] != player.team]:
+                player.state['Position'] = {k: f[k] for k in ('X','Y','Z')}
+                await self.rpc(a, 'capturedFlag', f)
+            self.assertEqual(room['phase'], 'waiting')
+            self.assertEqual(len(room['players']), 2)
+        self.assertEqual(room['teamWins']['BLUE'], 2)
+        self.assertEqual(room['scores'][player.id]['flags'], 9)
+        self.assertIn('error', await self.rpc(b, 'closeLobby'))
+        await self.rpc(a, 'closeLobby')
+        self.assertNotIn(code, self.server.app['service'].rooms)
 
     async def test_origin_invalid_messages_cleanup_and_health(self):
         with self.assertRaises(WSServerHandshakeError):

@@ -125,3 +125,44 @@ html, body { width:100%; height:100%; margin:0; overscroll-behavior:none; }
 #mp-panel .mp-join input { width:120px; margin:0; text-transform:uppercase; }
 #mp-panel button:disabled, #modern-ui button:disabled { opacity:.5; cursor:default; }
 #mp-status { overflow-wrap:anywhere; color:#fcb649; }
+/* Original home artwork and buttons remain the entry point of the extended edition. */
+#homeView { position:absolute; inset:0; overflow:auto; padding:76px 18px 32px; box-sizing:border-box; }
+#homeContent { position:relative !important; left:auto !important; top:auto !important; width:min(1100px,100%); height:auto; min-height:400px; margin:0 auto !important; transform:none !important; }
+#homeTitle { position:relative; left:auto; top:auto; width:100%; height:auto; aspect-ratio:1043/326; background-size:contain; background-repeat:no-repeat; }
+#homeGlow { pointer-events:none; left:0; top:-160px; width:100%; background-size:contain; background-repeat:no-repeat; }
+#homeIE, #homeTwitter, #homeFacebook { display:none; }
+#homeButtons { top:auto; display:flex; justify-content:center; flex-wrap:wrap; gap:16px; }
+#homeButtons .homeButton { appearance:none; border:0; border-radius:27px; background:linear-gradient(to top,#ff8700,#ffab00); width:auto; min-width:210px; padding:0 28px; margin:8px 0; color:#0c092a; font:bold 27px/54px proxima-nova,Arial,sans-serif; cursor:pointer; }
+#homeButtons .homeButton:hover { background:linear-gradient(to top,orange,#ffd100); }
+#homeButtons .homeButton:disabled { opacity:.5; cursor:default; }
+#enhanced-unlock { position:absolute; left:35%; top:37%; width:7%; height:22%; border:0; background:transparent; cursor:default; text-indent:0; padding:0; }
+#enhanced-unlock:focus-visible { outline:2px solid #ffab00; }
+#modern-launcher { position:relative; inset:auto; overflow:visible; background:none; padding:0; margin:10px auto; max-width:800px; font:16px/1.4 proxima-nova,Arial,sans-serif; color:white; }
+#modern-launcher .modern-card { max-width:none; }
+#modern-launcher [hidden], #homeView [hidden] { display:none !important; }
+#modern-launcher .enhanced-edition { text-align:center; letter-spacing:3px; color:#ffd28a; text-transform:uppercase; font-size:12px; }
+#modern-launcher .modern-options { flex-wrap:wrap; justify-content:center; gap:16px; margin:18px 0; }
+#modern-launcher .modern-options label { flex:1 1 130px; max-width:260px; text-align:left; }
+#modern-launcher select, #modern-launcher input { display:block; box-sizing:border-box; width:100%; min-height:42px; border:1px solid #9772aa; border-radius:5px; margin-top:5px; padding:8px; font:inherit; color:#fff; background:#1b0c2de8; }
+#modern-launcher button { padding:10px 18px; margin:5px; border:0; border-radius:24px; background:linear-gradient(to top,#ff8700,#ffab00); color:#0c092a; font:bold 16px proxima-nova,Arial,sans-serif; cursor:pointer; }
+#modern-launcher button:disabled { opacity:.5; cursor:default; }
+#modern-launcher :focus-visible { outline:2px solid #ffd28a; outline-offset:3px; }
+#enhanced-unlock-message { color:#ffd28a; text-align:center; }
+#mp-panel { margin:16px 0; padding:22px; border:1px solid #765087; border-radius:8px; background:linear-gradient(#210d30ed,#100719ed); box-shadow:0 5px 30px #0008; }
+#mp-panel h2, #mp-panel h3 { text-align:center; text-transform:uppercase; letter-spacing:2px; color:#ffba48; }
+#mp-panel .mp-join input { flex:1; max-width:170px; }
+#mp-panel table { width:100%; border-collapse:collapse; margin:15px 0; }
+#mp-panel th, #mp-panel td { padding:8px; text-align:left; border-bottom:1px solid #765087; }
+#mp-panel #mp-players { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:12px; }
+#mp-panel #mp-players li { padding:6px 10px; background:#35203e; border-radius:4px; }
+.enhanced-next { position:absolute; top:calc(50% + 120px); width:100%; text-align:center; color:#fff; font:16px Arial; z-index:100; text-shadow:0 2px 3px #000; }
+.modern-wide .retro #dash_top #flag_counts { background:#000b; border:1px solid #777; image-rendering:pixelated; }
+@media(max-width:600px) {
+ #homeView { padding:70px 12px 25px; }
+ #homeContent { min-height:0; }
+ #homeButtons { gap:8px; }
+ #homeButtons .homeButton { min-width:0; padding:0 16px; font-size:19px; line-height:44px; height:44px; }
+ #modern-launcher .modern-options label { flex-basis:120px; }
+ #mp-panel { padding:14px; }
+ .enhanced-next { top:calc(50% + 90px); font-size:12px; }
+}

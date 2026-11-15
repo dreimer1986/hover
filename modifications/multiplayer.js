@@ -1,185 +1,169 @@
-/* Replacement multiplayer transport; loaded only in the optional edition. */
+/* Extended edition multiplayer protocol v2. Archived clients remain unchanged. */
 (function () {
   'use strict';
-  const de = hoverLocale.lang === 'de';
-  const t = (g, e) => de ? g : e;
-  const $ = id => document.getElementById(id);
-  const panel = document.createElement('details');
-  panel.id = 'mp-panel';
-  panel.innerHTML = `<summary>Multiplayer · ${t('Gemeinsam spielen', 'Play together')}</summary>
-    <p>${t('Erstelle einen Raum und teile den Einladungslink. Der Gastgeber startet die Runde.', 'Create a room and share the invitation link. The host starts the round.')}</p>
-    <label>${t('Server-Adresse', 'Server address')}<input id="mp-server" type="url" spellcheck="false" placeholder="https://hover.dreimer.de"></label>
-    <div class="modern-options"><label>${t('Dein Name', 'Your name')}<input id="mp-name" maxlength="24" autocomplete="nickname" value="Player"></label>
-    <label>${t('Spieler maximal', 'Player limit')}<select id="mp-size"><option>2</option><option>4</option><option>6</option><option>8</option></select></label></div>
-    <button id="mp-create" type="button">${t('Raum erstellen', 'Create room')}</button>
-    <div class="mp-join"><input id="mp-code" maxlength="6" aria-label="${t('Raumcode', 'Room code')}" placeholder="ABC123" spellcheck="false"><button id="mp-join" type="button">${t('Beitreten', 'Join')}</button></div>
+  const de=hoverLocale.lang==='de', t=(a,b)=>de?a:b;
+  // The archived multiplayer spawn path assumes the modern HUD hook.
+  // Retro shares the network engine but has no team-change hook of its own.
+  Hover.RetroHud.prototype.onTeamUpdate=function(){
+    const hud=this.world.game.getElementById('hud');
+    hud.classList.toggle('team-red',this.craft.team==='red');
+    hud.classList.toggle('team-blue',this.craft.team==='blue');
+  };
+  const panel=document.createElement('section');panel.id='mp-panel';panel.hidden=true;
+  panel.innerHTML=`<h2>Multiplayer</h2>
+    <div id="mp-connect">
+      <label>${t('Server-Adresse','Server address')}<input id="mp-server" type="url" spellcheck="false" placeholder="https://hover.dreimer.de"></label>
+      <div class="modern-options"><label>${t('Dein Name','Your name')}<input id="mp-name" maxlength="24" autocomplete="nickname" value="Player"></label>
+      <label>${t('Spieler maximal','Player limit')}<select id="mp-size"><option>2</option><option>4</option><option>6</option><option>8</option></select></label></div>
+      <button id="mp-create" type="button">${t('Lobby erstellen','Create lobby')}</button>
+      <div class="mp-join"><input id="mp-code" maxlength="6" aria-label="${t('Raumcode','Room code')}" placeholder="ABC123" spellcheck="false"><button id="mp-join" type="button">${t('Beitreten','Join')}</button></div>
+    </div>
     <div id="mp-lobby" hidden><p id="mp-room"></p><ul id="mp-players"></ul>
-    <label>${t('Einladungslink', 'Invitation link')}<input id="mp-invite" readonly></label>
-    <button id="mp-begin" type="button">${t('Runde starten', 'Start round')}</button><button id="mp-leave" type="button">${t('Raum verlassen', 'Leave room')}</button></div>
+      <div class="modern-options"><label>Team<select id="mp-team"><option value="RED">${t('Rot','Red')}</option><option value="BLUE">${t('Blau','Blue')}</option></select></label>
+      <label>Arena<select id="mp-arena"><option value="44">1 · ${t('Stadt','City')}</option><option value="46">2 · ${t('Kanalisation','Sewer')}</option><option value="47">3 · ${t('Burg','Castle')}</option></select></label>
+      <label>${t('Grafik','Graphics')}<select id="mp-mode"><option value="modern">Modern</option><option value="retro">Retro</option></select></label>
+      <label>${t('Flaggen pro Team','Flags per team')}<select id="mp-flags"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label></div>
+      <label>${t('Einladungslink','Invitation link')}<input id="mp-invite" readonly></label>
+      <button id="mp-begin" type="button">${t('Runde starten','Start round')}</button>
+      <button id="mp-finish" type="button">${t('Lobby beenden · Punkte','End lobby · Scores')}</button>
+      <button id="mp-leave" type="button">${t('Lobby verlassen','Leave lobby')}</button>
+    </div>
+    <section id="mp-scores" hidden><h3>${t('Endergebnis','Final scores')}</h3><p id="mp-team-scores"></p><table><thead><tr><th>${t('Spieler','Player')}</th><th>${t('Flaggenpunkte','Flag points')}</th><th>${t('Siege','Wins')}</th></tr></thead><tbody></tbody></table></section>
     <p id="mp-status" role="status" aria-live="polite"></p>`;
-  $('modern-retro').after(panel);
-  // Allow scrolling the expanded lobby on touch devices despite the archived
-  // game's document-level touchmove preventDefault handler.
-  $('modern-launcher').addEventListener('touchmove', event => event.stopPropagation(), {passive:true});
-  const params = new URLSearchParams(location.search);
-  const defaultServer = location.hostname.endsWith('github.io') ? 'https://hover.dreimer.de' : location.origin;
-  $('mp-server').value = params.get('server') || localStorage.getItem('hover-mp-server') || defaultServer;
-  $('mp-name').value = localStorage.getItem('hover-mp-name') || 'Player';
-  if (params.has('room')) { $('mp-code').value = params.get('room').slice(0, 6).toUpperCase(); panel.open = true; }
-  let socket = null, sequence = 0, game = null, room = null, playerId = null, intentional = false, busy = false;
-  const pending = new Map();
-  const status = text => { $('mp-status').textContent = text; };
-  function endpoint() {
-    const url = new URL($('mp-server').value);
-    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw Error(t('HTTP- oder HTTPS-Adresse erforderlich.', 'Use an HTTP or HTTPS address.'));
-    if (location.protocol === 'https:' && url.protocol !== 'https:') throw Error(t('Diese HTTPS-Seite benötigt auch einen HTTPS-Spielserver.', 'This HTTPS page requires an HTTPS game server.'));
-    url.pathname = '/ws'; url.search = ''; url.hash = ''; url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
-    return url;
+  const $=id=>panel.querySelector('#'+id)||document.getElementById(id)||HoverEnhanced.controls.get(id);
+  $('modern-launcher').querySelector('.modern-card').appendChild(panel);
+  const params=new URLSearchParams(location.search);
+  const local=/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  const defaultServer=location.hostname.endsWith('github.io')?'https://hover.dreimer.de':location.origin;
+  $('mp-server').value=params.get('server')||localStorage.getItem('hover-mp-server')||defaultServer;
+  $('mp-name').value=localStorage.getItem('hover-mp-name')||'Player';
+  if(params.has('room')){$('mp-code').value=params.get('room').slice(0,6).toUpperCase();panel.hidden=false;}
+  let socket=null,sequence=0,game=null,room=null,playerId=null,intentional=false,busy=false,launchGeneration=0;
+  const pending=new Map(),status=text=>{$('mp-status').textContent=text;};
+  function endpoint(){
+    const url=new URL($('mp-server').value);
+    if(!['http:','https:'].includes(url.protocol)||url.username||url.password)throw Error(t('HTTPS-Serveradresse erforderlich.','An HTTPS server address is required.'));
+    const loopback=/^(localhost|127\.0\.0\.1|\[::1\])$/.test(url.hostname);
+    if(url.protocol!=='https:'&&!(local&&loopback&&location.protocol==='http:'))throw Error(t('Bitte den HTTPS-Endpunkt des Reverse Proxys verwenden.','Please use the HTTPS endpoint of the reverse proxy.'));
+    url.pathname='/ws';url.search='';url.hash='';url.protocol=url.protocol==='https:'?'wss:':'ws:';return url;
   }
-  async function connect() {
-    if (socket && socket.readyState === WebSocket.OPEN) return;
-    intentional = false;
-    const ws = socket = new WebSocket(endpoint());
-    ws.onmessage = event => {
-      const message = JSON.parse(event.data);
-      if (Object.hasOwn(message, 'id')) {
-        const request = pending.get(message.id);
-        if (request) { clearTimeout(request.timer); pending.delete(message.id); message.error ? request.reject(Error(message.error)) : request.resolve(message.result); }
-      } else dispatch(message.event, message.args || []);
+  async function connect(){
+    if(socket?.readyState===WebSocket.OPEN)return;
+    intentional=false;const ws=socket=new WebSocket(endpoint());
+    ws.onmessage=event=>{
+      const message=JSON.parse(event.data);
+      if(Object.hasOwn(message,'id')){const request=pending.get(message.id);if(request){clearTimeout(request.timer);pending.delete(message.id);message.error?request.reject(Error(message.error)):request.resolve(message.result);}}
+      else dispatch(message.event,message.args||[]).catch(error=>abort(error.message));
     };
-    ws.onclose = () => {
-      if (socket !== ws) return;
-      socket = null;
-      for (const request of pending.values()) { clearTimeout(request.timer); request.reject(Error(t('Verbindung getrennt.', 'Disconnected.'))); }
-      pending.clear();
-      const hadRoom = !!room;
-      room = null; renderLobby();
-      if (!intentional && hadRoom) abort(t('Verbindung verloren. Bitte einen neuen Raum erstellen.', 'Connection lost. Please create a new room.'));
+    ws.onclose=()=>{
+      if(socket!==ws)return;socket=null;
+      for(const request of pending.values()){clearTimeout(request.timer);request.reject(Error(t('Verbindung getrennt.','Disconnected.')));}pending.clear();
+      if(!intentional&&room)abort(t('Verbindung verloren. Erneut über den Raumcode beitreten.','Connection lost. Rejoin using the room code.'));
     };
-    await new Promise((resolve, reject) => {
-      const timer = setTimeout(() => { ws.close(); reject(Error(t('Server nicht erreichbar.', 'Server unavailable.'))); }, 10000);
-      ws.onopen = () => { clearTimeout(timer); resolve(); };
-      ws.onerror = () => { clearTimeout(timer); reject(Error(t('Verbindung fehlgeschlagen. Server-Adresse und HTTPS prüfen.', 'Connection failed. Check server address and HTTPS.'))); };
+    await new Promise((resolve,reject)=>{
+      const timer=setTimeout(()=>{ws.close();reject(Error(t('Server nicht erreichbar.','Server unavailable.')));},10000);
+      ws.onopen=()=>{clearTimeout(timer);resolve();};ws.onerror=()=>{clearTimeout(timer);reject(Error(t('Verbindung fehlgeschlagen. HTTPS-Adresse prüfen.','Connection failed. Check the HTTPS address.')));};
     });
-    localStorage.setItem('hover-mp-server', $('mp-server').value);
+    localStorage.setItem('hover-mp-server',$('mp-server').value);
   }
-  function rpc(method, ...args) {
-    return new Promise((resolve, reject) => {
-      if (!socket || socket.readyState !== WebSocket.OPEN) return reject(Error('Disconnected'));
-      const id = ++sequence;
-      const timer = setTimeout(() => { pending.delete(id); reject(Error('Server timeout')); }, 10000);
-      pending.set(id, {resolve, reject, timer});
-      socket.send(JSON.stringify({id, method, args}));
-    });
+  function rpc(method,...args){return new Promise((resolve,reject)=>{
+    if(socket?.readyState!==WebSocket.OPEN)return reject(Error('Disconnected'));
+    const id=++sequence,timer=setTimeout(()=>{pending.delete(id);reject(Error('Server timeout'));},10000);
+    pending.set(id,{resolve,reject,timer});socket.send(JSON.stringify({id,method,args,round:room?.round}));
+  });}
+  const server={};
+  for(const method of ['spawnMe','setCraftState','capturedFlag','uncapturedFlag','hitPod','createTempWall','sendCollision','fireBullet','sendMyBulletHitCraft','sendBulletDestroyed'])server[method]=(...args)=>{
+    const deferred=jQuery.Deferred();rpc(method,...args).then(v=>{deferred.resolve(v);},e=>{deferred.reject(e);});return deferred.promise();
+  };
+  jQuery.connection.hoverHub={server};
+  function stopScene(){
+    ++launchGeneration;
+    const view=Hover.router.currentView;
+    if(game)game.connected=false;
+    if(view?.game&&view.playing)view.stopGame();
+    game=null;
   }
-  // The preserved MPGame expects jQuery Deferreds. Adapt only that interface;
-  // this is our JSON/WebSocket protocol, not an implementation of SignalR.
-  const server = {};
-  for (const method of ['spawnMe','setCraftState','capturedFlag','uncapturedFlag','hitPod','createTempWall','sendCollision','fireBullet','sendMyBulletHitCraft','sendBulletDestroyed']) {
-    server[method] = (...args) => {
-      const deferred = jQuery.Deferred();
-      rpc(method, ...args).then(value => { deferred.resolve(value); }, error => { deferred.reject(error); });
-      return deferred.promise();
-    };
+  function disconnect(){
+    intentional=true;stopScene();room=null;playerId=null;
+    if(socket)socket.close();renderLobby();
   }
-  jQuery.connection.hoverHub = {server};
-  function disconnect() {
-    intentional = true;
-    game = null; room = null; playerId = null;
-    if (socket) socket.close();
-    renderLobby();
-  }
-  Hover.signalr = {
-    disconnect, stopGame: disconnect,
-    attachGameInstance(instance) {
-      game = instance;
-      const spawnPod = instance.spawnPod;
-      instance.spawnPod = function(data) {
-        spawnPod.call(this, data);
-        // The old modern Pod constructor hardcodes Y=20, discarding elevated
-        // map positions. Keep visuals, collision and server coordinates aligned.
-        this.world.pods[this.world.pods.length - 1].location.y = data.Y;
-      };
-      instance.onReady.register(() => patchWorld(instance));
+  Hover.signalr={
+    // The old GameView calls disconnect on scene removal. A scene is now only
+    // one round; explicit Leave/End/pagehide owns the actual lobby connection.
+    disconnect(){},stopGame(){},
+    attachGameInstance(instance){
+      game=instance;
+      const spawnPod=instance.spawnPod;
+      instance.spawnPod=function(data){spawnPod.call(this,data);this.world.pods[this.world.pods.length-1].location.y=data.Y;};
+      const placeFlag=instance.placeFlagAt;
+      instance.placeFlagAt=function(data){placeFlag.call(this,data);this.world.flags[this.world.flags.length-1].networkLocation={X:data.X,Y:data.Y,Z:data.Z};};
+      instance.onReady.register(()=>patchWorld(instance));
     }
   };
-  function renderLobby() {
-    $('mp-lobby').hidden = !room;
-    for (const id of ['mp-create','mp-join','mp-name','mp-server','mp-size']) $(id).disabled = !!room || busy;
-    // Avoid replacing a lobby/connection with an unrelated single-player view.
-    $('modern-play').disabled = $('modern-retro').disabled = !!room || busy;
-    if (!room) return;
-    $('mp-room').textContent = `${t('Raum', 'Room')} ${room.code} · ${room.players.length}/${room.capacity}`;
-    $('mp-players').replaceChildren(...room.players.map(p => {
-      const li = document.createElement('li'); li.textContent = `${p.name} · ${p.team === 'RED' ? t('Rot','Red') : t('Blau','Blue')}${p.id === room.host ? ' ★' : ''}`; return li;
-    }));
-    $('mp-begin').disabled = room.host !== playerId || room.phase !== 'waiting' || room.players.length < 2 || room.players.length % 2 !== 0;
-    const link = new URL(location.href); link.hash = ''; link.search = '';
-    link.searchParams.set('room', room.code); link.searchParams.set('server', $('mp-server').value);
-    $('mp-invite').value = link.href;
+  function renderLobby(){
+    $('mp-connect').hidden=!!room;$('mp-lobby').hidden=!room;
+    for(const id of ['mp-create','mp-join'])$(id).disabled=busy;
+    $('modern-play').disabled=$('modern-retro').disabled=!!room||busy;
+    $('enhanced-single-options').hidden=!!room;
+    if(!room)return;
+    panel.hidden=false;
+    $('mp-room').textContent=`${t('Lobby','Lobby')} ${room.code} · ${room.players.length}/${room.capacity} · ${t('Runde','Round')} ${room.round+1}`;
+    $('mp-players').replaceChildren(...room.players.map(p=>{const li=document.createElement('li');li.textContent=`${p.name} · ${p.team==='RED'?t('Rot','Red'):t('Blau','Blue')}${p.id===room.host?' ★':''}`;return li;}));
+    const waiting=room.phase==='waiting',host=room.host===playerId;
+    $('mp-team').disabled=!waiting||busy;
+    const own=room.players.find(p=>p.id===playerId);if(own)$('mp-team').value=own.team;
+    for(const id of ['mp-arena','mp-flags','mp-mode'])$(id).disabled=!host||!waiting||busy;
+    $('mp-arena').value=String(room.maze);$('mp-flags').value=String(room.flagCount);$('mp-mode').value=room.retro?'retro':'modern';
+    $('mp-begin').disabled=!host||!waiting||busy||new Set(room.players.map(p=>p.team)).size!==2;
+    $('mp-finish').hidden=!host;$('mp-finish').disabled=!waiting||busy;
+    const link=new URL(location.href);link.hash='';link.search='';link.searchParams.set('room',room.code);link.searchParams.set('server',$('mp-server').value);$('mp-invite').value=link.href;
   }
-  async function guarded(action) {
-    if (busy) return;
-    busy = true; renderLobby(); status(t('Verbinde …', 'Connecting …'));
-    try { await action(); }
-    catch (error) { status(error.message); if (!room) disconnect(); }
-    finally { busy = false; renderLobby(); }
+  async function guarded(action){if(busy)return;busy=true;renderLobby();try{await action();}catch(error){if(!intentional)status(error.message);if(!room)disconnect();}finally{busy=false;renderLobby();}}
+  async function join(code){
+    const name=$('mp-name').value.trim();if(!name)throw Error(t('Bitte einen Namen eingeben.','Please enter a name.'));
+    const result=await rpc('join',code,Hover.Profiles[$('modern-craft').value].id,name);playerId=result.id;room=result.room;
+    $('mp-scores').hidden=true;localStorage.setItem('hover-mp-name',name);status(t('Team wählen. Der Gastgeber startet die Runde.','Choose a team. The host starts the round.'));
   }
-  async function join(code) {
-    const name = $('mp-name').value.trim();
-    if (!name) throw Error(t('Bitte einen Namen eingeben.', 'Please enter a name.'));
-    Hover.retro = false;
-    if (window.HoverAudio) await new Promise(resolve => Hover.audio.loadSounds(resolve));
-    const result = await rpc('join', code, Hover.Profiles[$('modern-craft').value].id, name);
-    playerId = result.id; room = result.room;
-    localStorage.setItem('hover-mp-name', name);
-    status(t('Warte auf Mitspieler und den Start durch den Gastgeber.', 'Waiting for players and the host to start.'));
-  }
-  $('mp-create').onclick = () => guarded(async () => {
-    if (window.HoverAudio) HoverAudio.unlock();
-    await connect();
-    const code = await rpc('createGame', Number($('modern-arena').value), 4, Number($('mp-size').value) / 2);
-    await join(code);
+  $('mp-create').onclick=()=>guarded(async()=>{window.HoverAudio?.unlock();await connect();const code=await rpc('createGame',44,4,Number($('mp-size').value)/2);await join(code);});
+  $('mp-join').onclick=()=>guarded(async()=>{window.HoverAudio?.unlock();await connect();await join($('mp-code').value.trim().toUpperCase());});
+  $('mp-team').onchange=()=>{const team=$('mp-team').value;guarded(()=>rpc('chooseTeam',team));};
+  for(const id of ['mp-arena','mp-flags','mp-mode'])$(id).onchange=()=>{
+    const settings=[Number($('mp-arena').value),Number($('mp-flags').value),$('mp-mode').value==='retro'];guarded(()=>rpc('configureRoom',...settings));
+  };
+  $('mp-begin').onclick=()=>guarded(()=>rpc('beginRoom'));
+  $('mp-finish').onclick=()=>guarded(()=>rpc('closeLobby'));
+  $('mp-leave').onclick=()=>guarded(async()=>{await rpc('leave');disconnect();status(t('Lobby verlassen.','Left lobby.'));});
+  $('modern-menu').addEventListener('click',()=>{
+    if(room&&game)guarded(()=>rpc('leave').finally(()=>{disconnect();HoverEnhanced.showHome();panel.hidden=false;}));
   });
-  $('mp-join').onclick = () => guarded(async () => {
-    if (window.HoverAudio) HoverAudio.unlock();
-    await connect(); await join($('mp-code').value.trim().toUpperCase());
-  });
-  $('mp-begin').onclick = () => guarded(() => rpc('beginRoom'));
-  $('mp-leave').onclick = () => { disconnect(); status(t('Raum verlassen.', 'Left room.')); };
-  $('modern-menu').addEventListener('click', disconnect);
-  window.addEventListener('pagehide', disconnect);
-  function abort(message) {
-    const current = game;
-    if (current) {
-      current.connected = false;
-      const view = Hover.router.currentView;
-      if (view && view.game === current) view.stopGame();
+  window.addEventListener('pagehide',disconnect);
+  function abort(message){disconnect();HoverEnhanced.showHome();panel.hidden=false;status(message);}
+  function showLobby(message){stopScene();HoverEnhanced.showHome();panel.hidden=false;renderLobby();status(message);}
+  async function dispatch(event,args){
+    if(event==='lobby'){room=args[0];renderLobby();return;}
+    if(event==='roundAborted'){room=args[0];showLobby(t('Runde abgebrochen: Ein Spieler hat die Verbindung getrennt. Die Lobby bleibt offen.','Round aborted: a player disconnected. The lobby remains open.'));return;}
+    if(event==='launch'){
+      room=args[0];renderLobby();const generation=++launchGeneration;
+      if(document.activeElement instanceof HTMLElement)document.activeElement.blur();
+      Hover.retro=room.retro;window.HoverAudio?.unlock();
+      if(window.HoverAudio)await new Promise(resolve=>Hover.audio.loadSounds(resolve));
+      if(generation!==launchGeneration||!room)return;
+      Hover.router.navigate('multiplayer-room',{trigger:false});
+      Hover.router.setCurrentView(new Hover.views.GameView({gameId:room.code,mazeId:room.maze,retro:room.retro,playerName:$('mp-name').value.trim(),craftProfile:Hover.Profiles[$('modern-craft').value]}));
+      setTimeout(()=>{if(game&&generation===launchGeneration)game.useMazeId(room.maze);},0);return;
     }
-    disconnect();
-    Hover.router.navigate('', {trigger:false}); Hover.router.home();
-    panel.open = true; status(message);
-  }
-  function dispatch(event, args) {
-    if (event === 'lobby') { room = args[0]; renderLobby(); return; }
-    if (event === 'roundAborted') { abort(t('Ein Spieler hat die Verbindung getrennt. Bitte einen neuen Raum erstellen.', args[0])); return; }
-    if (event === 'launch') {
-      if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
-      Hover.retro = false;
-      Hover.router.navigate('multiplayer-room', {trigger:false});
-      Hover.router.setCurrentView(new Hover.views.GameView({gameId:room.code, mazeId:args[0], playerName:$('mp-name').value.trim(), craftProfile:Hover.Profiles[$('modern-craft').value]}));
-      // Constructor must return and GameView must register its onReady listener.
-      setTimeout(() => { if (game) game.useMazeId(args[0]); }, 0);
-      return;
+    if(event==='roundEnded'){
+      room=args[0];const winner=room.lastResult==='RED'?t('Rot','Red'):t('Blau','Blue');
+      showLobby(t('Runde beendet. Team ','Round finished. Team ')+winner+t(' gewinnt. Nächste Runde wählen oder Lobby beenden.',' wins. Choose the next round or end the lobby.'));return;
     }
-    if (event === 'roundEnded') { if (game) game.connected = false; return; }
-    if (event === 'awardPod' && game) {
-      const pos = args[0], world = game.world;
-      const pod = world.pods.find(p => Math.hypot(p.location.x-pos.X,p.location.y-pos.Y,p.location.z-pos.Z)<10);
-      if (pod) { pod.onHit(game.craft); pod.remove(); world.pods.splice(world.pods.indexOf(pod),1); }
-      return;
+    if(event==='lobbyClosed'){
+      const result=args[0];disconnect();HoverEnhanced.showHome();panel.hidden=false;$('mp-scores').hidden=false;
+      $('mp-team-scores').textContent=`${t('Rundensiege','Round wins')}: ${t('Rot','Red')} ${result.teamWins.RED} · ${t('Blau','Blue')} ${result.teamWins.BLUE}`;
+      panel.querySelector('tbody').replaceChildren(...result.players.sort((a,b)=>b.flags-a.flags).map(p=>{const tr=document.createElement('tr');for(const value of [p.name,p.flags,p.wins]){const td=document.createElement('td');td.textContent=value;tr.appendChild(td);}return tr;}));
+      status(t('Lobby beendet. Danke fürs Spielen!','Lobby ended. Thanks for playing!'));return;
     }
-    if (game && typeof game[event] === 'function') game[event](...args);
+    if(event==='awardPod'&&game){const pos=args[0],world=game.world,pod=world.pods.find(p=>Math.hypot(p.location.x-pos.X,p.location.y-pos.Y,p.location.z-pos.Z)<10);if(pod){pod.onHit(game.craft);pod.remove();world.pods.splice(world.pods.indexOf(pod),1);}return;}
+    if(game&&typeof game[event]==='function')game[event](...args);
   }
   function patchWorld(instance) {
     const world = instance.world, requests = new Set();
@@ -189,7 +173,11 @@
       requests.add(key);
       // Send the current position first; collision callbacks may precede the
       // regular 15 Hz update, especially just after a sharp turn/jump.
-      rpc('setCraftState', instance.craft.getStateUpdate()).then(() => rpc(method, {X:position.x,Y:position.y,Z:position.z}))
+      rpc('setCraftState', instance.craft.getStateUpdate()).then(() => {
+        if (instance !== game || !instance.connected) return;
+        const flag = world.flags.find(f => f.location === position);
+        return rpc(method, flag?.networkLocation || {X:position.x,Y:position.y,Z:position.z});
+      })
         .catch(() => {}).finally(() => { setTimeout(() => requests.delete(key), 200); });
     }
     world.checkForFlagCaptures = (craft, enemyTeam) => {
@@ -219,6 +207,5 @@
       };
     }
   }
-  // Small public diagnostic surface used by integration tests; no credentials.
-  window.HoverMultiplayer = {get room(){return room;}, get game(){return game;}, get playerId(){return playerId;}, disconnect};
+  window.HoverMultiplayer={get room(){return room;},get game(){return game;},get playerId(){return playerId;},disconnect};
 })();

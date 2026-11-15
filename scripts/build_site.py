@@ -31,6 +31,8 @@ for source in (ROOT / 'web/assets').rglob('*'):
     if source.is_symlink() or not source.is_file():
         continue
     relative = source.relative_to(ROOT / 'web/assets')
+    # Windows/Wayback retained lowercase retro for Maze3; the loader requests Retro.
+    relative = Path(*('Retro' if part == 'retro' else part for part in relative.parts))
     # Keep the complete archive in Git; publish only runtime texture variants.
     if relative.parts[0] == 'Images':
         omitted.append({'path': str(relative), 'bytes': source.stat().st_size, 'reason': 'byte-identical capitalization duplicate; URLs normalized to images/'})
@@ -78,14 +80,14 @@ for date, name in [('2013-10-02', 'early'), ('2019-03-11', 'latest')]:
             # Keep the old information panel local; its external YouTube player is not archived.
             text = re.sub(r'http://img\.youtube\.com/vi/.*?/maxresdefault\.jpg', '../../assets/images/UI/hover_fb.png', text)
         dest.write_text(text)
-# A third opt-in derivative shares assets; both restored releases stay unchanged.
+# A third extended derivative shares assets; both restored releases stay unchanged.
 modified = output / 'play/modified'
 shutil.copytree(output / 'play/latest', modified)
 shutil.copytree(ROOT / 'modifications', modified, dirs_exist_ok=True)
 index = modified / 'index.html'
-html = index.read_text().replace('<title>Hover!</title>', '<title>Hover! — Touch + Vollbild</title>')
+html = index.read_text().replace('<title>Hover!</title>', '<title>Hover! — Erweiterte Fassung</title>')
 html = html.replace('</head>', '<link rel="stylesheet" href="modern.css">\n<script src="../../locale.js"></script>\n<script src="../../mobile.js"></script>\n</head>')
-html = html.replace('</body>', '<script src="audio.js"></script>\n<script src="modern.js"></script>\n<script src="multiplayer.js"></script>\n</body>')
+html = html.replace('</body>', '<script src="audio.js"></script>\n<script src="enhanced.js"></script>\n<script src="modern.js"></script>\n<script src="multiplayer.js"></script>\n</body>')
 html = html.replace('width=device-width"', 'width=device-width,viewport-fit=cover"')
 index.write_text(html)
 if args.include_downloads:
@@ -99,7 +101,7 @@ else:
 # Version the new UI files so a refreshed page cannot reuse an older cached UI.
 for page in [output / 'index.html', modified / 'index.html']:
     html = page.read_text()
-    for url in ['style.css', 'locale.js', 'mobile.js', '../../locale.js', '../../mobile.js', 'modern.js', 'modern.css', 'audio.js', 'multiplayer.js']:
+    for url in ['style.css', 'locale.js', 'mobile.js', '../../locale.js', '../../mobile.js', 'modern.js', 'modern.css', 'audio.js', 'enhanced.js', 'multiplayer.js']:
         asset = (page.parent / url).resolve()
         if asset.is_file() and asset.is_relative_to(output):
             version = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]

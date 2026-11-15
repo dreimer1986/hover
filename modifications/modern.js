@@ -22,18 +22,16 @@
     </nav>
     <section id="modern-launcher" aria-label="Hover starten">
       <div class="modern-card">
-        <img src="../../assets/images/UI/hoverlogo.png" alt="Hover!">
-        <p class="modern-kicker">TOUCH + VOLLBILD · MODIFIZIERTE FASSUNG</p>
-        <h1>Deine Arena. Dein Bildschirm.</h1>
-        <p>Die späte Webfassung mit neuer Bedienung. Fahre mit den Pfeiltasten oder dem Steuerkreuz. Sammle Flaggen und bringe sie zur Basis!</p>
-        <div class="modern-options">
-          <label>Arena<select id="modern-arena"><option value="44">1 · Stadt</option><option value="46">2 · Kanalisation</option><option value="47">3 · Burg</option></select></label>
+        <p class="enhanced-edition">Erweiterte Fassung</p>
+        <div id="enhanced-single-options" class="modern-options">
+          <label id="enhanced-level-control" hidden>Arena<select id="modern-arena"><option value="44">1 · Stadt</option><option value="46">2 · Kanalisation</option><option value="47">3 · Burg</option></select></label>
           <label>Hovercraft<select id="modern-craft"><option value="Easy">Einfach</option><option value="Normal">Normal</option><option value="Hard">Schwer</option></select></label>
+          <label>Flaggen pro Team<select id="modern-flags"><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
         </div>
-        <button id="modern-play" class="modern-primary" type="button">Spiel starten →</button>
-        <button id="modern-retro" type="button">Retro-Modus starten</button>
-        <p class="modern-help">Sprung: A · Wand: S · Tarnung: D · Feuern: Leertaste<br>Sprung, Wand und Tarnung benötigen eingesammelte Extras; Feuern eine Waffe. Booster wirken nach dem Einsammeln automatisch. Querformat bietet mehr Übersicht.</p>
-        <a href="../latest/">Späte Originalfassung</a> · <a href="../early/">Frühe Originalfassung</a>
+        <button id="modern-play" class="homeButton" type="button">Einzelspieler</button>
+        <button id="enhanced-multiplayer" class="homeButton" type="button">Multiplayer</button>
+        <button id="modern-retro" class="homeButton" type="button">Retro</button>
+        <p id="enhanced-unlock-message" role="status" aria-live="polite"></p>
       </div>
     </section>
     <div id="modern-readout" aria-label="Spielstatus" hidden></div>
@@ -63,7 +61,8 @@
     <p id="modern-status" role="status" aria-live="polite"></p>`;
   window.hoverLocale.translate(ui);
   document.body.appendChild(ui);
-  const $ = id => document.getElementById(id);
+  const controls = new Map([...ui.querySelectorAll('[id]')].map(el => [el.id, el]));
+  const $ = id => document.getElementById(id) || controls.get(id);
   function release() {
     pointers.clear();
     if (controller) [...directions, ...actions].forEach(key => { controller[key] = false; });
@@ -122,15 +121,15 @@
     // and decode the correct bank first, including on modern/retro switches.
     if (window.HoverAudio) await new Promise(resolve => Hover.audio.loadSounds(resolve));
     starting = false;
-    if (retro) Hover.router.retro();
-    else {
-      Hover.retro = false;
-      Hover.router.navigate('single-player', {trigger: false});
-      Hover.router.setCurrentView(new Hover.views.GameView({
-        mazeId: Number($('modern-arena').value), craftProfile: Hover.Profiles[$('modern-craft').value]
-      }));
-    }
+    Hover.router.navigate(retro ? 'retro' : 'single-player/play', {trigger: false});
+    Hover.router.setCurrentView(new Hover.views.GameView({
+      retro, mazeId: window.HoverEnhanced.levelUnlocked ? Number($('modern-arena').value) : 44,
+      flagCount: Number($('modern-flags').value), craftProfile: Hover.Profiles[$('modern-craft').value]
+    }));
   }
+  window.HoverEnhanced.start = start;
+  window.HoverEnhanced.controls = controls;
+  window.HoverEnhanced.ui = ui;
   $('modern-play').onclick = () => start(false);
   $('modern-retro').onclick = () => start(true);
   function active() { return touch && view && view.playing && controller && !document.hidden; }
@@ -280,14 +279,15 @@
     }
     const inGame = !!document.getElementById('gameView');
     root.classList.toggle('modern-in-game', inGame);
-    $('modern-launcher').hidden = inGame;
-    $('modern-menu').hidden = !inGame;
+    $('modern-launcher').hidden = inGame || !document.getElementById('homeView');
+    $('modern-menu').hidden = !inGame && (!next || next.id === 'homeView');
     if (game && game.renderer && game.camera && game.shortCamera) {
       if (!originalDimensions) originalDimensions = Object.assign({}, game.dimensions);
       // Reuse the game's independent touch controller, leaving physical keys intact.
       controller = game.craftControllers.find(c => typeof c.dpadStart === 'function');
       resizeGame(game);
       prepareRetro(game);
+      if (window.HoverEnhanced) HoverEnhanced.fitRetroFlags(game, wide);
     }
     updateRetroHud(game, inGame && wide && !!Hover.retro && !!game);
     const readout = $('modern-readout');

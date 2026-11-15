@@ -19,6 +19,7 @@ const root = path.resolve(__dirname, '..');
   async function check(name, fn) { await fn(); results.push(name); console.log('PASS ' + name); }
   async function ready(p) { await p.waitForFunction(() => window.Hover && Hover.router); }
   async function play(p, arena = '44', craft = 'Easy') {
+    if(await p.locator('#enhanced-level-control').isHidden())await p.click('#enhanced-unlock');
     await p.selectOption('#modern-arena', arena); await p.selectOption('#modern-craft', craft);
     await p.click('#modern-play'); await p.waitForFunction(() => Hover.router.currentView.playing);
     const intro = p.locator('.msg-intro .msgButton');
@@ -29,9 +30,9 @@ const root = path.resolve(__dirname, '..');
   async function canvas(p, width, height) { const s = await p.evaluate(() => { const g = Hover.router.currentView.game; const r = g.renderer.domElement.getBoundingClientRect(); return {x:r.x,y:r.y,w:r.width,h:r.height,aspect:g.camera.aspect,short:g.shortCamera.aspect}; }); assert.equal(s.x,0);assert.equal(s.y,0);assert.equal(s.w,width);assert.equal(s.h,height);assert.equal(s.aspect,width/height);assert.equal(s.short,width/height); }
   try {
     const desktop = await page({viewport:{width:1280,height:800}});
-    await check('Desktop keeps archive and original default', async () => {
-      await desktop.goto(base); assert.equal(desktop.url(), base);
-      assert.equal(await desktop.locator('.hero .button.primary').getAttribute('href'), 'play/latest/');
+    await check('Desktop defaults to extended; archive remains accessible', async () => {
+      await desktop.goto(base); await desktop.waitForURL(base+'play/modified/'); await desktop.goto(base+'?view=archive');
+      assert.equal(await desktop.locator('.hero .button.primary').getAttribute('href'), 'play/modified/');
       assert.equal(await desktop.locator('.versions article').count(), 3);
     });
     const mobile = await page({viewport:{width:844,height:390},isMobile:true,hasTouch:true,
