@@ -1,7 +1,7 @@
 # Audio-Nachtest / Audio retest
 
-- **Umgesetzt am 15.11.2026:** Die modifizierte Fassung verwendet vorbereitete PCM-Motorschleifen mit geglättetem Übergang. Original-Samples und Archivfassungen bleiben unverändert. Automatisierte Tests prüfen wiederholte Schleifen; der Hörtest auf dem betroffenen iPhone steht noch aus. Android-Audio wurde vor dieser Änderung vom Nutzer als korrekt bestätigt.
-- **Implemented November 15, 2026:** The modified edition uses prepared PCM engine loops with a blended transition. Original samples and archived editions remain unchanged. Automated tests check repeated loops; listening on the affected iPhone still needs confirmation. The user confirmed correct Android audio before this change.
+- **Umgesetzt am 15.11.2026:** Die modifizierte Fassung verwendet vorbereitete PCM-Motorschleifen mit geglättetem Übergang. Original-Samples und Archivfassungen bleiben unverändert. Automatisierte Tests prüfen wiederholte Schleifen; der Nutzer hat den erfolgreichen iPhone-Hörtest bestätigt. Android-Audio wurde vor dieser Änderung vom Nutzer als korrekt bestätigt.
+- **Implemented November 15, 2026:** The modified edition uses prepared PCM engine loops with a blended transition. Original samples and archived editions remain unchanged. Automated tests check repeated loops; the user confirmed successful listening on the affected iPhone. The user confirmed correct Android audio before this change.
 
 # Abgleich der Anforderungen / Request checklist
 
@@ -19,5 +19,5 @@ Umgesetzt / Implemented:
 
 Am Gerät nach Veröffentlichung prüfen / Check on actual devices after publication:
 
-- [ ] Neuer Container auf der NAS und Multiplayer über Caddy / Updated NAS container and multiplayer through Caddy.
-- [ ] Durchgehender Motorlauf auf dem betroffenen iPhone / Continuous engine loop on the affected iPhone.
+- [x] Neuer Container auf der NAS und Multiplayer über Caddy / Updated NAS container and multiplayer through Caddy.
+- [x] Durchgehender Motorlauf auf dem betroffenen iPhone / Continuous engine loop on the affected iPhone.

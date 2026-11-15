@@ -6,15 +6,17 @@
   const $ = id => document.getElementById(id) || (api.controls && api.controls.get(id));
   api.showHome = () => { Hover.router.navigate('',{trigger:false}); if(Hover.router.currentView?.id!=='homeView')Hover.router.home(); };
   async function unlock() {
-    if (api.levelUnlocked) return;
-    api.levelUnlocked = true; sessionStorage.setItem('hover-levels','1');
-    $('enhanced-level-control').hidden = false;
-    $('enhanced-unlock-message').textContent = t('Levelauswahl freigeschaltet!','Level select unlocked!');
+    api.levelUnlocked = !api.levelUnlocked;
+    const enabled=api.levelUnlocked;sessionStorage.setItem('hover-levels',enabled?'1':'0');
+    $('enhanced-level-control').hidden = !enabled;
+    if(!enabled)$('modern-arena').value='44';
+    $('enhanced-unlock-message').textContent = enabled?t('Levelauswahl freigeschaltet!','Level select unlocked!'):t('Levelauswahl gesperrt. Start bei Karte 1.','Level select locked. Start on map 1.');
     if (window.HoverAudio) {
       HoverAudio.unlock();
       Hover.retro = false;
       await new Promise(resolve => Hover.audio.loadSounds(resolve));
-      HoverAudio.playCue('WINLEVEL');
+      Hover.audio.getSound(enabled?'GAMEOVR':'WINLEVEL').stop();
+      HoverAudio.playCue(enabled?'WINLEVEL':'GAMEOVR');
     }
   }
   const home = Hover.views.HomeView.prototype, render = home.render, remove = home.remove;
@@ -27,6 +29,7 @@
     const buttons=this.el.querySelector('#homeButtons');buttons.replaceChildren();
     for(const id of ['modern-play','enhanced-multiplayer','modern-retro'])buttons.appendChild($(id));
     content.appendChild($('modern-launcher'));
+    api.installPreview?.();
     $('modern-launcher').hidden=false;
     $('enhanced-level-control').hidden=!api.levelUnlocked;
     this.el.querySelector('#homeIE').setAttribute('aria-hidden','true');
@@ -39,6 +42,7 @@
     if (new URLSearchParams(location.search).has('room') || window.HoverMultiplayer?.room) {
       const panel=$('mp-panel');if(panel){panel.hidden=false;panel.open=true;}
     }
+    api.installHome?.(this.el);
     return this;
   };
   home.remove=function(){

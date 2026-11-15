@@ -12,7 +12,7 @@ const base = (process.env.HOVER_URL || 'http://127.0.0.1:8767/hover/').replace(/
     for (const [locale,lang] of [['de-DE','de'],['en-US','en'],['fr-FR','en']]) {
       const p=await browser.newPage({locale,viewport:{width:1280,height:800}});
       p.on('pageerror',e=>errors.push(e.message));
-      await p.goto(base+'?view=archive');
+      await p.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await p.goto(base+'?view=archive');
       assert.equal(await p.locator('html').getAttribute('lang'),lang);
       assert.equal((await p.locator('.hero .button.primary').innerText()).replace('↗','').trim(),lang==='de'?'Jetzt spielen':'Play now');
       assert.equal(await p.locator('.versions article').count(),3);
@@ -21,7 +21,7 @@ const base = (process.env.HOVER_URL || 'http://127.0.0.1:8767/hover/').replace(/
       assert.match(await p.locator('.archive-note details').innerText(),lang==='de'?/Was wurde ergänzt/:/What was restored/);
       assert.equal(await p.locator('nav').getAttribute('aria-label'),lang==='de'?'Hauptnavigation':'Main navigation');
       assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-      await p.goto(base+'play/modified/');await p.waitForSelector('#modern-play');
+      await p.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await p.goto(base+'play/modified/');await p.waitForSelector('#modern-play');
       assert.equal(await p.locator('html').getAttribute('lang'),lang);
       assert.equal(await p.locator('#modern-play').innerText(),lang==='de'?'Einzelspieler':'Single player');
       assert.equal(await p.locator('#modern-craft option').first().innerText(),lang==='de'?'Einfach':'Easy');
@@ -43,7 +43,7 @@ const base = (process.env.HOVER_URL || 'http://127.0.0.1:8767/hover/').replace(/
     }
     const mobile=await browser.newPage({locale:'en-GB',isMobile:true,hasTouch:true,viewport:{width:390,height:844},userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 Safari/604.1'});
     mobile.on('pageerror',e=>errors.push(e.message));
-    await mobile.goto(base);await mobile.waitForURL(base+'play/modified/');await mobile.waitForSelector('#modern-play');
+    await mobile.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await mobile.goto(base);await mobile.waitForURL(base+'play/modified/');await mobile.waitForSelector('#modern-play');
     assert.equal(await mobile.locator('html').getAttribute('lang'),'en');
     assert.equal(await mobile.locator('#modern-wide').getAttribute('aria-pressed'),'true');
     assert.equal(await mobile.locator('#modern-touch').getAttribute('aria-pressed'),'true');

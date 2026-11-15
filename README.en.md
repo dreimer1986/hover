@@ -50,3 +50,7 @@ The Store packages are different distributions of the same game version. Origina
 [Restoration and documented changes](RESTORATION.en.md) · [Server operation](SERVER.en.md) · [Original multiplayer](MULTIPLAYER.en.md) · [Sources and rights](THIRD_PARTY.en.md)
 
 GitHub Actions builds and publishes the website on pushes to `master`. `python3 scripts/verify_archive.py` checks preserved originals. Browser and server tests are in `scripts/` and `server/`.
+
+The craft selector shows original models and statistics. **M** or the map button opens the large radar; **M/Esc** closes it. Driving and actions are disabled while it is open; the match continues. Pressing the centre of the O again locks level selection.
+
+Standard controllers: left stick/D-pad to drive, A/Cross to jump, X/Square for walls, B/Circle for cloak, right trigger to fire, Start/Back for the map. Once detected, **Off / Touch / Controller** replaces the Touch button. Press a button or tap the start screen to begin. Menus remain accessible with mouse/touch. The user confirmed working iPhone audio and NAS operation.

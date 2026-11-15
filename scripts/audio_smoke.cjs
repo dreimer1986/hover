@@ -8,7 +8,7 @@ const base=(process.env.HOVER_URL||'http://127.0.0.1:8767/hover/').replace(/\/?$
   try {
     const p=await browser.newPage({viewport:{width:844,height:390},deviceScaleFactor:3,isMobile:true,hasTouch:true,locale:'en-US',userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 Safari/604.1'});
     p.on('pageerror',e=>errors.push(e.message));p.on('response',r=>{if(r.status()>=400)missing.push(r.status()+' '+r.url())});
-    await p.goto(base+'play/modified/');await p.waitForSelector('#modern-play');
+    await p.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await p.goto(base+'play/modified/');await p.waitForSelector('#modern-play');
     await p.evaluate(()=>{Hover.settings.setIntroMessageShown(true);Hover.settings.setSoundEnabled(true);Hover.audio.setEnabled(true);});
     const energy=()=>p.evaluate(()=>{const a=HoverAudio.analyser;a.fftSize=2048;const data=new Float32Array(a.fftSize);a.getFloatTimeDomainData(data);return Math.sqrt(data.reduce((s,n)=>s+n*n,0)/data.length);});
     async function audible(){await p.waitForFunction(()=>{const a=HoverAudio.analyser;if(!a)return false;const data=new Float32Array(a.fftSize);a.getFloatTimeDomainData(data);return data.some(v=>Math.abs(v)>.0001);},{},{timeout:5000});return energy();}

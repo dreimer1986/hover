@@ -12,7 +12,7 @@ const screenshots=process.env.SCREENSHOT_DIR||'/home/dreimer/.cache/hover-previe
     for(const [name,viewport,dpr,mobile] of [['pixel-like',{width:1300,height:600},2.4,true],['iphone-like',{width:844,height:390},3,true],['desktop',{width:1920,height:1080},1,false],['fractional-high',{width:900,height:500},3.5,true]]) {
       const p=await b.newPage({viewport,deviceScaleFactor:dpr,isMobile:mobile,hasTouch:mobile,locale:'de-DE',...(mobile?{userAgent:'Mozilla/5.0 (Linux; Android 17) AppleWebKit/537.36 Chrome/142.0.0.0 Mobile Safari/537.36'}:{})});
       p.on('pageerror',e=>errors.push(e.message));p.on('response',r=>{if(r.status()>=400)missing.push(r.status()+' '+r.url())});
-      await p.goto(base+'play/modified/');await p.waitForSelector('#modern-play');
+      await p.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await p.goto(base+'play/modified/');await p.waitForSelector('#modern-play');
       await p.evaluate(()=>{Hover.settings.setIntroMessageShown(true);Hover.settings.setSoundEnabled(false);Hover.audio.setEnabled(false);});
       if(!mobile)await p.click('#modern-wide');
       for(const retro of [false,true]) {

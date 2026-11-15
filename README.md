@@ -50,3 +50,7 @@ Die Store-Pakete sind unterschiedliche Verpackungen derselben Spielversion. Orig
 [Restaurierung und dokumentierte Änderungen](RESTORATION.md) · [Server und Betrieb](SERVER.md) · [Ursprünglicher Multiplayer](MULTIPLAYER.md) · [Originalquellen und Rechte](THIRD_PARTY.md)
 
 GitHub Actions baut und veröffentlicht die Website bei Pushes auf `master`. `python3 scripts/verify_archive.py` prüft die erhaltenen Originaldateien. Browser- und Servertests liegen unter `scripts/` und `server/`.
+
+Die Schiffsauswahl zeigt Originalmodelle und Werte. **M** oder der Kartenknopf öffnet die große Radarübersicht; **M/Esc** schließt sie. Währenddessen sind Fahr- und Aktionseingaben gesperrt, die Partie läuft weiter. Erneutes Drücken in die Mitte des O sperrt die Levelauswahl wieder.
+
+Standard-Controller: linken Stick/Steuerkreuz zum Fahren, A/Cross für Sprung, X/Square für Wand, B/Circle für Tarnung, rechter Trigger zum Feuern, Start/Back für die Karte. Nach der Erkennung ersetzt **Aus / Touch / Controller** den Touch-Schalter. Zum Start eine Taste drücken oder die Startfläche antippen. Das Menü kann mit Maus/Touch bedient werden. iPhone-Audio und NAS-Betrieb wurden vom Nutzer erfolgreich getestet.

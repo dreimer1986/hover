@@ -7,7 +7,7 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
   for(let i=0;i<2;i++){
    const p=await browser.newPage({viewport:{width:1100,height:700},locale:'en-US'});pages.push(p);p.setDefaultTimeout(30000);
    p.on('pageerror',e=>{errors.push(e.message);console.log('PAGEERROR',e.message)});p.on('response',r=>{if(r.status()>=400)missing.push(r.status()+' '+r.url())});
-   await p.goto(base+'play/modified/');await p.waitForSelector('#enhanced-multiplayer');await p.click('#enhanced-multiplayer');
+   await p.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await p.goto(base+'play/modified/');await p.waitForSelector('#enhanced-multiplayer');await p.click('#enhanced-multiplayer');
    await p.fill('#mp-name','Pilot '+i);await p.evaluate(()=>{Hover.settings.setSoundEnabled(false);Hover.audio.setEnabled(false);for(const key of Object.values(Hover.messageTypes||{}))Hover.settings.setPickupMessageShown(key,true);});
   }
   const [a,b]=pages;

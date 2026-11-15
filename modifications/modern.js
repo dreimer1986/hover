@@ -76,6 +76,7 @@
     lastSize = '';
   }
   $('modern-wide').onclick = () => { wide = !wide; sync(); };
+  HoverEnhanced.setTouch=value=>{release();touch=value;sync();};
   $('modern-touch').onclick = () => { release(); touch = !touch; sync(); };
   function status(text) { $('modern-status').textContent = t(text); }
   function fullscreenChanged() {
@@ -132,7 +133,7 @@
   window.HoverEnhanced.ui = ui;
   $('modern-play').onclick = () => start(false);
   $('modern-retro').onclick = () => start(true);
-  function active() { return touch && view && view.playing && controller && !document.hidden; }
+  function active() { return !HoverEnhanced.mapOpen && touch && view && view.playing && controller && !document.hidden; }
   function applyDirections() {
     if (!controller) return;
     directions.forEach(key => { controller[key] = [...pointers.values()].some(p => p.keys.includes(key)); });
@@ -299,7 +300,9 @@
         ' · Booster ' + value('dash-boost-number-big');
       if (readout.textContent !== text) readout.textContent = text;
     }
-    const controls = inGame && !!(next && next.playing) && touch;
+    HoverEnhanced.updateInput?.(game,next);
+    HoverEnhanced.updateMap?.(game,next);
+    const controls = !HoverEnhanced.mapOpen && inGame && !!(next && next.playing) && touch;
     if (!controls && !$('modern-controls').hidden) release();
     $('modern-controls').hidden = !controls;
     requestAnimationFrame(tick);

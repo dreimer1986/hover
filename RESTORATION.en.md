@@ -144,3 +144,13 @@ Public multiplayer addresses require HTTPS/WSS. Caddy handles TLS in front of th
 Checks: `extended_smoke.cjs` exercises the original home screen, secret unlock with sound, flag counts and map progression in both languages. `multiplayer_smoke.cjs` uses two browsers for Modern and Retro, team changes, three/six flags, lobby reuse and final scores. `modified_smoke.cjs`, `locale_smoke.cjs` and `display_smoke.cjs` continue to check touch, fullscreen, languages and different pixel densities. Server tests cover eight clients and multiple rounds. Automated teleports/win events are not full manual playthroughs; NAS operation and iPhone listening still need confirmation on actual devices.
 
 The full Retro castle check found preserved textures under `Maze3/retro`, while the loader requests `Maze3/Retro`. The website build normalizes this directory name and retains all Retro textures. Files are byte-identical, with no substitute textures. Source, destination and SHA-256: [retro-path-aliases.json](verification/retro-path-aliases.json). This also fixes the texture-selection filter overlooking the lowercase directory.
+
+## Craft preview, map view and controllers (November 16, 2026)
+
+`extras.js` displays the three original craft models and textures with the original speed, power, stability and agility values. An additional WebGL renderer draws only when selection changes; no continuous preview animation runs alongside the game. The O unlock now toggles off as well, resetting map selection to map 1 and playing the existing defeat sample `GAMEOVR`.
+
+The large map uses the existing radar drawing functions and does not reveal additional walls. It shows the arena with explored walls, flags, items and crafts. M, Esc, touch and controller menu buttons close it. Keyboard, touch and gamepad actions are blocked while open; physics and multiplayer continue. Held inputs are cleared when switching.
+
+`input.js` replaces the old controller path with a [Gamepad API](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API) adapter supporting standard mapping, deadzone and discovery at any index. The start screen accepts a button, keyboard, mouse or touch input. Detection reveals Off/Touch/Controller selection. After focus loss or mode changes, a controller must return to neutral before inputs resume. Non-standard devices need browser/OS mapping first; custom button mapping is not included.
+
+Expandable overviews on the home and archive pages describe the enhancements, and the outdated RECOMMENDED banner on the later original release is removed. The user confirmed working iPhone engine audio and the updated NAS container. Controller tests simulate the browser API; actual controller hardware still needs testing.

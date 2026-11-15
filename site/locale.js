@@ -5,6 +5,8 @@
   const language = ((navigator.languages && navigator.languages[0]) || navigator.language || 'en').toLowerCase();
   const lang = language.startsWith('de') ? 'de' : 'en';
   const english = {
+    'Alle Erweiterungen ansehen': 'View all enhancements',
+    'Schiffsvorschau und Werte, Touch und Controller, große Karte, Vollbild, Modern/Retro mit 3–6 Flaggen, freischaltbare Levelauswahl, Kartenfortschritt, dauerhafte Multiplayer-Lobbys, überarbeitete Darstellung und Audio. Die vollständige Übersicht findest du im Startbildschirm der erweiterten Fassung.': 'Craft preview and statistics, touch and controllers, large map, fullscreen, Modern/Retro with 3–6 flags, unlockable level selection, map progression, persistent multiplayer lobbies, improved rendering and audio. The full overview is available on the extended edition home screen.',
     'Hover! — Erweiterte Fassung': 'Hover! — Extended edition',
     'Erweiterte Fassung': 'Extended edition',
     'Einzelspieler': 'Single player',

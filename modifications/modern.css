@@ -166,3 +166,24 @@ html, body { width:100%; height:100%; margin:0; overscroll-behavior:none; }
  #mp-panel { padding:14px; }
  .enhanced-next { top:calc(50% + 90px); font-size:12px; }
 }
+#craft-preview { margin:8px 0 0; text-align:center; color:#ffd28a; }
+#craft-preview canvas { display:block; width:100%; height:auto; aspect-ratio:16/9; }
+#large-map { position:fixed; inset:0; z-index:30000; padding: max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left)); box-sizing:border-box; background:#120a22f5; color:white; display:flex; flex-direction:column; gap:10px; font:16px Arial,sans-serif; }
+#large-map[hidden] { display:none; }
+#large-map header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+#large-map h2,#large-map p { margin:0; }
+#large-map p { font-size:12px; line-height:1.4; }
+#large-map button { border:0; border-radius:22px; padding:12px 18px; background:#ffab00; color:#160c26; font:inherit; cursor:pointer; }
+#large-map button:focus-visible { outline:2px solid white; outline-offset:3px; }
+#large-map canvas { display:block; width:100%; flex:1; min-height:0; background:#080611; border:1px solid #765087; box-sizing:border-box; }
+.map-open #modern-controls { display:none !important; }
+#craft-preview dl { display:grid; grid-template-columns:1fr auto; font-size:13px; line-height:1.5; text-align:left; gap:2px 10px; margin:5px 0; color:#eee9ff; }
+#craft-preview dd { margin:0; font-variant-numeric:tabular-nums; }
+.input-gate #homeButtons,.input-gate #modern-launcher { display:none !important; }
+#input-start { max-width:650px; margin:20px auto; text-align:center; font:18px/1.5 Arial,sans-serif; color:white; }
+#input-start button { padding:12px 32px; border:0; border-radius:28px; background:#ffab00; font:bold 24px Arial,sans-serif; cursor:pointer; }
+html:not(.input-gate) #input-start { display:none; }
+#modern-toolbar { flex-wrap:wrap; }
+.enhanced-changes { margin:16px auto; max-width:760px; color:#eee9ff; font-size:14px; }
+.enhanced-changes summary { cursor:pointer; color:#ffca71; }
+.enhanced-changes li { margin:7px 0; }

@@ -19,7 +19,7 @@ const root = path.resolve(__dirname, '..');
   async function check(name, fn) { await fn(); results.push(name); console.log('PASS ' + name); }
   async function ready(p) { await p.waitForFunction(() => window.Hover && Hover.router); }
   async function play(p, arena = '44', craft = 'Easy') {
-    if(await p.locator('#enhanced-level-control').isHidden())await p.click('#enhanced-unlock');
+    if(!await p.evaluate(()=>HoverEnhanced.levelUnlocked))await p.click('#enhanced-unlock');
     await p.selectOption('#modern-arena', arena); await p.selectOption('#modern-craft', craft);
     await p.click('#modern-play'); await p.waitForFunction(() => Hover.router.currentView.playing);
     const intro = p.locator('.msg-intro .msgButton');
@@ -31,18 +31,18 @@ const root = path.resolve(__dirname, '..');
   try {
     const desktop = await page({viewport:{width:1280,height:800}});
     await check('Desktop defaults to extended; archive remains accessible', async () => {
-      await desktop.goto(base); await desktop.waitForURL(base+'play/modified/'); await desktop.goto(base+'?view=archive');
+      await desktop.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await desktop.goto(base); await desktop.waitForURL(base+'play/modified/'); await desktop.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await desktop.goto(base+'?view=archive');
       assert.equal(await desktop.locator('.hero .button.primary').getAttribute('href'), 'play/modified/');
       assert.equal(await desktop.locator('.versions article').count(), 3);
     });
     const mobile = await page({viewport:{width:844,height:390},isMobile:true,hasTouch:true,
       userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 Safari/604.1'});
     await check('Mobile redirects; archive and original releases remain reachable', async () => {
-      await mobile.goto(base); await mobile.waitForURL(base + 'play/modified/'); await ready(mobile);
+      await mobile.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await mobile.goto(base); await mobile.waitForURL(base + 'play/modified/'); await ready(mobile);
       await mobile.click('#modern-toolbar a'); await mobile.waitForURL(base+'?view=archive');
-      await mobile.goto(base+'#downloads'); assert.equal(mobile.url(),base+'#downloads');
-      for (const v of ['early','latest']) { await mobile.goto(base+'play/'+v+'/'); assert.equal(mobile.url(),base+'play/'+v+'/'); assert.equal(await mobile.locator('#modern-ui').count(),0); }
-      await mobile.goto(base+'play/modified/'); await ready(mobile);
+      await mobile.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await mobile.goto(base+'#downloads'); assert.equal(mobile.url(),base+'#downloads');
+      for (const v of ['early','latest']) { await mobile.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await mobile.goto(base+'play/'+v+'/'); assert.equal(mobile.url(),base+'play/'+v+'/'); assert.equal(await mobile.locator('#modern-ui').count(),0); }
+      await mobile.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await mobile.goto(base+'play/modified/'); await ready(mobile);
     });
     await check('Mobile landscape fills viewport and intro remains dismissible', async () => { await play(mobile); await canvas(mobile,844,390); assert(await mobile.locator('#modern-controls').isVisible()); });
     const cdp = await mobile.context().newCDPSession(mobile);
@@ -91,7 +91,7 @@ const root = path.resolve(__dirname, '..');
       await mobile.click('#modern-full'); assert.match(await mobile.locator('#modern-status').innerText(),/nicht verfügbar/);await canvas(mobile,390,844);
     });
     await check('Modified desktop options start off; fullscreen exits to classic layout', async () => {
-      await desktop.goto(base+'play/modified/'); await ready(desktop); await play(desktop);
+      await desktop.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await desktop.goto(base+'play/modified/'); await ready(desktop); await play(desktop);
       assert.equal(await desktop.locator('#modern-wide').getAttribute('aria-pressed'),'false');
       assert(!(await desktop.locator('#modern-controls').isVisible()));
       await desktop.click('#modern-full'); await desktop.waitForFunction(()=>!!document.fullscreenElement);await desktop.waitForTimeout(200);await canvas(desktop,1280,800);

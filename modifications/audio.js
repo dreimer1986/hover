@@ -103,7 +103,7 @@
     fadeIn() { this.play(); }
     isLoaded() { return this.loaded; }
   }
-  api.playCue = name => { if (name === 'WINLEVEL') player.getSound(name).play(true); };
+  api.playCue = name => { if (['WINLEVEL','GAMEOVR'].includes(name)) player.getSound(name).play(true); };
   player.stopAll();
   player.modernSounds = null; player.retroSounds = null; player.sounds = {};
   player.nonsound = new Sound('', []);
