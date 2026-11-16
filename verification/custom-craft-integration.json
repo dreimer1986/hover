@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-16",
+  "server": "0.3.0",
+  "protocol": 3,
+  "container": {
+    "runtime": "Podman",
+    "uid": 10001,
+    "readOnly": true,
+    "capabilitiesDropped": "ALL"
+  },
+  "passed": [
+    "OBJ conversion and in-workshop preview",
+    "Independent preview renderer geometry and textures",
+    "IndexedDB reload and complete package export",
+    "Custom craft profile and chase camera without position mutation",
+    "Public lobby discovery",
+    "Host sharing and guest selection",
+    "Modern and Retro two-client remote craft geometry",
+    "Guest retention after reload",
+    "German, English and French fallback",
+    "Mobile English toolbar",
+    "Controller selector width <=125px",
+    "Textured OBJ, GLTF and GLB",
+    "Seven Python server/validation tests",
+    "3649 original archive integrity checks"
+  ],
+  "manualRemaining": [
+    "NAS v0.3.0 update",
+    "Physical mobile devices and controllers"
+  ]
+}

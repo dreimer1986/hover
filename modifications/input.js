@@ -64,6 +64,8 @@
  'Korrigierte Darstellung bei verschiedenen Pixeldichten, Retro-HUD und Ergebnisdialoge.',
  'Gemeinsame Audioausgabe, ergänzte Motorgeräusche und geglättete Motorschleifen.',
  'Deutsch/Englisch nach Browsersprache, HTTPS/WSS für öffentliche Multiplayer-Verbindungen.',
+ 'Eigene OBJ/GLTF/GLB-Schiffe mit Texturen, Größenprüfung, Punktebudget und Import/Export.',
+ 'Optionale Außenansicht, öffentliche Lobbys und geteilte Gastgeber-Schiffe.',
  'Beide Original-Webfassungen und Store-Pakete bleiben separat erhalten.'
  ]:[
  'Original home screen, craft preview and original craft statistics.',
@@ -75,6 +77,8 @@
  'Corrected rendering across pixel densities, Retro HUD and result dialogs.',
  'Shared audio output, restored engine sounds and blended engine loops.',
  'German/English based on browser language; HTTPS/WSS for public multiplayer.',
+ 'Custom OBJ/GLTF/GLB crafts with textures, size validation, point budgets and import/export.',
+ 'Optional chase view, public lobbies and shared host crafts.',
  'Both original web releases and Store packages remain separately preserved.'
  ];
  const summary=document.createElement('summary');summary.textContent=de?'Was wurde erweitert?':'What has changed?';details.appendChild(summary);

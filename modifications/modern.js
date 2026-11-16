@@ -61,6 +61,7 @@
     <p id="modern-status" role="status" aria-live="polite"></p>`;
   window.hoverLocale.translate(ui);
   document.body.appendChild(ui);
+  new ResizeObserver(()=>root.style.setProperty('--hover-toolbar-height',Math.ceil(document.getElementById('modern-toolbar').getBoundingClientRect().height)+'px')).observe(document.getElementById('modern-toolbar'));
   const controls = new Map([...ui.querySelectorAll('[id]')].map(el => [el.id, el]));
   const $ = id => document.getElementById(id) || controls.get(id);
   function release() {

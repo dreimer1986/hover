@@ -19,5 +19,22 @@ Umgesetzt / Implemented:
 
 Am Gerät nach Veröffentlichung prüfen / Check on actual devices after publication:
 
-- [x] Neuer Container auf der NAS und Multiplayer über Caddy / Updated NAS container and multiplayer through Caddy.
+- [x] Container v0.2.0 auf der NAS und Multiplayer über Caddy / v0.2.0 NAS container and multiplayer through Caddy.
 - [x] Durchgehender Motorlauf auf dem betroffenen iPhone / Continuous engine loop on the affected iPhone.
+
+# Neue Erweiterungen vom 16.11.2026 / New enhancements, November 16, 2026
+
+- [x] Schiffsvorschau und Originalwerte; O-Schalter mit Sieg-/Niederlagenklängen / Craft preview/statistics; O toggle with win/loss cues.
+- [x] Große modale Karte, M/Esc/Touch/Controller / Large modal map, M/Esc/touch/controller.
+- [x] Startfläche und Controller-Auswahl; kompakte Breite / Start gate and controller selection; compact width.
+- [x] Ausklappbare Übersicht; veraltetes Empfehlungsbanner entfernt / Expandable change overview; obsolete recommendation banner removed.
+- [x] OBJ/GLTF/GLB, Texturatlas, Vorschau im Importbereich, Größenlimits / OBJ/GLTF/GLB, texture atlas, in-workshop preview and size limits.
+- [x] Punktebudget, Browser-/Serverprüfung, Persistenz, Import/Export / Point budget, browser/server validation, persistence and import/export.
+- [x] Gastgeber-Schiffe teilen, Prüfsummen-Cache, Gastschiffe behalten / Host sharing, checksum cache, retain guest crafts.
+- [x] Außenansicht ohne Verschieben des Fahrzeugs / Chase view without moving the vehicle.
+- [x] Benannte, optional öffentliche Lobbys mit Suchliste / Named, optionally public lobbies and discovery.
+- [x] Map-Editor-Einschätzung dokumentiert / Map editor assessment documented.
+
+Nach diesem Release noch am Gerät prüfen / Actual-device checks after this release:
+
+- [ ] NAS auf v0.3.0 aktualisieren und mit echten Geräten testen / Update NAS to v0.3.0 and test with actual devices.

@@ -106,6 +106,8 @@ class Service:
         if method == 'createGame':
             maze, flags, team_size = args[:3]
             settings = args[3] if len(args) > 3 else {}
+            if not isinstance(settings, dict) or not set(settings) <= {'name', 'public'}:
+                raise ValueError('Invalid lobby settings')
             name = settings.get('name', 'Hover lobby')
             public = settings.get('public', False)
             if not isinstance(name, str) or not 1 <= len(name.strip()) <= 40 or not name.isprintable() or type(public) is not bool:

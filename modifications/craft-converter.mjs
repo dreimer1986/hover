@@ -10,7 +10,7 @@ export async function convert(files,options,policy){
  manager.onStart=()=>{loading=true;};manager.onLoad=()=>finish();manager.onError=url=>failed.push(url);
  manager.setURLModifier(url=>{
   if(url.startsWith('blob:'))return url;
-  if(url.startsWith('data:')){if(url.length>24*1024*1024||!/^data:(image\/(png|jpeg|webp)|application\/octet-stream);base64,/.test(url))throw Error('Unsupported embedded resource');return url;}
+  if(url.startsWith('data:')){if(url.length>24*1024*1024||!/^data:(image\/(png|jpeg|webp)|application\/(octet-stream|gltf-buffer));base64,/.test(url))throw Error('Unsupported embedded resource');return url;}
   const name=decodeURIComponent(url.split('/').pop());const file=lookup.get(name);if(!file)throw Error('Missing local resource: '+name);
   const object=URL.createObjectURL(file);urls.push(object);return object;
  });

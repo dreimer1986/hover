@@ -17,6 +17,7 @@
   for(let i=0;i<f.length;i+=10)if(f[i]!==40||f.slice(i+1,i+10).some(x=>!Number.isInteger(x)||x<0||x>=v.length/3))fail('Invalid triangle index');
   if(typeof d.texture!=='string'||!/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(d.texture))fail('PNG texture required');
   const image=atob(d.texture.split(',')[1]);if(image.length<33||image.slice(0,8)!=='\x89PNG\r\n\x1a\n'||image.slice(12,16)!=='IHDR')fail('Invalid PNG');
+  if(image.charCodeAt(24)!==8||![2,6].includes(image.charCodeAt(25))||image.slice(26,29)!=='\0\0\0')fail('Use non-interlaced RGB/RGBA PNG8');
   const bytes=Uint8Array.from(image,c=>c.charCodeAt(0)),view=new DataView(bytes.buffer);if(![view.getUint32(16),view.getUint32(20)].every(x=>x>=1&&x<=p.maxTexture))fail('Texture dimensions exceed limits');
   const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw))),b=>b.toString(16).padStart(2,'0')).join('');
   return {hash,id:parseInt(hash.slice(0,12),16)+100,name:d.name,points:d.points,json:raw,data:d};

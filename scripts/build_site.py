@@ -84,6 +84,11 @@ for date, name in [('2013-10-02', 'early'), ('2019-03-11', 'latest')]:
 modified = output / 'play/modified'
 shutil.copytree(output / 'play/latest', modified)
 shutil.copytree(ROOT / 'modifications', modified, dirs_exist_ok=True)
+# Version the lazily loaded converter as well as the initial UI scripts.
+library = modified / 'craft-library.js'
+if library.exists():
+    converter_version = hashlib.sha256((modified / 'craft-converter.mjs').read_bytes()).hexdigest()[:12]
+    library.write_text(library.read_text().replace("'./craft-converter.mjs'", "'./craft-converter.mjs?v=" + converter_version + "'"))
 index = modified / 'index.html'
 html = index.read_text().replace('<title>Hover!</title>', '<title>Hover! — Erweiterte Fassung</title>')
 html = html.replace('</head>', '<link rel="stylesheet" href="modern.css">\n<script src="../../locale.js"></script>\n<script src="../../mobile.js"></script>\n</head>')

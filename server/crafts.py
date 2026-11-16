@@ -5,6 +5,7 @@ import json
 import math
 from pathlib import Path
 import struct
+import zlib
 
 POLICY_PATH = Path(__file__).with_name('craft-policy.json')
 if not POLICY_PATH.exists():
@@ -27,7 +28,7 @@ def validate(raw):
     d = json.loads(raw, object_pairs_hook=unique)
     if not isinstance(d, dict) or set(d) != {'schema', 'name', 'points', 'geometry', 'texture'} or type(d['schema']) is not int or d['schema'] != 1:
         raise ValueError('Invalid craft schema')
-    if not isinstance(d['name'], str) or not 1 <= len(d['name'].strip()) <= 32 or not d['name'].isprintable():
+    if not isinstance(d['name'], str) or not d['name'].strip() or len(d['name']) > 32 or not d['name'].isprintable():
         raise ValueError('Invalid craft name')
     pts = d['points']
     if not isinstance(pts, dict) or set(pts) != set(POLICY['parameters']):
@@ -61,6 +62,20 @@ def validate(raw):
     if len(image)<33 or image[:8]!=b'\x89PNG\r\n\x1a\n' or image[12:16]!=b'IHDR': raise ValueError('Invalid PNG')
     width,height=struct.unpack('>II',image[16:24])
     if not 1<=width<=512 or not 1<=height<=512: raise ValueError('Texture dimensions exceed limits')
+    if image[24]!=8 or image[25] not in (2,6) or image[26:29]!=b'\0\0\0': raise ValueError('Use non-interlaced RGB/RGBA PNG8')
+    offset=8; compressed=bytearray(); ended=False
+    while offset+12<=len(image):
+        length=struct.unpack('>I',image[offset:offset+4])[0]
+        kind=image[offset+4:offset+8]; end=offset+8+length
+        if end+4>len(image) or zlib.crc32(image[offset+4:end])!=struct.unpack('>I',image[end:end+4])[0]: raise ValueError('Corrupt PNG chunk')
+        if kind==b'IDAT': compressed.extend(image[offset+8:end])
+        if kind==b'IEND': ended=True; break
+        offset=end+4
+    stride=width*(4 if image[25]==6 else 3)+1; expected=stride*height
+    try:
+        decoder=zlib.decompressobj(); pixels=decoder.decompress(compressed,expected+1)
+        if not ended or not decoder.eof or decoder.unused_data or len(pixels)!=expected or any(pixels[i]>4 for i in range(0,expected,stride)): raise ValueError('Invalid PNG pixels')
+    except zlib.error as e: raise ValueError('Invalid PNG compression') from e
     digest=hashlib.sha256(raw.encode()).hexdigest()
     ident=int(digest[:12],16)+100
     return {'hash':digest,'id':ident,'name':d['name'],'bytes':len(raw.encode()),'json':raw,'points':pts}

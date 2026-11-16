@@ -28,8 +28,8 @@
     const labels=[t('Tempo','Speed'),t('Kraft','Power'),t('Stabilität','Stability'),t('Wendigkeit','Agility')];
     preview.querySelector('dl').replaceChildren(...Hover.Profiles.getStats(Hover.Profiles[key]).flatMap((value,i)=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=labels[i];dd.textContent=(value*10).toFixed(1)+' / 10';return [dt,dd];}));
     try{
-      const craft=await loadCraft(key);if(generation!==previewGeneration)return;
-      for(const child of scene.children.slice())if(child.userData?.previewCraft)scene.remove(child);
+      const craft=await loadCraft(key);if(generation!==previewGeneration){if(craft.group.userData.customPreview)HoverCrafts.disposePreview(craft.group);return;}
+      for(const child of scene.children.slice())if(child.userData?.previewCraft){scene.remove(child);if(child.userData.customPreview)HoverCrafts.disposePreview(child);}
       craft.group.userData.previewCraft=true;scene.add(craft.group);
       const distance=craft.radius/Math.sin(THREE.Math.degToRad(camera.fov/2))*.75;
       camera.position.set(0,distance*.38,distance);camera.lookAt(new THREE.Vector3());

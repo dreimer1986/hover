@@ -10,15 +10,17 @@
   const material=new THREE.MeshLambertMaterial({map:model.redDiffuseTexture||model.diffuseTexture,transparent:true,alphaTest:.1}),mesh=new THREE.Mesh(model.geometry,material);g.scene.add(mesh);g.chaseMesh=mesh;mesh.visible=false;
   const draw=g.draw;
   g.draw=function(dt){
-   mesh.visible=enabled&&g.craft.cloakTime<=0;
+   g.chaseCameraEnabled=enabled;mesh.visible=enabled&&g.craft.cloakTime<=0;
    if(!enabled)return draw.call(this,dt);
-   const craft=g.craft,pos=craft.position,front=g.camera.position,short=g.shortCamera.position,rx=g.camera.rotation.x,sx=g.shortCamera.rotation.x;
-   let distance=430,camera;
-   for(let i=0;i<8;i++){camera=new THREE.Vector3(pos.x+Math.sin(craft.angle)*distance,pos.y+distance*.45,pos.z+Math.cos(craft.angle)*distance);if(!g.world.getCollisionXYZ(pos.x,pos.y,pos.z,camera.x,camera.y,camera.z))break;distance*=.75;}
-   g.camera.position=camera;g.shortCamera.position=camera;g.camera.rotation.x=g.shortCamera.rotation.x=-Math.atan(.45);
+   const craft=g.craft,pos=craft.position,front=g.camera.position,short=g.shortCamera.position,rx=g.camera.rotation.x,sx=g.shortCamera.rotation.x,light=g.spotLight.position,order=g.camera.rotation.order,shortOrder=g.shortCamera.rotation.order;
+   let distance=430,camera=null;
+   // Never push the camera inside the craft when a wall is immediately behind it.
+   for(;distance>=240;distance-=40){const candidate=new THREE.Vector3(pos.x+Math.sin(craft.angle)*distance,pos.y+distance*.3,pos.z+Math.cos(craft.angle)*distance);if(!g.world.getCollisionXYZ(pos.x,pos.y,pos.z,candidate.x,candidate.y,candidate.z)){camera=candidate;break;}}
+   if(!camera){mesh.visible=false;return draw.call(this,dt);}
+   g.camera.position=camera;g.shortCamera.position=camera;g.spotLight.position=camera.clone();g.camera.rotation.order=g.shortCamera.rotation.order='YXZ';g.camera.rotation.x=g.shortCamera.rotation.x=-.18;
    mesh.position.copy(pos);mesh.position.y-=60;mesh.rotation.y=craft.angle;
    material.map=craft.team==='blue'?(model.blueDiffuseTexture||model.diffuseTexture):model.redDiffuseTexture||model.diffuseTexture;
-   try{return draw.call(this,dt);}finally{g.camera.position=front;g.shortCamera.position=short;g.camera.rotation.x=rx;g.shortCamera.rotation.x=sx;}
+   try{return draw.call(this,dt);}finally{g.spotLight.position=light;g.camera.position=front;g.shortCamera.position=short;g.camera.rotation.x=rx;g.shortCamera.rotation.x=sx;g.camera.rotation.order=order;g.shortCamera.rotation.order=shortOrder;}
   };
   return result;
  };

@@ -146,7 +146,7 @@
     await HoverCrafts.ready;
     if((snapshot.crafts||[]).length>8)throw Error('Too many shared crafts');
     for(const offered of snapshot.crafts||[]){
-      if(HoverCrafts.list().some(e=>e.hash===offered.hash))continue;
+      const cached=HoverCrafts.list().find(e=>e.hash===offered.hash);if(cached){if(cached.id!==offered.id)throw Error('Craft ID mismatch');continue;}
       if(!downloads.has(offered.hash))downloads.set(offered.hash,(async()=>{const raw=await rpc('getCraft',offered.hash);const entry=await HoverCraftFormat.validate(raw);if(entry.hash!==offered.hash||entry.id!==offered.id)throw Error('Craft checksum mismatch');return HoverCrafts.add(raw);})().catch(e=>{downloads.delete(offered.hash);throw e;}));
       await downloads.get(offered.hash);
     }

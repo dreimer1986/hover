@@ -1,12 +1,12 @@
 /* Local IndexedDB library and validated legacy geometry; no uploaded code is executed. */
 (function(){
  'use strict';
- const de=hoverLocale.lang==='de',t=(a,b)=>de?a:b,format=HoverCraftFormat,entries=new Map(),native=new Map(),select=HoverEnhanced.controls.get('modern-craft');
+ const de=hoverLocale.lang==='de',t=(a,b)=>de?a:b,format=HoverCraftFormat,entries=new Map(),native=new Map(),prepared=new Map(),select=HoverEnhanced.controls.get('modern-craft');
  const panel=document.createElement('details');panel.id='craft-workshop';panel.className='enhanced-changes';
- panel.innerHTML=`<summary>${t('Eigene Schiffe · Import / Export','Custom crafts · Import / export')}</summary><p>${t('Statische OBJ + MTL + Texturen oder GLTF/GLB mit lokalen Ressourcen gemeinsam auswählen. Basisfarben werden übernommen; PBR-Effekte und Animationen nicht.','Select a static OBJ + MTL + textures, or GLTF/GLB with all local resources. Base colours are retained; PBR effects and animations are not.')}</p><input id="craft-files" type="file" multiple accept=".obj,.mtl,.gltf,.glb,.bin,.png,.jpg,.jpeg,.webp,.json"><div class="modern-options"><label>${t('Name','Name')}<input id="craft-name" maxlength="32" value="Custom craft"></label><label>${t('Oben-Achse','Up axis')}<select id="craft-up"><option value="y">Y</option><option value="z">Z</option></select></label><label>${t('Drehen','Rotate')}<select id="craft-rotation"><option>0</option><option>90</option><option>180</option><option>270</option></select></label><label>${t('Größe (% der Hülle)','Size (% of bounds)')}<input id="craft-size" type="number" min="10" max="100" value="90"></label></div><p id="craft-limits"></p><div id="craft-points"></div><p id="craft-budget"></p><button id="craft-convert" type="button">${t('Importieren und prüfen','Import and validate')}</button><button id="craft-preview-draft" type="button" disabled>${t('Werte in Vorschau übernehmen','Preview edited values')}</button><button id="craft-save" type="button" disabled>${t('Vorschau speichern','Save preview')}</button><button id="craft-edit" type="button">${t('Gewähltes Schiff bearbeiten','Edit selected craft')}</button><button id="craft-save-session" type="button">${t('Gewähltes Sitzungsschiff behalten','Keep selected session craft')}</button><button id="craft-export" type="button">${t('Gewähltes Schiff exportieren','Export selected craft')}</button><button id="craft-export-geometry" type="button">${t('Modell als Hover-JSON/JS','Model as Hover JSON/JS')}</button><button id="craft-delete" type="button">${t('Gewähltes Schiff löschen','Delete selected craft')}</button><p id="craft-status" role="status"></p>`;
+ panel.innerHTML=`<summary>${t('Eigene Schiffe · Import / Export','Custom crafts · Import / export')}</summary><p>${t('Statische OBJ + MTL + Texturen oder GLTF/GLB mit lokalen Ressourcen gemeinsam auswählen. Basisfarben werden übernommen; PBR-Effekte und Animationen nicht.','Select a static OBJ + MTL + textures, or GLTF/GLB with all local resources. Base colours are retained; PBR effects and animations are not.')}</p><input id="craft-files" type="file" multiple accept=".obj,.mtl,.gltf,.glb,.bin,.png,.jpg,.jpeg,.webp,.json"><div class="modern-options"><label>${t('Name','Name')}<input id="craft-name" maxlength="32" value="Custom craft"></label><label>${t('Oben-Achse','Up axis')}<select id="craft-up"><option value="y">Y</option><option value="z">Z</option></select></label><label>${t('Drehen','Rotate')}<select id="craft-rotation"><option>0</option><option>90</option><option>180</option><option>270</option></select></label><label>${t('Größe (% der Hülle)','Size (% of bounds)')}<input id="craft-size" type="number" min="10" max="100" value="90"></label></div><p id="craft-limits"></p><figure id="craft-import-preview" hidden><figcaption></figcaption></figure><div id="craft-points"></div><p id="craft-budget"></p><button id="craft-convert" type="button">${t('Importieren und prüfen','Import and validate')}</button><button id="craft-preview-draft" type="button" disabled>${t('Werte in Vorschau übernehmen','Preview edited values')}</button><button id="craft-save" type="button" disabled>${t('Vorschau speichern','Save preview')}</button><button id="craft-edit" type="button">${t('Gewähltes Schiff bearbeiten','Edit selected craft')}</button><button id="craft-save-session" type="button">${t('Gewähltes Sitzungsschiff behalten','Keep selected session craft')}</button><button id="craft-export" type="button">${t('Gewähltes Schiff exportieren','Export selected craft')}</button><button id="craft-export-geometry" type="button">${t('Modell als Hover-JSON/JS','Model as Hover JSON/JS')}</button><button id="craft-delete" type="button">${t('Gewähltes Schiff löschen','Delete selected craft')}</button><p id="craft-status" role="status"></p>`;
  HoverEnhanced.controls.get('modern-launcher').querySelector('.modern-card').appendChild(panel);
  const $=id=>panel.querySelector('#'+id),message=text=>$('craft-status').textContent=text;
- let db=null,policy=null,draft=null,draftEntry=null,working=false;
+ let db=null,policy=null,draft=null,draftEntry=null,working=false,importRenderer=null,importScene,importCamera,importGroup=null;
  function profile(entry){const result={id:entry.id,modelName:'Custom_'+entry.hash};for(const [k,[a,b]]of Object.entries(policy.parameters))result[k]=a+(b-a)*entry.points[k]/10;return result;}
  const key=e=>'custom_'+e.hash;
  async function prepare(entry){
@@ -14,7 +14,7 @@
   const promise=new Promise((resolve,reject)=>{
    const geometry=new THREE.JSONLoader().parse(entry.data.geometry,'').geometry;
    const image=new Image();image.onload=()=>{if(image.naturalWidth>policy.maxTexture||image.naturalHeight>policy.maxTexture)return reject(Error('Texture dimensions exceed limits'));const texture=new THREE.Texture(image);texture.needsUpdate=true;resolve({geometry,texture});};image.onerror=()=>reject(Error('Texture could not be decoded'));image.src=entry.data.texture;
-  });native.set(entry.hash,promise);try{return await promise;}catch(e){native.delete(entry.hash);throw e;}
+  });native.set(entry.hash,promise);try{const model=await promise;prepared.set(entry.hash,model);return model;}catch(e){native.delete(entry.hash);throw e;}
  }
  async function add(raw,persistent=false){
   const e=await format.validate(raw);if(entries.size>=64&&!entries.has(e.hash))throw Error('Session craft limit reached; export and reload');await prepare(e);e.persistent=persistent||entries.get(e.hash)?.persistent||false;entries.set(e.hash,e);Hover.Profiles[key(e)]=profile(e);
@@ -29,9 +29,25 @@
  function points(){return Object.fromEntries(Object.keys(policy.parameters).map(k=>[k,Number($('point-'+k).value)]));}
  function budget(){const used=Object.values(points()).reduce((a,b)=>a+b,0);$('craft-budget').textContent=t('Punkte: ','Points: ')+used+' / '+policy.budget;$('craft-budget').classList.toggle('over-budget',used>policy.budget);for(const k of Object.keys(policy.parameters))$('point-value-'+k).textContent=$('point-'+k).value;}
  function fill(d){$('craft-name').value=d.name;for(const [k,v]of Object.entries(d.points))$('point-'+k).value=v;budget();}
+ function disposePreview(group){group.traverse(o=>{o.geometry?.dispose();o.material?.map?.dispose();o.material?.dispose();});}
+ async function previewImported(e){
+  const figure=$('craft-import-preview');figure.hidden=false;
+  if(!importRenderer){
+   importRenderer=new THREE.WebGLRenderer({alpha:true,antialias:true});importRenderer.setClearColor(0,0);importRenderer.setSize(640,360);figure.prepend(importRenderer.domElement);
+   importScene=new THREE.Scene();importCamera=new THREE.PerspectiveCamera(35,640/360,.1,10000);importScene.add(new THREE.AmbientLight(0xaaaaaa));const light=new THREE.PointLight(0xffffff,.9);light.position.set(200,400,600);importScene.add(light);
+   let drag=null;const canvas=importRenderer.domElement;canvas.style.touchAction='none';
+   canvas.onpointerdown=event=>{drag={x:event.clientX,y:event.clientY};canvas.setPointerCapture(event.pointerId);};
+   canvas.onpointermove=event=>{if(!drag||!importGroup)return;importGroup.rotation.y+=(event.clientX-drag.x)*.01;importGroup.rotation.x=Math.max(-1,Math.min(1,importGroup.rotation.x+(event.clientY-drag.y)*.01));drag={x:event.clientX,y:event.clientY};importRenderer.render(importScene,importCamera);};
+   canvas.onpointerup=canvas.onpointercancel=()=>{drag=null;};
+  }
+  const model=await window.HoverCrafts.preview(key(e));if(importGroup){importScene.remove(importGroup);disposePreview(importGroup);}importGroup=model.group;importScene.add(importGroup);
+  const distance=Math.hypot(...policy.bounds)/2/Math.sin(THREE.Math.degToRad(importCamera.fov/2))*.75;importCamera.position.set(0,distance*.38,distance);importCamera.lookAt(new THREE.Vector3());importRenderer.render(importScene,importCamera);
+  const bounds=entries.get(e.hash).data.geometry.vertices,axes=[0,1,2].map(axis=>{const values=bounds.filter((_,i)=>i%3===axis);return (Math.max(...values)-Math.min(...values)).toFixed(1);});
+  figure.querySelector('figcaption').textContent=e.name+' · '+axes.join(' × ')+t(' · Zum Drehen ziehen',' · Drag to rotate');figure.dataset.hash=e.hash;
+ }
  async function previewDraft(){
   if(!draft)throw Error('Import a model first');const data={...draft,name:$('craft-name').value.trim(),points:points()};
-  const e=await add(JSON.stringify(data));draftEntry=e;select.value=key(e);select.dispatchEvent(new Event('change'));$('craft-save').disabled=false;
+  const e=await add(JSON.stringify(data));await previewImported(e);draftEntry=e;select.value=key(e);select.dispatchEvent(new Event('change'));$('craft-save').disabled=false;
   message(t('Vorschau: ','Preview: ')+e.data.geometry.vertices.length/3+t(' Vertices · ',' vertices · ')+e.data.geometry.faces.length/10+t(' Dreiecke. Noch nicht gespeichert.',' triangles. Not saved yet.'));
  }
  $('craft-convert').onclick=()=>action(async()=>{
@@ -42,7 +58,7 @@
  });
  $('craft-preview-draft').onclick=()=>action(previewDraft);
  $('craft-save').onclick=()=>action(async()=>{await previewDraft();draftEntry=await persist(draftEntry);message(t('Schiff im Browser gespeichert. Für eine dauerhafte Sicherung exportieren.','Craft saved in this browser. Export it for a durable backup.'));});
- $('craft-edit').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');draft=e.data;fill(draft);$('craft-preview-draft').disabled=false;message(t('Werte ändern und Vorschau aktualisieren.','Edit values and update the preview.'));});
+ $('craft-edit').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');draft=e.data;fill(draft);await previewImported(e);$('craft-preview-draft').disabled=false;message(t('Werte ändern und Vorschau aktualisieren.','Edit values and update the preview.'));});
  $('craft-save-session').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');await persist(e);message(t('Schiff gespeichert.','Craft saved.'));});
  $('craft-export').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');await format.validate(e.json);download(e.name.replace(/[^\w-]/g,'_')+'.hovercraft.json',e.json);message(t('Export erstellt.','Export created.'));});
  $('craft-export-geometry').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');download(e.name.replace(/[^\w-]/g,'_')+'.js',JSON.stringify(e.data.geometry));message(t('Geometrie exportiert. Das vollständige Paket enthält zusätzlich Textur und Fahrwerte.','Geometry exported. The complete package also includes texture and handling values.'));});
@@ -57,13 +73,9 @@
  })();
  const onReady=Hover.views.GameView.prototype.onGameReady;
  Hover.views.GameView.prototype.onGameReady=function(){
-  for(const e of entries.values()){const model=prepared.get(e.hash);if(model){model.texture.needsUpdate=true;Hover.Editor.schemeLoader.models['Custom_'+e.hash]={geometry:model.geometry,redDiffuseTexture:model.texture,blueDiffuseTexture:model.texture};}}
+  for(const e of entries.values()){const model=prepared.get(e.hash);if(model){const texture=model.texture.clone();texture.needsUpdate=true;Hover.Editor.schemeLoader.models['Custom_'+e.hash]={geometry:model.geometry.clone(),redDiffuseTexture:texture,blueDiffuseTexture:texture};}}
   return onReady.call(this);
  };
- const prepared=new Map();const oldPrepare=prepare;
- // add() awaits preparation; retain resolved data for the synchronous engine hook.
- async function resolved(e){const model=await oldPrepare(e);prepared.set(e.hash,model);return model;}
- prepare=resolved;
- window.HoverCrafts={ready,entry:k=>entries.get(k.replace(/^custom_/,'')),list:()=>[...entries.values()],add,persist,selected,
-  profile:e=>profile(e),async preview(k){const e=entries.get(k.replace(/^custom_/,'')),m=await prepare(e),geometry=m.geometry;geometry.computeBoundingBox();const box=geometry.boundingBox,mesh=new THREE.Mesh(geometry,new THREE.MeshPhongMaterial({map:m.texture,shading:THREE.SmoothShading}));mesh.position.copy(box.min.clone().add(box.max).multiplyScalar(-.5));const group=new THREE.Object3D();group.add(mesh);group.rotation.y=Math.PI+Math.PI/6;return{group,radius:box.max.clone().sub(box.min).length()/2};}};
+ window.HoverCrafts={ready,disposePreview,entry:k=>entries.get(k.replace(/^custom_/,'')),list:()=>[...entries.values()],add,persist,selected,
+  profile:e=>profile(e),async preview(k){const e=entries.get(k.replace(/^custom_/,'')),m=await prepare(e),geometry=m.geometry.clone(),texture=m.texture.clone();texture.needsUpdate=true;geometry.computeBoundingBox();const box=geometry.boundingBox,mesh=new THREE.Mesh(geometry,new THREE.MeshPhongMaterial({map:texture,shading:THREE.SmoothShading}));mesh.position.copy(box.min.clone().add(box.max).multiplyScalar(-.5));const group=new THREE.Object3D();group.userData.customPreview=true;group.add(mesh);group.rotation.y=Math.PI+Math.PI/6;return{group,radius:box.max.clone().sub(box.min).length()/2};}};
 })();

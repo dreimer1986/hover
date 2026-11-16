@@ -154,3 +154,15 @@ The large map uses the existing radar drawing functions and does not reveal addi
 `input.js` replaces the old controller path with a [Gamepad API](https://developer.mozilla.org/en-US/docs/Web/API/Gamepad_API/Using_the_Gamepad_API) adapter supporting standard mapping, deadzone and discovery at any index. The start screen accepts a button, keyboard, mouse or touch input. Detection reveals Off/Touch/Controller selection. After focus loss or mode changes, a controller must return to neutral before inputs resume. Non-standard devices need browser/OS mapping first; custom button mapping is not included.
 
 Expandable overviews on the home and archive pages describe the enhancements, and the outdated RECOMMENDED banner on the later original release is removed. The user confirmed working iPhone engine audio and the updated NAS container. Controller tests simulate the browser API; actual controller hardware still needs testing.
+
+## Craft workshop and public lobbies (November 16, 2026)
+
+The extension includes an isolated OBJ/GLTF/GLB importer with locally vendored Three.js r160; the old game engine is retained. `craft-converter.mjs` converts static geometry and base-colour materials into a validated Three.js 3.1 subset. `craft-library.js` manages previews, points, IndexedDB and complete export packages. `craft-validation.js` and `server/crafts.py` independently enforce the same contract, defined by `craft-policy.json`. `scripts/analyze_crafts.py` reproduces original dimensions and point-budget derivation. [Usage, limits and map editor assessment](CRAFTS.en.md).
+
+Protocol 3 adds lobby names/visibility, public discovery, host-shared models and SHA-256-addressed downloads. Guest models start as session-local data and can explicitly be saved/exported. Existing limits on server-authoritative physics remain; import validation is not complete anti-cheat.
+
+`camera.js` adds optional chase view. The old engine shares camera, light and vehicle position objects. Rendering temporarily separates camera/light positions and restores their references afterward, preventing vehicle displacement outside the map. YXZ rotation order prevents a tilted horizon while steering. The controller selector overrides the form-wide 100% width; measured toolbar height keeps HUD elements below wrapped controls. The workshop contains its own draggable mouse/touch model preview.
+
+Tests: seven Python server tests including model validation and public/private lobby permissions; browser checks for OBJ/MTL/PNG, GLTF/BIN/PNG and GLB, tampered packages, persistence/export, public discovery, model transfer and rendering in Modern/Retro. Ten consecutive chase-camera draws must leave vehicle position unchanged. More complex third-party models still need practical author testing of import limits and rendering.
+
+Previews and gameplay receive separate geometry/texture objects because the legacy Three.js version stores GPU resources on those objects. The importer preview uses a fixed comparison scale, displays axis dimensions and supports drag rotation.

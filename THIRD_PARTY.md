@@ -14,3 +14,7 @@ Primärquellen der Sicherung:
 Die Kennzeichnung eines Uploads durch einen Archive.org-Nutzer wird nicht als neue Lizenz des Originalspiels übernommen. Dieses Projekt ist ein unabhängiges Archivprojekt und keine offizielle Microsoft-Website.
 
 Alle auf der Startseite verwendeten Logos und Schriftarten stammen aus den gesicherten Spielressourcen. Die Spielbilder wurden bei der lokalen Prüfung der wiederhergestellten Fassungen aufgenommen.
+
+## Importer: Three.js r160
+
+Die getrennte Importfunktion verwendet Three.js r160 sowie OBJLoader, MTLLoader, GLTFLoader und BufferGeometryUtils unter MIT-Lizenz. Quelle: https://github.com/mrdoob/three.js/tree/r160. Lizenz: `modifications/vendor/three/LICENSE`. Nur Modul-Importpfade wurden auf lokale Dateien umgestellt. Die archivierte Spielengine bleibt unverändert.

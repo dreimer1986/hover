@@ -188,9 +188,21 @@ html:not(.input-gate) #input-start { display:none; }
 .enhanced-changes summary { cursor:pointer; color:#ffca71; }
 .enhanced-changes li { margin:7px 0; }
 #craft-points { display:grid; gap:10px; }
-#craft-points label { display:grid; grid-template-columns:140px 1fr 28px; align-items:center; gap:8px; }
+#craft-points label { display:grid; grid-template-columns:minmax(90px,140px) minmax(0,1fr) 28px; align-items:center; gap:8px; }
 #craft-points input { min-height:24px; padding:0; }
 .over-budget { color:#ff7979; }
 #modern-launcher .mp-checkbox { display:flex; align-items:center; gap:8px; margin:10px 0; }
 #modern-launcher .mp-checkbox input { width:20px; min-height:20px; margin:0; }
 #mp-directory { list-style:none; padding:0; }
+/* Toolbar controls must not inherit the full-width form-select rule. */
+#modern-ui #modern-toolbar #modern-input-mode { width:auto; max-width:125px; flex:0 0 auto; margin:0; padding:8px 20px 8px 8px; font-size:13px; }
+#craft-import-preview { margin:16px 0; padding:8px; border:1px solid #765087; border-radius:8px; background:#10091bdd; text-align:center; }
+#craft-import-preview canvas { display:block; width:100%; height:auto; max-height:360px; object-fit:contain; cursor:grab; }
+#craft-import-preview figcaption { color:#ffd28a; }
+@media(max-width:600px){#modern-ui #modern-toolbar #modern-input-mode { max-width:100px; font-size:10px; padding:8px 14px 8px 4px; }}
+#modern-ui > .homeButton { display:none; }
+#homeView { padding-top:calc(var(--hover-toolbar-height,50px) + 24px); }
+.modern-wide .modern #dash-top { top:calc(var(--hover-toolbar-height,50px) + 2px); }
+.modern-wide .retro #dash_top #flag_counts { top:calc(var(--hover-toolbar-height,50px) + 6px + env(safe-area-inset-top,0px)); }
+@media(max-width:600px){#homeView { padding-top:calc(var(--hover-toolbar-height,50px) + 20px); }}
+@media(orientation:portrait){#modern-readout { top:calc(var(--hover-toolbar-height,50px) + 50px); }}
