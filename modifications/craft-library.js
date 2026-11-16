@@ -6,7 +6,7 @@
  panel.innerHTML=`<summary>${t('Eigene Schiffe · Import / Export','Custom crafts · Import / export')}</summary><p>${t('Statische OBJ + MTL + Texturen oder GLTF/GLB mit lokalen Ressourcen gemeinsam auswählen. Basisfarben werden übernommen; PBR-Effekte und Animationen nicht.','Select a static OBJ + MTL + textures, or GLTF/GLB with all local resources. Base colours are retained; PBR effects and animations are not.')}</p><input id="craft-files" type="file" multiple accept=".obj,.mtl,.gltf,.glb,.bin,.png,.jpg,.jpeg,.webp,.json"><div class="modern-options"><label>${t('Name','Name')}<input id="craft-name" maxlength="32" value="Custom craft"></label><label>${t('Oben-Achse','Up axis')}<select id="craft-up"><option value="y">Y</option><option value="z">Z</option></select></label><label>${t('Drehen','Rotate')}<select id="craft-rotation"><option>0</option><option>90</option><option>180</option><option>270</option></select></label><label>${t('Größe (% der Hülle)','Size (% of bounds)')}<input id="craft-size" type="number" min="10" max="100" value="90"></label></div><p id="craft-limits"></p><figure id="craft-import-preview" hidden><figcaption></figcaption></figure><div id="craft-points"></div><p id="craft-budget"></p><button id="craft-convert" type="button">${t('Importieren und prüfen','Import and validate')}</button><button id="craft-preview-draft" type="button" disabled>${t('Werte in Vorschau übernehmen','Preview edited values')}</button><button id="craft-save" type="button" disabled>${t('Vorschau speichern','Save preview')}</button><button id="craft-edit" type="button">${t('Gewähltes Schiff bearbeiten','Edit selected craft')}</button><button id="craft-save-session" type="button">${t('Gewähltes Sitzungsschiff behalten','Keep selected session craft')}</button><button id="craft-export" type="button">${t('Gewähltes Schiff exportieren','Export selected craft')}</button><button id="craft-export-geometry" type="button">${t('Modell als Hover-JSON/JS','Model as Hover JSON/JS')}</button><button id="craft-delete" type="button">${t('Gewähltes Schiff löschen','Delete selected craft')}</button><p id="craft-status" role="status"></p>`;
  HoverEnhanced.controls.get('modern-launcher').querySelector('.modern-card').appendChild(panel);
  const $=id=>panel.querySelector('#'+id),message=text=>$('craft-status').textContent=text;
- let db=null,policy=null,draft=null,draftEntry=null,working=false,importRenderer=null,importScene,importCamera,importGroup=null;
+ let db=null,policy=null,draft=null,draftEntry=null,sourceDraft=null,pendingTransform=false,working=false,importRenderer=null,importScene,importCamera,importGroup=null;
  function profile(entry){const result={id:entry.id,modelName:'Custom_'+entry.hash};for(const [k,[a,b]]of Object.entries(policy.parameters))result[k]=a+(b-a)*entry.points[k]/10;return result;}
  const key=e=>'custom_'+e.hash;
  async function prepare(entry){
@@ -25,7 +25,7 @@
  async function persist(e){if(!e.persistent&&[...entries.values()].filter(e=>e.persistent).length>=policy.maxStored)throw Error('Local craft limit reached');await transaction('readwrite',s=>s.put({hash:e.hash,json:e.json}));return add(e.json,true);}
  const selected=()=>entries.get(select.value.replace(/^custom_/,''));
  function download(name,text){const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
- async function action(fn){if(working)return;working=true;panel.setAttribute('aria-busy','true');try{message(t('Bitte warten …','Please wait …'));await fn();}catch(e){message(e.message);}finally{working=false;panel.setAttribute('aria-busy','false');}}
+ async function action(fn){if(working)return;working=true;panel.setAttribute('aria-busy','true');try{message(t('Bitte warten …','Please wait …'));await fn();}catch(e){message(e.message);}finally{working=false;panel.setAttribute('aria-busy','false');if(pendingTransform){pendingTransform=false;action(refreshTransform);}}}
  function points(){return Object.fromEntries(Object.keys(policy.parameters).map(k=>[k,Number($('point-'+k).value)]));}
  function budget(){const used=Object.values(points()).reduce((a,b)=>a+b,0);$('craft-budget').textContent=t('Punkte: ','Points: ')+used+' / '+policy.budget;$('craft-budget').classList.toggle('over-budget',used>policy.budget);for(const k of Object.keys(policy.parameters))$('point-value-'+k).textContent=$('point-'+k).value;}
  function fill(d){$('craft-name').value=d.name;for(const [k,v]of Object.entries(d.points))$('point-'+k).value=v;budget();}
@@ -43,22 +43,37 @@
   const model=await window.HoverCrafts.preview(key(e));if(importGroup){importScene.remove(importGroup);disposePreview(importGroup);}importGroup=model.group;importScene.add(importGroup);
   const distance=Math.hypot(...policy.bounds)/2/Math.sin(THREE.Math.degToRad(importCamera.fov/2))*.75;importCamera.position.set(0,distance*.38,distance);importCamera.lookAt(new THREE.Vector3());importRenderer.render(importScene,importCamera);
   const bounds=entries.get(e.hash).data.geometry.vertices,axes=[0,1,2].map(axis=>{const values=bounds.filter((_,i)=>i%3===axis);return (Math.max(...values)-Math.min(...values)).toFixed(1);});
-  figure.querySelector('figcaption').textContent=e.name+' · '+axes.join(' × ')+t(' · Zum Drehen ziehen',' · Drag to rotate');figure.dataset.hash=e.hash;
+  figure.querySelector('figcaption').textContent=e.name+' · '+axes.join(' × ')+t(' · Ziehen dreht nur die Ansicht; „Drehen“ ändert das Schiff',' · Drag changes the view only; Rotate changes the craft');figure.dataset.hash=e.hash;
  }
  async function previewDraft(){
   if(!draft)throw Error('Import a model first');const data={...draft,name:$('craft-name').value.trim(),points:points()};
   const e=await add(JSON.stringify(data));await previewImported(e);draftEntry=e;select.value=key(e);select.dispatchEvent(new Event('change'));$('craft-save').disabled=false;
   message(t('Vorschau: ','Preview: ')+e.data.geometry.vertices.length/3+t(' Vertices · ',' vertices · ')+e.data.geometry.faces.length/10+t(' Dreiecke. Noch nicht gespeichert.',' triangles. Not saved yet.'));
  }
+ function sourceSize(data){const v=data.geometry.vertices;return Math.max(...policy.bounds.map((bound,axis)=>{const a=v.filter((_,i)=>i%3===axis);return (Math.max(...a)-Math.min(...a))/bound;}))*100;}
+ function transformSource(){
+  if(!sourceDraft)throw Error('Import a model first');
+  const size=Number($('craft-size').value),angle=Number($('craft-rotation').value)*Math.PI/180,zUp=$('craft-up').value==='z';
+  if(!Number.isFinite(size)||size<10||size>100)throw Error('Size must be 10–100%');
+  const geometry=JSON.parse(JSON.stringify(sourceDraft.geometry)),c=Math.cos(angle),s=Math.sin(angle);
+  for(const values of [geometry.vertices,geometry.normals])for(let i=0;i<values.length;i+=3){const x=values[i],y=zUp?values[i+2]:values[i+1],z=zUp?-values[i+1]:values[i+2];values[i]=c*x+s*z;values[i+1]=y;values[i+2]=-s*x+c*z;}
+  const axes=[0,1,2].map(axis=>geometry.vertices.filter((_,i)=>i%3===axis)),lo=axes.map(a=>Math.min(...a)),hi=axes.map(a=>Math.max(...a)),factor=Math.min(...policy.bounds.map((b,i)=>hi[i]-lo[i]>1e-8?b/(hi[i]-lo[i]):Infinity))*size/100;
+  for(let i=0;i<geometry.vertices.length;i++){const axis=i%3,center=axis===1?lo[axis]:(lo[axis]+hi[axis])/2;geometry.vertices[i]=Math.round((geometry.vertices[i]-center)*factor*1e5)/1e5;}
+  for(let i=0;i<geometry.normals.length;i++)geometry.normals[i]=Math.round(geometry.normals[i]*1e5)/1e5;
+  draft={...sourceDraft,geometry};
+ }
+ async function refreshTransform(){transformSource();await previewDraft();}
+ for(const id of ['craft-up','craft-rotation','craft-size'])$(id).onchange=()=>{if(!sourceDraft)return;if(working){pendingTransform=true;return;}action(refreshTransform);};
  $('craft-convert').onclick=()=>action(async()=>{
   await ready;const files=Array.from($('craft-files').files);if(!files.length)throw Error('Select model files');
-  if(files.length===1&&/\.json$/i.test(files[0].name)){const e=await format.validate(await files[0].text());draft=e.data;fill(draft);}
-  else{const size=Number($('craft-size').value);if(!Number.isFinite(size)||size<10||size>100)throw Error('Size must be 10–100%');const converter=await import('./craft-converter.mjs');draft=await converter.convert(files,{name:$('craft-name').value.trim(),points:points(),up:$('craft-up').value,rotation:$('craft-rotation').value,size},policy);}
-  $('craft-preview-draft').disabled=false;await previewDraft();
+  let source;
+  if(files.length===1&&/\.json$/i.test(files[0].name)){const e=await format.validate(await files[0].text());source=e.data;fill(source);$('craft-size').value=Math.max(10,Math.min(100,sourceSize(source)));}
+  else{const converter=await import('./craft-converter.mjs');source=await converter.convert(files,{name:$('craft-name').value.trim(),points:points(),up:'y',rotation:'0',size:100},policy);}
+  sourceDraft=source;$('craft-preview-draft').disabled=false;if(files.length===1&&/\.json$/i.test(files[0].name)&&$('craft-up').value==='y'&&$('craft-rotation').value==='0'){draft=source;await previewDraft();}else await refreshTransform();
  });
  $('craft-preview-draft').onclick=()=>action(previewDraft);
  $('craft-save').onclick=()=>action(async()=>{await previewDraft();draftEntry=await persist(draftEntry);message(t('Schiff im Browser gespeichert. Für eine dauerhafte Sicherung exportieren.','Craft saved in this browser. Export it for a durable backup.'));});
- $('craft-edit').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');draft=e.data;fill(draft);await previewImported(e);$('craft-preview-draft').disabled=false;message(t('Werte ändern und Vorschau aktualisieren.','Edit values and update the preview.'));});
+ $('craft-edit').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');sourceDraft=draft=e.data;fill(draft);$('craft-up').value='y';$('craft-rotation').value='0';$('craft-size').value=Math.max(10,Math.min(100,sourceSize(draft)));await previewImported(e);$('craft-preview-draft').disabled=false;message(t('Werte ändern und Vorschau aktualisieren.','Edit values and update the preview.'));});
  $('craft-save-session').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');await persist(e);message(t('Schiff gespeichert.','Craft saved.'));});
  $('craft-export').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');await format.validate(e.json);download(e.name.replace(/[^\w-]/g,'_')+'.hovercraft.json',e.json);message(t('Export erstellt.','Export created.'));});
  $('craft-export-geometry').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');download(e.name.replace(/[^\w-]/g,'_')+'.js',JSON.stringify(e.data.geometry));message(t('Geometrie exportiert. Das vollständige Paket enthält zusätzlich Textur und Fahrwerte.','Geometry exported. The complete package also includes texture and handling values.'));});

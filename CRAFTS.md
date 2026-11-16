@@ -7,11 +7,11 @@ Im Startbildschirm der erweiterten Fassung **Eigene Schiffe · Import / Export**
 ## Importieren und sichern
 
 1. Genau ein **OBJ**, **GLTF** oder **GLB** gemeinsam mit allen benötigten lokalen Dateien auswählen. Bei OBJ gehören gegebenenfalls MTL und Texturen dazu; bei GLTF auch BIN-Dateien. Dateinamen müssen eindeutig sein. Externe URLs werden nicht heruntergeladen.
-2. Namen, Oben-Achse (Y/Z), Drehung und Größe wählen. **Importieren und prüfen** erzeugt eine Vorschau mit den konvertierten Texturen. Nach Änderungen an Ausrichtung/Größe erneut importieren.
+2. Namen, Oben-Achse (Y/Z), Drehung und Größe wählen. **Importieren und prüfen** erzeugt eine Vorschau mit den konvertierten Texturen. Änderungen an Ausrichtung und Größe aktualisieren die Vorschau sofort. Ziehen mit Maus oder Finger dreht nur die Betrachtungsansicht.
 3. Fahrpunkte verteilen, **Werte in Vorschau übernehmen** und **Vorschau speichern**. Das Schiff steht dann im Einzelspieler zur Auswahl und bleibt nach Neuladen erhalten.
 4. **Gewähltes Schiff exportieren** speichert ein vollständiges `.hovercraft.json` mit Modell, Farbtextur und Punkteverteilung. Diese Datei kann wieder importiert werden; alle Prüfungen laufen erneut. **Modell als Hover-JSON/JS** exportiert nur die Geometrie im alten Three.js-3.1-Format, ohne Textur und Fahrwerte.
 
-**Gewähltes Schiff bearbeiten** lädt gespeicherte oder empfangene Schiffe in den Punkteeditor. Speichern erzeugt eine neue, über ihre Prüfsumme identifizierte Variante. Alte Varianten können gelöscht werden. Die Bibliothek liegt in IndexedDB dieses Browsers und dieser Website: GitHub Pages und die NAS haben getrennte Speicher. Browserdaten-Löschen entfernt die Bibliothek; Exportdateien sind die dauerhafte Sicherung. Maximal 24 dauerhaft gespeicherte Schiffe, höchstens 64 geladene Varianten je Seitensitzung.
+**Gewähltes Schiff bearbeiten** lädt gespeicherte oder empfangene Schiffe in den Editor für Fahrwerte, Ausrichtung und Größe. Bei einem falsch herum gespeicherten Schiff hier **Drehen → 180** wählen und **Vorschau speichern**. Speichern erzeugt eine neue, über ihre Prüfsumme identifizierte Variante. Alte Varianten können gelöscht werden. Die Bibliothek liegt in IndexedDB dieses Browsers und dieser Website: GitHub Pages und die NAS haben getrennte Speicher. Browserdaten-Löschen entfernt die Bibliothek; Exportdateien sind die dauerhafte Sicherung. Maximal 24 dauerhaft gespeicherte Schiffe, höchstens 64 geladene Varianten je Seitensitzung.
 
 ## Größen, Geometrie und Texturen
 

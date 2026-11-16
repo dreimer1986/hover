@@ -6,11 +6,11 @@ Der Container enthält den Python-Spielserver **und die Website**. Er benötigt 
 
 ## Installation auf der Synology
 
-1. Im [Release multiplayer-v0.3.0](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.3.0) das passende Image herunterladen:
+1. Im [Release multiplayer-v0.3.1](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.3.1) das passende Image herunterladen:
    - **amd64** für Synology mit Intel-/AMD-Prozessor.
    - **arm64** für unterstützte NAS mit 64-Bit-ARM-Prozessor. Die NAS muss Container Manager/Docker unterstützen; nicht jedes ARM-Modell tut das. 32-Bit-ARM ist nicht enthalten.
 2. In **Container Manager → Image/Abbild → Hinzufügen → Aus Datei hinzufügen** die Datei `hover-multiplayer-….tar.gz` importieren. Falls DSM die komprimierte Datei nicht annimmt, zuerst zu `.tar` entpacken.
-3. Aus dem Image **hover-multiplayer:0.3.0** einen Container erstellen, automatischen Neustart aktivieren und **NAS-Port 8080 → Container-Port 8080, TCP** zuordnen. Keine Ordner einbinden und keinen privilegierten Modus verwenden.
+3. Aus dem Image **hover-multiplayer:0.3.1** einen Container erstellen, automatischen Neustart aktivieren und **NAS-Port 8080 → Container-Port 8080, TCP** zuordnen. Keine Ordner einbinden und keinen privilegierten Modus verwenden.
 4. Caddy wie unten beschrieben auf den NAS-Port richten und **https://hover.dreimer.de/** öffnen. Unter **Multiplayer** ist bei der Container-Website die aktuelle HTTPS-Adresse voreingestellt.
 
 Die Menünamen können sich zwischen Docker und neueren Container-Manager-Versionen unterscheiden. Die mitgelieferte [compose.yaml](compose.yaml) kann alternativ als Container-Manager-Projekt importiert werden, nachdem das Image geladen wurde. Ist NAS-Port 8080 schon belegt, beispielsweise `18080:8080` verwenden und den Proxy auf 18080 richten.
@@ -27,7 +27,7 @@ Bei älterem DSM ohne Compose:
 ```sh
 sudo docker run -d --name hover-multiplayer --restart unless-stopped \
   --read-only --cap-drop ALL --security-opt no-new-privileges:true \
-  -p 8080:8080 hover-multiplayer:0.3.0
+  -p 8080:8080 hover-multiplayer:0.3.1
 ```
 
 ## Caddy 2: hover.dreimer.de
@@ -60,22 +60,22 @@ Bei Verbindungsabbruch wird die Runde abgebrochen, die übrigen Spieler bleiben 
 
 ## Bestehenden Synology-Container aktualisieren
 
-1. Laufende Partien beenden. Passendes v0.3.0-Archiv herunterladen und in **Container Manager → Abbild/Image → Hinzufügen → Aus Datei** importieren. Das neue Image heißt `hover-multiplayer:0.3.0`.
+1. Laufende Partien beenden. Passendes v0.3.1-Archiv herunterladen und in **Container Manager → Abbild/Image → Hinzufügen → Aus Datei** importieren. Das neue Image heißt `hover-multiplayer:0.3.1`.
 2. Portzuordnung und Umgebungsvariablen des alten Containers notieren. Den alten Container stoppen und zur Rückfallmöglichkeit umbenennen, z. B. `hover-multiplayer-old`. Sein automatischer Neustart sollte deaktiviert sein.
 3. Aus dem **neuen Image** einen neuen Container `hover-multiplayer` erstellen. Dieselben Ports (normalerweise `8080:8080`) und Umgebungsvariablen übernehmen, automatischen Neustart aktivieren. Keine Volumes und kein privilegierter Modus erforderlich. Ein bloßer Neustart des alten Containers aktualisiert sein Image nicht.
-4. Den neuen Container starten. `https://hover.dreimer.de/healthz` muss `version: 0.3.0` und `protocol: 3` melden. Website neu laden, Lobby erstellen und beitreten. Caddy bleibt bei unveränderter Portzuordnung unverändert.
+4. Den neuen Container starten. `https://hover.dreimer.de/healthz` muss `version: 0.3.1` und `protocol: 3` melden. Website neu laden, Lobby erstellen und beitreten. Caddy bleibt bei unveränderter Portzuordnung unverändert.
 5. Nach erfolgreichem Test kann der alte Container entfernt werden. Für einen Rückfall den neuen stoppen und den alten wieder starten; gegebenenfalls dessen ursprünglichen Namen wiederherstellen. Laufende Lobbys werden nicht übertragen.
 
-Bei Installation als **Compose-Projekt** stattdessen das neue Image importieren, die Image-Zeile im vorhandenen Projekt auf `hover-multiplayer:0.3.0` ändern und das Projekt neu erstellen. Eigene Port-/Origin-Einstellungen behalten. Per SSH im Projektverzeichnis:
+Bei Installation als **Compose-Projekt** stattdessen das neue Image importieren, die Image-Zeile im vorhandenen Projekt auf `hover-multiplayer:0.3.1` ändern und das Projekt neu erstellen. Eigene Port-/Origin-Einstellungen behalten. Per SSH im Projektverzeichnis:
 
 ```sh
 sudo docker load -i hover-multiplayer-amd64.tar.gz
-# compose.yaml: image: hover-multiplayer:0.3.0
+# compose.yaml: image: hover-multiplayer:0.3.1
 sudo docker compose up -d --force-recreate
 sudo docker compose ps
 ```
 
-Das Release enthält [compose.yaml](compose.yaml) und diese Anleitung. Für ARM die arm64-Datei verwenden. Website und Server müssen beide Protokoll 3 verwenden; die neue Pages-Fassung benötigt den neuen Container.
+Das Release enthält [compose.yaml](compose.yaml) und diese Anleitung. Für ARM die arm64-Datei verwenden. Website und Server müssen beide Protokoll 3 verwenden (Server ab 0.3.0). Version 0.3.1 liefert außerdem die korrigierte Schiffsdrehung und Schiffsnamen für die auf der NAS gehostete Website.
 
 ## Einstellungen und Betrieb
 
@@ -99,7 +99,7 @@ Die Originalarchive und Store-Pakete wurden nicht verändert. [Analyse der alten
 ## Image selbst bauen
 
 ```sh
-docker build -t hover-multiplayer:0.3.0 .
+docker build -t hover-multiplayer:0.3.1 .
 docker compose up -d
 ```
 

@@ -7,11 +7,11 @@ Open **Custom crafts · Import / export** on the extended edition home screen. T
 ## Importing and saving
 
 1. Select exactly one **OBJ**, **GLTF** or **GLB**, together with all required local resources. OBJ may need MTL and textures; GLTF may need BIN files. Resource filenames must be unique. External URLs are not downloaded.
-2. Choose a name, up axis (Y/Z), rotation and size. **Import and validate** displays the converted model and textures. Import again after changing orientation/size.
+2. Choose a name, up axis (Y/Z), rotation and size. **Import and validate** displays the converted model and textures. Orientation and size changes update the preview immediately. Dragging with a mouse or finger only changes the viewing angle.
 3. Allocate handling points, choose **Preview edited values**, then **Save preview**. The craft becomes available in single player and survives page reloads.
 4. **Export selected craft** saves a complete `.hovercraft.json` containing model, colour texture and points. Reimporting runs all validation again. **Model as Hover JSON/JS** exports only legacy Three.js 3.1 geometry, without texture or handling data.
 
-**Edit selected craft** loads saved or received crafts into the point editor. Saving creates a new checksum-identified variant; old variants can be deleted. IndexedDB storage belongs to this browser and website: GitHub Pages and the NAS have separate libraries. Clearing browser data removes the library; exported files are the durable backup. Limits: 24 persistent crafts and 64 loaded variants per page session.
+**Edit selected craft** loads saved or received crafts into the handling, orientation and size editor. To correct a backwards craft, choose **Rotate → 180** here and **Save preview**. Saving creates a new checksum-identified variant; old variants can be deleted. IndexedDB storage belongs to this browser and website: GitHub Pages and the NAS have separate libraries. Clearing browser data removes the library; exported files are the durable backup. Limits: 24 persistent crafts and 64 loaded variants per page session.
 
 ## Size, geometry and textures
 
