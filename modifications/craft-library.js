@@ -106,6 +106,8 @@
  };
  window.HoverCrafts={ready,disposePreview,entry:k=>entries.get(k.replace(/^custom_/,'')),list:()=>[...entries.values()],add,persist,selected,
   pointBudget:()=>policy.budget,
+  profileStats:profile=>Object.entries(policy.parameters).map(([k,[lo,hi]])=>({key:k,label:labels[k],value:Math.max(0,Math.min(10,(profile[k]-lo)/(hi-lo)*policy.steps))})),
   stats:e=>Object.keys(policy.parameters).map(k=>({key:k,label:labels[k],value:e.points[k]})),
   profile:e=>profile(e),async preview(k){const e=entries.get(k.replace(/^custom_/,'')),m=await prepare(e),geometry=m.geometry.clone(),texture=m.texture.clone();texture.needsUpdate=true;geometry.computeBoundingBox();const box=geometry.boundingBox,mesh=new THREE.Mesh(geometry,new THREE.MeshPhongMaterial({map:texture,shading:THREE.SmoothShading}));mesh.position.copy(box.min.clone().add(box.max).multiplyScalar(-.5));const group=new THREE.Object3D();group.userData.customPreview=true;group.add(mesh);group.rotation.y=Math.PI+Math.PI/6;return{group,radius:box.max.clone().sub(box.min).length()/2};}};
+ ready.then(()=>select.dispatchEvent(new Event('change'))).catch(()=>{});
 })();

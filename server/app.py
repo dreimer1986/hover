@@ -16,7 +16,7 @@ import time
 from aiohttp import web, WSMsgType
 
 MAPS = json.loads(Path(__file__).with_name('maps.json').read_text())
-VERSION = '0.3.3'
+VERSION = '0.3.4'
 try:
     from .crafts import validate as validate_craft, POLICY as CRAFT_POLICY
 except ImportError:

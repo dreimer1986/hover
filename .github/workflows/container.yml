@@ -5,7 +5,7 @@ on:
       release_tag:
         description: Existing draft release to receive Docker archives
         required: true
-        default: multiplayer-v0.3.3
+        default: multiplayer-v0.3.4
 permissions:
   contents: write
 jobs:
@@ -31,8 +31,8 @@ jobs:
           python scripts/verify_archive.py
       - name: Build and run image
         run: |
-          docker build -t hover-multiplayer:0.3.3 .
-          docker run -d --name hover-test --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1:8080:8080 hover-multiplayer:0.3.3
+          docker build -t hover-multiplayer:0.3.4 .
+          docker run -d --name hover-test --read-only --cap-drop ALL --security-opt no-new-privileges -p 127.0.0.1:8080:8080 hover-multiplayer:0.3.4
           for i in $(seq 1 30); do
             if curl --fail http://127.0.0.1:8080/healthz; then break; fi
             sleep 1
@@ -40,7 +40,7 @@ jobs:
           curl --fail http://127.0.0.1:8080/play/modified/ -o /dev/null
           docker exec hover-test python -c "import os; assert os.getuid() == 10001"
           docker stop hover-test
-          docker save hover-multiplayer:0.3.3 | gzip > hover-multiplayer-${{ matrix.arch }}.tar.gz
+          docker save hover-multiplayer:0.3.4 | gzip > hover-multiplayer-${{ matrix.arch }}.tar.gz
           sha256sum hover-multiplayer-${{ matrix.arch }}.tar.gz > hover-multiplayer-${{ matrix.arch }}.sha256
       - uses: actions/upload-artifact@v4
         with:

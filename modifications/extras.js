@@ -25,10 +25,12 @@
   async function showCraft(){
     const generation=++previewGeneration,key=select.value;
     preview.querySelector('figcaption').textContent=window.HoverCrafts?.entry(key)?.name||crafts[key][0];
-    const custom=window.HoverCrafts?.entry(key),labels=[t('Tempo','Speed'),t('Kraft','Power'),t('Stabilität','Stability'),t('Wendigkeit','Agility')];
-    const stats=custom?HoverCrafts.stats(custom):Hover.Profiles.getStats(Hover.Profiles[key]).map((value,i)=>({label:labels[i],value:value*10}));
-    preview.querySelector('.craft-stats-caption').textContent=custom?t('Fahrpunkte: ','Handling points: ')+stats.reduce((sum,s)=>sum+s.value,0)+' / '+HoverCrafts.pointBudget():t('Originalbewertung','Original ratings');
-    preview.querySelector('dl').replaceChildren(...stats.flatMap(stat=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=stat.label;dd.textContent=(custom?String(stat.value):stat.value.toFixed(1))+' / 10';if(stat.key)dd.dataset.parameter=stat.key;return [dt,dd];}));
+    if(!window.HoverCrafts)return;
+    await HoverCrafts.ready;if(generation!==previewGeneration)return;
+    const custom=HoverCrafts.entry(key),stats=custom?HoverCrafts.stats(custom):HoverCrafts.profileStats(Hover.Profiles[key]);
+    const number=value=>new Intl.NumberFormat(de?'de-DE':'en-US',{maximumFractionDigits:1}).format(value);
+    preview.querySelector('.craft-stats-caption').textContent=(custom?t('Fahrpunkte: ','Handling points: '):t('Vergleichspunkte (umgerechnet): ','Equivalent handling points: '))+number(stats.reduce((sum,s)=>sum+s.value,0))+' / '+HoverCrafts.pointBudget();
+    preview.querySelector('dl').replaceChildren(...stats.flatMap(stat=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=stat.label;dd.textContent=number(stat.value)+' / 10';dd.dataset.parameter=stat.key;return [dt,dd];}));
     try{
       const craft=await loadCraft(key);if(generation!==previewGeneration){if(craft.group.userData.customPreview)HoverCrafts.disposePreview(craft.group);return;}
       for(const child of scene.children.slice())if(child.userData?.previewCraft){scene.remove(child);if(child.userData.customPreview)HoverCrafts.disposePreview(child);}

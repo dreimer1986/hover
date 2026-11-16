@@ -42,7 +42,42 @@
     "Actual single-player craft/profile fields equal policy-derived values",
     "Saved library reload",
     "Edited draft points update preview",
-    "Stock craft ratings unchanged"
+    "Stock craft ratings use the same five-point scale; original physics unchanged"
   ],
-  "sourceModelsRedistributed": false
+  "sourceModelsRedistributed": false,
+  "stockComparisons": [
+    {
+      "name": "Chicago",
+      "points": {
+        "maxSpeed": 0.0,
+        "acceleration": 0.0,
+        "turnSpeed": 0.0,
+        "drag": -0.0,
+        "turnDrag": 10.0
+      },
+      "total": 10.0
+    },
+    {
+      "name": "Wizard",
+      "points": {
+        "maxSpeed": 5.999999999999998,
+        "acceleration": 4.482758620689655,
+        "turnSpeed": 1.1111111111111116,
+        "drag": 8.16256617876051,
+        "turnDrag": 5.000381475547417
+      },
+      "total": 24.756817386108693
+    },
+    {
+      "name": "Bambi",
+      "points": {
+        "maxSpeed": 10.0,
+        "acceleration": 10.0,
+        "turnSpeed": 10.0,
+        "drag": 10.0,
+        "turnDrag": -0.0
+      },
+      "total": 40.0
+    }
+  ]
 }
