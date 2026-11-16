@@ -1,0 +1,60 @@
+{
+  "tested": "2026-11-16",
+  "sourceFilesNotRedistributed": true,
+  "imports": [
+    {
+      "file": "model/model.obj",
+      "triangles": 574,
+      "vertices": 1136,
+      "result": "Pass without MTL; albedo.png automatically assigned",
+      "sha256": "1b7b8798d88febe32489b3c59b6809b2212ce9d2f3061e39a025445988e035bb"
+    },
+    {
+      "file": "model/model.fbx",
+      "triangles": 574,
+      "vertices": 1201,
+      "result": "Pass with FBX material loading",
+      "sha256": "8cce86b3eaa0625766df4f44dcf6119d68211702a940ff9a1869e7b481c9fdf5"
+    },
+    {
+      "file": "low_poly_space_ship/scene.gltf",
+      "triangles": 280,
+      "vertices": 520,
+      "result": "Pass with scene.bin and Material_baseColor.png",
+      "sha256": "7292aba4015f0511ec9cffeaef756c22194946af081c006894fb6ed1cde39e02"
+    }
+  ],
+  "textureDecoding": {
+    "DDS_DXT3": 17,
+    "TGA": 3,
+    "reference": "Pillow RGBA decode",
+    "maximumChannelDifferenceAfterCanvasReadback": 2,
+    "syntheticAdditionalChecks": [
+      "DXT1",
+      "DXT5",
+      "TGA truncated input rejection"
+    ]
+  },
+  "remainingLimits": [
+    {
+      "model": "model2/base.obj",
+      "triangles": 8116
+    },
+    {
+      "model": "hovercraft_low_poly/scene.gltf",
+      "triangles": 20017
+    },
+    {
+      "model": "Passenger Hovercraft OBJ",
+      "triangles": 42452
+    }
+  ],
+  "triangleLimit": 4096,
+  "MAX": "Requires export from 3ds Max",
+  "uiChecks": [
+    "manual colour texture assignment and removal",
+    "main model selection supported",
+    "rotation/persistence/export regression",
+    "two-client Modern/Retro multiplayer regression"
+  ]
+}

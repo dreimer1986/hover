@@ -6,7 +6,7 @@ Open **Custom crafts · Import / export** on the extended edition home screen. T
 
 ## Importing and saving
 
-1. Select exactly one **OBJ**, **GLTF** or **GLB**, together with all required local resources. OBJ may need MTL and textures; GLTF may need BIN files. Resource filenames must be unique. External URLs are not downloaded.
+1. Select an **OBJ**, **FBX**, **GLTF** or **GLB**, together with its required local resources. If several alternatives are selected, choose **Main model**. OBJ may include MTL and textures, or use manual colour-texture assignment without MTL; GLTF may need BIN files. Resource filenames must be unique. External URLs are not downloaded.
 2. Choose a name, up axis (Y/Z), rotation and size. **Import and validate** displays the converted model and textures. Orientation and size changes update the preview immediately. Dragging with a mouse or finger only changes the viewing angle.
 3. Allocate handling points, choose **Preview edited values**, then **Save preview**. The craft becomes available in single player and survives page reloads.
 4. **Export selected craft** saves a complete `.hovercraft.json` containing model, colour texture and points. Reimporting runs all validation again. **Model as Hover JSON/JS** exports only legacy Three.js 3.1 geometry, without texture or handling data.
@@ -34,6 +34,16 @@ The importer triangulates and merges identical position/normal/UV combinations. 
 OBJ material colours/diffuse textures and GLTF base colours are baked into the atlas. Transformed UVs must stay within 0–1; bake repeating UVs in Blender first. PBR metallic/roughness, normal/emissive maps and transparent material effects are not faithfully retained. The atlas is a simplified colour texture for the old engine. Missing resources produce an error.
 
 Original geometry is JSON v3.1 despite its `.js` extension. Imported scripts are never executed. The user-provided `threejs_v3_to_obj.py` was used for the initial round-trip test; `scripts/prepare_craft_fixtures.py` generates reproducible fixtures.
+
+## Material assignment and additional formats
+
+The importer accepts static OBJ, FBX, GLTF and GLB. If the selected files contain alternative model formats, choose **Main model**; they are not merged. OBJ can be used without an MTL file. After import, each material has a colour texture selector. **Automatic** uses existing assignments or an unambiguous albedo/diffuse/base-colour filename when no assignment exists. Otherwise choose a texture explicitly. **Material colour only** removes the texture. Changes update the preview.
+
+Colour textures may be PNG, JPEG, WebP, BMP, TGA or DDS. DDS supports DXT1/BC1, DXT3/BC2, DXT5/BC3 and the loader's uncompressed 32-bit BGRA layout. Software decoding avoids requiring S3TC on mobile GPUs. Other DDS compression formats, cubemaps and volume textures are rejected. TGA uses the Three.js loader, including RLE variants. Images become the existing PNG colour atlas.
+
+FBX uses the separate Three.js r160 loader and accepts static meshes, excluding animations, skins and morph targets. **MAX and BLEND cannot be imported directly**; export FBX, OBJ or GLTF from the original application. Selecting only a MAX model explains this requirement.
+
+Normal, height, metalness, roughness, specular and emission maps are not extra colour layers. These effects still do not become full PBR materials. A package containing nine such PNGs normally needs only its albedo map as the colour texture. Select one suitable set of resources rather than every alternative export; the total input limit remains 24 MiB.
 
 ## Handling and points
 

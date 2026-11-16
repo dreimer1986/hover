@@ -17,4 +17,6 @@ Alle auf der Startseite verwendeten Logos und Schriftarten stammen aus den gesic
 
 ## Importer: Three.js r160
 
-Die getrennte Importfunktion verwendet Three.js r160 sowie OBJLoader, MTLLoader, GLTFLoader und BufferGeometryUtils unter MIT-Lizenz. Quelle: https://github.com/mrdoob/three.js/tree/r160. Lizenz: `modifications/vendor/three/LICENSE`. Nur Modul-Importpfade wurden auf lokale Dateien umgestellt. Die archivierte Spielengine bleibt unverändert.
+Die getrennte Importfunktion verwendet Three.js r160 sowie OBJLoader, MTLLoader, GLTFLoader, FBXLoader, TGALoader, DDSLoader, NURBS-Helfern und BufferGeometryUtils unter MIT-Lizenz. Quelle: https://github.com/mrdoob/three.js/tree/r160. Lizenz: `modifications/vendor/three/LICENSE`. Nur Modul-Importpfade wurden auf lokale Dateien umgestellt. Die archivierte Spielengine bleibt unverändert.
+
+FBX verwendet zusätzlich fflate 0.6.9 (MIT): https://github.com/101arrowz/fflate/tree/v0.6.9. Die vollständige Lizenz liegt in `modifications/vendor/three/fflate.LICENSE`.

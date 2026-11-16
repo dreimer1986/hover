@@ -6,11 +6,11 @@ The container includes the Python game server **and the website**. It needs only
 
 ## Installing on Synology
 
-1. Download the matching image from [release multiplayer-v0.3.1](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.3.1):
+1. Download the matching image from [release multiplayer-v0.3.2](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.3.2):
    - **amd64** for Synology NAS with Intel/AMD processors.
    - **arm64** for supported NAS with 64-bit ARM processors. The NAS must support Container Manager/Docker; not every ARM model does. 32-bit ARM is not included.
 2. In **Container Manager → Image → Add → Add from File**, import `hover-multiplayer-….tar.gz`. If DSM rejects compressed files, decompress it to `.tar` first.
-3. Create a container from **hover-multiplayer:0.3.1**, enable automatic restart and map **NAS port 8080 → container port 8080, TCP**. No folder mappings or privileged mode are needed.
+3. Create a container from **hover-multiplayer:0.3.2**, enable automatic restart and map **NAS port 8080 → container port 8080, TCP**. No folder mappings or privileged mode are needed.
 4. Point Caddy at the NAS port as described below and open **https://hover.dreimer.de/**. The container website defaults to its current HTTPS address in the **Multiplayer** panel.
 
 Menu names vary between the older Docker package and newer Container Manager. Alternatively, import [compose.yaml](compose.yaml) as a Container Manager project after loading the image. If NAS port 8080 is occupied, use a mapping such as `18080:8080` and point the proxy at port 18080.
@@ -27,7 +27,7 @@ Older DSM without Compose:
 ```sh
 sudo docker run -d --name hover-multiplayer --restart unless-stopped \
   --read-only --cap-drop ALL --security-opt no-new-privileges:true \
-  -p 8080:8080 hover-multiplayer:0.3.1
+  -p 8080:8080 hover-multiplayer:0.3.2
 ```
 
 ## Caddy 2: hover.dreimer.de
@@ -60,22 +60,22 @@ A disconnection aborts the round, keeping the remaining players in the lobby. Wh
 
 ## Updating an existing Synology container
 
-1. Finish active games. Download the matching v0.3.1 archive and import it through **Container Manager → Image → Add → Add from File**. The new image is `hover-multiplayer:0.3.1`.
+1. Finish active games. Download the matching v0.3.2 archive and import it through **Container Manager → Image → Add → Add from File**. The new image is `hover-multiplayer:0.3.2`.
 2. Note the old container's ports and environment variables. Stop it and rename it, for example to `hover-multiplayer-old`, to keep a rollback option. Disable its automatic restart.
 3. Create a new `hover-multiplayer` container from the **new image**. Keep the same ports (usually `8080:8080`) and environment variables, and enable automatic restart. No volumes or privileged mode are required. Restarting the old container alone does not update its image.
-4. Start the new container. `https://hover.dreimer.de/healthz` should report `version: 0.3.1` and `protocol: 3`. Reload the website, create and join a lobby. Caddy needs no changes if the port mapping stays the same.
+4. Start the new container. `https://hover.dreimer.de/healthz` should report `version: 0.3.2` and `protocol: 3`. Reload the website, create and join a lobby. Caddy needs no changes if the port mapping stays the same.
 5. After a successful test, remove the old container. To roll back, stop the new one and restart the old one, restoring its original name if needed. Active lobbies are not transferred.
 
-For a **Compose project**, import the new image, change the existing project's image to `hover-multiplayer:0.3.1` and recreate the project. Keep your own port/origin settings. Using SSH in the project directory:
+For a **Compose project**, import the new image, change the existing project's image to `hover-multiplayer:0.3.2` and recreate the project. Keep your own port/origin settings. Using SSH in the project directory:
 
 ```sh
 sudo docker load -i hover-multiplayer-amd64.tar.gz
-# compose.yaml: image: hover-multiplayer:0.3.1
+# compose.yaml: image: hover-multiplayer:0.3.2
 sudo docker compose up -d --force-recreate
 sudo docker compose ps
 ```
 
-The release includes [compose.yaml](compose.yaml) and this guide. Use the arm64 file for ARM. Both website and server must use protocol 3 (server 0.3.0 or later). Version 0.3.1 also delivers corrected craft rotation and craft labels for the NAS-hosted website.
+The release includes [compose.yaml](compose.yaml) and this guide. Use the arm64 file for ARM. Both website and server must use protocol 3 (server 0.3.0 or later). Version 0.3.2 also delivers FBX, DDS/TGA and manual material assignment for the NAS-hosted website.
 
 ## Configuration and operation
 
@@ -99,7 +99,7 @@ Original archives and Store packages are unchanged. [Historical interface analys
 ## Building the image yourself
 
 ```sh
-docker build -t hover-multiplayer:0.3.1 .
+docker build -t hover-multiplayer:0.3.2 .
 docker compose up -d
 ```
 

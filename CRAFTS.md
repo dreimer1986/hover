@@ -6,7 +6,7 @@ Im Startbildschirm der erweiterten Fassung **Eigene Schiffe · Import / Export**
 
 ## Importieren und sichern
 
-1. Genau ein **OBJ**, **GLTF** oder **GLB** gemeinsam mit allen benötigten lokalen Dateien auswählen. Bei OBJ gehören gegebenenfalls MTL und Texturen dazu; bei GLTF auch BIN-Dateien. Dateinamen müssen eindeutig sein. Externe URLs werden nicht heruntergeladen.
+1. Ein **OBJ**, **FBX**, **GLTF** oder **GLB** gemeinsam mit den benötigten lokalen Dateien auswählen. Bei mehreren Modellfassungen im Dateisatz das **Hauptmodell** auswählen. Bei OBJ gehören gegebenenfalls MTL und Texturen dazu; ohne MTL lässt sich die Farbtextur manuell zuordnen; bei GLTF auch BIN-Dateien. Dateinamen müssen eindeutig sein. Externe URLs werden nicht heruntergeladen.
 2. Namen, Oben-Achse (Y/Z), Drehung und Größe wählen. **Importieren und prüfen** erzeugt eine Vorschau mit den konvertierten Texturen. Änderungen an Ausrichtung und Größe aktualisieren die Vorschau sofort. Ziehen mit Maus oder Finger dreht nur die Betrachtungsansicht.
 3. Fahrpunkte verteilen, **Werte in Vorschau übernehmen** und **Vorschau speichern**. Das Schiff steht dann im Einzelspieler zur Auswahl und bleibt nach Neuladen erhalten.
 4. **Gewähltes Schiff exportieren** speichert ein vollständiges `.hovercraft.json` mit Modell, Farbtextur und Punkteverteilung. Diese Datei kann wieder importiert werden; alle Prüfungen laufen erneut. **Modell als Hover-JSON/JS** exportiert nur die Geometrie im alten Three.js-3.1-Format, ohne Textur und Fahrwerte.
@@ -34,6 +34,16 @@ Der Importer trianguliert und fasst identische Vertex-/Normalen-/UV-Kombinatione
 OBJ-Materialfarben und Diffuse-Texturen beziehungsweise GLTF-Basisfarben werden in den Atlas übernommen. UVs müssen nach Texturtransformation im Bereich 0–1 liegen; wiederholte UVs vorher in Blender backen. PBR-Metall-/Rauheitswerte, Normal-/Emissionskarten und transparente Materialeffekte werden nicht gleichwertig übernommen. Der Atlas ist eine vereinfachte Farbtextur für die alte Engine. Fehlende Ressourcen führen zu einer Fehlermeldung.
 
 Die originale Geometrie ist JSON v3.1, auch wenn die Datei `.js` heißt. Der Importer führt keine gelieferten Skripte aus. Dein `threejs_v3_to_obj.py` wurde für den ursprünglichen Rückkonvertierungstest verwendet; die reproduzierbaren Testfixtures erstellt `scripts/prepare_craft_fixtures.py`.
+
+## Materialzuordnung und zusätzliche Formate
+
+Nach dem Import erscheint eine Farbtextur-Auswahl für jedes Material. **Automatisch** verwendet vorhandene Materialzuordnungen oder, wenn diese fehlen, eine eindeutig erkennbare Albedo-/Diffuse-/BaseColor-Datei. Andernfalls eine der ausgewählten Texturen ausdrücklich zuweisen. **Nur Materialfarbe** entfernt die Farbtextur. Änderungen aktualisieren die Vorschau. Bei mehreren Hauptmodellen wechselt **Hauptmodell** zwischen den alternativen Dateien; die Modelle werden nicht zusammengefügt.
+
+Unterstützte Farbtexturen: PNG, JPEG, WebP, BMP, TGA und DDS. DDS wird für DXT1/BC1, DXT3/BC2, DXT5/BC3 sowie vom Loader unterstütztes unkomprimiertes 32-Bit-BGRA in Software dekodiert, ohne S3TC-Unterstützung der Handy-GPU vorauszusetzen. Andere DDS-Kompressionen, Cubemaps und Volumentexturen werden abgelehnt. TGA unterstützt die vom Three.js-Loader gelesenen Varianten einschließlich RLE. Alle werden in denselben PNG-Farbatlas umgewandelt.
+
+FBX verwendet den separaten Three.js-r160-Loader; statische Meshes werden übernommen. Animationen, Skins und Morph Targets bleiben ausgeschlossen. **MAX und BLEND werden nicht direkt importiert**: Dafür eine FBX-/OBJ-/GLTF-Fassung aus dem jeweiligen Ursprungsprogramm verwenden. Die Auswahl eines MAX-Modells allein zeigt eine entsprechende Erklärung.
+
+Normal-, Height-, Metalness-, Roughness-, Specular- und Emissionsdateien sind keine zusätzlichen Farbtexturen desselben Materials. Diese Effekte werden weiterhin nicht als vollständiges PBR-Material umgesetzt. Aus einem Satz mit neun solchen PNGs wird daher normalerweise nur Albedo als Farbtextur benötigt. Bei mehreren Exporten oder Textursets nur eine passende Zusammenstellung auswählen; das Gesamteingabelimit bleibt 24 MiB.
 
 ## Fahrwerte und Punkte
 

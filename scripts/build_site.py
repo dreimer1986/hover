@@ -87,6 +87,9 @@ shutil.copytree(ROOT / 'modifications', modified, dirs_exist_ok=True)
 # Version the lazily loaded converter as well as the initial UI scripts.
 library = modified / 'craft-library.js'
 if library.exists():
+    texture_version = hashlib.sha256((modified / 'craft-textures.mjs').read_bytes()).hexdigest()[:12]
+    converter = modified / 'craft-converter.mjs'
+    converter.write_text(converter.read_text().replace("'./craft-textures.mjs'", "'./craft-textures.mjs?v=" + texture_version + "'"))
     converter_version = hashlib.sha256((modified / 'craft-converter.mjs').read_bytes()).hexdigest()[:12]
     library.write_text(library.read_text().replace("'./craft-converter.mjs'", "'./craft-converter.mjs?v=" + converter_version + "'"))
 index = modified / 'index.html'
