@@ -27,6 +27,7 @@
     preview.querySelector('figcaption').textContent=window.HoverCrafts?.entry(key)?.name||crafts[key][0];
     if(!window.HoverCrafts)return;
     await HoverCrafts.ready;if(generation!==previewGeneration)return;
+    if(!preview.querySelector('.craft-stats-help'))preview.appendChild(HoverCrafts.createStatsHelp('craft-stats-help'));
     const custom=HoverCrafts.entry(key),stats=custom?HoverCrafts.stats(custom):HoverCrafts.profileStats(Hover.Profiles[key]);
     const number=value=>new Intl.NumberFormat(de?'de-DE':'en-US',{maximumFractionDigits:1}).format(value);
     preview.querySelector('.craft-stats-caption').textContent=(custom?t('Fahrpunkte: ','Handling points: '):t('Vergleichspunkte (umgerechnet): ','Equivalent handling points: '))+number(stats.reduce((sum,s)=>sum+s.value,0))+' / '+HoverCrafts.pointBudget();

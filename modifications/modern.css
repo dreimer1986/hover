@@ -206,3 +206,8 @@ html:not(.input-gate) #input-start { display:none; }
 .modern-wide .retro #dash_top #flag_counts { top:calc(var(--hover-toolbar-height,50px) + 6px + env(safe-area-inset-top,0px)); }
 @media(max-width:600px){#homeView { padding-top:calc(var(--hover-toolbar-height,50px) + 20px); }}
 @media(orientation:portrait){#modern-readout { top:calc(var(--hover-toolbar-height,50px) + 50px); }}
+
+.craft-stats-help { margin:10px 0; text-align:left; color:#eee9ff; font-size:13px; line-height:1.5; }
+.craft-stats-help summary { cursor:pointer; color:#ffd28a; padding:8px 0; }
+.craft-stats-help summary:focus-visible { outline:2px solid #ffb36b; outline-offset:2px; }
+.craft-stats-help p { margin:8px 0; }

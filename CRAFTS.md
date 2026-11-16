@@ -55,13 +55,25 @@ Fünf Regler haben jeweils 0–10 Punkte; insgesamt stehen **40 Punkte** zur Ver
 | Beschleunigung (`acceleration`) | ca. 1,375 → 5 |
 | Lenkkraft (`turnSpeed`) | ca. 0,07363 → 0,18408 |
 | Gleitfähigkeit (`drag`) | 3275 → 64 |
-| Direkte Lenkung (`turnDrag`) | 26214 → 13107 |
+| Nachdrehen (`turnDrag`) | 26214 → 13107 |
 
 Das Budget entspricht dem höchsten normierten Gesamtwert der Originalprofile (Bambi: 40). Alle fünf Regler zusammen auf Maximum wären 50 und sind unzulässig. Es gibt keine zusätzliche Kostenkurve; das einfache Budget ist nachvollziehbar. Die Originalprofile bleiben unverändert. Ein frei editierbarer Massewert existiert in diesen Profilen nicht; Kollisionsgröße und Physikcode werden nicht aus Importdateien übernommen.
 
 Bei eigenen Schiffen zeigt die Schiffsauswahl dieselben fünf Fahrpunkte und Bezeichnungen wie der Editor, einschließlich der Gesamtpunktzahl. Die drei Standardschiffe werden in der erweiterten Fassung auf dieselben fünf Vergleichswerte von 0–10 umgerechnet. Bruchwerte erscheinen mit höchstens einer Nachkommastelle; ihre ursprünglichen Fahrwerte werden nicht verändert. 0 bedeutet das untere Ende des jeweiligen Originalbereichs, nicht Stillstand oder eine fehlende Eigenschaft. Die unveränderten Archivfassungen behalten ihre historische Anzeige. Die Editorpunkte werden innerhalb der obigen Bereiche in physikalische Fahrwerte umgerechnet und sind keine direkten Geschwindigkeits- oder Beschleunigungseinheiten.
 
 [Messwerte und Budgetableitung](verification/craft-policy-analysis.json) · [Verbindliche Regeln](modifications/craft-policy.json). Browser **und Server** prüfen Schema, endliche Zahlen, Grenzen, Indizes, Bildgröße, erlaubte Eigenschaften und Budget. Der Server prüft außerdem die PNG-Struktur und begrenzt die Dekompression. Ein Texteditor kann diese Regeln nicht durch zusätzliche Profilfelder umgehen. Diese Grenzen ersetzen weder praktische Balance-Tests noch vollständige serverseitige Spielphysik.
+
+### Was bewirken die Werte?
+
+In Schiffsauswahl und Editor öffnet **Was bedeuten die Werte?** die Erläuterungen auch per Touch oder Tastatur.
+
+- **Tempo:** Mehr Punkte erhöhen die normale Höchstgeschwindigkeit.
+- **Beschleunigung:** Mehr Punkte erhöhen den Schub beim Gasgeben; weniger Punkte machen das Anfahren sanfter.
+- **Lenkkraft:** Mehr Punkte erhöhen sowohl den Aufbau der Drehbewegung als auch das maximale Drehtempo bei Lenkeingaben.
+- **Gleitfähigkeit:** Mehr Punkte verringern die Dämpfung ohne Gas; das Schiff rollt länger weiter. Weniger Punkte bremsen es nach dem Loslassen stärker ab.
+- **Nachdrehen:** Mehr Punkte verringern die Drehdämpfung ohne Lenkeingabe; das Schiff dreht länger weiter. Weniger Punkte lassen die Drehbewegung schneller abklingen. Die frühere Bezeichnung „Direkte Lenkung“ war irreführend und wurde korrigiert; Fahrwerte und gespeicherte Punkte bleiben gleich.
+
+40 Punkte sind eine Obergrenze, keine Zielvorgabe und keine objektive Leistungsnote. Mehr Gleitfähigkeit oder Nachdrehen kann die Kontrolle erschweren. Chicago ist trotz 10 Punkten anfängerfreundlich, weil es langsamer fährt, sanfter beschleunigt, langsamer dreht und ohne Gas stärker abbremst. Eine unterschiedliche Masse ist in den Profilen nicht enthalten. Diese Aussagen folgen aus `applyTurn` und `applyAccel` des erhaltenen Spielcodes; es wurde keine neue Physik eingeführt.
 
 ## Multiplayer und Wiederverwendung
 

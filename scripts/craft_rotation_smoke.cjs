@@ -4,7 +4,7 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
  try{
   const page=await browser.newPage({locale:'en-US'}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));
-  await page.goto(process.env.HOVER_URL||'http://127.0.0.1:8772/');await page.locator('#craft-workshop summary').click();
+  await page.goto(process.env.HOVER_URL||'http://127.0.0.1:8772/');await page.locator('#craft-workshop > summary').click();
   const idle=()=>page.waitForFunction(()=>document.querySelector('#craft-workshop').getAttribute('aria-busy')==='false');
   async function checkRotation(){
    await idle();const before=await page.evaluate(()=>HoverCrafts.selected().data);
@@ -19,7 +19,7 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
    await page.reload();await page.waitForFunction(hash=>HoverCrafts.list().some(e=>e.hash===hash&&e.persistent),saved.hash);
    await page.selectOption('#modern-craft','custom_'+saved.hash);
    assert.deepEqual(await page.evaluate(()=>HoverCrafts.selected().data.geometry.vertices),after.geometry.vertices);
-   await page.locator('#craft-workshop summary').click();
+   await page.locator('#craft-workshop > summary').click();
    const [download]=await Promise.all([page.waitForEvent('download'),page.click('#craft-export')]);await idle();
    assert.equal(require('node:fs').readFileSync(await download.path(),'utf8'),saved.json);
    return saved;

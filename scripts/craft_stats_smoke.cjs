@@ -6,7 +6,7 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
  try{
   for(const locale of ['de-DE','en-US']){
    const page=await browser.newPage({locale}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));
-   await page.goto(process.env.HOVER_URL||'http://127.0.0.1:8772/');await page.waitForSelector('#modern-play');await page.locator('#craft-workshop summary').click();
+   await page.goto(process.env.HOVER_URL||'http://127.0.0.1:8772/');await page.waitForSelector('#modern-play');await page.locator('#craft-workshop > summary').click();
    const idle=()=>page.waitForFunction(()=>document.querySelector('#craft-workshop').getAttribute('aria-busy')==='false');
    const shown=()=>page.locator('#craft-preview dd').evaluateAll(nodes=>Object.fromEntries(nodes.map(n=>[n.dataset.parameter,Number(n.textContent.split('/')[0])])));
    for(const entry of packages){
@@ -24,7 +24,7 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
    }
    await page.evaluate(()=>HoverEnhanced.showHome());await page.reload();await page.waitForSelector('#modern-play');await page.waitForFunction(count=>HoverCrafts.list().filter(e=>e.persistent).length===count,packages.length);
    const last=packages.at(-1),hash=await page.evaluate(name=>HoverCrafts.list().find(e=>e.name===name).hash,last.data.name);await page.selectOption('#modern-craft','custom_'+hash);assert.deepEqual(await shown(),last.data.points);
-   await page.locator('#craft-workshop summary').click();await page.click('#craft-edit');await idle();
+   await page.locator('#craft-workshop > summary').click();await page.click('#craft-edit');await idle();
    const key=Object.keys(last.data.points).find(k=>last.data.points[k]>0);await page.locator('#point-'+key).evaluate((node,value)=>{node.value=value;node.dispatchEvent(new Event('input',{bubbles:true}));},String(last.data.points[key]-1));await page.click('#craft-preview-draft');await idle();assert.deepEqual(await shown(),{...last.data.points,[key]:last.data.points[key]-1});
    for(const key of ['Easy','Normal','Hard']){await page.selectOption('#modern-craft',key);await page.waitForFunction(k=>document.querySelector('#craft-preview').dataset.craft===k,key);const original=await page.evaluate(k=>JSON.stringify(Hover.Profiles[k]),key);const policy=await page.evaluate(()=>HoverCraftFormat.policyReady),profile=JSON.parse(original),format=new Intl.NumberFormat(locale,{maximumFractionDigits:1});const expected=Object.entries(policy.parameters).map(([k,[lo,hi]])=>format.format(Math.max(0,Math.min(10,(profile[k]-lo)/(hi-lo)*10)))+' / 10');await page.waitForFunction(()=>document.querySelectorAll('#craft-preview dd').length===5);assert.deepEqual(await page.locator('#craft-preview dd').allTextContents(),expected);assert.equal(await page.evaluate(k=>JSON.stringify(Hover.Profiles[k]),key),original);}
    assert.deepEqual(errors,[]);await page.close();

@@ -55,13 +55,25 @@ Five sliders each offer 0–10 points, with **40 points total**. Values are deri
 | Acceleration | approximately 1.375 → 5 |
 | Steering power (`turnSpeed`) | approximately 0.07363 → 0.18408 |
 | Coasting (`drag`) | 3275 → 64 |
-| Steering response (`turnDrag`) | 26214 → 13107 |
+| Turn coasting (`turnDrag`) | 26214 → 13107 |
 
 The budget equals the largest normalized original total (Bambi: 40). Maximizing all five sliders costs 50 and is rejected. There is no nonlinear cost curve. Original profiles remain unchanged. These profiles have no editable mass parameter; collision dimensions and physics code are not imported.
 
 For custom crafts, craft selection shows the same five handling point values and labels as the editor, including the total allocation. In the extended edition, the three stock crafts are converted to the same five 0–10 comparison values, displayed with at most one decimal place. Their original handling values remain unchanged. Zero means the lower end of the corresponding original range, not a stationary craft or a missing capability. The preserved archive editions retain their historical display. Editor points are mapped to physical handling values within the ranges above; they are not direct speed or acceleration units.
 
 [Measurements and budget derivation](verification/craft-policy-analysis.json) · [Enforced policy](modifications/craft-policy.json). Both browser **and server** validate schema, finite numbers, bounds, indices, image dimensions, permitted properties and points. The server also checks PNG structure and bounds decompression. Editing package text cannot bypass the rules by adding profile fields. These limits do not replace practical balancing or fully server-authoritative physics.
+
+### What do the values do?
+
+**What do these values mean?** opens the explanation in craft selection and the editor, including touch and keyboard access.
+
+- **Speed:** More points raise normal top speed.
+- **Acceleration:** More points increase thrust under power; fewer points give gentler acceleration.
+- **Steering power:** More points increase both rotation buildup and the maximum turning rate while steering.
+- **Coasting:** More points reduce damping when power is released, so the craft coasts farther. Fewer points slow it down sooner.
+- **Turn coasting:** More points reduce damping when steering is released, so rotation continues longer. Fewer points stop rotation sooner. The previous label “Steering response” was misleading and has been corrected; physics and saved allocations remain unchanged.
+
+40 points is a cap, not a target or an objective performance score. More coasting or turn coasting can make control harder. Chicago is beginner-friendly despite its 10-point total because it is slower, accelerates more gently, turns more slowly and decelerates more strongly without power. The profiles contain no different mass values. These explanations follow the preserved game's `applyTurn` and `applyAccel`; no new physics is introduced.
 
 ## Multiplayer and reuse
 
