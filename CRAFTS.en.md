@@ -59,6 +59,8 @@ Five sliders each offer 0–10 points, with **40 points total**. Values are deri
 
 The budget equals the largest normalized original total (Bambi: 40). Maximizing all five sliders costs 50 and is rejected. There is no nonlinear cost curve. Original profiles remain unchanged. These profiles have no editable mass parameter; collision dimensions and physics code are not imported.
 
+For custom crafts, craft selection shows the same five handling point values and labels as the editor, including the total allocation. The three stock crafts retain their four historical ratings, which use a different rounded scale. Editor points are mapped to physical handling values within the ranges above; they are not direct speed or acceleration units.
+
 [Measurements and budget derivation](verification/craft-policy-analysis.json) · [Enforced policy](modifications/craft-policy.json). Both browser **and server** validate schema, finite numbers, bounds, indices, image dimensions, permitted properties and points. The server also checks PNG structure and bounds decompression. Editing package text cannot bypass the rules by adding profile fields. These limits do not replace practical balancing or fully server-authoritative physics.
 
 ## Multiplayer and reuse

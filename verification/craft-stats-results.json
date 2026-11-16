@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-16",
+  "archiveSha256": "ccee048cb3efdf0a6c1d8c5e186de70a69e376a086f0f6a5b78c875a919658bb",
+  "crafts": [
+    {
+      "name": "Crepé",
+      "points": {
+        "maxSpeed": 5,
+        "acceleration": 9,
+        "turnSpeed": 9,
+        "drag": 7,
+        "turnDrag": 10
+      },
+      "total": 40
+    },
+    {
+      "name": "Spacer",
+      "points": {
+        "maxSpeed": 9,
+        "acceleration": 9,
+        "turnSpeed": 8,
+        "drag": 7,
+        "turnDrag": 7
+      },
+      "total": 40
+    },
+    {
+      "name": "Streamer",
+      "points": {
+        "maxSpeed": 10,
+        "acceleration": 10,
+        "turnSpeed": 8,
+        "drag": 4,
+        "turnDrag": 8
+      },
+      "total": 40
+    }
+  ],
+  "passed": [
+    "German and English preview labels equal editor labels",
+    "Preview values equal saved point allocations",
+    "Actual single-player craft/profile fields equal policy-derived values",
+    "Saved library reload",
+    "Edited draft points update preview",
+    "Stock craft ratings unchanged"
+  ],
+  "sourceModelsRedistributed": false
+}

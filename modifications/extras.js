@@ -25,8 +25,10 @@
   async function showCraft(){
     const generation=++previewGeneration,key=select.value;
     preview.querySelector('figcaption').textContent=window.HoverCrafts?.entry(key)?.name||crafts[key][0];
-    const labels=[t('Tempo','Speed'),t('Kraft','Power'),t('Stabilität','Stability'),t('Wendigkeit','Agility')];
-    preview.querySelector('dl').replaceChildren(...Hover.Profiles.getStats(Hover.Profiles[key]).flatMap((value,i)=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=labels[i];dd.textContent=(value*10).toFixed(1)+' / 10';return [dt,dd];}));
+    const custom=window.HoverCrafts?.entry(key),labels=[t('Tempo','Speed'),t('Kraft','Power'),t('Stabilität','Stability'),t('Wendigkeit','Agility')];
+    const stats=custom?HoverCrafts.stats(custom):Hover.Profiles.getStats(Hover.Profiles[key]).map((value,i)=>({label:labels[i],value:value*10}));
+    preview.querySelector('.craft-stats-caption').textContent=custom?t('Fahrpunkte: ','Handling points: ')+stats.reduce((sum,s)=>sum+s.value,0)+' / '+HoverCrafts.pointBudget():t('Originalbewertung','Original ratings');
+    preview.querySelector('dl').replaceChildren(...stats.flatMap(stat=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=stat.label;dd.textContent=(custom?String(stat.value):stat.value.toFixed(1))+' / 10';if(stat.key)dd.dataset.parameter=stat.key;return [dt,dd];}));
     try{
       const craft=await loadCraft(key);if(generation!==previewGeneration){if(craft.group.userData.customPreview)HoverCrafts.disposePreview(craft.group);return;}
       for(const child of scene.children.slice())if(child.userData?.previewCraft){scene.remove(child);if(child.userData.customPreview)HoverCrafts.disposePreview(child);}
@@ -39,7 +41,7 @@
   api.installPreview=function(){
     if(preview)return;
     preview=document.createElement('figure');preview.id='craft-preview';
-    preview.innerHTML='<figcaption></figcaption><dl></dl>'; 
+    preview.innerHTML='<figcaption></figcaption><p class="craft-stats-caption"></p><dl></dl>';
     select.parentElement.appendChild(preview);
     renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});renderer.setClearColor(0,0);renderer.setSize(480,270);
     renderer.domElement.setAttribute('role','img');renderer.domElement.setAttribute('aria-label',t('Vorschau des gewählten Hovercrafts','Selected hovercraft preview'));

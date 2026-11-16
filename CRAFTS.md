@@ -59,6 +59,8 @@ Fünf Regler haben jeweils 0–10 Punkte; insgesamt stehen **40 Punkte** zur Ver
 
 Das Budget entspricht dem höchsten normierten Gesamtwert der Originalprofile (Bambi: 40). Alle fünf Regler zusammen auf Maximum wären 50 und sind unzulässig. Es gibt keine zusätzliche Kostenkurve; das einfache Budget ist nachvollziehbar. Die Originalprofile bleiben unverändert. Ein frei editierbarer Massewert existiert in diesen Profilen nicht; Kollisionsgröße und Physikcode werden nicht aus Importdateien übernommen.
 
+Bei eigenen Schiffen zeigt die Schiffsauswahl dieselben fünf Fahrpunkte und Bezeichnungen wie der Editor, einschließlich der Gesamtpunktzahl. Die drei Originalschiffe behalten ihre vier historischen Bewertungen; diese beruhen auf einer anderen, gerundeten Skala. Die Editorpunkte werden innerhalb der obigen Bereiche in physikalische Fahrwerte umgerechnet und sind keine direkten Geschwindigkeits- oder Beschleunigungseinheiten.
+
 [Messwerte und Budgetableitung](verification/craft-policy-analysis.json) · [Verbindliche Regeln](modifications/craft-policy.json). Browser **und Server** prüfen Schema, endliche Zahlen, Grenzen, Indizes, Bildgröße, erlaubte Eigenschaften und Budget. Der Server prüft außerdem die PNG-Struktur und begrenzt die Dekompression. Ein Texteditor kann diese Regeln nicht durch zusätzliche Profilfelder umgehen. Diese Grenzen ersetzen weder praktische Balance-Tests noch vollständige serverseitige Spielphysik.
 
 ## Multiplayer und Wiederverwendung

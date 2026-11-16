@@ -23,7 +23,7 @@ Desktop controls: arrow keys, Space and A/S/D. Fullscreen requires a button pres
 
 Open [hover.dreimer.de](https://hover.dreimer.de/), choose **Multiplayer**, enter a name and create a lobby or join using a room code. Choose your team; the host selects the arena, graphics and flag count. The lobby stays open after each round. **End lobby · Scores** displays the final totals.
 
-The Python/WebSocket server runs without Microsoft services in a Docker container on **8080/TCP**, exposed through an HTTPS reverse proxy. [Synology installation and updates](SERVER.en.md) · [Download container v0.3.2](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.3.2).
+The Python/WebSocket server runs without Microsoft services in a Docker container on **8080/TCP**, exposed through an HTTPS reverse proxy. [Synology installation and updates](SERVER.en.md) · [Download container v0.3.3](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.3.3).
 
 ## Run locally
 
