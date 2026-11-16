@@ -92,6 +92,8 @@
     '1 · Stadt': '1 · City',
     '2 · Kanalisation': '2 · Sewers',
     '3 · Burg': '3 · Castle',
+    'Chicago (Einfach)': 'Chicago (Easy)',
+    'Bambi (Schwer)': 'Bambi (Hard)',
     'Einfach': 'Easy',
     'Schwer': 'Hard',
     'Spiel starten →': 'Start game →',

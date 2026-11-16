@@ -122,7 +122,7 @@
     $('mp-share').disabled=$('mp-update-name').disabled=!waiting||busy;
     $('mp-team').disabled=!waiting||busy;
     const own=room.players.find(p=>p.id===playerId);if(own)$('mp-team').value=own.team;
-    const craftOptions=[[0,'Chicago'],[1,'Wizard'],[2,'Bambi'],...(room.crafts||[]).map(m=>[m.id,m.name])];
+    const craftOptions=[[0,t('Chicago (Einfach)','Chicago (Easy)')],[1,'Wizard (Normal)'],[2,t('Bambi (Schwer)','Bambi (Hard)')],...(room.crafts||[]).map(m=>[m.id,m.name])];
     $('mp-craft').replaceChildren(...craftOptions.map(([id,name])=>{const o=document.createElement('option');o.value=id;o.textContent=name;return o;}));
     if(own)$('mp-craft').value=own.profile;$('mp-craft').disabled=!waiting||busy;
     for(const id of ['mp-arena','mp-flags','mp-mode'])$(id).disabled=!host||!waiting||busy;

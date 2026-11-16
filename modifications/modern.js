@@ -25,7 +25,7 @@
         <p class="enhanced-edition">Erweiterte Fassung</p>
         <div id="enhanced-single-options" class="modern-options">
           <label id="enhanced-level-control" hidden>Arena<select id="modern-arena"><option value="44">1 · Stadt</option><option value="46">2 · Kanalisation</option><option value="47">3 · Burg</option></select></label>
-          <label>Hovercraft<select id="modern-craft"><option value="Easy">Einfach</option><option value="Normal">Normal</option><option value="Hard">Schwer</option></select></label>
+          <label>Hovercraft<select id="modern-craft"><option value="Easy">Chicago (Einfach)</option><option value="Normal">Wizard (Normal)</option><option value="Hard">Bambi (Schwer)</option></select></label>
           <label>Flaggen pro Team<select id="modern-flags"><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
         </div>
         <button id="modern-play" class="homeButton" type="button">Einzelspieler</button>
