@@ -13,7 +13,7 @@
    g.chaseCameraEnabled=enabled;mesh.visible=enabled&&g.craft.cloakTime<=0;
    if(!enabled)return draw.call(this,dt);
    const craft=g.craft,pos=craft.position,front=g.camera.position,short=g.shortCamera.position,rx=g.camera.rotation.x,sx=g.shortCamera.rotation.x,light=g.spotLight.position,order=g.camera.rotation.order,shortOrder=g.shortCamera.rotation.order;
-   let distance=430,camera=null;
+   let distance=window.HoverPreferences?.values.camera||430,camera=null;
    // Never push the camera inside the craft when a wall is immediately behind it.
    for(;distance>=240;distance-=40){const candidate=new THREE.Vector3(pos.x+Math.sin(craft.angle)*distance,pos.y+distance*.3,pos.z+Math.cos(craft.angle)*distance);if(!g.world.getCollisionXYZ(pos.x,pos.y,pos.z,candidate.x,candidate.y,candidate.z)){camera=candidate;break;}}
    if(!camera){mesh.visible=false;return draw.call(this,dt);}

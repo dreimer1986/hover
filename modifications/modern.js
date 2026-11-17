@@ -134,7 +134,7 @@
   window.HoverEnhanced.ui = ui;
   $('modern-play').onclick = () => start(false);
   $('modern-retro').onclick = () => start(true);
-  function active() { return !HoverEnhanced.mapOpen && touch && view && view.playing && controller && !document.hidden; }
+  function active() { return !HoverEnhanced.menuOpen && !HoverEnhanced.mapOpen && touch && view && view.playing && controller && !document.hidden; }
   function applyDirections() {
     if (!controller) return;
     directions.forEach(key => { controller[key] = [...pointers.values()].some(p => p.keys.includes(key)); });
@@ -303,7 +303,7 @@
     }
     HoverEnhanced.updateInput?.(game,next);
     HoverEnhanced.updateMap?.(game,next);
-    const controls = !HoverEnhanced.mapOpen && inGame && !!(next && next.playing) && touch;
+    const controls = !HoverEnhanced.menuOpen && !HoverEnhanced.mapOpen && inGame && !!(next && next.playing) && touch;
     if (!controls && !$('modern-controls').hidden) release();
     $('modern-controls').hidden = !controls;
     requestAnimationFrame(tick);

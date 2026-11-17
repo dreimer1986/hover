@@ -1,4 +1,4 @@
-"""Hover replacement multiplayer service. Protocol v3, no Microsoft services.
+"""Hover replacement multiplayer service. Protocol v4, no Microsoft services.
 
 Movement remains client-simulated. Rooms, teams, flags and item ownership are
 server-managed; this is intended for casual play, not authoritative anti-cheat.
@@ -16,7 +16,7 @@ import time
 from aiohttp import web, WSMsgType
 
 MAPS = json.loads(Path(__file__).with_name('maps.json').read_text())
-VERSION = '0.3.5'
+VERSION = '0.4.0'
 try:
     from .crafts import validate as validate_craft, POLICY as CRAFT_POLICY
 except ImportError:
@@ -45,6 +45,10 @@ class Client:
         self.id = secrets.token_hex(8)
         self.room = None
         self.ready = False
+        self.lobby_ready = False
+        self.resume_token = secrets.token_urlsafe(32)
+        self.disconnected_at = None
+        self.chat_at = 0
         self.state = None
         self.tokens = 100.0
         self.last = time.monotonic()
@@ -61,6 +65,10 @@ class Service:
     def __init__(self):
         self.rooms = {}
         self.clients = set()
+        self.sessions = {}
+        self.tasks = set()
+        self.countdown_seconds = 3
+        self.reconnect_seconds = 30
         self.max_rooms = int(os.getenv('MAX_ROOMS', '32'))
         self.max_clients = int(os.getenv('MAX_CLIENTS', '256'))
 
@@ -70,28 +78,31 @@ class Service:
     def info(self, room):
         return {'code': room['code'], 'maze': room['maze'], 'capacity': room['capacity'],
                 'host': room['host'], 'phase': room['phase'], 'round': room['round'],
-                'name': room['name'], 'public': room['public'],
+                'name': room['name'], 'public': room['public'], 'rotation': room.get('rotation', []), 'votes': room.get('votes', {}),
                 'crafts': [{k: m[k] for k in ('hash', 'id', 'name')} for m in room['crafts'].values()],
                 'flagCount': room['flagCount'], 'retro': room['retro'], 'lastResult': room['lastResult'],
-                'players': [{'id': c.id, 'name': c.name, 'team': c.team, 'ready': c.ready, 'profile': c.profile} for c in room['players']]}
+                'players': [{'id': c.id, 'name': c.name, 'team': c.team, 'ready': c.ready, 'lobbyReady': c.lobby_ready, 'connected': c.disconnected_at is None, 'profile': c.profile} for c in room['players']]}
 
     async def leave(self, client):
+        self.sessions.pop(client.resume_token, None)
         room, client.room = client.room, None
         client.ready = False
         client.state = None
         if room is None:
             return
         room['players'].remove(client)
+        room.get('votes', {}).pop(client.id, None)
         if not room['players']:
             self.rooms.pop(room['code'], None)
             return
         if room['host'] == client.id:
             room['host'] = room['players'][0].id
-        if room['phase'] in ('loading', 'playing'):
+        if room['phase'] in ('countdown', 'loading', 'playing'):
             # Explicitly end interrupted rounds rather than leave a frozen lobby
             # or grant a win merely because a network connection disappeared.
             room['phase'] = 'waiting'
             room['lastResult'] = 'aborted'
+            for player in room['players']: player.lobby_ready = False
             await self.broadcast(room, 'roundAborted', self.info(room))
         await self.broadcast(room, 'lobby', self.info(room))
 
@@ -101,6 +112,52 @@ class Service:
         return client.room
 
     async def call(self, c, method, args):
+        if method == 'ping':
+            return True
+        if method == 'resume':
+            old = self.sessions.get(args[0])
+            if c.room or not old or old.disconnected_at is None or time.monotonic() - old.disconnected_at > self.reconnect_seconds or not old.room:
+                raise ValueError('Session expired')
+            room = old.room
+            for key in ('id', 'name', 'profile', 'team', 'ready', 'lobby_ready', 'state', 'resume_token', 'room'):
+                setattr(c, key, getattr(old, key))
+            room['players'][room['players'].index(old)] = c
+            old.room = None
+            if room['phase'] == 'loading': c.ready = False
+            self.sessions[c.resume_token] = c
+            await self.broadcast(room, 'lobby', self.info(room))
+            return {'id': c.id, 'room': self.info(room), 'token': c.resume_token, 'flags': room['flags'], 'pods': room['pods']}
+        if method in ('setReady', 'voteMap', 'rotation', 'kick', 'quickMessage'):
+            room = c.room
+            if not room: raise ValueError('Join a lobby first')
+            if method == 'quickMessage':
+                if args[0] not in ('hello', 'ready', 'help', 'defend', 'attack', 'thanks', 'gg'): raise ValueError('Unknown message')
+                if time.monotonic() - c.chat_at < 2: raise ValueError('Please wait before sending another message')
+                c.chat_at = time.monotonic()
+                await self.broadcast(room, 'quickMessage', c.name, args[0])
+                return True
+            if method == 'kick':
+                if room['host'] != c.id: raise ValueError('Only the host may remove players')
+                target = next((p for p in room['players'] if p.id == args[0] and p is not c), None)
+                if not target: raise ValueError('Unknown player')
+                await target.send({'event': 'kicked', 'args': []})
+                await self.leave(target)
+                await target.ws.close()
+                return True
+            if room['phase'] != 'waiting': raise ValueError('Wait until the round ends')
+            if method == 'setReady':
+                if type(args[0]) is not bool: raise ValueError('Invalid ready state')
+                c.lobby_ready = args[0]
+            elif method == 'voteMap':
+                if str(args[0]) not in MAPS: raise ValueError('Unknown map')
+                room['votes'][c.id] = args[0]
+            else:
+                if room['host'] != c.id: raise ValueError('Only the host may set the rotation')
+                rotation = args[0]
+                if not isinstance(rotation, list) or len(rotation) > 3 or any(type(m) is not int or str(m) not in MAPS for m in rotation) or len(set(rotation)) != len(rotation): raise ValueError('Invalid rotation')
+                room['rotation'] = rotation
+            await self.broadcast(room, 'lobby', self.info(room))
+            return True
         if method == 'listRooms':
             return [{'code': r['code'], 'name': r['name'], 'players': len(r['players']), 'capacity': r['capacity'], 'maze': r['maze'], 'retro': r['retro'], 'flagCount': r['flagCount']} for r in self.rooms.values() if r['public'] and r['players'] and r['phase'] == 'waiting' and len(r['players']) < r['capacity']]
         if method == 'createGame':
@@ -127,7 +184,7 @@ class Service:
                     'players': [], 'phase': 'waiting', 'created': time.monotonic(), 'flags': [], 'pods': [], 'bullets': {},
                     'name': name.strip(), 'public': public, 'crafts': {},
                     'round': 0, 'flagCount': flags, 'retro': False, 'lastResult': None,
-                    'scores': {}, 'teamWins': {'RED': 0, 'BLUE': 0}}
+                    'rotation': [], 'votes': {}, 'scores': {}, 'teamWins': {'RED': 0, 'BLUE': 0}}
             # An unjoined reservation is bound to this socket and expires too.
             room['owner'] = c.id
             self.rooms[code] = room
@@ -142,6 +199,8 @@ class Service:
             room = self.rooms.get(code.upper())
             if not room or room['phase'] != 'waiting':
                 raise ValueError('Room not found or already started')
+            if len(self.sessions) >= self.max_clients:
+                raise ValueError('Server is full')
             if len(room['players']) >= room['capacity']:
                 raise ValueError('Room is full')
             c.name, c.profile = name, profile
@@ -152,7 +211,8 @@ class Service:
             if len(room['players']) == 1:
                 room['host'] = c.id
             await self.broadcast(room, 'lobby', self.info(room))
-            return {'id': c.id, 'room': self.info(room)}
+            self.sessions[c.resume_token] = c
+            return {'id': c.id, 'room': self.info(room), 'token': c.resume_token}
         if method in ('shareCraft', 'getCraft', 'selectCraft', 'renameLobby'):
             room = c.room
             if not room:
@@ -165,6 +225,7 @@ class Service:
                 ident = args[0]
                 if type(ident) is not int or ident not in [0,1,2]+[m['id'] for m in room['crafts'].values()]: raise ValueError('Unknown craft')
                 c.profile = ident
+                c.lobby_ready = False
             else:
                 if room['host'] != c.id: raise ValueError('Only the host may share crafts or rename the lobby')
                 if method == 'renameLobby':
@@ -193,6 +254,7 @@ class Service:
                 if sum(p.team == team and p is not c for p in room['players']) >= 4:
                     raise ValueError('A team can contain at most four players')
                 c.team = team
+                c.lobby_ready = False
             else:
                 if room['host'] != c.id:
                     raise ValueError('Only the host can change the lobby')
@@ -201,12 +263,14 @@ class Service:
                     if str(maze) not in MAPS or type(count) is not int or not 3 <= count <= 6 or type(retro) is not bool:
                         raise ValueError('Invalid round settings')
                     room.update(maze=maze, flagCount=count, retro=retro)
+                    for player in room['players']: player.lobby_ready = False
                 else:
                     result = {'rounds': room['round'], 'teamWins': room['teamWins'], 'players': list(room['scores'].values())}
                     room['phase'] = 'closed'
                     members = list(room['players'])
                     for member in members:
                         member.room = None
+                        self.sessions.pop(member.resume_token, None)
                     self.rooms.pop(room['code'], None)
                     await self.broadcast(room, 'lobbyClosed', result)
                     room['players'].clear()
@@ -219,18 +283,25 @@ class Service:
                 raise ValueError('Only the host can start a waiting room')
             if len({p.team for p in room['players']}) != 2:
                 raise ValueError('Both teams need at least one player')
-            room['phase'] = 'loading'
-            room['round'] += 1
-            room['created'] = time.monotonic()
-            room['lastResult'] = None
-            room['bullets'] = {}
-            for player in room['players']:
-                player.ready = False
-                player.state = None
-            data = MAPS[str(room['maze'])]
-            room['flags'] = [dict(f, captured=False, captor=None) for team in ('RED', 'BLUE') for f in [f for f in data['Flags'] if f['Team'] == team][:room['flagCount']]]
-            room['pods'] = [dict(p, PodType=secrets.randbelow(8) + 1, active=True) for p in data['Pods']]
-            await self.broadcast(room, 'launch', self.info(room))
+            if not all(p.lobby_ready and p.disconnected_at is None for p in room['players']):
+                raise ValueError('All players must be ready and connected')
+            if room['votes']:
+                counts = {m: sum(v == m for v in room['votes'].values()) for m in (44, 46, 47)}
+                best = max(counts.values())
+                if counts.get(room['maze'], 0) != best:
+                    room['maze'] = next(m for m in counts if counts[m] == best)
+            room['votes'] = {}
+            room['phase'] = 'countdown'
+            await self.broadcast(room, 'lobby', self.info(room))
+            async def countdown():
+                for seconds in range(self.countdown_seconds, 0, -1):
+                    if room['phase'] != 'countdown': return
+                    await self.broadcast(room, 'countdown', seconds)
+                    await asyncio.sleep(1)
+                if room['phase'] == 'countdown': await self.launch(room)
+            task = asyncio.create_task(countdown())
+            self.tasks.add(task)
+            task.add_done_callback(self.tasks.discard)
             return True
         if method == 'spawnMe':
             room = c.room
@@ -296,6 +367,9 @@ class Service:
                         room['scores'][participant.id]['wins'] += 1
             await self.broadcast(room, 'onFlagCaptured' if capture else 'onFlagUncaptured', vector(flag))
             if won:
+                for player in room['players']: player.lobby_ready = False
+                rotation = room.get('rotation', [])
+                if rotation: room['maze'] = rotation[(rotation.index(room['maze']) + 1) % len(rotation)] if room['maze'] in rotation else rotation[0]
                 await self.broadcast(room, 'roundEnded', self.info(room))
             return True
         if method == 'hitPod':
@@ -348,6 +422,20 @@ class Service:
             return True
         raise ValueError('Unknown method')
 
+    async def launch(self, room):
+        room['phase'] = 'loading'
+        room['round'] += 1
+        room['created'] = time.monotonic()
+        room['lastResult'] = None
+        room['bullets'] = {}
+        for player in room['players']:
+            player.ready = False
+            player.state = None
+        data = MAPS[str(room['maze'])]
+        room['flags'] = [dict(f, captured=False, captor=None) for team in ('RED', 'BLUE') for f in [f for f in data['Flags'] if f['Team'] == team][:room['flagCount']]]
+        room['pods'] = [dict(p, PodType=secrets.randbelow(8) + 1, active=True) for p in data['Pods']]
+        await self.broadcast(room, 'launch', self.info(room))
+
     async def websocket(self, request):
         origin = request.headers.get('Origin', '')
         allowed = {s.strip() for s in os.getenv('ALLOWED_ORIGINS', 'https://dreimer1986.github.io,https://hover.dreimer.de').split(',') if s.strip()}
@@ -375,14 +463,19 @@ class Service:
                         raise ValueError('Invalid message')
                     if len(msg.data.encode()) > 16384 and data['method'] != 'shareCraft':
                         raise ValueError('Message too large')
-                    if data['method'] not in ('listRooms', 'shareCraft', 'getCraft', 'selectCraft', 'renameLobby', 'createGame', 'join', 'leave', 'chooseTeam', 'configureRoom', 'closeLobby', 'beginRoom') and c.room and data.get('round') != c.room['round']:
+                    if data['method'] not in ('ping', 'resume', 'setReady', 'voteMap', 'rotation', 'kick', 'quickMessage', 'listRooms', 'shareCraft', 'getCraft', 'selectCraft', 'renameLobby', 'createGame', 'join', 'leave', 'chooseTeam', 'configureRoom', 'closeLobby', 'beginRoom') and c.room and data.get('round') != c.room['round']:
                         raise ValueError('Stale round')
                     result = await self.call(c, data['method'], data['args'])
                     await c.send({'id': ident, 'result': result})
                 except (ValueError, KeyError, TypeError, IndexError, OverflowError, RecursionError) as error:
                     await c.send({'id': ident, 'error': str(error)[:120]})
         finally:
-            await self.leave(c)
+            if c.room:
+                c.disconnected_at = time.monotonic()
+                if c.room['phase'] == 'countdown':
+                    c.room['phase'] = 'waiting'
+                    for player in c.room['players']: player.lobby_ready = False
+                await self.broadcast(c.room, 'lobby', self.info(c.room))
             self.clients.discard(c)
             for code, room in list(self.rooms.items()):
                 if not room['players'] and room['owner'] == c.id:
@@ -392,8 +485,11 @@ class Service:
     async def lifecycle(self, app):
         async def reap():
             while True:
-                await asyncio.sleep(30)
+                await asyncio.sleep(1)
                 now = time.monotonic()
+                for client in list(self.sessions.values()):
+                    if client.disconnected_at is not None and now - client.disconnected_at > self.reconnect_seconds:
+                        await self.leave(client)
                 for code, room in list(self.rooms.items()):
                     if (not room['players'] or room['phase'] == 'loading') and now - room['created'] > 600:
                         for client in list(room['players']):
@@ -402,6 +498,8 @@ class Service:
         task = asyncio.create_task(reap())
         yield
         task.cancel()
+        for pending in self.tasks: pending.cancel()
+        await asyncio.gather(*self.tasks, return_exceptions=True)
         with suppress(asyncio.CancelledError):
             await task
         await asyncio.gather(*(c.ws.close(code=1001, message=b'Server shutdown') for c in list(self.clients)))
@@ -414,7 +512,7 @@ def create_app(site_dir=None):
     app.cleanup_ctx.append(service.lifecycle)
     app.router.add_get('/ws', service.websocket)
     async def health(request):
-        return web.json_response({'status': 'ok', 'version': VERSION, 'protocol': 3, 'rooms': len(service.rooms), 'players': len(service.clients)})
+        return web.json_response({'status': 'ok', 'version': VERSION, 'protocol': 4, 'rooms': len(service.rooms), 'players': len(service.clients)})
     app.router.add_get('/healthz', health)
     root = Path(site_dir or os.getenv('SITE_DIR', Path(__file__).resolve().parents[1] / '_site')).resolve()
     async def static(request):

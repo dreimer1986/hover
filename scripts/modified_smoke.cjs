@@ -102,17 +102,17 @@ const root = path.resolve(__dirname, '..');
     });
     await check('Menu, all arenas and craft profiles survive repeated starts', async () => {
       for(const [arena,craft,id] of [['46','Normal',1],['47','Hard',2],['44','Easy',0]]) {
-        await desktop.click('#modern-menu');await desktop.waitForSelector('#modern-play');await play(desktop,arena,craft);
+        await desktop.click('#modern-menu');await desktop.click('[data-command=home]');await desktop.waitForSelector('#modern-play');await play(desktop,arena,craft);
         assert.equal(await desktop.evaluate(()=>Hover.router.currentView.game.craftProfile.id),id);
         assert.equal(await desktop.evaluate(()=>Hover.router.currentView.game.mazeId),Number(arena));
         await canvas(desktop,1280,800);
       }
     });
     await check('Retro and return to modern retain working controls and layout', async () => {
-      await desktop.click('#modern-menu');await desktop.click('#modern-retro');await desktop.waitForFunction(()=>Hover.retro&&Hover.router.currentView.playing);
+      await desktop.click('#modern-menu');await desktop.click('[data-command=home]');await desktop.click('#modern-retro');await desktop.waitForFunction(()=>Hover.retro&&Hover.router.currentView.playing);
       await desktop.waitForTimeout(300);await canvas(desktop,1280,800);
       await desktop.screenshot({path:root+'/verification/modified-retro.png'});
-      await desktop.click('#modern-menu');await play(desktop);assert.equal(await desktop.evaluate(()=>Hover.retro),false);await canvas(desktop,1280,800);
+      await desktop.click('#modern-menu');await desktop.click('[data-command=home]');await play(desktop);assert.equal(await desktop.evaluate(()=>Hover.retro),false);await canvas(desktop,1280,800);
     });
     await check('No missing resources or JavaScript errors', async () => { assert.deepEqual(errors,[]);assert.deepEqual(missing,[]); });
   } finally {

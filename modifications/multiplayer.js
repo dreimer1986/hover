@@ -1,4 +1,4 @@
-/* Extended edition multiplayer protocol v3. Archived clients remain unchanged. */
+/* Extended edition multiplayer protocol v4. Archived clients remain unchanged. */
 (function () {
   'use strict';
   const de=hoverLocale.lang==='de', t=(a,b)=>de?a:b;
@@ -37,6 +37,11 @@
     <p id="mp-status" role="status" aria-live="polite"></p>`;
   const $=id=>panel.querySelector('#'+id)||document.getElementById(id)||HoverEnhanced.controls.get(id);
   $('modern-launcher').querySelector('.modern-card').appendChild(panel);
+  const comfort=document.createElement('div');comfort.id='mp-comfort';comfort.innerHTML=`<button id="mp-ready">${t('Bereit','Ready')}</button><label>${t('Kartenabstimmung','Map vote')}<select id="mp-vote"><option value="44">1 · City</option><option value="46">2 · Sewer</option><option value="47">3 · Castle</option></select></label><button id="mp-vote-send">${t('Abstimmen','Vote')}</button><label>${t('Kartenrotation (Gastgeber)','Map rotation (host)')}<select id="mp-rotation"><option value="">${t('Aus','Off')}</option><option value="44,46,47">1 → 2 → 3</option><option value="47,46,44">3 → 2 → 1</option></select></label><p id="mp-vote-status"></p>`;
+  $('mp-lobby').prepend(comfort);
+  const chat=document.createElement('div');chat.id='mp-quick';chat.hidden=true;chat.innerHTML=`<span id="mp-ping"></span><select id="mp-message" aria-label="${t('Schnellnachricht','Quick message')}"></select><button id="mp-send">${t('Senden','Send')}</button><span id="mp-chat-log" role="status"></span>`;document.getElementById('modern-toolbar').append(chat);
+  const messages={hello:t('Hallo!','Hello!'),ready:t('Bereit!','Ready!'),help:t('Brauche Hilfe!','Need help!'),defend:t('Verteidigen!','Defend!'),attack:t('Angreifen!','Attack!'),thanks:t('Danke!','Thanks!'),gg:t('Gutes Spiel!','Good game!')};
+  for(const [value,text]of Object.entries(messages)){const o=document.createElement('option');o.value=value;o.textContent=text;$('mp-message').append(o);}
   const params=new URLSearchParams(location.search);
   const local=/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   const defaultServer=location.hostname.endsWith('github.io')?'https://hover.dreimer.de':location.origin;
@@ -44,6 +49,7 @@
   $('mp-name').value=localStorage.getItem('hover-mp-name')||'Player';
   if(params.has('room')){$('mp-code').value=params.get('room').slice(0,6).toUpperCase();panel.hidden=false;}
   let socket=null,sequence=0,game=null,room=null,playerId=null,intentional=false,busy=false,launchGeneration=0;
+  let resumeToken=null,reconnecting=false;
   const downloads=new Map();
   const pending=new Map(),status=text=>{$('mp-status').textContent=text;};
   function endpoint(){
@@ -65,13 +71,29 @@
     ws.onclose=()=>{
       if(socket!==ws)return;socket=null;
       for(const request of pending.values()){clearTimeout(request.timer);request.reject(Error(t('Verbindung getrennt.','Disconnected.')));}pending.clear();
-      if(!intentional&&room)abort(t('Verbindung verloren. Erneut über den Raumcode beitreten.','Connection lost. Rejoin using the room code.'));
+      if(!intentional&&room&&!reconnecting)reconnect();
     };
     await new Promise((resolve,reject)=>{
       const timer=setTimeout(()=>{ws.close();reject(Error(t('Server nicht erreichbar.','Server unavailable.')));},10000);
       ws.onopen=()=>{clearTimeout(timer);resolve();};ws.onerror=()=>{clearTimeout(timer);reject(Error(t('Verbindung fehlgeschlagen. HTTPS-Adresse prüfen.','Connection failed. Check the HTTPS address.')));};
     });
     localStorage.setItem('hover-mp-server',$('mp-server').value);
+  }
+  async function reconnect(){
+    reconnecting=true;const deadline=Date.now()+28000;if(game)game.connected=false;
+    status(t('Verbindung unterbrochen. Wiederverbinden …','Connection interrupted. Reconnecting …'));
+    while(!intentional&&room&&Date.now()<deadline){
+      try{await connect();const restored=await rpc('resume',resumeToken);playerId=restored.id;room=restored.room;
+        if(game&&room.phase==='playing'){
+          for(const f of restored.flags){const local=game.world.flags.find(x=>x.networkLocation&&Math.hypot(x.networkLocation.X-f.X,x.networkLocation.Z-f.Z)<10);if(local&&local.captured!==f.captured)game[f.captured?'onFlagCaptured':'onFlagUncaptured']({X:f.X,Y:f.Y,Z:f.Z});}
+          for(const pod of restored.pods)if(!pod.active)game.removePod(pod);
+          game.connected=true;game.updateReceived=true;game.clock.getDelta();game.clock2.getDelta();
+        }else if(room.phase==='waiting')showLobby(t('Sitzung wiederhergestellt.','Session restored.'));
+        else if(room.phase==='loading'){await dispatch('launch',[room]);}
+        renderLobby();status(t('Verbindung wiederhergestellt.','Connection restored.'));reconnecting=false;return;
+      }catch(_){await new Promise(resolve=>setTimeout(resolve,1000));}
+    }
+    reconnecting=false;if(!intentional)abort(t('Sitzung abgelaufen. Bitte erneut beitreten.','Session expired. Please rejoin.'));
   }
   function rpc(method,...args){return new Promise((resolve,reject)=>{
     if(socket?.readyState!==WebSocket.OPEN)return reject(Error('Disconnected'));
@@ -91,7 +113,7 @@
     game=null;
   }
   function disconnect(){
-    intentional=true;stopScene();room=null;playerId=null;
+    intentional=true;resumeToken=null;stopScene();room=null;playerId=null;
     if(socket)socket.close();renderLobby();
   }
   Hover.signalr={
@@ -108,6 +130,7 @@
     }
   };
   function renderLobby(){
+    chat.hidden=!room;
     $('mp-connect').hidden=!!room;$('mp-lobby').hidden=!room;
     for(const id of ['mp-create','mp-join'])$(id).disabled=busy;
     $('modern-play').disabled=$('modern-retro').disabled=!!room||busy;
@@ -115,8 +138,11 @@
     if(!room)return;
     panel.hidden=false;
     $('mp-room').textContent=`${room.name||t('Lobby','Lobby')} · ${room.code} · ${room.players.length}/${room.capacity} · ${t('Runde','Round')} ${room.round+1}`;
-    $('mp-players').replaceChildren(...room.players.map(p=>{const li=document.createElement('li');li.textContent=`${p.name} · ${p.team==='RED'?t('Rot','Red'):t('Blau','Blue')}${p.id===room.host?' ★':''}`;return li;}));
+    $('mp-players').replaceChildren(...room.players.map(p=>{const li=document.createElement('li');li.textContent=`${p.name} · ${p.team==='RED'?t('Rot','Red'):t('Blau','Blue')}${p.id===room.host?' ★':''} · ${p.lobbyReady?'✓':t('nicht bereit','not ready')}${p.connected===false?' · offline':''}`;if(room.host===playerId&&p.id!==playerId){const kick=document.createElement('button');kick.textContent=t('Entfernen','Remove');kick.onclick=()=>guarded(()=>rpc('kick',p.id));li.append(kick);}return li;}));
     const waiting=room.phase==='waiting',host=room.host===playerId;
+    $('mp-ready').disabled=!waiting||busy;$('mp-ready').setAttribute('aria-pressed',String(!!room.players.find(p=>p.id===playerId)?.lobbyReady));$('mp-ready').textContent=room.players.find(p=>p.id===playerId)?.lobbyReady?t('Nicht mehr bereit','Not ready'):t('Bereit','Ready');
+    $('mp-rotation').disabled=!host||!waiting;$('mp-rotation').value=(room.rotation||[]).join(',');$('mp-vote-send').disabled=!waiting;
+    $('mp-vote-status').textContent=Object.entries(room.votes||{}).map(([id,map])=>(room.players.find(p=>p.id===id)?.name||'?')+': '+({44:1,46:2,47:3}[map])).join(' · ');
     $('mp-host-settings').hidden=!host;
     $('mp-edit-name').value=room.name||'';$('mp-edit-public').checked=!!room.public;
     $('mp-share').disabled=$('mp-update-name').disabled=!waiting||busy;
@@ -127,7 +153,7 @@
     if(own)$('mp-craft').value=own.profile;$('mp-craft').disabled=!waiting||busy;
     for(const id of ['mp-arena','mp-flags','mp-mode'])$(id).disabled=!host||!waiting||busy;
     $('mp-arena').value=String(room.maze);$('mp-flags').value=String(room.flagCount);$('mp-mode').value=room.retro?'retro':'modern';
-    $('mp-begin').disabled=!host||!waiting||busy||new Set(room.players.map(p=>p.team)).size!==2;
+    $('mp-begin').disabled=!host||!waiting||busy||new Set(room.players.map(p=>p.team)).size!==2||!room.players.every(p=>p.lobbyReady&&p.connected!==false);
     $('mp-finish').hidden=!host;$('mp-finish').disabled=!waiting||busy;
     const link=new URL(location.href);link.hash='';link.search='';link.searchParams.set('room',room.code);link.searchParams.set('server',$('mp-server').value);$('mp-invite').value=link.href;
   }
@@ -135,7 +161,7 @@
   async function join(code){
     const name=$('mp-name').value.trim();if(!name)throw Error(t('Bitte einen Namen eingeben.','Please enter a name.'));
     await HoverCrafts.ready;const chosen=Hover.Profiles[$('modern-craft').value].id;
-    const result=await rpc('join',code,chosen<=2?chosen:0,name);playerId=result.id;room=result.room;
+    const result=await rpc('join',code,chosen<=2?chosen:0,name);if(!result.token)throw Error(t('Bitte den Multiplayer-Server auf 0.4.0 aktualisieren.','Please update the multiplayer server to 0.4.0.'));playerId=result.id;room=result.room;resumeToken=result.token;
     await syncCrafts(room);if(room.host===playerId)await shareCrafts();
     if((room.crafts||[]).some(c=>c.id===chosen))await rpc('selectCraft',chosen);
     $('mp-scores').hidden=true;localStorage.setItem('hover-mp-name',name);status(t('Team wählen. Der Gastgeber startet die Runde.','Choose a team. The host starts the round.'));
@@ -165,16 +191,21 @@
   for(const id of ['mp-arena','mp-flags','mp-mode'])$(id).onchange=()=>{
     const settings=[Number($('mp-arena').value),Number($('mp-flags').value),$('mp-mode').value==='retro'];guarded(()=>rpc('configureRoom',...settings));
   };
+  $('mp-ready').onclick=()=>guarded(()=>rpc('setReady',!room.players.find(p=>p.id===playerId)?.lobbyReady));
+  $('mp-vote-send').onclick=()=>guarded(()=>rpc('voteMap',Number($('mp-vote').value)));
+  $('mp-rotation').onchange=()=>{const rotation=$('mp-rotation').value.split(',').filter(Boolean).map(Number);guarded(()=>rpc('rotation',rotation));};
+  $('mp-send').onclick=()=>rpc('quickMessage',$('mp-message').value).catch(e=>status(e.message));
+  setInterval(async()=>{if(!room||reconnecting)return;const start=performance.now();try{await rpc('ping');$('mp-ping').textContent=Math.round(performance.now()-start)+' ms';}catch(_){}},5000);
   $('mp-begin').onclick=()=>guarded(()=>rpc('beginRoom'));
   $('mp-finish').onclick=()=>guarded(()=>rpc('closeLobby'));
   $('mp-leave').onclick=()=>guarded(async()=>{await rpc('leave');disconnect();status(t('Lobby verlassen.','Left lobby.'));});
-  $('modern-menu').addEventListener('click',()=>{
-    if(room&&game)guarded(()=>rpc('leave').finally(()=>{disconnect();HoverEnhanced.showHome();panel.hidden=false;}));
-  });
   window.addEventListener('pagehide',disconnect);
   function abort(message){disconnect();HoverEnhanced.showHome();panel.hidden=false;status(message);}
   function showLobby(message){stopScene();HoverEnhanced.showHome();panel.hidden=false;renderLobby();status(message);}
   async function dispatch(event,args){
+    if(event==='kicked'){abort(t('Der Gastgeber hat dich aus der Lobby entfernt.','The host removed you from the lobby.'));return;}
+    if(event==='quickMessage'){$('mp-chat-log').textContent=args[0]+': '+messages[args[1]];return;}
+    if(event==='countdown'){status(t('Start in ','Starting in ')+args[0]+' …');return;}
     if(event==='lobby'){room=args[0];renderLobby();await syncCrafts(room);return;}
     if(event==='roundAborted'){room=args[0];showLobby(t('Runde abgebrochen: Ein Spieler hat die Verbindung getrennt. Die Lobby bleibt offen.','Round aborted: a player disconnected. The lobby remains open.'));return;}
     if(event==='launch'){
@@ -243,5 +274,5 @@
       };
     }
   }
-  window.HoverMultiplayer={get room(){return room;},get game(){return game;},get playerId(){return playerId;},disconnect};
+  window.HoverMultiplayer={get room(){return room;},get game(){return game;},get playerId(){return playerId;},disconnect,leave:()=>rpc('leave').finally(disconnect)};
 })();

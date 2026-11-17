@@ -48,8 +48,8 @@ const screenshots=process.env.SCREENSHOT_DIR||'/home/dreimer/.cache/hover-previe
           await p.locator('.msgButton').click();await p.waitForSelector('#modern-play');
           // Losing must also leave a usable centered retry/return button.
           await p.click('#modern-retro');await p.waitForFunction(()=>Hover.router.currentView.playing);await p.waitForTimeout(100);
-          await p.evaluate(()=>Hover.router.currentView.onGameLost());await p.waitForSelector('.msg-level-lost .msgButton');await p.locator('.msgButton').click();await p.waitForFunction(()=>Hover.router.currentView.playing);await p.click('#modern-menu');await p.waitForSelector('#modern-play');
-        } else await p.click('#modern-menu');
+          await p.evaluate(()=>Hover.router.currentView.onGameLost());await p.waitForSelector('.msg-level-lost .msgButton');await p.locator('.msgButton').click();await p.waitForFunction(()=>Hover.router.currentView.playing);await p.click('#modern-menu');await p.click('[data-command=home]');await p.waitForSelector('#modern-play');
+        } else await p.click('#modern-menu');await p.click('[data-command=home]');
         results.push({name,retro,state,passed:true});console.log('PASS '+name+' '+(retro?'retro + win/loss':'modern + glow'));
       }
       await p.close();

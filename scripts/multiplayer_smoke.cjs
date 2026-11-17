@@ -25,7 +25,7 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
    console.log('CONFIG '+mode);await a.selectOption('#mp-arena',maze);await a.waitForFunction(maze=>HoverMultiplayer.room.maze===Number(maze),maze);
    await a.selectOption('#mp-flags',count);await a.waitForFunction(n=>HoverMultiplayer.room.flagCount===Number(n),count);
    await a.selectOption('#mp-mode',mode);await a.waitForFunction(mode=>HoverMultiplayer.room.retro===(mode==='retro'),mode);
-   await a.click('#mp-begin');
+   await a.click('#mp-ready');await b.click('#mp-ready');await a.click('#mp-begin');
    for(const p of pages){await p.waitForFunction(()=>HoverMultiplayer.game?.connected&&Hover.router.currentView.playing,null,{timeout:45000});await p.waitForFunction(()=>Object.keys(HoverMultiplayer.game.players.players).length===1);assert.equal(await p.evaluate(()=>HoverMultiplayer.game.world.flags.length),Number(count)*2);}
    console.log('PASS room '+code+' '+mode+' arena '+maze+' flags '+count);
    const before=await a.evaluate(()=>HoverMultiplayer.game.craft.position.z);await a.keyboard.down('ArrowUp');await a.waitForTimeout(500);await a.keyboard.up('ArrowUp');

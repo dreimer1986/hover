@@ -1,6 +1,6 @@
 services:
   hover:
-    image: hover-multiplayer:0.3.5
+    image: hover-multiplayer:0.4.0
     container_name: hover-multiplayer
     restart: unless-stopped
     ports:

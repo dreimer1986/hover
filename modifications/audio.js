@@ -8,13 +8,18 @@
   const buffers = new Map(), banks = new Map(), allSounds = new Set();
   const errors = [];
   let context, master, analyser;
+  const buses = {}; let levels = {music:1,engine:1,effects:1}, paused=false;
+  function applyVolumes(){for(const [name,bus] of Object.entries(buses))bus.gain.value=paused && name!=='music'?0:levels[name];}
   const api = window.HoverAudio = {errors, unlock, get context() { return context; }, get analyser() { return analyser; }};
+  api.setVolumes = values => { for(const name of Object.keys(levels))levels[name]=values[name]; applyVolumes(); };
+  api.setPaused = value => {paused=value;applyVolumes();};
   function ensureContext() {
     if (!context) {
       context = new AudioContext();
       master = context.createGain();
       analyser = context.createAnalyser(); analyser.fftSize = 256;
       master.connect(analyser); analyser.connect(context.destination);
+      for(const name of Object.keys(levels)){buses[name]=context.createGain();buses[name].connect(master);}applyVolumes();
       master.gain.value = player.volume;
     }
     return context;
@@ -83,7 +88,7 @@
       source.loopEnd = this.buffer.duration;
       gain.gain.setValueAtTime(0, ctx.currentTime);
       gain.gain.linearRampToValueAtTime(1, ctx.currentTime + .008);
-      source.connect(gain); gain.connect(master);
+      source.connect(gain); gain.connect(buses[this.name==='MUSIC'?'music':this.name.startsWith('ENG_')?'engine':'effects']);
       this.source = source; this.gain = gain; this.playing = true;
       source.onended = () => {
         source.disconnect(); gain.disconnect();

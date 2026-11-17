@@ -19,11 +19,14 @@ Die erweiterte Fassung startet standardmäßig auf PC und Mobilgeräten. Sie bie
 
 Am PC: Pfeiltasten, Leertaste und A/S/D. Vollbild erfordert einen Tastendruck und Browser-Unterstützung; Großansicht funktioniert auch ohne Vollbild-API. Querformat wird auf Handys empfohlen.
 
+
+Pause, Training, Bestzeiten, Controller-Menüs, Werkstatt-Testfahrt, Sicherung und Offline-Paket: [Bedienungsanleitung](FEATURES.md). Multiplayer 0.4.0 ergänzt Bereitschaft, Countdown, Ping, Kartenabstimmung/Rotation, Schnellnachrichten und Wiederverbinden.
+
 ## Multiplayer und NAS
 
 Auf [hover.dreimer.de](https://hover.dreimer.de/) **Multiplayer** wählen, Namen eingeben, Lobby erstellen oder per Raumcode beitreten. Teams selbst wählen; der Gastgeber legt Arena, Grafik und Flaggenzahl fest. Nach jeder Runde bleibt die Lobby geöffnet. **Lobby beenden · Punkte** zeigt die Endabrechnung.
 
-Der Python-/WebSocket-Server läuft ohne Microsoft-Dienste im Docker-Container auf **8080/TCP**, öffentlich hinter einem HTTPS-Reverse-Proxy. [Installation und Aktualisierung auf Synology](SERVER.md) · [Container v0.3.5 herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.3.5).
+Der Python-/WebSocket-Server läuft ohne Microsoft-Dienste im Docker-Container auf **8080/TCP**, öffentlich hinter einem HTTPS-Reverse-Proxy. [Installation und Aktualisierung auf Synology](SERVER.md) · [Container v0.4.0 herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.4.0).
 
 ## Lokal starten
 

@@ -55,10 +55,10 @@
    canvas.onpointermove=event=>{if(!drag||!importGroup)return;importGroup.rotation.y+=(event.clientX-drag.x)*.01;importGroup.rotation.x=Math.max(-1,Math.min(1,importGroup.rotation.x+(event.clientY-drag.y)*.01));drag={x:event.clientX,y:event.clientY};importRenderer.render(importScene,importCamera);};
    canvas.onpointerup=canvas.onpointercancel=()=>{drag=null;};
   }
-  const model=await window.HoverCrafts.preview(key(e));if(importGroup){importScene.remove(importGroup);disposePreview(importGroup);}importGroup=model.group;importScene.add(importGroup);
+  const model=await window.HoverCrafts.preview(key(e));if(importGroup){importScene.remove(importGroup);disposePreview(importGroup);}importGroup=model.group;const arrow=new THREE.ArrowHelper(new THREE.Vector3(0,0,-1),new THREE.Vector3(0,-45,0),160,0xffa328,35,18);importGroup.add(arrow);importScene.add(importGroup);
   const distance=Math.hypot(...policy.bounds)/2/Math.sin(THREE.Math.degToRad(importCamera.fov/2))*.75;importCamera.position.set(0,distance*.38,distance);importCamera.lookAt(new THREE.Vector3());importRenderer.render(importScene,importCamera);
   const bounds=entries.get(e.hash).data.geometry.vertices,axes=[0,1,2].map(axis=>{const values=bounds.filter((_,i)=>i%3===axis);return (Math.max(...values)-Math.min(...values)).toFixed(1);});
-  figure.querySelector('figcaption').textContent=e.name+' · '+axes.join(' × ')+t(' · Ziehen dreht nur die Ansicht; „Drehen“ ändert das Schiff',' · Drag changes the view only; Rotate changes the craft');figure.dataset.hash=e.hash;
+  figure.querySelector('figcaption').textContent=e.name+' · '+axes.join(' × ')+t(' · Orange Pfeil = vorne (−Z). Ziehen dreht nur die Ansicht; „Drehen“ ändert das Schiff',' · Orange arrow = forward (−Z). Drag changes the view only; Rotate changes the craft');figure.dataset.hash=e.hash;
  }
  async function previewDraft(){
   if(!draft)throw Error('Import a model first');const data={...draft,name:$('craft-name').value.trim(),points:points()};
@@ -98,6 +98,7 @@
   sourceDraft=source;$('craft-preview-draft').disabled=false;if(files.length===1&&/\.json$/i.test(files[0].name)&&$('craft-up').value==='y'&&$('craft-rotation').value==='0'){draft=source;await previewDraft();}else await refreshTransform();
  }
  $('craft-convert').onclick=()=>action(importModel);
+ const test=document.createElement('button');test.id='craft-test-drive';test.textContent=t('Testfahrt mit Vorschau','Test drive preview');panel.append(test);test.onclick=()=>action(async()=>{await previewDraft();await HoverEnhanced.startPractice('workshop',!!document.getElementById('practice-retro')?.checked);});
  $('craft-preview-draft').onclick=()=>action(previewDraft);
  $('craft-save').onclick=()=>action(async()=>{await previewDraft();draftEntry=await persist(draftEntry);message(t('Schiff im Browser gespeichert. Für eine dauerhafte Sicherung exportieren.','Craft saved in this browser. Export it for a durable backup.'));});
  $('craft-edit').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');sourceDraft=draft=e.data;$('craft-materials').replaceChildren();$('craft-model-label').hidden=true;fill(draft);$('craft-up').value='y';$('craft-rotation').value='0';$('craft-size').value=Math.max(10,Math.min(100,sourceSize(draft)));await previewImported(e);$('craft-preview-draft').disabled=false;message(t('Werte ändern und Vorschau aktualisieren.','Edit values and update the preview.'));});
@@ -118,7 +119,16 @@
   for(const e of entries.values()){const model=prepared.get(e.hash);if(model){const texture=model.texture.clone();texture.needsUpdate=true;Hover.Editor.schemeLoader.models['Custom_'+e.hash]={geometry:model.geometry.clone(),redDiffuseTexture:texture,blueDiffuseTexture:texture};}}
   return onReady.call(this);
  };
- window.HoverCrafts={ready,disposePreview,createStatsHelp,entry:k=>entries.get(k.replace(/^custom_/,'')),list:()=>[...entries.values()],add,persist,selected,
+ async function importLibrary(raws){
+  if(!Array.isArray(raws)||raws.length>policy.maxStored)throw Error('Library exceeds storage limit');
+  const validated=await Promise.all(raws.map(raw=>format.validate(raw)));
+  if(new Set([...entries.values()].filter(e=>e.persistent).map(e=>e.hash).concat(validated.map(e=>e.hash))).size>policy.maxStored)throw Error('Combined library exceeds storage limit');
+  if(new Set([...entries.keys(),...validated.map(e=>e.hash)]).size>64)throw Error('Session craft limit reached');
+  await Promise.all(validated.map(prepare));
+  await new Promise((resolve,reject)=>{if(!db)return reject(Error('Local storage unavailable'));const tx=db.transaction('crafts','readwrite');for(const e of validated)tx.objectStore('crafts').put({hash:e.hash,json:e.json});tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);});
+  for(const e of validated)await add(e.json,true);
+ }
+ window.HoverCrafts={ready,importLibrary,disposePreview,createStatsHelp,entry:k=>entries.get(k.replace(/^custom_/,'')),list:()=>[...entries.values()],add,persist,selected,
   pointBudget:()=>policy.budget,
   profileStats:profile=>Object.entries(policy.parameters).map(([k,[lo,hi]])=>({key:k,label:labels[k],value:Math.max(0,Math.min(10,(profile[k]-lo)/(hi-lo)*policy.steps))})),
   stats:e=>Object.keys(policy.parameters).map(k=>({key:k,label:labels[k],value:e.points[k]})),

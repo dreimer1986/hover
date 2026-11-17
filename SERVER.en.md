@@ -6,11 +6,11 @@ The container includes the Python game server **and the website**. It needs only
 
 ## Installing on Synology
 
-1. Download the matching image from [release multiplayer-v0.3.5](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.3.5):
+1. Download the matching image from [release multiplayer-v0.4.0](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.4.0):
    - **amd64** for Synology NAS with Intel/AMD processors.
    - **arm64** for supported NAS with 64-bit ARM processors. The NAS must support Container Manager/Docker; not every ARM model does. 32-bit ARM is not included.
 2. In **Container Manager → Image → Add → Add from File**, import `hover-multiplayer-….tar.gz`. If DSM rejects compressed files, decompress it to `.tar` first.
-3. Create a container from **hover-multiplayer:0.3.5**, enable automatic restart and map **NAS port 8080 → container port 8080, TCP**. No folder mappings or privileged mode are needed.
+3. Create a container from **hover-multiplayer:0.4.0**, enable automatic restart and map **NAS port 8080 → container port 8080, TCP**. No folder mappings or privileged mode are needed.
 4. Point Caddy at the NAS port as described below and open **https://hover.dreimer.de/**. The container website defaults to its current HTTPS address in the **Multiplayer** panel.
 
 Menu names vary between the older Docker package and newer Container Manager. Alternatively, import [compose.yaml](compose.yaml) as a Container Manager project after loading the image. If NAS port 8080 is occupied, use a mapping such as `18080:8080` and point the proxy at port 18080.
@@ -27,7 +27,7 @@ Older DSM without Compose:
 ```sh
 sudo docker run -d --name hover-multiplayer --restart unless-stopped \
   --read-only --cap-drop ALL --security-opt no-new-privileges:true \
-  -p 8080:8080 hover-multiplayer:0.3.5
+  -p 8080:8080 hover-multiplayer:0.4.0
 ```
 
 ## Caddy 2: hover.dreimer.de
@@ -60,22 +60,22 @@ A disconnection aborts the round, keeping the remaining players in the lobby. Wh
 
 ## Updating an existing Synology container
 
-1. Finish active games. Download the matching v0.3.5 archive and import it through **Container Manager → Image → Add → Add from File**. The new image is `hover-multiplayer:0.3.5`.
+1. Finish active games. Download the matching v0.4.0 archive and import it through **Container Manager → Image → Add → Add from File**. The new image is `hover-multiplayer:0.4.0`.
 2. Note the old container's ports and environment variables. Stop it and rename it, for example to `hover-multiplayer-old`, to keep a rollback option. Disable its automatic restart.
 3. Create a new `hover-multiplayer` container from the **new image**. Keep the same ports (usually `8080:8080`) and environment variables, and enable automatic restart. No volumes or privileged mode are required. Restarting the old container alone does not update its image.
-4. Start the new container. `https://hover.dreimer.de/healthz` should report `version: 0.3.5` and `protocol: 3`. Reload the website, create and join a lobby. Caddy needs no changes if the port mapping stays the same.
+4. Start the new container. `https://hover.dreimer.de/healthz` should report `version: 0.4.0` and `protocol: 4`. Reload the website, create and join a lobby. Caddy needs no changes if the port mapping stays the same.
 5. After a successful test, remove the old container. To roll back, stop the new one and restart the old one, restoring its original name if needed. Active lobbies are not transferred.
 
-For a **Compose project**, import the new image, change the existing project's image to `hover-multiplayer:0.3.5` and recreate the project. Keep your own port/origin settings. Using SSH in the project directory:
+For a **Compose project**, import the new image, change the existing project's image to `hover-multiplayer:0.4.0` and recreate the project. Keep your own port/origin settings. Using SSH in the project directory:
 
 ```sh
 sudo docker load -i hover-multiplayer-amd64.tar.gz
-# compose.yaml: image: hover-multiplayer:0.3.5
+# compose.yaml: image: hover-multiplayer:0.4.0
 sudo docker compose up -d --force-recreate
 sudo docker compose ps
 ```
 
-The release includes [compose.yaml](compose.yaml) and this guide. Use the arm64 file for ARM. Both website and server must use protocol 3 (server 0.3.0 or later). Version 0.3.5 also delivers handling explanations in craft selection and the editor for the NAS-hosted website.
+The release includes [compose.yaml](compose.yaml) and this guide. Use the arm64 file for ARM. Both website and server must use protocol 4 (server 0.4.0 or later). Version 0.4.0 also delivers the new settings, training and convenience features on the NAS.
 
 ## Configuration and operation
 
@@ -88,7 +88,7 @@ The release includes [compose.yaml](compose.yaml) and this guide. Use the arm64 
 
 ## Scope, provenance and tests
 
-This is a newly implemented replacement, not the recovered Microsoft backend. `modifications/multiplayer.js` replaces SignalR with our JSON/WebSocket protocol v3; the existing multiplayer engine handles rendering and local physics. `server/maps.json` contains only spawn, flag and item positions from `web/2019-03-11/scripts/mazes.c3a2bdf0.js`. Three to six flags per team are selected from existing positions. The original modern engine ignored item heights (`Y=20`); only the new multiplayer restores their map heights.
+This is a newly implemented replacement, not the recovered Microsoft backend. `modifications/multiplayer.js` replaces SignalR with our JSON/WebSocket protocol v4; the existing multiplayer engine handles rendering and local physics. `server/maps.json` contains only spawn, flag and item positions from `web/2019-03-11/scripts/mazes.c3a2bdf0.js`. Three to six flags per team are selected from existing positions. The original modern engine ignored item heights (`Y=20`); only the new multiplayer restores their map heights.
 
 Rooms, teams, single item awards and flag states are server-managed. Movement and effects remain largely client-simulated. Message size/rate limits and basic state/distance checks exist, but there is no complete server physics simulation or competitive anti-cheat. Flag-return pads, weapons and inventory are not fully server-authoritative. There is no persistent scoreboard, mid-round rejoining or recovery after server restart.
 
@@ -99,7 +99,7 @@ Original archives and Store packages are unchanged. [Historical interface analys
 ## Building the image yourself
 
 ```sh
-docker build -t hover-multiplayer:0.3.5 .
+docker build -t hover-multiplayer:0.4.0 .
 docker compose up -d
 ```
 
@@ -108,3 +108,7 @@ GitHub Actions builds native Linux amd64 and arm64 images and attaches importabl
 ## Crafts and lobby directory in v0.3.0
 
 Protocol 3 adds named lobbies, private by default, and a directory of joinable public rooms. Hosts can share up to eight validated crafts (1.5 MB each, 8 MB combined). Other players fetch missing SHA-256 packages before starting and select them in the lobby. Server checks cover point budget, geometry, PNG structure and storage limits. Server copies last only until the lobby closes; guests can retain/export them in their browsers. [Details](CRAFTS.en.md). Messages remain limited to 16 KiB except validated craft uploads (2 MB WebSocket ceiling). The global room limit also bounds total model storage.
+
+## Convenience features in 0.4.0
+
+Both website and server require protocol 4. Everyone must be ready before a three-second countdown. Disconnected slots are retained for 30 seconds for the same open tab. Host transfer, removal, rotation, voting and quick messages are described in the [user guide](FEATURES.en.md). Restarting the server discards active lobbies.

@@ -211,3 +211,37 @@ html:not(.input-gate) #input-start { display:none; }
 .craft-stats-help summary { cursor:pointer; color:#ffd28a; padding:8px 0; }
 .craft-stats-help summary:focus-visible { outline:2px solid #ffb36b; outline-offset:2px; }
 .craft-stats-help p { margin:8px 0; }
+/* Preferences use the extended edition's dark panels and orange focus. */
+.hover-dialog { color:#fff; background:#181818; border:2px solid #e88a27; border-radius:8px; padding:22px; width:min(650px,calc(100vw - 56px)); max-height:calc(100dvh - 70px); overflow:auto; font:16px/1.5 Arial,sans-serif; z-index:20000; }
+.hover-dialog::backdrop { background:#000a; }
+.hover-dialog button { color:#fff; background:#393939; border:1px solid #a66a37; padding:9px 14px; border-radius:4px; cursor:pointer; }
+.preference-fields { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+.preference-fields label { display:flex; flex-wrap:wrap; gap:6px; justify-content:space-between; }
+.preference-fields input { width:75%; accent-color:#ec8d28; }
+.preference-fields output { min-width:36px; }
+.preference-buttons { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+:focus-visible { outline:3px solid #ffb43f !important; outline-offset:3px; }
+.settings-open #modern-controls { display:none !important; }
+#modern-pad { transform:scale(var(--touch-size,1)); transform-origin:bottom left; opacity:var(--touch-opacity,.85); }
+#modern-actions { transform:scale(var(--touch-size,1)); transform-origin:bottom right; opacity:var(--touch-opacity,.85); }
+.modern-wide .modern #dash-bottom,.modern-wide .modern #dash-top { transform:scale(calc(var(--hud-scale,.6) * var(--preference-hud,1))); }
+#modern-retro-hud { transform:translateX(-50%) scale(var(--preference-hud,1)); transform-origin:bottom center; }
+.binding-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; align-items:center; margin:12px 0; }
+#hover-bindings { margin-top:20px; }
+#practice-guide { position:fixed; top:calc(var(--hover-toolbar-height,44px) + 8px); left:50%; transform:translateX(-50%); width:min(560px,85vw); padding:8px 14px; color:white; background:#161616e8; border:1px solid #e88a27; z-index:10001; font:14px/1.4 Arial,sans-serif; }
+#practice-guide p { margin:0 0 6px; }
+.practice-options { display:flex; gap:14px; align-items:center; margin:12px 0; }
+html:not(.modern-wide) .modern #dash-bottom { transform:scale(var(--preference-hud,1)); transform-origin:bottom center; }
+html:not(.modern-wide) .modern #dash-top { transform:scale(var(--preference-hud,1)); transform-origin:top center; }
+.controller-keyboard-grid { display:grid; grid-template-columns:repeat(8,1fr); gap:5px; margin-top:14px; }
+#controller-keyboard output { display:block; overflow-wrap:anywhere; min-height:30px; }
+#mp-quick { display:flex; align-items:center; gap:4px; flex-wrap:wrap; max-width:350px; }
+#mp-quick select { width:auto; max-width:140px; margin:0; }
+#mp-chat-log { font-size:12px; flex-basis:100%; }
+#mp-comfort { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+#mp-players button { margin-left:10px; padding:3px 8px; }
+.preference-fields label { display:grid; grid-template-columns:1fr 48px; gap:4px 8px; }
+.preference-fields label > span { grid-column:1/-1; }
+.preference-fields input { width:100%; }
+.hover-dialog { background:radial-gradient(ellipse at top right,#32233d,#14111d); font-family:proxima-nova,Arial,sans-serif; }
+#practice-guide button { color:#fbe1c1; background:#35223f; border:1px solid #b8894c; border-radius:5px; padding:7px 10px; }

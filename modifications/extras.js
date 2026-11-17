@@ -86,8 +86,9 @@
   api.toggleMap=()=>setOpen(!api.mapOpen);
   button.onclick=api.toggleMap;close.onclick=()=>setOpen(false);
   for(const type of ['keydown','keyup'])window.addEventListener(type,e=>{
+    if(api.menuOpen)return;
     if(!api.mapOpen&&e.target.matches?.('input,select,textarea,[contenteditable="true"]'))return;
-    if(e.code==='KeyM'||(api.mapOpen&&e.key==='Escape')){
+    if(e.code===(window.HoverBindings?.values.keys.map||'KeyM')||(api.mapOpen&&e.key==='Escape')){
       if(type==='keydown'&&!e.repeat)setOpen(!api.mapOpen);e.preventDefault();e.stopImmediatePropagation();return;
     }
     if(api.mapOpen){

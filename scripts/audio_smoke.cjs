@@ -76,7 +76,7 @@ const base=(process.env.HOVER_URL||'http://127.0.0.1:8767/hover/').replace(/\/?$
       await p.evaluate(()=>HoverAudio.context.suspend());assert.equal(await p.evaluate(()=>HoverAudio.context.state),'suspended');
       await p.locator('#modern-wide').tap();await p.waitForFunction(()=>HoverAudio.context.state==='running');await audible();
       const contextState=await p.evaluate(()=>HoverAudio.context.state);
-      await p.locator('#modern-menu').tap();await p.waitForSelector('#modern-play');await p.waitForTimeout(2200);assert(await energy()<.00001);
+      await p.locator('#modern-menu').tap();await p.locator('[data-command=home]').tap();await p.waitForSelector('#modern-play');await p.waitForTimeout(2200);assert(await energy()<.00001);
       results.push({retro,engines,loopChecks,continuousIdle,music,wallRms,item,itemRms,mute:true,resume:contextState,menuSilent:true});console.log('PASS '+engine+' '+(retro?'retro':'modern')+' engine/effects/mute/resume/menu');
     }
     assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);

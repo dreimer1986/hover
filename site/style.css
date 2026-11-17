@@ -7,3 +7,8 @@ body{overflow-x:clip}
 .orbital{inset:-45px -15px;transform:none}
 
 @media(min-width:1100px){.versions{grid-template-columns:repeat(3,minmax(0,1fr))}.versions h3{font-size:25px}.versions .version-meta{flex-wrap:wrap;gap:8px}.versions .button{gap:10px;padding-inline:16px}}
+.archive-timeline { padding-block:35px; }
+.archive-timeline article { min-height:150px; margin:20px 0; padding:18px; background:#151b29; border-left:3px solid #f6a13b; }
+.archive-timeline article img { width:180px; height:113px; object-fit:cover; float:left; margin:0 20px 12px 0; }
+.archive-timeline article::after { content:""; display:block; clear:both; }
+@media(max-width:500px) { .archive-timeline article img { float:none; width:100%; height:150px; } }

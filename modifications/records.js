@@ -1,0 +1,12 @@
+/* Versioned record keys reserve time-trial/lap categories without inventing race rules. */
+(function(){
+ 'use strict';
+ const de=hoverLocale.lang==='de',t=(a,b)=>de?a:b;let records={};try{records=JSON.parse(localStorage.getItem('hover-records-v1')||'{}');}catch(_){}
+ const section=document.createElement('details');section.className='enhanced-changes';section.id='hover-records';section.innerHTML=`<summary>${t('Persönliche Bestzeiten','Personal records')}</summary><p>${t('Einzelspieler · aktive Spielzeit ohne Pause · getrennt nach Karte, Schiff, Grafik und Flaggenzahl. Zufällige Flaggenplätze und Extras können Zeiten beeinflussen.','Single player · active play time excluding pauses · separated by map, craft, graphics and flag count. Random flags and pickups may affect times.')}</p><ul></ul>`;HoverEnhanced.controls.get('modern-launcher').querySelector('.modern-card').append(section);
+ function render(){section.querySelector('ul').replaceChildren(...Object.values(records).map(r=>{const li=document.createElement('li');li.textContent=`${r.maze} · ${r.name} · ${r.retro?'Retro':'Modern'} · ${r.flags} ${t('Flaggen','flags')} · ${r.seconds.toFixed(2)} s`;return li;}));}
+ function key(view){return JSON.stringify({version:1,kind:'capture-flags',rules:'extended-v1',maze:view.options.mazeId,craft:view.game.craftProfile.modelName,retro:!!view.options.retro,flags:view.options.flagCount||3,level:view.options.level||1});}
+ const proto=Hover.views.GameView.prototype,ready=proto.onSoundAndGameReady,won=proto.onGameWon;
+ proto.onSoundAndGameReady=function(){const result=ready.call(this);if(this.options.gameId||this.options.practice)return result;this.recordSeconds=0;const update=this.game.updatePhysics,view=this;this.game.updatePhysics=function(dt){view.recordSeconds+=dt;return update.call(this,dt);};return result;};
+ proto.onGameWon=function(){if(!this.options.gameId&&!this.options.practice&&this.recordSeconds>0){const k=key(this),old=records[k];if(!old||this.recordSeconds<old.seconds){const craft=HoverCrafts.list().find(e=>'Custom_'+e.hash===this.game.craftProfile.modelName);records[k]={seconds:this.recordSeconds,maze:this.options.mazeId,name:craft?.name||this.game.craftProfile.modelName,retro:!!this.options.retro,flags:this.options.flagCount||3,date:new Date().toISOString()};localStorage.setItem('hover-records-v1',JSON.stringify(records));render();}}return won.call(this);};
+ window.HoverRecords={schema:1,kinds:['capture-flags','race-total','race-lap'],get records(){return records;}};render();
+})();

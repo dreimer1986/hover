@@ -9,6 +9,8 @@ class MultiplayerTests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.server = TestServer(create_app())
         await self.server.start_server()
+        self.server.app['service'].countdown_seconds = 0
+        self.server.app['service'].reconnect_seconds = .01
         self.session = ClientSession()
         self.sockets = []
         self.ident = 0
@@ -28,6 +30,8 @@ class MultiplayerTests(unittest.IsolatedAsyncioTestCase):
         self.ident += 1
         ident = self.ident
         room = next(iter(self.server.app['service'].rooms.values()), None)
+        if method == 'beginRoom' and room:
+            for player in room['players']: player.lobby_ready = True
         await ws.send_json({'id': ident, 'method': method, 'args': args, 'round': room['round'] if room else None})
         while True:
             message = await ws.receive_json(timeout=5)
@@ -78,7 +82,7 @@ class MultiplayerTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(len(result['result']), 7)
         self.assertIn('error', await self.rpc(sockets[0], 'setCraftState', {'Position': {'X': float('nan'), 'Y': 0, 'Z': 0}}))
         await sockets[1].close()
-        await asyncio.sleep(.05)
+        await asyncio.sleep(1.1)
         self.assertEqual(room['phase'], 'waiting')
 
     async def test_flags_items_and_duplicate_events(self):
@@ -138,7 +142,7 @@ class MultiplayerTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn('error', await ws.receive_json())
         self.assertIn('error', await self.rpc(ws, 'createGame', 99, 4, 1))
         code = (await self.rpc(ws, 'createGame', 47, 4, 1))['result']
-        await ws.close(); await asyncio.sleep(.05)
+        await ws.close(); await asyncio.sleep(1.1)
         self.assertNotIn(code, self.server.app['service'].rooms)
         async with self.session.get(self.server.make_url('/healthz')) as response:
             self.assertEqual((await response.json())['status'], 'ok')
