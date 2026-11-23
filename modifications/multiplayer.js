@@ -200,8 +200,8 @@
   $('mp-finish').onclick=()=>guarded(()=>rpc('closeLobby'));
   $('mp-leave').onclick=()=>guarded(async()=>{await rpc('leave');disconnect();status(t('Lobby verlassen.','Left lobby.'));});
   window.addEventListener('pagehide',disconnect);
-  function abort(message){disconnect();HoverEnhanced.showHome();panel.hidden=false;status(message);}
-  function showLobby(message){stopScene();HoverEnhanced.showHome();panel.hidden=false;renderLobby();status(message);}
+  function abort(message){disconnect();HoverEnhanced.showHome();panel.hidden=false;HoverEnhanced.revealSection?.('multiplayer');status(message);}
+  function showLobby(message){stopScene();HoverEnhanced.showHome();panel.hidden=false;HoverEnhanced.revealSection?.('multiplayer');renderLobby();status(message);}
   async function dispatch(event,args){
     if(event==='kicked'){abort(t('Der Gastgeber hat dich aus der Lobby entfernt.','The host removed you from the lobby.'));return;}
     if(event==='quickMessage'){$('mp-chat-log').textContent=args[0]+': '+messages[args[1]];return;}
@@ -224,7 +224,7 @@
       showLobby(t('Runde beendet. Team ','Round finished. Team ')+winner+t(' gewinnt. Nächste Runde wählen oder Lobby beenden.',' wins. Choose the next round or end the lobby.'));return;
     }
     if(event==='lobbyClosed'){
-      const result=args[0];disconnect();HoverEnhanced.showHome();panel.hidden=false;$('mp-scores').hidden=false;
+      const result=args[0];disconnect();HoverEnhanced.showHome();panel.hidden=false;HoverEnhanced.revealSection?.('multiplayer');$('mp-scores').hidden=false;
       $('mp-team-scores').textContent=`${t('Rundensiege','Round wins')}: ${t('Rot','Red')} ${result.teamWins.RED} · ${t('Blau','Blue')} ${result.teamWins.BLUE}`;
       panel.querySelector('tbody').replaceChildren(...result.players.sort((a,b)=>b.flags-a.flags).map(p=>{const tr=document.createElement('tr');for(const value of [p.name,p.flags,p.wins]){const td=document.createElement('td');td.textContent=value;tr.appendChild(td);}return tr;}));
       status(t('Lobby beendet. Danke fürs Spielen!','Lobby ended. Thanks for playing!'));return;

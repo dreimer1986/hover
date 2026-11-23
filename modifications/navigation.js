@@ -21,7 +21,7 @@
  let current=null;
  function back(){sections.hidden=true;document.documentElement.classList.remove('section-open');current=null;api.sectionOpen=null;closeMenu();if(Hover.router.currentView?.id!=='homeView')api.showHome();}
  function open(key){if(key==='workshop')refreshCrafts();const target=pages.get(key);if(!target)return;closeMenu();if(Hover.router.currentView?.playing)return;current=key;api.sectionOpen=key;sections.querySelector('h1').textContent=target.label;pages.forEach(({page},name)=>page.hidden=name!==key);sections.hidden=false;document.documentElement.classList.add('section-open');sections.scrollTop=0;get('section-back').focus();}
- api.openSection=open;api.closeSection=back;
+ api.openSection=open;api.closeSection=back;api.revealSection=key=>{let attempts=0;const wait=()=>{if(Hover.router.currentView?.id==='homeView')open(key);else if(++attempts<100)setTimeout(wait,30);};wait();};
  get('section-back').onclick=back;
  register('workshop',t('Eigene Schiffe','Custom crafts'),get('craft-workshop'));
  register('records',t('Persönliche Bestzeiten','Personal records'),get('hover-records'));
@@ -44,7 +44,7 @@
  // The test drive return lives in settings, not permanently over the track.
  const returnButton=document.createElement('button');returnButton.id='practice-return';returnButton.textContent=t('Zurück zur Werkstatt','Return to workshop');returnButton.hidden=true;
  document.querySelector('#hover-settings .preference-buttons').append(returnButton);
- returnButton.onclick=()=>{api.showHome();let attempts=0;const wait=()=>{if(Hover.router.currentView?.id==='homeView')open('workshop');else if(++attempts<100)setTimeout(wait,30);};wait();};
+ returnButton.onclick=()=>{api.showHome();api.revealSection('workshop');};
  const update=api.updateInput;api.updateInput=function(game,view){
   const playing=!!view?.game,workshop=view?.options?.practice==='workshop';returnButton.hidden=!workshop;
   for(const link of links)link.hidden=playing;

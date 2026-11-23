@@ -5,3 +5,5 @@
 Desktop- und Mobil-Layouttests bestätigen zentrierte Vorschau, getrennte Ansichten, senkrechtes Burgermenü, Trainingsauswahl/-Ladetext und Ton in Einstellungen. Werkstatt-Testfahrt mit Rückkehr zum Entwurf, zwei Multiplayer-Browser einschließlich Wiederverbinden sowie simulierte Controller-Eingabe sind geprüft. Echte Mobilgeräte/Controller und die NAS bleiben vom Nutzer zu testen.
 
 No additional individual mass/handling fields were found in the original profiles. Shared jump impulse, hover height, health and effect timers are not additional per-craft profile parameters. / In den Originalprofilen existieren keine weiteren individuellen Masse-/Fahrparameter. Sprungimpuls, Schwebehöhe, Lebensenergie und Effektzeiten sind gemeinsame Regeln bzw. Laufzeitwerte.
+
+Complete Modern/Retro multiplayer rounds were rechecked after fixing navigation to the final score view: the shared lobby and cumulative final scores remain visible on both clients. / Nach Korrektur der Navigation zur Endabrechnung wurden vollständige Modern-/Retro-Runden erneut geprüft: dauerhafte Lobby und Gesamtpunkte bleiben auf beiden Clients sichtbar.
