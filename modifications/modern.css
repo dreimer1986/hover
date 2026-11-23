@@ -245,3 +245,27 @@ html:not(.modern-wide) .modern #dash-top { transform:scale(var(--preference-hud,
 .preference-fields input { width:100%; }
 .hover-dialog { background:radial-gradient(ellipse at top right,#32233d,#14111d); font-family:proxima-nova,Arial,sans-serif; }
 #practice-guide button { color:#fbe1c1; background:#35223f; border:1px solid #b8894c; border-radius:5px; padding:7px 10px; }
+/* A compact vertical menu replaces the full-width toolbar. */
+#modern-toolbar { left:auto; right:calc(10px + env(safe-area-inset-right,0px)); top:calc(8px + env(safe-area-inset-top,0px)); width:auto; display:block; padding:0; }
+#hover-menu-toggle { width:46px; height:44px; font-size:27px; line-height:1; margin-left:auto; display:block; }
+#hover-menu-items { display:flex; flex-direction:column; gap:5px; position:absolute; top:50px; right:0; width:235px; max-height:calc(100dvh - 76px); overflow:auto; padding:10px; background:#1d122bf5; border:1px solid #9b75af; border-radius:9px; box-shadow:0 5px 30px #0009; pointer-events:auto; }
+#hover-menu-items[hidden], #hover-sections[hidden], .hover-section-page[hidden], #practice-return[hidden] { display:none !important; }
+#hover-menu-items > * { margin:0; width:100%; box-sizing:border-box; text-align:left; text-decoration:none; font-size:15px; }
+#hover-menu-items #modern-input-mode { max-width:none; }
+#mp-quick { position:fixed; right:68px; top:8px; max-width:min(340px,calc(100vw - 80px)); pointer-events:auto; }
+#hover-sections { position:fixed; inset:0; z-index:10001; overflow:auto; padding:70px 20px 35px; box-sizing:border-box; color:#eee9ff; background:radial-gradient(ellipse at 25% 0,#4c285d,#10091feF 75%); font:16px/1.5 proxima-nova,Arial,sans-serif; }
+#hover-sections header,#section-content { max-width:820px; margin:0 auto; }
+#hover-sections h1 { color:#ffba48; text-align:center; font-size:30px; }
+#hover-sections button { cursor:pointer; padding:10px 18px; margin:5px; border:0; border-radius:24px; background:linear-gradient(to top,#ff8700,#ffab00); color:#0c092a; font:bold 16px proxima-nova,Arial,sans-serif; }
+#hover-sections button:disabled { opacity:.5; }
+#hover-sections input,#hover-sections select { box-sizing:border-box; width:100%; min-height:42px; margin:5px 0; padding:8px; border:1px solid #9772aa; border-radius:5px; color:white; background:#1b0c2de8; font:inherit; }
+#hover-sections input[type=checkbox] { width:20px; min-height:20px; }
+#hover-sections input[type=range] { padding:0; }
+#hover-sections .section-details > summary { display:none; }
+#hover-sections .enhanced-changes { border:0; margin:0; padding:0; }
+#hover-sections .practice-options { justify-content:center; flex-wrap:wrap; }
+.section-open #homeView { visibility:hidden; }
+#craft-preview { width:min(440px,100%); margin:16px auto !important; }
+#craft-preview .craft-stats-help { text-align:left; }
+#homeView { padding-top:45px; }
+#practice-guide[hidden] { display:none !important; }

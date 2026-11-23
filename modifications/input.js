@@ -73,6 +73,7 @@
  'Persönliche Bestzeiten nach Karte, Schiff, Modern/Retro und Flaggenzahl; Übungsfahrten zählen nicht.',
  'Bereitschaft und Countdown, Ping, Kartenabstimmung/Rotation, Wiederverbinden, Gastgeberwechsel und Schnellnachrichten.',
  'Bibliothek und Einstellungen gemeinsam sichern; vollständiges Offline-Paket und bebilderte Archivzeitleiste.',
+ 'Senkrechtes Burgermenü und eigene Ansichten für Werkstatt, Training, Bestzeiten, Sicherung und Multiplayer; zentrierte Vorschau.',
  'Beide Original-Webfassungen und Store-Pakete bleiben separat erhalten.'
  ]:[
  'Original home screen, craft preview and original craft statistics.',
@@ -92,6 +93,7 @@
  'Personal records by map, craft, Modern/Retro and flag count; practice runs are excluded.',
  'Readiness/countdown, ping, map votes/rotation, reconnection, host transfer and quick messages.',
  'Combined library/settings backups, a complete offline package and illustrated archive timeline.',
+ 'Vertical hamburger menu and separate workshop, training, records, backup and multiplayer views; centered preview.',
  'Both original web releases and Store packages remain separately preserved.'
  ];
  const summary=document.createElement('summary');summary.textContent=de?'Was wurde erweitert?':'What has changed?';details.appendChild(summary);

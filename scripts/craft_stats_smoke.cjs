@@ -1,3 +1,4 @@
+const {click:navigationClick}=require('./navigation_helpers.cjs');
 const {chromium}=require('playwright-core'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,args:['--no-sandbox','--enable-unsafe-swiftshader']});
@@ -18,7 +19,7 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
      await page.evaluate(()=>{Hover.settings.setIntroMessageShown(true);Hover.settings.setSoundEnabled(false);Hover.audio.setEnabled(false)});await page.click('#modern-play');await page.waitForFunction(()=>Hover.router.currentView.playing);
      const physics=await page.evaluate(()=>{const craft=Hover.router.currentView.game.craft,entry=HoverCrafts.selected();return Object.keys(entry.points).map(k=>({key:k,actual:craft[k],profile:craft.profile[k]}));});
      const policy=await page.evaluate(()=>HoverCraftFormat.policyReady);for(const row of physics){const [lo,hi]=policy.parameters[row.key],expected=lo+(hi-lo)*entry.data.points[row.key]/10;assert.equal(row.actual,expected);assert.equal(row.profile,expected);}
-     await page.click('#modern-menu');await page.click('[data-command=home]');await page.waitForSelector('#modern-play');
+     await navigationClick(page,'#modern-menu');await page.click('[data-command=home]');await page.waitForSelector('#modern-play');
     }
     console.log('PASS',locale,entry.data.name,'editor/preview/saved points'+(locale==='de-DE'?' and actual game physics':''));
    }

@@ -48,7 +48,7 @@
    const horizontal=down(15)||pad.axes[0]>.55?1:down(14)||pad.axes[0]<-.55?-1:0;
    if(now-lastNav>180&&(vertical||horizontal)){lastNav=now;const focused=elements[index];if(horizontal&&focused?.tagName==='SELECT'){focused.selectedIndex=Math.max(0,Math.min(focused.options.length-1,focused.selectedIndex+horizontal));focused.dispatchEvent(new Event('change'));}else if(horizontal&&focused?.type==='range'){horizontal>0?focused.stepUp():focused.stepDown();focused.dispatchEvent(new Event('input'));}else{index=(index+(vertical||horizontal)+elements.length)%elements.length;elements[index]?.focus();elements[index]?.scrollIntoView({block:'nearest'});}}
    if(edge(0)){const focused=document.activeElement;if(focused?.tagName==='SUMMARY')focused.parentElement.open=!focused.parentElement.open;else if(focused?.tagName==='SELECT'){focused.selectedIndex=(focused.selectedIndex+1)%focused.options.length;focused.dispatchEvent(new Event('change'));}else if(focused?.tagName==='INPUT'&&['text','url','number'].includes(focused.type)){openKeyboard(focused);}else focused?.click?.();}
-   if(edge(1)){if(keyboard.open)keyboard.close();else if(api.menuOpen)api.toggleSettings();}
+   if(edge(1)){if(keyboard.open)keyboard.close();else if(api.menuOpen)api.toggleSettings();else if(api.sectionOpen)api.closeSection();}
   }else if(edge(bindings.buttons.pause))api.toggleSettings();
   previous=pad.buttons.map(b=>b.pressed);return menu;
  };

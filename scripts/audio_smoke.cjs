@@ -1,3 +1,4 @@
+const {click:navigationClick}=require('./navigation_helpers.cjs');
 const pw=require('playwright-core'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const engine=process.env.BROWSER_ENGINE||'chromium';
 const base=(process.env.HOVER_URL||'http://127.0.0.1:8767/hover/').replace(/\/?$/,'/');
@@ -70,13 +71,13 @@ const base=(process.env.HOVER_URL||'http://127.0.0.1:8767/hover/').replace(/\/?$
       await p.evaluate(()=>Hover.audio.stopAll());await p.waitForTimeout(100);
       const item=await p.evaluate(()=>{const g=Hover.router.currentView.game,pod=g.world.pods.find(p=>p.sound==='OBT_JUMP')||g.world.pods.find(p=>/^OBT_/.test(p.sound));if(!pod)throw new Error('No collectible found');pod.onHit(g.craft);return pod.sound;});
       assert(await p.evaluate(name=>Hover.audio.getSound(name).playing,item));const itemRms=await audible();
-      await p.locator('#modern-sound').tap();assert.equal(await p.evaluate(()=>Hover.audio.enabled),false);await p.waitForTimeout(150);assert(await energy()<.00001);
+      await navigationClick(p,'#modern-settings');await p.locator('#modern-sound').tap();await p.click('[data-command=resume]');assert.equal(await p.evaluate(()=>Hover.audio.enabled),false);await p.waitForTimeout(150);assert(await energy()<.00001);
       await p.evaluate(()=>{const c=Hover.router.currentView.game.craft;c.player=true;c.enginePlaying=null;});
-      await p.locator('#modern-sound').tap();await audible();
+      await navigationClick(p,'#modern-settings');await p.locator('#modern-sound').tap();await p.click('[data-command=resume]');await audible();
       await p.evaluate(()=>HoverAudio.context.suspend());assert.equal(await p.evaluate(()=>HoverAudio.context.state),'suspended');
-      await p.locator('#modern-wide').tap();await p.waitForFunction(()=>HoverAudio.context.state==='running');await audible();
+      await navigationClick(p,'#modern-wide');await p.waitForFunction(()=>HoverAudio.context.state==='running');await audible();
       const contextState=await p.evaluate(()=>HoverAudio.context.state);
-      await p.locator('#modern-menu').tap();await p.locator('[data-command=home]').tap();await p.waitForSelector('#modern-play');await p.waitForTimeout(2200);assert(await energy()<.00001);
+      await navigationClick(p,'#modern-settings');await p.locator('[data-command=home]').tap();await p.waitForSelector('#modern-play');await p.waitForTimeout(2200);assert(await energy()<.00001);
       results.push({retro,engines,loopChecks,continuousIdle,music,wallRms,item,itemRms,mute:true,resume:contextState,menuSilent:true});console.log('PASS '+engine+' '+(retro?'retro':'modern')+' engine/effects/mute/resume/menu');
     }
     assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);

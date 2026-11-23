@@ -1,3 +1,4 @@
+const {click:navigationClick}=require('./navigation_helpers.cjs');
 /* Integration tests against the generated site; no dependencies in the game itself. */
 const { chromium } = require('playwright-core');
 const assert = require('node:assert/strict');
@@ -88,31 +89,31 @@ const root = path.resolve(__dirname, '..');
     });
     await check('Fullscreen unavailable: large view and understandable feedback', async () => {
       await mobile.evaluate(()=>{document.documentElement.requestFullscreen=undefined;document.documentElement.webkitRequestFullscreen=undefined;});
-      await mobile.click('#modern-full'); assert.match(await mobile.locator('#modern-status').innerText(),/nicht verfügbar/);await canvas(mobile,390,844);
+      await navigationClick(mobile,'#modern-full'); assert.match(await mobile.locator('#modern-status').innerText(),/nicht verfügbar/);await canvas(mobile,390,844);
     });
     await check('Modified desktop options start off; fullscreen exits to classic layout', async () => {
       await desktop.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await desktop.goto(base+'play/modified/'); await ready(desktop); await play(desktop);
       assert.equal(await desktop.locator('#modern-wide').getAttribute('aria-pressed'),'false');
       assert(!(await desktop.locator('#modern-controls').isVisible()));
-      await desktop.click('#modern-full'); await desktop.waitForFunction(()=>!!document.fullscreenElement);await desktop.waitForTimeout(200);await canvas(desktop,1280,800);
-      await desktop.click('#modern-full');await desktop.waitForFunction(()=>!document.fullscreenElement);assert.equal(await desktop.locator('#modern-wide').getAttribute('aria-pressed'),'false');
-      await desktop.click('#modern-wide');await desktop.click('#modern-touch');await desktop.waitForTimeout(200);await canvas(desktop,1280,800);
+      await navigationClick(desktop,'#modern-full'); await desktop.waitForFunction(()=>!!document.fullscreenElement);await desktop.waitForTimeout(200);await canvas(desktop,1280,800);
+      await navigationClick(desktop,'#modern-full');await desktop.waitForFunction(()=>!document.fullscreenElement);assert.equal(await desktop.locator('#modern-wide').getAttribute('aria-pressed'),'false');
+      await navigationClick(desktop,'#modern-wide');await navigationClick(desktop,'#modern-touch');await desktop.waitForTimeout(200);await canvas(desktop,1280,800);
       const before=await desktop.evaluate(()=>JSON.stringify(Hover.router.currentView.game.craft.position));await desktop.keyboard.down('ArrowUp');await desktop.waitForTimeout(700);await desktop.keyboard.up('ArrowUp');assert.notEqual(await desktop.evaluate(()=>JSON.stringify(Hover.router.currentView.game.craft.position)),before);
       await desktop.screenshot({path:root+'/verification/modified-desktop.png'});
     });
     await check('Menu, all arenas and craft profiles survive repeated starts', async () => {
       for(const [arena,craft,id] of [['46','Normal',1],['47','Hard',2],['44','Easy',0]]) {
-        await desktop.click('#modern-menu');await desktop.click('[data-command=home]');await desktop.waitForSelector('#modern-play');await play(desktop,arena,craft);
+        await navigationClick(desktop,'#modern-menu');await desktop.click('[data-command=home]');await desktop.waitForSelector('#modern-play');await play(desktop,arena,craft);
         assert.equal(await desktop.evaluate(()=>Hover.router.currentView.game.craftProfile.id),id);
         assert.equal(await desktop.evaluate(()=>Hover.router.currentView.game.mazeId),Number(arena));
         await canvas(desktop,1280,800);
       }
     });
     await check('Retro and return to modern retain working controls and layout', async () => {
-      await desktop.click('#modern-menu');await desktop.click('[data-command=home]');await desktop.click('#modern-retro');await desktop.waitForFunction(()=>Hover.retro&&Hover.router.currentView.playing);
+      await navigationClick(desktop,'#modern-menu');await desktop.click('[data-command=home]');await desktop.click('#modern-retro');await desktop.waitForFunction(()=>Hover.retro&&Hover.router.currentView.playing);
       await desktop.waitForTimeout(300);await canvas(desktop,1280,800);
       await desktop.screenshot({path:root+'/verification/modified-retro.png'});
-      await desktop.click('#modern-menu');await desktop.click('[data-command=home]');await play(desktop);assert.equal(await desktop.evaluate(()=>Hover.retro),false);await canvas(desktop,1280,800);
+      await navigationClick(desktop,'#modern-menu');await desktop.click('[data-command=home]');await play(desktop);assert.equal(await desktop.evaluate(()=>Hover.retro),false);await canvas(desktop,1280,800);
     });
     await check('No missing resources or JavaScript errors', async () => { assert.deepEqual(errors,[]);assert.deepEqual(missing,[]); });
   } finally {

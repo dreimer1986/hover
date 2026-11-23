@@ -6,7 +6,7 @@ These features apply to Modern and Retro. Preserved original editions remain unc
 
 ## Pause, settings and input
 
-**Esc**, **Menu** or controller **Start** opens settings. Single-player simulation and the record clock pause; multiplayer continues. **Leave match** explicitly ends your participation.
+**☰** at the top right opens the vertical menu. **Esc**, **Settings** or controller **Start** opens settings. Single-player simulation and the record clock pause; multiplayer continues. **Leave match** explicitly ends your participation.
 
 Separate music, engine and effects sliders accompany HUD size, chase distance, touch size/opacity, stick dead zone and sensitivity. Preferences persist locally and can be reset.
 
@@ -14,9 +14,9 @@ In **Bindings & controller**, select an action and press its new key/button. Dup
 
 ## Training and workshop
 
-**Start training** opens a separate small arena; select Retro first if desired. Drive, jump, cloak, place a wall, collect a pickup and finally collect the blue flags. Prompts explain inventory, duration gauges and radar. There are no opponents.
+**☰ → Training → Start training** opens a separate small arena; select Retro first if desired. Drive, jump, cloak, place a wall, collect a pickup and finally collect the blue flags. Prompts explain inventory, duration gauges and radar. There are no opponents.
 
-**Test drive preview** applies the current workshop model and handling points. The orange preview arrow marks forward (−Z). The return button brings you straight back to the open editor, retaining your draft. Saving the craft permanently is not required. Practice runs do not count as records.
+Under **☰ → Custom crafts**, **Test drive preview** applies the current workshop model and handling points. The orange preview arrow marks forward (−Z). **Settings → Return to workshop** brings you back to the editor, retaining your draft. Saving the craft permanently is not required. Practice runs do not count as records.
 
 ## Records
 
@@ -34,8 +34,10 @@ The same open tab retries brief network interruptions for up to 28 seconds; the 
 
 ## Backup and offline play
 
-**Back up library & settings** exports all persistent crafts, settings sliders and bindings. Restore validates every model and point budget before storage and merges with existing crafts, up to 24 persistent crafts total. Explicitly keep session crafts first.
+**☰ → Backup & restore** exports all persistent crafts, settings sliders and bindings. Restore validates every model and point budget before storage and merges with existing crafts, up to 24 persistent crafts total. Explicitly keep session crafts first.
 
 The offline ZIP includes both restored web editions, the extended edition and both original Store downloads. Extract everything, install Python 3 and run **start.cmd** (Windows) or **sh start.sh** (Linux/macOS). The launcher binds only to `127.0.0.1:8088`; this fixed address preserves browser storage. Single player needs no internet; multiplayer still requires a reachable server. Python is required, but no extra packages. Store packages are not installed automatically.
 
 Build with `python3 scripts/build_offline.py --output /path/to/package`. A checksum accompanies the ZIP. Provenance, dates and known gaps are shown in the archive and [restoration report](RESTORATION.en.md).
+
+Workshop, records, backups, training and multiplayer have separate views. The original home retains game start, selection and a centered craft preview. The five handling attributes are all individual stock parameters; the physics has no mass parameter. Shared rules such as jump impulse or hover height are not hidden craft statistics.

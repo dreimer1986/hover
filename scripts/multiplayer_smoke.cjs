@@ -1,3 +1,4 @@
+const {click:navigationClick}=require('./navigation_helpers.cjs');
 const {chromium}=require('playwright-core'),assert=require('node:assert/strict'),fs=require('node:fs');
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,args:['--no-sandbox','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});
@@ -37,7 +38,7 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
     await b.waitForFunction(pos=>!HoverMultiplayer.game.world.pods.some(p=>p.location.x===pos.x&&p.location.z===pos.z),item);
     await a.evaluate(()=>{const c=HoverMultiplayer.game.craft;c.wallCount=1;c.placeWall();});await b.waitForFunction(()=>HoverMultiplayer.game.world.tempWalls.length>0);
    } else {
-    await a.click('#modern-wide');await a.waitForFunction(()=>document.querySelector('#flag_counts').width===150);
+    await navigationClick(a,'#modern-wide');await a.waitForFunction(()=>document.querySelector('#flag_counts').width===150);
    }
    const flags=await a.evaluate(()=>HoverMultiplayer.game.world.flags.filter(f=>f.team!==HoverMultiplayer.game.craft.team).map(f=>({x:f.location.x,y:f.location.y,z:f.location.z})));
    for(let i=0;i<flags.length;i++){

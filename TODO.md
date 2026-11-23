@@ -119,6 +119,12 @@ Quellen im Repository / Repository references: [Spielcode / Game code](web/2019-
 - [ ] Rennrunden in die bestehende dauerhafte Lobby und Kartenrotation integrieren / Integrate races with persistent lobbies and map rotation.
 - [ ] Renn-KI separat und zuletzt prüfen; die vorhandene Flaggen-/Verfolger-KI kann nicht unverändert mitfahren / Evaluate racing AI separately and last; existing flag/pursuit AI cannot race unchanged.
 
+## 10. Standalone Windows / ReactOS
+
+- [ ] Eigenständig startbare EXE mit eingebetteter oder portierter Spiel-Engine untersuchen; ReactOS als Zielsystem / Investigate a standalone EXE with an embedded or ported engine, targeting ReactOS.
+- [ ] Multiplayer über den vorhandenen HTTPS/WebSocket-Server erhalten, nicht auf Offline-Nutzung beschränken / Retain multiplayer through the existing HTTPS/WebSocket service, not offline-only.
+- [ ] Laufzeit-, Grafik- und TLS-Unterstützung auf echtem ReactOS prüfen, bevor Kompatibilität zugesagt wird / Test runtime, graphics and TLS support on actual ReactOS before claiming compatibility.
+
 ## Übergreifende Vorgaben / Cross-cutting requirements
 
 - Originalarchive und restaurierte Originalfassungen erhalten; neue Spielregeln nur in der erweiterten Fassung / Preserve original archives and restored editions; add new rules only to the extended edition.

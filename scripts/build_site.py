@@ -95,7 +95,7 @@ if library.exists():
 index = modified / 'index.html'
 html = index.read_text().replace('<title>Hover!</title>', '<title>Hover! — Erweiterte Fassung</title>')
 html = html.replace('</head>', '<link rel="stylesheet" href="modern.css">\n<script src="../../locale.js"></script>\n<script src="../../mobile.js"></script>\n</head>')
-html = html.replace('</body>', '<script src="audio.js"></script>\n<script src="enhanced.js"></script>\n<script src="modern.js"></script>\n<script src="extras.js"></script>\n<script src="input.js"></script>\n<script src="craft-validation.js"></script>\n<script src="craft-library.js"></script>\n<script src="camera.js"></script>\n<script src="multiplayer.js"></script>\n<script src="preferences.js"></script>\n<script src="controls.js"></script>\n<script src="practice.js"></script>\n<script src="records.js"></script>\n<script src="backup.js"></script>\n</body>')
+html = html.replace('</body>', '<script src="audio.js"></script>\n<script src="enhanced.js"></script>\n<script src="modern.js"></script>\n<script src="extras.js"></script>\n<script src="input.js"></script>\n<script src="craft-validation.js"></script>\n<script src="craft-library.js"></script>\n<script src="camera.js"></script>\n<script src="multiplayer.js"></script>\n<script src="preferences.js"></script>\n<script src="controls.js"></script>\n<script src="practice.js"></script>\n<script src="records.js"></script>\n<script src="backup.js"></script>\n<script src="navigation.js"></script>\n</body>')
 html = html.replace('width=device-width"', 'width=device-width,viewport-fit=cover"')
 index.write_text(html)
 if args.include_downloads:
@@ -109,7 +109,7 @@ else:
 # Version the new UI files so a refreshed page cannot reuse an older cached UI.
 for page in [output / 'index.html', modified / 'index.html']:
     html = page.read_text()
-    for url in ['style.css', 'timeline.js', 'locale.js', 'mobile.js', '../../locale.js', '../../mobile.js', 'modern.js', 'modern.css', 'audio.js', 'enhanced.js', 'extras.js', 'input.js', 'craft-validation.js', 'craft-library.js', 'camera.js', 'multiplayer.js', 'preferences.js', 'controls.js', 'practice.js', 'records.js', 'backup.js']:
+    for url in ['style.css', 'timeline.js', 'locale.js', 'mobile.js', '../../locale.js', '../../mobile.js', 'modern.js', 'modern.css', 'audio.js', 'enhanced.js', 'extras.js', 'input.js', 'craft-validation.js', 'craft-library.js', 'camera.js', 'multiplayer.js', 'preferences.js', 'controls.js', 'practice.js', 'records.js', 'backup.js', 'navigation.js']:
         asset = (page.parent / url).resolve()
         if asset.is_file() and asset.is_relative_to(output):
             version = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]

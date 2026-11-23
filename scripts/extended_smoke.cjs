@@ -1,3 +1,4 @@
+const {click:navigationClick}=require('./navigation_helpers.cjs');
 const {chromium}=require('playwright-core'),assert=require('node:assert/strict'),fs=require('node:fs');
 (async()=>{
  const b=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,args:['--no-sandbox','--enable-unsafe-swiftshader','--autoplay-policy=no-user-gesture-required']});
@@ -13,15 +14,15 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
    await p.evaluate(()=>{Hover.settings.setIntroMessageShown(true);Hover.settings.setSoundEnabled(false);Hover.audio.setEnabled(false);});
    await p.click('#modern-retro');await p.waitForFunction(()=>Hover.router.currentView.playing);
    assert.equal(await p.evaluate(()=>Hover.router.currentView.options.mazeId),46);assert.equal(await p.evaluate(()=>Hover.router.currentView.game.world.flags.length),12);
-   if(!mobile)await p.click('#modern-wide');
+   if(!mobile)await navigationClick(p,'#modern-wide');
    await p.waitForFunction(()=>document.querySelector('#flag_counts').width===150);
    await p.evaluate(()=>Hover.router.currentView.game.world.onWin.call());
    await p.waitForFunction(()=>Hover.router.currentView.options.mazeId===47&&Hover.router.currentView.playing,null,{timeout:20000});assert(await p.evaluate(()=>Hover.retro));assert.equal(await p.evaluate(()=>Hover.router.currentView.game.world.flags.length),12);
-   await p.click('#modern-menu');await p.click('[data-command=home]');await p.waitForSelector('#modern-play');
+   await navigationClick(p,'#modern-menu');await p.click('[data-command=home]');await p.waitForSelector('#modern-play');
    await p.selectOption('#modern-flags','3');await p.selectOption('#modern-arena','44');await p.click('#modern-retro');await p.waitForFunction(()=>Hover.router.currentView.playing);await p.waitForFunction(()=>document.querySelector('#flag_counts').width===75);
-   await p.click('#modern-menu');await p.click('[data-command=home]');await p.waitForSelector('#modern-play');await p.click('#modern-play');await p.waitForFunction(()=>Hover.router.currentView.playing);
+   await navigationClick(p,'#modern-menu');await p.click('[data-command=home]');await p.waitForSelector('#modern-play');await p.click('#modern-play');await p.waitForFunction(()=>Hover.router.currentView.playing);
    await p.evaluate(()=>Hover.router.currentView.game.world.onWin.call());await p.waitForFunction(()=>Hover.router.currentView.options.mazeId===46&&Hover.router.currentView.playing,null,{timeout:20000});
-   await p.click('#modern-menu');await p.click('[data-command=home]');await p.waitForSelector('#modern-play');await p.waitForTimeout(4300);assert.equal(await p.evaluate(()=>Hover.router.currentView.id),'homeView');
+   await navigationClick(p,'#modern-menu');await p.click('[data-command=home]');await p.waitForSelector('#modern-play');await p.waitForTimeout(4300);assert.equal(await p.evaluate(()=>Hover.router.currentView.id),'homeView');
    await p.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await p.goto(base+'?view=archive');await p.waitForSelector('main');assert(!p.url().includes('/play/'));
    results.push({locale,mobile,originalHome:true,secretUnlock:true,flags:[3,6],retroProgression:true,modernProgression:true,archive:true});console.log('PASS extended '+locale);await p.close();
   }

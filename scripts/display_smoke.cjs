@@ -1,3 +1,4 @@
+const {click:navigationClick}=require('./navigation_helpers.cjs');
 const {chromium} = require('playwright-core');
 const assert = require('node:assert/strict');
 const fs=require('node:fs'), path=require('node:path');
@@ -14,7 +15,7 @@ const screenshots=process.env.SCREENSHOT_DIR||'/home/dreimer/.cache/hover-previe
       p.on('pageerror',e=>errors.push(e.message));p.on('response',r=>{if(r.status()>=400)missing.push(r.status()+' '+r.url())});
       await p.addInitScript(()=>sessionStorage.setItem('hover-input-ready','1'));await p.goto(base+'play/modified/');await p.waitForSelector('#modern-play');
       await p.evaluate(()=>{Hover.settings.setIntroMessageShown(true);Hover.settings.setSoundEnabled(false);Hover.audio.setEnabled(false);});
-      if(!mobile)await p.click('#modern-wide');
+      if(!mobile)await navigationClick(p,'#modern-wide');
       for(const retro of [false,true]) {
         if(retro){await p.click('#enhanced-unlock');await p.selectOption('#modern-arena','47');}
         await p.click(retro?'#modern-retro':'#modern-play');await p.waitForFunction(()=>Hover.router.currentView.playing);await p.waitForTimeout(250);
@@ -28,9 +29,9 @@ const screenshots=process.env.SCREENSHOT_DIR||'/home/dreimer/.cache/hover-previe
             const portrait=await checkFrame();assert.deepEqual(portrait.buffer,portrait.dimensions);assert.deepEqual(portrait.viewport,[0,0,...portrait.buffer]);assert.deepEqual(portrait.rect,[0,0,...portrait.screen]);
             await p.setViewportSize(viewport);await p.waitForTimeout(200);
           }
-          await p.click('#modern-full');await p.waitForFunction(()=>!!document.fullscreenElement);await p.waitForTimeout(200);
+          await navigationClick(p,'#modern-full');await p.waitForFunction(()=>!!document.fullscreenElement);await p.waitForTimeout(200);
           const fullscreen=await checkFrame();assert.deepEqual(fullscreen.buffer,fullscreen.dimensions);assert.deepEqual(fullscreen.viewport,[0,0,...fullscreen.buffer]);assert.deepEqual(fullscreen.rect,[0,0,...fullscreen.screen]);
-          await p.click('#modern-full');await p.waitForFunction(()=>!document.fullscreenElement);await p.waitForTimeout(100);
+          await navigationClick(p,'#modern-full');await p.waitForFunction(()=>!document.fullscreenElement);await p.waitForTimeout(100);
         }
         await p.screenshot({path:path.join(screenshots,name+'-'+(retro?'retro':'modern')+'.png'),scale:'css'});
         if(retro) {
@@ -48,8 +49,8 @@ const screenshots=process.env.SCREENSHOT_DIR||'/home/dreimer/.cache/hover-previe
           await p.locator('.msgButton').click();await p.waitForSelector('#modern-play');
           // Losing must also leave a usable centered retry/return button.
           await p.click('#modern-retro');await p.waitForFunction(()=>Hover.router.currentView.playing);await p.waitForTimeout(100);
-          await p.evaluate(()=>Hover.router.currentView.onGameLost());await p.waitForSelector('.msg-level-lost .msgButton');await p.locator('.msgButton').click();await p.waitForFunction(()=>Hover.router.currentView.playing);await p.click('#modern-menu');await p.click('[data-command=home]');await p.waitForSelector('#modern-play');
-        } else await p.click('#modern-menu');await p.click('[data-command=home]');
+          await p.evaluate(()=>Hover.router.currentView.onGameLost());await p.waitForSelector('.msg-level-lost .msgButton');await p.locator('.msgButton').click();await p.waitForFunction(()=>Hover.router.currentView.playing);await navigationClick(p,'#modern-menu');await p.click('[data-command=home]');await p.waitForSelector('#modern-play');
+        } else await navigationClick(p,'#modern-menu');await p.click('[data-command=home]');
         results.push({name,retro,state,passed:true});console.log('PASS '+name+' '+(retro?'retro + win/loss':'modern + glow'));
       }
       await p.close();

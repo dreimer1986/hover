@@ -1,3 +1,4 @@
+const {click:navigationClick}=require('./navigation_helpers.cjs');
 const {chromium} = require('playwright-core');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -26,18 +27,18 @@ const base = (process.env.HOVER_URL || 'http://127.0.0.1:8767/hover/').replace(/
       assert.equal(await p.locator('#modern-play').innerText(),lang==='de'?'Einzelspieler':'Single player');
       assert.equal(await p.locator('#modern-craft option').first().innerText(),lang==='de'?'Einfach':'Easy');
       await p.click('#modern-play');await p.waitForFunction(()=>Hover.router.currentView.playing);
-      await p.locator('.msgButton').click();await p.click('#modern-wide');await p.click('#modern-touch');
+      await p.locator('.msgButton').click();await navigationClick(p,'#modern-wide');await navigationClick(p,'#modern-touch');
       await p.waitForTimeout(150);
       assert.match(await p.locator('#modern-readout').innerText(),lang==='de'?/Sprung .* Wand .* Tarnung .* Schild/:/Jump .* Wall .* Cloak .* Shield/);
       assert.equal((await p.locator('[data-action=jump]').innerText()).split('\n')[0],lang==='de'?'Sprung':'Jump');
       if(locale==='en-US') {
-        await p.click('#modern-full');await p.waitForFunction(()=>!!document.fullscreenElement);
+        await navigationClick(p,'#modern-full');await p.waitForFunction(()=>!!document.fullscreenElement);
         assert.equal(await p.locator('#modern-full').innerText(),'⛶ Exit fullscreen');
-        await p.click('#modern-full');await p.waitForFunction(()=>!document.fullscreenElement);
+        await navigationClick(p,'#modern-full');await p.waitForFunction(()=>!document.fullscreenElement);
         assert.equal(await p.locator('#modern-full').innerText(),'⛶ Fullscreen');
       }
       await p.evaluate(()=>{document.documentElement.requestFullscreen=undefined;document.documentElement.webkitRequestFullscreen=undefined;});
-      await p.click('#modern-full');assert.match(await p.locator('#modern-status').innerText(),lang==='de'?/nicht verfügbar/:/not available/);
+      await navigationClick(p,'#modern-full');assert.match(await p.locator('#modern-status').innerText(),lang==='de'?/nicht verfügbar/:/not available/);
       results.push({locale,language:lang,archive:true,launcher:true,game:true,fullscreenFeedback:true});
       console.log('PASS '+locale+' -> '+lang);await p.close();
     }
