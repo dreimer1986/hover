@@ -1,15 +1,15 @@
 # Geplante Erweiterungen / Planned improvements
 
-**Stand / Updated: 23.11.2026.** Punkte 1–7 sind vom Nutzer zur Umsetzung freigegeben. Sie sind in der erweiterten Fassung implementiert; reale Geräte- und NAS-Abnahme stehen weiterhin aus. Punkte 8–9 bleiben spätere Vorhaben. / Items 1–7 were authorized and implemented in the extended edition; physical-device and NAS acceptance tests remain pending. Items 8–9 remain future work.
+**Stand / Updated: 24.11.2026 · v0.5.2.** Punkte 1–7 sind implementiert. Die offenen Abnahmepunkte zum veröffentlichten Stand wurden auf Wunsch des Nutzers geschlossen; damit werden keine zusätzlichen, hier nicht dokumentierten Testläufe behauptet. Karteneditor, Rennen, Standalone-Version und weitere offene Funktionen bleiben spätere Vorhaben. / Items 1–7 are implemented. Outstanding acceptance items for the published release were closed at the user's request; this does not claim additional undocumented test runs. The map editor, racing, standalone edition and other unchecked features remain future work.
 
 Vorgeschlagene Reihenfolge / Suggested order: Einstellungen und Pause → vollständige Controller-Bedienung → Werkstatt-Testfahrt → Multiplayer-Komfort → Bestzeiten → Karteneditor. Rennstrecken zunächst technisch erproben, dann Zeitfahren, danach Multiplayer-Rennen; Renn-KI zuletzt und separat. / Settings and pause → full controller navigation → workshop test drive → multiplayer usability → personal records → map editor. Validate track feasibility first, then time trials, multiplayer races, and finally racing AI as a separate project.
 
-## Zuerst: aktuellen Stand testen / First: test the current release
+## Abnahme des veröffentlichten Stands / Published-release acceptance
 
-- [ ] Nutzerfeedback zum neuen Stand 0.5.0 sammeln / Collect user feedback on the new 0.5.0 release.
-- [ ] PC, Android/iPhone, echte Controller und NAS-Multiplayer prüfen / Check PC, Android/iPhone, physical controllers and NAS multiplayer.
-- [ ] Besonders Import/Export, Texturen, Drehung, Speichern/Neuladen, Außenansicht und Schiffsteilung prüfen / Focus on import/export, textures, orientation, persistence, chase view and shared crafts.
-- [ ] Einheitliche Vergleichswerte und die neuen Erläuterungen auf Verständlichkeit prüfen / Check that the shared comparison scale and handling explanations are understandable.
+- [x] Nutzerfeedback zum veröffentlichten Stand bis 0.5.2 sammeln / Collect user feedback on the published releases through 0.5.2.
+- [x] PC, Android/iPhone, echte Controller und NAS-Multiplayer prüfen / Check PC, Android/iPhone, physical controllers and NAS multiplayer.
+- [x] Besonders Import/Export, Texturen, Drehung, Speichern/Neuladen, Außenansicht und Schiffsteilung prüfen / Focus on import/export, textures, orientation, persistence, chase view and shared crafts.
+- [x] Einheitliche Vergleichswerte und die neuen Erläuterungen auf Verständlichkeit prüfen / Check that the shared comparison scale and handling explanations are understandable.
 
 ## 1. Pause und Einstellungen / Pause and settings
 
@@ -82,7 +82,7 @@ Umsetzung und Bedienung / Implementation and controls: [Deutsch](FEATURES.md) ·
 
 ### Technische Prüfung vor Umsetzung / Technical validation before implementation
 
-Diese Befunde stammen aus einer Quellcodeprüfung, nicht aus einem Großkarten-Belastungstest. / These findings come from source inspection, not large-map stress testing.
+Die folgende Tabelle beschreibt den ursprünglichen technischen Ausgangspunkt. Die Prüfungen in diesem Abschnitt gehören zur künftigen Entwicklung des Rennmodus und sind keine offenen Abnahmepunkte für v0.5.2. Diese Befunde stammen aus einer Quellcodeprüfung, nicht aus einem Großkarten-Belastungstest. / The table below records the original technical baseline. Checks in this section belong to future racing development, not outstanding v0.5.2 acceptance. These findings come from source inspection, not large-map stress testing.
 
 | Bereich / Area | Befund / Finding |
 | --- | --- |
@@ -95,8 +95,8 @@ Diese Befunde stammen aus einer Quellcodeprüfung, nicht aus einem Großkarten-B
 
 Quellen im Repository / Repository references: [Spielcode / Game code](web/2019-03-11/scripts/game.cbbb14d7.js), [Kartendaten / Map data](web/2019-03-11/scripts/mazes.c3a2bdf0.js), [Server](server/app.py). Im Spielcode sind insbesondere der World-Konstruktor (`wallQuad`), `getCollisionXYZ`, `checkCraftAgainstStaticGeometry`, die Kartendarstellung und die Kameraeinstellungen relevant. / Relevant game paths include the world constructor (`wallQuad`), collision queries, static rendering and camera settings.
 
-- [x] Kollisionssuche für importierte Karten über deren gesamte Ausdehnung aufbauen; Originalkarten behalten ihren bisherigen Index / Build a collision index across the full extent of imported maps; stock maps retain their existing index.
-- [ ] Kollisionen an alten und neuen Bereichsgrenzen prüfen; außerhalb der alten Fläche dürfen keine Wände aus der Suche verschwinden / Verify old and new boundaries; walls outside the old region must remain collidable.
+- [x] Kollisionssuche über die gesamte Kartenausdehnung in der erweiterten Fassung; Archivfassungen unverändert / Collision lookup across the full map extent in the extended edition; archived editions unchanged.
+- [x] Kollisionen an alten und neuen Bereichsgrenzen prüfen; außerhalb der alten Fläche dürfen keine Wände aus der Suche verschwinden / Verify old and new boundaries; walls outside the old region must remain collidable.
 - [ ] Multiplayer-Positionsgrenzen passend erweitern beziehungsweise kartenbezogen prüfen; Validierung beibehalten / Extend or map-scope multiplayer position limits while retaining validation.
 - [ ] Einfache Teststrecke mit langen Geraden und weiten Kurven erstellen; zunächst auch innerhalb der bisherigen Fläche erproben / Build a simple course with long straights and sweeping turns; first also test within the existing area.
 - [ ] Ladezeit, Speicher, Bildrate und Kollisionen auf PC und Mobilgeräten messen / Measure load time, memory, frame rate and collision behaviour on PC and mobile devices.
@@ -173,9 +173,9 @@ Am Gerät nach Veröffentlichung prüfen / Check on actual devices after publica
 - [x] Benannte, optional öffentliche Lobbys mit Suchliste / Named, optionally public lobbies and discovery.
 - [x] Map-Editor-Einschätzung dokumentiert / Map editor assessment documented.
 
-Nach diesem Release noch am Gerät prüfen / Actual-device checks after this release:
+Historischer Geräte-Abnahmepunkt, auf Nutzerwunsch geschlossen / Historical device acceptance item, closed at the user's request:
 
-- [ ] Aktuellen Stand v0.3.5 auf NAS und echten Geräten testen; Container bei Bedarf aktualisieren / Test current v0.3.5 on NAS and actual devices; update the container if needed.
+- [x] Stand v0.3.5 auf NAS und echten Geräten testen; durch die Abnahme des aktuellen Stands ersetzt / Test v0.3.5 on NAS and actual devices; superseded by current-release acceptance.
 
 ## 11. Eigene Karten und ReactOS-Schiff / Custom maps and ReactOS craft
 
