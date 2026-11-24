@@ -49,3 +49,5 @@ Werkstatt, Bestzeiten, Sicherung, Training und Multiplayer besitzen getrennte An
 Die neue höhenabhängige KI gilt für alle Arenen der erweiterten Fassung. Sie nutzt Treppen und sammelt bei Bedarf Sprung-Extras für erhöhte Ziele. Erhöhte Flaggenplätze werden zwischen Rot und Blau verteilt, auch im Multiplayer. Die archivierten Originalfassungen bleiben unverändert.
 
 Neon Causeway ist Karte 4 der normalen Einzelspieler-Reihenfolge und startet automatisch nach Karte 3. Im Multiplayer ist sie direkt auswählbar und Teil der Kartenabstimmung und Rotation. Dafür den NAS-Server auf 0.5.1 aktualisieren.
+
+Neon Causeway ist ab 0.5.2 heller abgestimmt, mit deutlicheren Fahrwegen und Treppen, gezielt leuchtenden Neonstreifen und weniger Entfernungsabdunklung. Gilt auch für Retro und den vereinfachten mobilen Renderer.

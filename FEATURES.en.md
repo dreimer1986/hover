@@ -49,3 +49,5 @@ Workshop, records, backups, training and multiplayer have separate views. The or
 The new height-aware AI applies to every arena in the extended edition. It uses stairs and collects jump pickups when needed for elevated targets. Elevated flag locations are shared between red and blue, including multiplayer. Archived original editions remain unchanged.
 
 Neon Causeway is map 4 in the normal single-player sequence and starts automatically after map 3. Multiplayer offers it directly in selection, voting and rotation. Update the NAS server to 0.5.1 for this arena.
+
+Neon Causeway has brighter lighting from 0.5.2, with clearer roads and stairs, targeted emissive neon strips and reduced distance darkening. Retro and the simplified mobile renderer are covered too.

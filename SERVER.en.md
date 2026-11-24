@@ -6,11 +6,11 @@ The container includes the Python game server **and the website**. It needs only
 
 ## Installing on Synology
 
-1. Download the matching image from [release multiplayer-v0.5.1](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.5.1):
+1. Download the matching image from [release multiplayer-v0.5.2](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.5.2):
    - **amd64** for Synology NAS with Intel/AMD processors.
    - **arm64** for supported NAS with 64-bit ARM processors. The NAS must support Container Manager/Docker; not every ARM model does. 32-bit ARM is not included.
 2. In **Container Manager → Image → Add → Add from File**, import `hover-multiplayer-….tar.gz`. If DSM rejects compressed files, decompress it to `.tar` first.
-3. Create a container from **hover-multiplayer:0.5.1**, enable automatic restart and map **NAS port 8080 → container port 8080, TCP**. No folder mappings or privileged mode are needed.
+3. Create a container from **hover-multiplayer:0.5.2**, enable automatic restart and map **NAS port 8080 → container port 8080, TCP**. No folder mappings or privileged mode are needed.
 4. Point Caddy at the NAS port as described below and open **https://hover.dreimer.de/**. The container website defaults to its current HTTPS address in the **Multiplayer** panel.
 
 Menu names vary between the older Docker package and newer Container Manager. Alternatively, import [compose.yaml](compose.yaml) as a Container Manager project after loading the image. If NAS port 8080 is occupied, use a mapping such as `18080:8080` and point the proxy at port 18080.
@@ -27,7 +27,7 @@ Older DSM without Compose:
 ```sh
 sudo docker run -d --name hover-multiplayer --restart unless-stopped \
   --read-only --cap-drop ALL --security-opt no-new-privileges:true \
-  -p 8080:8080 hover-multiplayer:0.5.1
+  -p 8080:8080 hover-multiplayer:0.5.2
 ```
 
 ## Caddy 2: hover.dreimer.de
@@ -60,22 +60,22 @@ A disconnection aborts the round, keeping the remaining players in the lobby. Wh
 
 ## Updating an existing Synology container
 
-1. Finish active games. Download the matching v0.5.1 archive and import it through **Container Manager → Image → Add → Add from File**. The new image is `hover-multiplayer:0.5.1`.
+1. Finish active games. Download the matching v0.5.2 archive and import it through **Container Manager → Image → Add → Add from File**. The new image is `hover-multiplayer:0.5.2`.
 2. Note the old container's ports and environment variables. Stop it and rename it, for example to `hover-multiplayer-old`, to keep a rollback option. Disable its automatic restart.
 3. Create a new `hover-multiplayer` container from the **new image**. Keep the same ports (usually `8080:8080`) and environment variables, and enable automatic restart. No volumes or privileged mode are required. Restarting the old container alone does not update its image.
-4. Start the new container. `https://hover.dreimer.de/healthz` should report `version: 0.5.1` and `protocol: 4`. Reload the website, create and join a lobby. Caddy needs no changes if the port mapping stays the same.
+4. Start the new container. `https://hover.dreimer.de/healthz` should report `version: 0.5.2` and `protocol: 4`. Reload the website, create and join a lobby. Caddy needs no changes if the port mapping stays the same.
 5. After a successful test, remove the old container. To roll back, stop the new one and restart the old one, restoring its original name if needed. Active lobbies are not transferred.
 
-For a **Compose project**, import the new image, change the existing project's image to `hover-multiplayer:0.5.1` and recreate the project. Keep your own port/origin settings. Using SSH in the project directory:
+For a **Compose project**, import the new image, change the existing project's image to `hover-multiplayer:0.5.2` and recreate the project. Keep your own port/origin settings. Using SSH in the project directory:
 
 ```sh
 sudo docker load -i hover-multiplayer-amd64.tar.gz
-# compose.yaml: image: hover-multiplayer:0.5.1
+# compose.yaml: image: hover-multiplayer:0.5.2
 sudo docker compose up -d --force-recreate
 sudo docker compose ps
 ```
 
-The release includes [compose.yaml](compose.yaml) and this guide. Use the arm64 file for ARM. Both website and server must use protocol 4 (server 0.4.0 or later). Version 0.5.1 adds ReactOS Silver, single-player map import and the new AI. Server 0.5.1 includes Neon Causeway as the fourth multiplayer arena in selection, voting and rotation.
+The release includes [compose.yaml](compose.yaml) and this guide. Use the arm64 file for ARM. Both website and server must use protocol 4 (server 0.4.0 or later). Version 0.5.2 adds ReactOS Silver, single-player map import and the new AI. Server 0.5.2 includes Neon Causeway as the fourth multiplayer arena in selection, voting and rotation.
 
 ## Configuration and operation
 
@@ -99,7 +99,7 @@ Original archives and Store packages are unchanged. [Historical interface analys
 ## Building the image yourself
 
 ```sh
-docker build -t hover-multiplayer:0.5.1 .
+docker build -t hover-multiplayer:0.5.2 .
 docker compose up -d
 ```
 
@@ -109,6 +109,6 @@ GitHub Actions builds native Linux amd64 and arm64 images and attaches importabl
 
 Protocol 3 adds named lobbies, private by default, and a directory of joinable public rooms. Hosts can share up to eight validated crafts (1.5 MB each, 8 MB combined). Other players fetch missing SHA-256 packages before starting and select them in the lobby. Server checks cover point budget, geometry, PNG structure and storage limits. Server copies last only until the lobby closes; guests can retain/export them in their browsers. [Details](CRAFTS.en.md). Messages remain limited to 16 KiB except validated craft uploads (2 MB WebSocket ceiling). The global room limit also bounds total model storage.
 
-## Convenience features in 0.5.1
+## Convenience features in 0.5.2
 
 Both website and server require protocol 4. Everyone must be ready before a three-second countdown. Disconnected slots are retained for 30 seconds for the same open tab. Host transfer, removal, rotation, voting and quick messages are described in the [user guide](FEATURES.en.md). Restarting the server discards active lobbies.

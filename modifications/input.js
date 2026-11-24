@@ -74,7 +74,7 @@
  'Bereitschaft und Countdown, Ping, Kartenabstimmung/Rotation, Wiederverbinden, Gastgeberwechsel und Schnellnachrichten.',
  'Bibliothek und Einstellungen gemeinsam sichern; vollständiges Offline-Paket und bebilderte Archivzeitleiste.',
  'Senkrechtes Burgermenü und eigene Ansichten für Werkstatt, Training, Bestzeiten, Sicherung und Multiplayer; zentrierte Vorschau.',
- 'Ausgewogenes viertes Schiff ReactOS Silver mit abgerundeter Geometrie und Flügellogos; Kartenimport/-export im Einzelspieler mit zweistöckiger Cyberpunk-Beispielkarte und neuer KI für alle erweiterten Arenen. Erhöhte Flaggenplätze stehen beiden Teams offen. Neon Causeway ist Karte 4 nach Karte 3 sowie im Multiplayer auswählbar.',
+ 'Ausgewogenes viertes Schiff ReactOS Silver mit abgerundeter Geometrie und Flügellogos; Kartenimport/-export im Einzelspieler mit zweistöckiger Cyberpunk-Beispielkarte und neuer KI für alle erweiterten Arenen. Erhöhte Flaggenplätze stehen beiden Teams offen. Neon Causeway ist Karte 4 nach Karte 3 sowie im Multiplayer auswählbar; hellere Fahrwege und Treppen mit getrennten Neon-Leuchtmasken.',
  'Beide Original-Webfassungen und Store-Pakete bleiben separat erhalten.'
  ]:[
  'Original home screen, craft preview and original craft statistics.',
@@ -95,7 +95,7 @@
  'Readiness/countdown, ping, map votes/rotation, reconnection, host transfer and quick messages.',
  'Combined library/settings backups, a complete offline package and illustrated archive timeline.',
  'Vertical hamburger menu and separate workshop, training, records, backup and multiplayer views; centered preview.',
- 'Balanced fourth craft ReactOS Silver with rounded geometry and wing logos; custom single-player map import/export with a two-storey cyberpunk example and new AI across all extended arenas. Elevated flag locations are shared between teams. Neon Causeway is map 4 after map 3 and selectable in multiplayer.',
+ 'Balanced fourth craft ReactOS Silver with rounded geometry and wing logos; custom single-player map import/export with a two-storey cyberpunk example and new AI across all extended arenas. Elevated flag locations are shared between teams. Neon Causeway is map 4 after map 3 and selectable in multiplayer; brighter roads and stairs with separate neon emissive masks.',
  'Both original web releases and Store packages remain separately preserved.'
  ];
  const summary=document.createElement('summary');summary.textContent=de?'Was wurde erweitert?':'What has changed?';details.appendChild(summary);

@@ -29,3 +29,5 @@ Das GLB enthält Metall-/Rauheitswerte. Hover verwendet einen Farbatlas und sein
 `modifications/maps/assets/cyber-panel.png` wurde mit dem eingebauten Werkzeug **image_gen.imagegen** für diese Erweiterung erzeugt. Das ursprüngliche Rasterbild bleibt unverändert. Der genaue englische Prompt ist in der [englischen Herkunftsdokumentation](NEW-ASSETS.en.md#neon-causeway) festgehalten; er fordert eine kachelbare, frontal dargestellte dunkelblaue Stahloberfläche mit dezenten cyanfarbenen und magentafarbenen Lichtstreifen ohne Text oder Perspektive.
 
 Das Beispielpaket enthält seine Texturen. Ursprünglich archivierte Karten, Texturen und Schiffdateien werden nicht verändert.
+
+Die Quelldateien werden für die Beleuchtungsanpassung in 0.5.2 nicht bearbeitet. `neon-lighting.js` berechnet beim Laden aus der Farbsättigung eine separate Graustufen-Leuchtmaske für Neonstreifen und passt die Karten-Shader nur für Neon Causeway an.

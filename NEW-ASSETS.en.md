@@ -31,3 +31,5 @@ The GLB stores metallic/roughness properties. Hover's old renderer uses a diffus
 > Use case: stylized-concept. Asset type: a seamless square game environment diffuse texture, 1024x1024. Create a straight-on orthographic tile of dark brushed steel cyberpunk architectural panels for a Hover racing arena. Clean geometric recessed plates, subtle wear, narrow cyan luminous strip accents near panel seams, tiny magenta light details. No perspective, no text, no symbols, no objects, no frame, no scenery. Evenly lit flat material surface, not a photograph of a wall. All four edges tile seamlessly. Mainly dark blue-gray steel with restrained neon highlights, readable at 512 pixels. Texture only.
 
 The example embeds its textures. Original archived maps, textures and ship files are not modified.
+
+Lighting changes in 0.5.2 do not edit the source artwork. At load time, `neon-lighting.js` derives a separate grayscale emissive mask for neon strips from colour saturation and adjusts the map shaders only for Neon Causeway.

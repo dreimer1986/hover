@@ -32,3 +32,5 @@ The [example package](modifications/maps/Neon-Causeway.hovermap.json) also serve
 Limits: 16 MiB package, 2,048 walls, 1,024 floor polygons, 50,000-unit side span; absolute coordinates at most 50,000. These are chosen import limits, not proven engine maxima. Imported maps receive a collision index covering their full extent. Records include the complete map hash to distinguish revisions.
 
 Build the example with `python3 scripts/build_cyber_map.py`. [Texture provenance](NEW-ASSETS.en.md).
+
+Since 0.5.2, Neon Causeway uses brighter per-material lighting: more readable dark surfaces, a separate emissive mask for cyan/magenta strips and reduced distance darkening in Modern mode. Retro and the simplified mobile renderer are also brighter. Source textures, the city sky and lighting in other arenas are retained. These are material effects, not additional spatial lamps or dynamic shadows.

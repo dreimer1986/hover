@@ -189,3 +189,6 @@ Nach diesem Release noch am Gerät prüfen / Actual-device checks after this rel
 Bedienung / Usage: [Karten DE](MAPS.md) · [Maps EN](MAPS.en.md) · [Assets DE](NEW-ASSETS.md) · [Assets EN](NEW-ASSETS.en.md).
 
 - [x] Neon Causeway als feste Karte 4 nach Karte 3, einschließlich Multiplayer-Auswahl, Abstimmung und Rotation / Bundle Neon Causeway as map 4 after map 3, including multiplayer selection, voting and rotation.
+
+- [x] Lesbarere Beleuchtung und getrennte Neon-Leuchtmasken für Neon Causeway in Modern/Retro und mobilem Renderer / More readable lighting and separate neon emissive masks for Neon Causeway in Modern/Retro and the mobile renderer.
+- [ ] Räumliche Karten-Lichtquellen im Kartenformat und Editor vorsehen; Shader und Leistungsbudget für mobile Geräte prüfen / Add spatial map lights to the map format and editor; evaluate shaders and mobile performance budget.

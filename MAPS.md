@@ -32,3 +32,5 @@ Das [Beispielpaket](modifications/maps/Neon-Causeway.hovermap.json) ist zugleich
 Grenzen: 16 MiB Paket, 2.048 Wände, 1.024 Bodenpolygone, 50.000 Einheiten Seitenlänge; Koordinatenbetrag maximal 50.000. Das sind bewusst gesetzte Importgrenzen, keine nachgewiesenen Maximalwerte der Engine. Die Kollisionssuche wird für importierte Karten über die gesamte Kartenausdehnung aufgebaut. Bestzeiten verwenden den vollständigen Kartenhash, damit verschiedene Kartenstände nicht vermischt werden.
 
 Erzeugen des Beispiels: `python3 scripts/build_cyber_map.py`. [Herkunft der Texturen](NEW-ASSETS.md).
+
+Neon Causeway verwendet ab 0.5.2 eine eigene, hellere Materialbeleuchtung: besser sichtbare dunkle Flächen, eine getrennte Leuchtmaske für cyanfarbene/magentafarbene Streifen und eine reduzierte Entfernungsabdunklung im Modern-Modus. Retro und der vereinfachte mobile Renderer werden ebenfalls aufgehellt. Die Originaltexturen, der Stadthimmel und die Beleuchtung anderer Arenen bleiben erhalten. Das sind Materialeffekte, keine zusätzlichen räumlichen Lampen oder dynamischen Schatten.
