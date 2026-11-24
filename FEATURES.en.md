@@ -41,3 +41,9 @@ The offline ZIP includes both restored web editions, the extended edition and bo
 Build with `python3 scripts/build_offline.py --output /path/to/package`. A checksum accompanies the ZIP. Provenance, dates and known gaps are shown in the archive and [restoration report](RESTORATION.en.md).
 
 Workshop, records, backups, training and multiplayer have separate views. The original home retains game start, selection and a centered craft preview. The five handling attributes are all individual stock parameters; the physics has no mass parameter. Shared rules such as jump impulse or hover height are not hidden craft statistics.
+
+## New crafts and maps
+
+[ReactOS Silver](NEW-ASSETS.en.md) is a balanced fourth craft. **☰ → Custom maps** supports importing, previewing, storing, exporting and playing maps in Modern/Retro. [Guide and cyberpunk example](MAPS.en.md).
+
+The new height-aware AI applies to every arena in the extended edition. It uses stairs and collects jump pickups when needed for elevated targets. Elevated flag locations are shared between red and blue, including multiplayer. Archived original editions remain unchanged.

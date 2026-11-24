@@ -41,3 +41,9 @@ Das Offline-ZIP enthält beide restaurierten Webfassungen, die erweiterte Fassun
 Erstellen: `python3 scripts/build_offline.py --output /pfad/zum/paket`. Prüfsumme steht neben dem ZIP. Herkunft, Datierungen und bekannte Lücken stehen im Archiv und im [Restaurierungsbericht](RESTORATION.md).
 
 Werkstatt, Bestzeiten, Sicherung, Training und Multiplayer besitzen getrennte Ansichten. Auf der ursprünglichen Startseite bleiben Spielstart, Auswahl und zentrierte Schiffsvorschau. Die fünf Fahrwerte sind alle individuellen Originalparameter; Masse existiert in der Physik nicht. Weitere gemeinsame Regeln wie Sprungimpuls oder Schwebehöhe sind keine versteckten Schiffswerte.
+
+## Neue Schiffe und Karten
+
+[ReactOS Silver](NEW-ASSETS.md) ergänzt die Auswahl als ausgewogenes viertes Schiff. Unter **☰ → Eigene Karten** lassen sich Karten importieren, ansehen, speichern, exportieren und in Modern/Retro spielen. [Anleitung und Cyberpunk-Beispiel](MAPS.md).
+
+Die neue höhenabhängige KI gilt für alle Arenen der erweiterten Fassung. Sie nutzt Treppen und sammelt bei Bedarf Sprung-Extras für erhöhte Ziele. Erhöhte Flaggenplätze werden zwischen Rot und Blau verteilt, auch im Multiplayer. Die archivierten Originalfassungen bleiben unverändert.

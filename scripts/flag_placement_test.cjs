@@ -1,0 +1,3 @@
+const assert=require('node:assert/strict'),{select}=require('../modifications/flag-placement.js'),maps=require('../server/maps.json');
+for(const map of Object.values(maps))for(const count of [3,4,5,6])for(const random of [()=>0,()=>.999]){const result=select(map.Flags,count,random);assert.equal(result.length,2*count);assert.equal(result.filter(p=>p.Team==='RED').length,count);assert.equal(new Set(result.map(p=>[p.X,p.Y,p.Z].join(','))).size,result.length);const high=result.filter(p=>p.Y>32);assert(high.length>0);if(high.length>1)assert.equal(new Set(high.map(p=>p.Team)).size,2);else assert.equal(high[0].Team,random()<.5?'RED':'BLUE');}
+console.log('PASS all arenas, 3–6 flags, both elevated team assignments, unique positions');

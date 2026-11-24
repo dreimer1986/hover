@@ -178,7 +178,7 @@
     }
   }
   async function shareCrafts(){
-    const policy=await HoverCraftFormat.policyReady,local=HoverCrafts.list().filter(e=>e.persistent),selected=HoverCrafts.selected();
+    const policy=await HoverCraftFormat.policyReady,local=HoverCrafts.list().filter(e=>e.builtin||e.persistent),selected=HoverCrafts.selected();
     if(selected){const i=local.indexOf(selected);if(i>=0)local.splice(i,1);local.unshift(selected);}
     for(const e of local.slice(0,policy.maxShared))if(!(room.crafts||[]).some(m=>m.hash===e.hash))await rpc('shareCraft',e.json);
     if(local.length>policy.maxShared)status(t('Die ersten acht Schiffe wurden geteilt.','The first eight crafts were shared.'));

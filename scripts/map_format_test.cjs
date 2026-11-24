@@ -1,0 +1,4 @@
+const assert=require('node:assert/strict'),{validate}=require('../modifications/map-format.js'),source=require('../modifications/maps/Neon-Causeway.hovermap.json');
+const valid=validate(source);assert.equal(valid.bounds.maxX,33792);assert.equal(JSON.stringify(validate(valid)),JSON.stringify(valid));
+for(const edit of [d=>d.assets.wall='https://example.com/a.png',d=>d.maze.Floors[0].Points[1].Y=1,d=>d.maze.Floors[0].Points.pop(),d=>d.maze.Flags=[],d=>d.maze.Spawns[0].X=Infinity,d=>d.maze.Spawns[0].Y=20000,d=>d.maze.Walls.push(d.maze.Walls[0]),d=>d.maze.Beacons=[],d=>d.maze.Floors[0].Points[1].X=99999,d=>d.name='<script>\n',d=>{d.maze.Walls[0].Step=true;}]){const copy=structuredClone(source);edit(copy);assert.throws(()=>validate(copy));}
+console.log('PASS canonical round trip and eleven invalid map packages rejected');

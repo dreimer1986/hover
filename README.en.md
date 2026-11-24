@@ -20,13 +20,13 @@ The extended edition is the default on desktop and mobile. It includes:
 Desktop controls: arrow keys, Space and A/S/D. Fullscreen requires a button press and browser support; expanded view also works without the fullscreen API. Landscape orientation is recommended on phones.
 
 
-Pause, training, personal records, controller menus, workshop test drives, backups and offline package: [User guide](FEATURES.en.md). Multiplayer 0.4.1 adds readiness, countdown, ping, map votes/rotation, quick messages and reconnection.
+Pause, training, personal records, controller menus, workshop test drives, backups and offline package: [User guide](FEATURES.en.md). Multiplayer 0.5.0 adds readiness, countdown, ping, map votes/rotation, quick messages and reconnection.
 
 ## Multiplayer and NAS
 
 Open [hover.dreimer.de](https://hover.dreimer.de/), choose **Multiplayer**, enter a name and create a lobby or join using a room code. Choose your team; the host selects the arena, graphics and flag count. The lobby stays open after each round. **End lobby · Scores** displays the final totals.
 
-The Python/WebSocket server runs without Microsoft services in a Docker container on **8080/TCP**, exposed through an HTTPS reverse proxy. [Synology installation and updates](SERVER.en.md) · [Download container v0.4.1](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.4.1).
+The Python/WebSocket server runs without Microsoft services in a Docker container on **8080/TCP**, exposed through an HTTPS reverse proxy. [Synology installation and updates](SERVER.en.md) · [Download container v0.5.0](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.5.0).
 
 ## Run locally
 
@@ -59,3 +59,5 @@ The craft selector shows original models and statistics. **M** or the map button
 Standard controllers: left stick/D-pad to drive, A/Cross to jump, X/Square for walls, B/Circle for cloak, right trigger to fire, Start/Back for the map. Once detected, **Off / Touch / Controller** replaces the Touch button. Press a button or tap the start screen to begin. Menus remain accessible with mouse/touch. The user confirmed working iPhone audio and NAS operation.
 
 Import custom OBJ/FBX/GLTF/GLB crafts, preview textures and size, allocate handling points and save them in the browser. Export packages back up the library; hosts can share crafts with their lobby. Named public lobbies are discoverable through the server list. [Craft workshop, limits and public lobbies](CRAFTS.en.md).
+
+[New crafts and asset provenance](NEW-ASSETS.en.md) · [Custom maps and Neon Causeway](MAPS.en.md)

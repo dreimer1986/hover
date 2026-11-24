@@ -60,11 +60,7 @@
       this.enhancedFlagsPrepared=true;
       const count=Math.max(3,Math.min(6,Number(this.options.flagCount)||3)),world=this.game.world;
       for(const flag of world.flags)flag.remove();world.flags=[];
-      for(const team of ['RED','BLUE']) {
-        const locations=world.getFlagLocations().filter(f=>f.Team===team).slice();
-        for(let i=locations.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[locations[i],locations[j]]=[locations[j],locations[i]];}
-        locations.slice(0,count).forEach(f=>world.spawnFlag(f));
-      }
+      HoverFlagPlacement.select(world.getFlagLocations(),count).forEach(f=>world.spawnFlag(f));
     }
     ready.call(this);
   };

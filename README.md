@@ -20,13 +20,13 @@ Die erweiterte Fassung startet standardmäßig auf PC und Mobilgeräten. Sie bie
 Am PC: Pfeiltasten, Leertaste und A/S/D. Vollbild erfordert einen Tastendruck und Browser-Unterstützung; Großansicht funktioniert auch ohne Vollbild-API. Querformat wird auf Handys empfohlen.
 
 
-Pause, Training, Bestzeiten, Controller-Menüs, Werkstatt-Testfahrt, Sicherung und Offline-Paket: [Bedienungsanleitung](FEATURES.md). Multiplayer 0.4.1 ergänzt Bereitschaft, Countdown, Ping, Kartenabstimmung/Rotation, Schnellnachrichten und Wiederverbinden.
+Pause, Training, Bestzeiten, Controller-Menüs, Werkstatt-Testfahrt, Sicherung und Offline-Paket: [Bedienungsanleitung](FEATURES.md). Multiplayer 0.5.0 ergänzt Bereitschaft, Countdown, Ping, Kartenabstimmung/Rotation, Schnellnachrichten und Wiederverbinden.
 
 ## Multiplayer und NAS
 
 Auf [hover.dreimer.de](https://hover.dreimer.de/) **Multiplayer** wählen, Namen eingeben, Lobby erstellen oder per Raumcode beitreten. Teams selbst wählen; der Gastgeber legt Arena, Grafik und Flaggenzahl fest. Nach jeder Runde bleibt die Lobby geöffnet. **Lobby beenden · Punkte** zeigt die Endabrechnung.
 
-Der Python-/WebSocket-Server läuft ohne Microsoft-Dienste im Docker-Container auf **8080/TCP**, öffentlich hinter einem HTTPS-Reverse-Proxy. [Installation und Aktualisierung auf Synology](SERVER.md) · [Container v0.4.1 herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.4.1).
+Der Python-/WebSocket-Server läuft ohne Microsoft-Dienste im Docker-Container auf **8080/TCP**, öffentlich hinter einem HTTPS-Reverse-Proxy. [Installation und Aktualisierung auf Synology](SERVER.md) · [Container v0.5.0 herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.5.0).
 
 ## Lokal starten
 
@@ -59,3 +59,5 @@ Die Schiffsauswahl zeigt Originalmodelle und Werte. **M** oder der Kartenknopf �
 Standard-Controller: linken Stick/Steuerkreuz zum Fahren, A/Cross für Sprung, X/Square für Wand, B/Circle für Tarnung, rechter Trigger zum Feuern, Start/Back für die Karte. Nach der Erkennung ersetzt **Aus / Touch / Controller** den Touch-Schalter. Zum Start eine Taste drücken oder die Startfläche antippen. Das Menü kann mit Maus/Touch bedient werden. iPhone-Audio und NAS-Betrieb wurden vom Nutzer erfolgreich getestet.
 
 Eigene Schiffe aus OBJ/FBX/GLTF/GLB importieren, Texturen und Größe in der Vorschau prüfen, Fahrpunkte verteilen und im Browser speichern. Exportpakete sichern die Bibliothek; Gastgeber können Schiffe mit der Lobby teilen. Benannte öffentliche Lobbys sind über die Serverliste auffindbar. [Schiffswerkstatt, Grenzen und öffentliche Lobbys](CRAFTS.md).
+
+[Neue Schiffe und Asset-Herkunft](NEW-ASSETS.md) · [Eigene Karten und Neon Causeway](MAPS.md)

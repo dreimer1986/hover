@@ -16,7 +16,7 @@ import time
 from aiohttp import web, WSMsgType
 
 MAPS = json.loads(Path(__file__).with_name('maps.json').read_text())
-VERSION = '0.4.1'
+VERSION = '0.5.0'
 try:
     from .crafts import validate as validate_craft, POLICY as CRAFT_POLICY
 except ImportError:
@@ -38,6 +38,33 @@ def vector(value, limit=100000):
 def distance(a, b):
     return math.sqrt(sum((a[k] - b[k]) ** 2 for k in ('X', 'Y', 'Z')))
 
+
+def select_flags(locations, count):
+    """Share elevated locations fairly; preserve unique positions and team counts."""
+    unique = {(p['X'], p['Y'], p['Z']): p for p in locations}
+    high = [p for p in unique.values() if p['Y'] > 32]
+    low = [p for p in unique.values() if p['Y'] <= 32]
+    rng = secrets.SystemRandom()
+    rng.shuffle(high)
+    rng.shuffle(low)
+    result, counts = [], {'RED': 0, 'BLUE': 0}
+    team = rng.choice(('RED', 'BLUE'))
+    elevated, rest = high[:2 * (count - 1)], high[2 * (count - 1):]
+    for point in elevated:
+        result.append(dict(point, Team=team))
+        counts[team] += 1
+        team = 'BLUE' if team == 'RED' else 'RED'
+    remaining = low + rest
+    rng.shuffle(remaining)
+    for point in remaining:
+        if counts[team] >= count:
+            team = 'BLUE' if team == 'RED' else 'RED'
+        if counts[team] >= count:
+            break
+        result.append(dict(point, Team=team))
+        counts[team] += 1
+        team = 'BLUE' if team == 'RED' else 'RED'
+    return result
 
 class Client:
     def __init__(self, ws):
@@ -432,7 +459,7 @@ class Service:
             player.ready = False
             player.state = None
         data = MAPS[str(room['maze'])]
-        room['flags'] = [dict(f, captured=False, captor=None) for team in ('RED', 'BLUE') for f in [f for f in data['Flags'] if f['Team'] == team][:room['flagCount']]]
+        room['flags'] = [dict(f, captured=False, captor=None) for f in select_flags(data['Flags'], room['flagCount'])]
         room['pods'] = [dict(p, PodType=secrets.randbelow(8) + 1, active=True) for p in data['Pods']]
         await self.broadcast(room, 'launch', self.info(room))
 

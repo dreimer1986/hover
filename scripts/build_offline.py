@@ -17,11 +17,12 @@ a.output.mkdir(parents=True, exist_ok=True)
 staging = a.output / 'hover-offline'
 subprocess.run([sys.executable, str(ROOT/'scripts/restore_windows.py')], cwd=ROOT, check=True)
 subprocess.run([sys.executable, str(ROOT/'scripts/build_site.py'), '--include-downloads', '--output', str(staging)], cwd=ROOT, check=True)
+shutil.copytree(ROOT/'models', staging/'models', dirs_exist_ok=True)
 shutil.copy(ROOT/'scripts/offline_launcher.py', staging/'start.py')
 (staging/'start.cmd').write_text('@echo off\r\ncd /d "%~dp0"\r\nwhere py >nul 2>nul\r\nif %errorlevel%==0 (py -3 start.py) else (python start.py)\r\npause\r\n')
 (staging/'start.sh').write_text('#!/bin/sh\ncd "$(dirname "$0")" || exit 1\nexec python3 start.py\n')
 (staging/'start.sh').chmod(0o755)
-for name in ['RESTORATION.md','RESTORATION.en.md','CRAFTS.md','CRAFTS.en.md','SERVER.md','SERVER.en.md','FEATURES.md','FEATURES.en.md']:
+for name in ['RESTORATION.md','RESTORATION.en.md','CRAFTS.md','CRAFTS.en.md','SERVER.md','SERVER.en.md','FEATURES.md','FEATURES.en.md','MAPS.md','MAPS.en.md','NEW-ASSETS.md','NEW-ASSETS.en.md']:
     shutil.copy(ROOT/name, staging/name)
     (staging/(name+'.html')).write_text('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>'+html.escape(name)+'</title><style>body{background:#15121f;color:#eee;font:16px/1.6 sans-serif;margin:24px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><pre>'+html.escape((ROOT/name).read_text())+'</pre>')
 index=staging/'index.html'

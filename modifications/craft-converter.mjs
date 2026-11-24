@@ -59,11 +59,14 @@ export async function convert(files,options,policy){
   const atlas=document.createElement('canvas');atlas.width=atlas.height=512;const ctx=atlas.getContext('2d'),columns=Math.ceil(Math.sqrt(materials.length)),cell=Math.floor(512/columns),pad=2;
   for(let i=0;i<materials.length;i++){
    const m=materials[i],x=i%columns*cell,y=Math.floor(i/columns)*cell;
-   ctx.fillStyle=m.color?.getStyle(T.SRGBColorSpace)||'#ffffff';ctx.fillRect(x,y,cell,cell);
+   const tile=document.createElement('canvas');tile.width=tile.height=cell;const tc=tile.getContext('2d'),transparent=!!m.transparent||m.alphaTest>0;
+   tc.fillStyle=m.color?.getStyle(T.SRGBColorSpace)||'#ffffff';if(!transparent)tc.fillRect(0,0,cell,cell);
    if(m.map){
     const image=m.map.image;if(!image||!image.width||!image.height||Math.max(image.width,image.height)>4096)throw Error('Texture missing or larger than 4096 pixels');
-    ctx.save();ctx.drawImage(image,x+pad,y+pad,cell-2*pad,cell-2*pad);ctx.globalCompositeOperation='multiply';ctx.fillStyle=m.color?.getStyle(T.SRGBColorSpace)||'#ffffff';ctx.fillRect(x+pad,y+pad,cell-2*pad,cell-2*pad);ctx.restore();
-   }
+    tc.drawImage(image,pad,pad,cell-2*pad,cell-2*pad);tc.globalCompositeOperation='multiply';tc.fillRect(pad,pad,cell-2*pad,cell-2*pad);
+    if(transparent){tc.globalCompositeOperation='destination-in';tc.drawImage(image,pad,pad,cell-2*pad,cell-2*pad);}
+   }else if(transparent){tc.globalAlpha=m.opacity??1;tc.fillRect(0,0,cell,cell);}
+   ctx.drawImage(tile,x,y);
   }
   const vertices=[],normals=[],uvs=[],faces=[],dedup=new Map(),round=x=>Math.round(x*1e5)/1e5;
   for(const {node,g,count,mats}of meshes){

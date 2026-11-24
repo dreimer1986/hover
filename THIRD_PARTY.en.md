@@ -20,3 +20,5 @@ All logos and fonts used on the homepage come from the preserved game assets. Ga
 The isolated importer uses Three.js r160 with OBJLoader, MTLLoader, GLTFLoader, FBXLoader, TGALoader, DDSLoader, NURBS helpers and BufferGeometryUtils under the MIT license. Source: https://github.com/mrdoob/three.js/tree/r160. License: `modifications/vendor/three/LICENSE`. Only module import paths were adjusted to local files. The archived game engine remains unchanged.
 
 FBX additionally uses fflate 0.6.9 (MIT): https://github.com/101arrowz/fflate/tree/v0.6.9. Full license: `modifications/vendor/three/fflate.LICENSE`.
+
+[New craft/map assets and their provenance](NEW-ASSETS.en.md).

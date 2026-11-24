@@ -32,8 +32,8 @@
   });native.set(entry.hash,promise);try{const model=await promise;prepared.set(entry.hash,model);return model;}catch(e){native.delete(entry.hash);throw e;}
  }
  async function add(raw,persistent=false){
-  const e=await format.validate(raw);if(entries.size>=64&&!entries.has(e.hash))throw Error('Session craft limit reached; export and reload');await prepare(e);e.persistent=persistent||entries.get(e.hash)?.persistent||false;entries.set(e.hash,e);Hover.Profiles[key(e)]=profile(e);
-  let option=Array.from(select.options).find(o=>o.value===key(e));if(!option){option=document.createElement('option');option.value=key(e);select.appendChild(option);}option.textContent=e.name+(e.persistent?'':t(' · Sitzung',' · Session'));
+  const e=await format.validate(raw);if(entries.size>=64&&!entries.has(e.hash))throw Error('Session craft limit reached; export and reload');await prepare(e);e.persistent=persistent||entries.get(e.hash)?.persistent||false;e.builtin=entries.get(e.hash)?.builtin||false;entries.set(e.hash,e);Hover.Profiles[key(e)]=profile(e);
+  let option=Array.from(select.options).find(o=>o.value===key(e));if(!option){option=document.createElement('option');option.value=key(e);select.appendChild(option);}option.textContent=e.name+(e.persistent||e.builtin?'':t(' · Sitzung',' · Session'));
   return e;
  }
  function transaction(mode,action){return new Promise((resolve,reject)=>{if(!db)return reject(Error(t('Lokaler Speicher nicht verfügbar. Bitte exportieren.','Local storage unavailable. Please export.')));const tx=db.transaction('crafts',mode),store=tx.objectStore('crafts');let result;const req=action(store);req.onsuccess=()=>result=req.result;tx.oncomplete=()=>resolve(result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||Error('Storage operation aborted'));});}
@@ -105,10 +105,10 @@
  $('craft-save-session').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');await persist(e);message(t('Schiff gespeichert.','Craft saved.'));});
  $('craft-export').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');await format.validate(e.json);download(e.name.replace(/[^\w-]/g,'_')+'.hovercraft.json',e.json);message(t('Export erstellt.','Export created.'));});
  $('craft-export-geometry').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');download(e.name.replace(/[^\w-]/g,'_')+'.js',JSON.stringify(e.data.geometry));message(t('Geometrie exportiert. Das vollständige Paket enthält zusätzlich Textur und Fahrwerte.','Geometry exported. The complete package also includes texture and handling values.'));});
- $('craft-delete').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');if(e.persistent)await transaction('readwrite',s=>s.delete(e.hash));if(window.HoverMultiplayer?.room?.crafts.some(m=>m.hash===e.hash)){e.persistent=false;select.querySelector('option[value="'+key(e)+'"]').textContent=e.name+t(' · Sitzung',' · Session');}else{entries.delete(e.hash);delete Hover.Profiles[key(e)];select.querySelector('option[value="'+key(e)+'"]').remove();select.value='Easy';}select.dispatchEvent(new Event('change'));message(t('Lokale Kopie entfernt. Bereits geteilte Lobby-Kopien bleiben bis zum Sitzungsende bestehen.','Local copy removed. Shared lobby copies remain until the session ends.'));});
+ $('craft-delete').onclick=()=>action(async()=>{const e=selected();if(!e)throw Error('Select a custom craft');if(e.builtin)throw Error(t('Das mitgelieferte Schiff bleibt erhalten. Bearbeitete Kopien können gelöscht werden.','The bundled craft is retained. Edited copies can be deleted.'));if(e.persistent)await transaction('readwrite',s=>s.delete(e.hash));if(window.HoverMultiplayer?.room?.crafts.some(m=>m.hash===e.hash)){e.persistent=false;select.querySelector('option[value="'+key(e)+'"]').textContent=e.name+t(' · Sitzung',' · Session');}else{entries.delete(e.hash);delete Hover.Profiles[key(e)];select.querySelector('option[value="'+key(e)+'"]').remove();select.value='Easy';}select.dispatchEvent(new Event('change'));message(t('Lokale Kopie entfernt. Bereits geteilte Lobby-Kopien bleiben bis zum Sitzungsende bestehen.','Local copy removed. Shared lobby copies remain until the session ends.'));});
  const originalFromId=Hover.Profiles.fromId;Hover.Profiles.fromId=id=>{for(const e of entries.values())if(e.id===id)return profile(e);return originalFromId(id);};
  const ready=(async()=>{
-  policy=await format.policyReady;$('craft-budget').after(createStatsHelp('craft-editor-help'));
+  policy=await format.policyReady;const response=await fetch('stock-crafts/ReactOS-Silver.hovercraft.json',{cache:'no-cache'});if(!response.ok)throw Error('Bundled ReactOS craft unavailable');const bundled=await add(await response.text());bundled.builtin=true;select.querySelector('option[value="'+key(bundled)+'"]').textContent=bundled.name+t(' (Ausgewogen)',' (Balanced)');$('craft-budget').after(createStatsHelp('craft-editor-help'));
   $('craft-limits').textContent=t('Grenzen: ','Limits: ')+policy.bounds.join(' × ')+' · '+policy.maxVertices+t(' Vertices · ',' vertices · ')+policy.maxTriangles+t(' Dreiecke · 16 Materialien · 1,5 MB pro Schiff. Texturen werden auf einen 512²-Atlas reduziert.',' triangles · 16 materials · 1.5 MB per craft. Textures are reduced to a 512² atlas.');
 
   for(const k of Object.keys(policy.parameters)){const label=document.createElement('label');label.textContent=labels[k]+' ';const input=document.createElement('input');input.type='range';input.min=0;input.max=10;input.step=1;input.value=k==='turnDrag'?10:0;input.id='point-'+k;input.oninput=budget;input.title=descriptions[k];input.setAttribute('aria-describedby','craft-editor-help-'+k);const output=document.createElement('output');output.id='point-value-'+k;label.append(input,output);$('craft-points').appendChild(label);}budget();
@@ -117,7 +117,19 @@
  const onReady=Hover.views.GameView.prototype.onGameReady;
  Hover.views.GameView.prototype.onGameReady=function(){
   for(const e of entries.values()){const model=prepared.get(e.hash);if(model){const texture=model.texture.clone();texture.needsUpdate=true;Hover.Editor.schemeLoader.models['Custom_'+e.hash]={geometry:model.geometry.clone(),redDiffuseTexture:texture,blueDiffuseTexture:texture};}}
-  return onReady.call(this);
+  const result=onReady.call(this),game=this.game,draw=game.draw;
+  game.draw=function(){
+   for(const player of Object.values(this.players?.players||{})){
+    const craft=player.craftObj;if(!craft?.profile?.modelName?.startsWith('Custom_')||craft.customMeshInstalled)continue;
+    const model=Hover.Editor.schemeLoader.models[craft.profile.modelName];if(!model)continue;
+    craft.scene.onBeforeRender.remove(craft.onBeforeRenderHandler);craft.scene.remove(craft.mesh);
+    const material=new THREE.MeshLambertMaterial({map:craft.team==='red'?model.redDiffuseTexture:model.blueDiffuseTexture,transparent:true,alphaTest:.05});
+    craft.mesh=new THREE.Mesh(model.geometry,material);craft.scene.add(craft.mesh);craft.customMeshInstalled=true;
+    craft.onBeforeRenderHandler=craft.scene.onBeforeRender.register(()=>{craft.mesh.position.copy(craft.position);craft.mesh.position.y-=60;craft.mesh.rotation.y=craft.angle;craft.mesh.visible=craft.isVisible();});
+   }
+   return draw.apply(this,arguments);
+  };
+  return result;
  };
  async function importLibrary(raws){
   if(!Array.isArray(raws)||raws.length>policy.maxStored)throw Error('Library exceeds storage limit');
@@ -132,6 +144,6 @@
   pointBudget:()=>policy.budget,
   profileStats:profile=>Object.entries(policy.parameters).map(([k,[lo,hi]])=>({key:k,label:labels[k],value:Math.max(0,Math.min(10,(profile[k]-lo)/(hi-lo)*policy.steps))})),
   stats:e=>Object.keys(policy.parameters).map(k=>({key:k,label:labels[k],value:e.points[k]})),
-  profile:e=>profile(e),async preview(k){const e=entries.get(k.replace(/^custom_/,'')),m=await prepare(e),geometry=m.geometry.clone(),texture=m.texture.clone();texture.needsUpdate=true;geometry.computeBoundingBox();const box=geometry.boundingBox,mesh=new THREE.Mesh(geometry,new THREE.MeshPhongMaterial({map:texture,shading:THREE.SmoothShading}));mesh.position.copy(box.min.clone().add(box.max).multiplyScalar(-.5));const group=new THREE.Object3D();group.userData.customPreview=true;group.add(mesh);group.rotation.y=Math.PI+Math.PI/6;return{group,radius:box.max.clone().sub(box.min).length()/2};}};
+  profile:e=>profile(e),async preview(k){const e=entries.get(k.replace(/^custom_/,'')),m=await prepare(e),geometry=m.geometry.clone(),texture=m.texture.clone();texture.needsUpdate=true;geometry.computeBoundingBox();const box=geometry.boundingBox,mesh=new THREE.Mesh(geometry,new THREE.MeshPhongMaterial({map:texture,transparent:true,alphaTest:.05,shading:THREE.SmoothShading}));mesh.position.copy(box.min.clone().add(box.max).multiplyScalar(-.5));const group=new THREE.Object3D();group.userData.customPreview=true;group.add(mesh);group.rotation.y=Math.PI+Math.PI/6;return{group,radius:box.max.clone().sub(box.min).length()/2};}};
  ready.then(()=>select.dispatchEvent(new Event('change'))).catch(()=>{});
 })();

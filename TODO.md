@@ -1,12 +1,12 @@
 # Geplante Erweiterungen / Planned improvements
 
-**Stand / Updated: 17.11.2026.** Punkte 1–7 sind vom Nutzer zur Umsetzung freigegeben. Sie sind in der erweiterten Fassung implementiert; reale Geräte- und NAS-Abnahme stehen weiterhin aus. Punkte 8–9 bleiben spätere Vorhaben. / Items 1–7 were authorized and implemented in the extended edition; physical-device and NAS acceptance tests remain pending. Items 8–9 remain future work.
+**Stand / Updated: 23.11.2026.** Punkte 1–7 sind vom Nutzer zur Umsetzung freigegeben. Sie sind in der erweiterten Fassung implementiert; reale Geräte- und NAS-Abnahme stehen weiterhin aus. Punkte 8–9 bleiben spätere Vorhaben. / Items 1–7 were authorized and implemented in the extended edition; physical-device and NAS acceptance tests remain pending. Items 8–9 remain future work.
 
 Vorgeschlagene Reihenfolge / Suggested order: Einstellungen und Pause → vollständige Controller-Bedienung → Werkstatt-Testfahrt → Multiplayer-Komfort → Bestzeiten → Karteneditor. Rennstrecken zunächst technisch erproben, dann Zeitfahren, danach Multiplayer-Rennen; Renn-KI zuletzt und separat. / Settings and pause → full controller navigation → workshop test drive → multiplayer usability → personal records → map editor. Validate track feasibility first, then time trials, multiplayer races, and finally racing AI as a separate project.
 
 ## Zuerst: aktuellen Stand testen / First: test the current release
 
-- [ ] Nutzerfeedback zum neuen Stand 0.4.0 sammeln / Collect user feedback on the new 0.4.0 release.
+- [ ] Nutzerfeedback zum neuen Stand 0.5.0 sammeln / Collect user feedback on the new 0.5.0 release.
 - [ ] PC, Android/iPhone, echte Controller und NAS-Multiplayer prüfen / Check PC, Android/iPhone, physical controllers and NAS multiplayer.
 - [ ] Besonders Import/Export, Texturen, Drehung, Speichern/Neuladen, Außenansicht und Schiffsteilung prüfen / Focus on import/export, textures, orientation, persistence, chase view and shared crafts.
 - [ ] Einheitliche Vergleichswerte und die neuen Erläuterungen auf Verständlichkeit prüfen / Check that the shared comparison scale and handling explanations are understandable.
@@ -95,7 +95,7 @@ Diese Befunde stammen aus einer Quellcodeprüfung, nicht aus einem Großkarten-B
 
 Quellen im Repository / Repository references: [Spielcode / Game code](web/2019-03-11/scripts/game.cbbb14d7.js), [Kartendaten / Map data](web/2019-03-11/scripts/mazes.c3a2bdf0.js), [Server](server/app.py). Im Spielcode sind insbesondere der World-Konstruktor (`wallQuad`), `getCollisionXYZ`, `checkCraftAgainstStaticGeometry`, die Kartendarstellung und die Kameraeinstellungen relevant. / Relevant game paths include the world constructor (`wallQuad`), collision queries, static rendering and camera settings.
 
-- [ ] Kollisions-Suchbereich dynamisch aus den tatsächlichen Kartengrenzen mit Reserve ableiten / Derive collision bounds dynamically from actual map bounds with a margin.
+- [x] Kollisionssuche für importierte Karten über deren gesamte Ausdehnung aufbauen; Originalkarten behalten ihren bisherigen Index / Build a collision index across the full extent of imported maps; stock maps retain their existing index.
 - [ ] Kollisionen an alten und neuen Bereichsgrenzen prüfen; außerhalb der alten Fläche dürfen keine Wände aus der Suche verschwinden / Verify old and new boundaries; walls outside the old region must remain collidable.
 - [ ] Multiplayer-Positionsgrenzen passend erweitern beziehungsweise kartenbezogen prüfen; Validierung beibehalten / Extend or map-scope multiplayer position limits while retaining validation.
 - [ ] Einfache Teststrecke mit langen Geraden und weiten Kurven erstellen; zunächst auch innerhalb der bisherigen Fläche erproben / Build a simple course with long straights and sweeping turns; first also test within the existing area.
@@ -176,3 +176,14 @@ Am Gerät nach Veröffentlichung prüfen / Check on actual devices after publica
 Nach diesem Release noch am Gerät prüfen / Actual-device checks after this release:
 
 - [ ] Aktuellen Stand v0.3.5 auf NAS und echten Geräten testen; Container bei Bedarf aktualisieren / Test current v0.3.5 on NAS and actual devices; update the container if needed.
+
+## 11. Eigene Karten und ReactOS-Schiff / Custom maps and ReactOS craft
+
+- [x] ReactOS Silver mit ausgewogenen 6/5/4/5/4 Punkten, gerundeten Einlässen/Triebwerken, Silberoptik und Flügellogos als viertes Schiff / Balanced ReactOS Silver with 6/5/4/5/4 points, rounded intakes/engines, silver appearance and wing logos as a fourth craft.
+- [x] Kartenimport als eigene Menüseite mit Vorschau, Speicherung und Export / Dedicated map import page with preview, persistence and export.
+- [x] Cyberpunk-Beispiel mit 50 % längeren Seiten, vier Treppen und verbundenem Obergeschoss in Modern/Retro / Cyberpunk example with 50% longer sides, four stair flights and connected upper floor in Modern/Retro.
+- [x] Höhenabhängige KI auf allen Arenen der erweiterten Fassung; erhöhte Flaggenplätze für beide Teams in Einzelspieler und Multiplayer / Height-aware AI throughout the extended edition; elevated flag locations for both teams in single player and multiplayer.
+- [ ] Eigene Karten zwischen Multiplayer-Teilnehmern validiert übertragen / Validated custom-map transfer between multiplayer participants.
+- [ ] Importseite zum grafischen Karteneditor ausbauen (Punkt 8) / Extend the import page into a graphical map editor (item 8).
+
+Bedienung / Usage: [Karten DE](MAPS.md) · [Maps EN](MAPS.en.md) · [Assets DE](NEW-ASSETS.md) · [Assets EN](NEW-ASSETS.en.md).
