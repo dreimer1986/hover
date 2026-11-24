@@ -15,7 +15,7 @@
       <label>${t('Server-Adresse','Server address')}<input id="mp-server" type="url" spellcheck="false" placeholder="https://hover.dreimer.de"></label>
       <div class="modern-options"><label>${t('Dein Name','Your name')}<input id="mp-name" maxlength="24" autocomplete="nickname" value="Player"></label>
       <label>${t('Spieler maximal','Player limit')}<select id="mp-size"><option>2</option><option>4</option><option>6</option><option>8</option></select></label></div>
-      <label>${t('Lobbyname','Lobby name')}<input id="mp-lobby-name" maxlength="40" value="Hover lobby"></label>
+      <label>${t('Lobbyname','Lobby name')}<input id="mp-lobby-name" maxlength="40" value="Hover Lobby"></label>
       <label class="mp-checkbox"><input id="mp-public" type="checkbox">${t('Öffentlich in der Lobbyliste anzeigen','Show publicly in the lobby list')}</label>
       <button id="mp-list" type="button">${t('Öffentliche Lobbys suchen','Find public lobbies')}</button><ul id="mp-directory"></ul>
       <button id="mp-create" type="button">${t('Lobby erstellen','Create lobby')}</button>
