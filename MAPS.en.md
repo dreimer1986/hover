@@ -8,6 +8,8 @@ Up to eight maps persist in this browser. **Export** saves the selected map incl
 
 ## Neon Causeway
 
+**Neon Causeway is integrated as map 4.** Single player advances to it automatically after completing map 3, in both Modern and Retro. Unlocking level selection allows direct access. Multiplayer includes it in map selection, voting and rotation without importing (server 0.5.1 or later). Map 4 ends the single-player campaign. Arbitrary user-imported maps remain single-player only.
+
 33,792 × 33,792 units: **50% longer sides** than a 22,528-unit stock arena, corresponding to 125% more area. Four broad stair flights with 24 steps each climb 1,536 units. A continuous ring and cross-bridges connect the upper floor. The ground floor remains accessible beneath the bridges. Each team has six potential flag locations, on both levels.
 
 All arenas in the extended edition receive height-aware opponent navigation. It checks drivable links, stairs and passage beneath upper platforms. Opponents use normal craft physics to climb stairs and capture upstairs flags. The two archived original editions retain their original AI. In imported maps, beacons must cover stair entrances/exits and platform connections; the example provides them. Bounded search handles disconnected beacon networks without infinite loops. Import checks geometry, resources and placement support; it cannot guarantee playability or reachability in arbitrary maps.

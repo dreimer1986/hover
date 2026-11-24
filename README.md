@@ -12,7 +12,7 @@ Die erweiterte Fassung startet standardmäßig auf PC und Mobilgeräten. Sie bie
 
 - Den ursprünglichen Startbildschirm mit Einzelspieler, Multiplayer und Retro-Modus.
 - Optionales Touch-Steuerkreuz, Aktionstasten, Großansicht und Vollbild; mobil sind Touch und Großansicht voreingestellt.
-- Drei Arenen in Modern und Retro, drei bis sechs Flaggen pro Team und automatischen Kartenfortschritt im Einzelspieler.
+- Vier Arenen in Modern und Retro, einschließlich Neon Causeway als Karte 4, drei bis sechs Flaggen pro Team und automatischen Kartenfortschritt im Einzelspieler.
 - Freischaltbare Einzelspieler-Kartenauswahl: in die Mitte des **O** im Hover-Logo drücken. Ohne Freischaltung beginnt eine Partie mit Karte 1.
 - Multiplayer-Lobbys für bis zu acht Spieler mit Teamwahl, wechselnden Arenen, Modern/Retro und abschließenden Punkten über mehrere Runden.
 - Deutsche oder englische Bedienoberfläche entsprechend der Browsersprache und gemeinsame Audioausgabe für Musik, Motor und Effekte.
@@ -20,13 +20,13 @@ Die erweiterte Fassung startet standardmäßig auf PC und Mobilgeräten. Sie bie
 Am PC: Pfeiltasten, Leertaste und A/S/D. Vollbild erfordert einen Tastendruck und Browser-Unterstützung; Großansicht funktioniert auch ohne Vollbild-API. Querformat wird auf Handys empfohlen.
 
 
-Pause, Training, Bestzeiten, Controller-Menüs, Werkstatt-Testfahrt, Sicherung und Offline-Paket: [Bedienungsanleitung](FEATURES.md). Multiplayer 0.5.0 ergänzt Bereitschaft, Countdown, Ping, Kartenabstimmung/Rotation, Schnellnachrichten und Wiederverbinden.
+Pause, Training, Bestzeiten, Controller-Menüs, Werkstatt-Testfahrt, Sicherung und Offline-Paket: [Bedienungsanleitung](FEATURES.md). Multiplayer 0.5.1 ergänzt Bereitschaft, Countdown, Ping, Kartenabstimmung/Rotation, Schnellnachrichten und Wiederverbinden.
 
 ## Multiplayer und NAS
 
 Auf [hover.dreimer.de](https://hover.dreimer.de/) **Multiplayer** wählen, Namen eingeben, Lobby erstellen oder per Raumcode beitreten. Teams selbst wählen; der Gastgeber legt Arena, Grafik und Flaggenzahl fest. Nach jeder Runde bleibt die Lobby geöffnet. **Lobby beenden · Punkte** zeigt die Endabrechnung.
 
-Der Python-/WebSocket-Server läuft ohne Microsoft-Dienste im Docker-Container auf **8080/TCP**, öffentlich hinter einem HTTPS-Reverse-Proxy. [Installation und Aktualisierung auf Synology](SERVER.md) · [Container v0.5.0 herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.5.0).
+Der Python-/WebSocket-Server läuft ohne Microsoft-Dienste im Docker-Container auf **8080/TCP**, öffentlich hinter einem HTTPS-Reverse-Proxy. [Installation und Aktualisierung auf Synology](SERVER.md) · [Container v0.5.1 herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.5.1).
 
 ## Lokal starten
 

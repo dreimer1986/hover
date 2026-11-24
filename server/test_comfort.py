@@ -15,14 +15,14 @@ class ComfortTests(MultiplayerTests):
         # Direct service call bypasses the legacy test helper's automatic ready state.
         with self.assertRaisesRegex(ValueError, 'ready'):
             await service.call(room['players'][0], 'beginRoom', [])
-        self.assertIn('error', await self.rpc(b, 'rotation', [44, 47]))
-        await self.rpc(a, 'rotation', [44, 47])
-        await self.rpc(b, 'voteMap', 47)
+        self.assertIn('error', await self.rpc(b, 'rotation', [44, 46, 47, 48]))
+        await self.rpc(a, 'rotation', [44, 46, 47, 48])
+        await self.rpc(b, 'voteMap', 48)
         await self.rpc(a, 'setReady', True)
         await self.rpc(b, 'setReady', True)
         await self.rpc(a, 'beginRoom')
         await asyncio.sleep(.01)
-        self.assertEqual(room['maze'], 47)
+        self.assertEqual(room['maze'], 48)
         await self.rpc(a, 'spawnMe'); await self.rpc(b, 'spawnMe')
         await b.close(); await asyncio.sleep(.05)
         self.assertEqual(room['phase'], 'playing')

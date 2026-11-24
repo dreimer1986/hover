@@ -20,3 +20,11 @@ class FlagPlacementTests(unittest.TestCase):
                             self.assertEqual({f['Team'] for f in high}, {'RED', 'BLUE'})
                         else:
                             self.assertEqual(high[0]['Team'], first_team)
+
+    def test_bundled_neon_positions_match_client_package(self):
+        import json
+        from pathlib import Path
+        maze = json.loads((Path(__file__).resolve().parents[1] / 'modifications/maps/Neon-Causeway.hovermap.json').read_text())['maze']
+        self.assertEqual(MAPS['48'], {key: maze[key] for key in ('Spawns', 'Flags', 'Pods')})
+        for team in ('RED', 'BLUE'):
+            self.assertGreaterEqual(sum(p['Team'] == team for p in maze['Spawns']), 4)

@@ -62,3 +62,9 @@ for x,z in [(13312,14848),(20480,18944),(14848,20480),(18944,13312),(13312,16896
 def image(name):return 'data:image/png;base64,'+base64.b64encode((ROOT/'modifications/maps/assets'/name).read_bytes()).decode()
 result={'format':'hover-map','version':1,'name':'Neon Causeway','author':'Hover archive project','description':'33,792 × 33,792 units, 50% longer sides than a 22,528-unit stock arena. Four stair flights connect the ground city to a continuous upper ring and cross-bridges at 1,536 units. / Vier Treppen verbinden die untere Stadt mit Ring und Brücken im zweiten Stock.','assets':{'wall':image('cyber-panel.png'),'floor':image('cyber-panel.png'),'sky':image('city-panorama.png')},'maze':{'Walls':walls,'Floors':floors,'Spawns':[dict(p,Team='RED') for p in red]+[dict(p,Team='BLUE') for p in blue],'Flags':flags,'Pods':pods,'Beacons':beacons}}
 out=ROOT/'modifications/maps/Neon-Causeway.hovermap.json';out.write_text(json.dumps(result,separators=(',',':')));print(out,len(walls),'walls',len(floors),'floors',out.stat().st_size,'bytes')
+
+# Keep the bundled multiplayer arena's authoritative object locations in sync.
+server_maps=ROOT/'server/maps.json'
+maps=json.loads(server_maps.read_text())
+maps['48']={key:result['maze'][key] for key in ['Spawns','Flags','Pods']}
+server_maps.write_text(json.dumps(maps,indent=2)+'\n')

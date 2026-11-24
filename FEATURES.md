@@ -47,3 +47,5 @@ Werkstatt, Bestzeiten, Sicherung, Training und Multiplayer besitzen getrennte An
 [ReactOS Silver](NEW-ASSETS.md) ergänzt die Auswahl als ausgewogenes viertes Schiff. Unter **☰ → Eigene Karten** lassen sich Karten importieren, ansehen, speichern, exportieren und in Modern/Retro spielen. [Anleitung und Cyberpunk-Beispiel](MAPS.md).
 
 Die neue höhenabhängige KI gilt für alle Arenen der erweiterten Fassung. Sie nutzt Treppen und sammelt bei Bedarf Sprung-Extras für erhöhte Ziele. Erhöhte Flaggenplätze werden zwischen Rot und Blau verteilt, auch im Multiplayer. Die archivierten Originalfassungen bleiben unverändert.
+
+Neon Causeway ist Karte 4 der normalen Einzelspieler-Reihenfolge und startet automatisch nach Karte 3. Im Multiplayer ist sie direkt auswählbar und Teil der Kartenabstimmung und Rotation. Dafür den NAS-Server auf 0.5.1 aktualisieren.

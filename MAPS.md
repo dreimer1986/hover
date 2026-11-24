@@ -10,6 +10,8 @@ Für die freistehende Plattform in Arena 3 sammelt die KI zuerst ein vorhandenes
 
 ## Neon Causeway
 
+**Neon Causeway ist fest als Karte 4 integriert.** Im Einzelspieler startet sie nach Abschluss von Karte 3 automatisch; Modern und Retro verhalten sich gleich. Mit freigeschalteter Levelauswahl ist sie direkt wählbar. Im Multiplayer steht sie ohne Import in Kartenauswahl, Abstimmung und Rotation bereit (Server ab 0.5.1). Nach Karte 4 endet der Einzelspieler-Durchlauf. Beliebige selbst importierte Karten bleiben vorerst Einzelspieler-Karten.
+
 33.792 × 33.792 Einheiten: **50 % längere Seiten** als eine 22.528-Einheiten-Originalarena, entsprechend 125 % mehr Fläche. Vier breite Treppen mit jeweils 24 Stufen führen 1.536 Einheiten nach oben. Ein umlaufender Ring und Querbrücken verbinden die obere Ebene. Unter den Brücken bleibt die untere Ebene befahrbar. Beide Teams haben sechs mögliche Flaggenplätze, darunter obere und untere Plätze.
 
 Alle Arenen der erweiterten Fassung erhalten eine höhenabhängige Gegner-Wegfindung. Sie prüft befahrbare Verbindungen, Treppen und die Durchfahrt unter oberen Flächen. Gegner fahren mit normaler Physik über die Treppen und können obere Flaggen sammeln. Die beiden archivierten Originalfassungen behalten ihre ursprüngliche KI. In importierten Karten müssen Wegpunkte passende Treppenein-/ausgänge und Plattformverbindungen enthalten; die Beispielkarte bringt diese mit. Die Suche ist begrenzt und behandelt getrennte Wegnetze ohne Endlosschleifen. Der Kartenimport prüft Geometrie, Ressourcen und Aufstellorte, garantiert aber keine spielerische Erreichbarkeit beliebiger Karten.

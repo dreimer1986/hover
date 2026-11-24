@@ -187,3 +187,5 @@ Nach diesem Release noch am Gerät prüfen / Actual-device checks after this rel
 - [ ] Importseite zum grafischen Karteneditor ausbauen (Punkt 8) / Extend the import page into a graphical map editor (item 8).
 
 Bedienung / Usage: [Karten DE](MAPS.md) · [Maps EN](MAPS.en.md) · [Assets DE](NEW-ASSETS.md) · [Assets EN](NEW-ASSETS.en.md).
+
+- [x] Neon Causeway als feste Karte 4 nach Karte 3, einschließlich Multiplayer-Auswahl, Abstimmung und Rotation / Bundle Neon Causeway as map 4 after map 3, including multiplayer selection, voting and rotation.

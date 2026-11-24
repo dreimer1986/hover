@@ -16,7 +16,7 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
   const code=await a.evaluate(()=>HoverMultiplayer.room.code);
   await b.fill('#mp-code',code);await b.click('#mp-join');await a.waitForFunction(()=>HoverMultiplayer.room?.players.length===2);await b.waitForFunction(()=>!!HoverMultiplayer.playerId);
   assert(await b.locator('#mp-begin').isDisabled());
-  for(const [maze,count,mode] of [['44','3','modern'],['47','6','retro']]){
+  for(const [maze,count,mode] of (process.env.HOVER_NEON_TEST?[['48','3','modern'],['48','6','retro']]:[['44','3','modern'],['47','6','retro']])){
    if(mode==='retro'){
     console.log('TEAM swap start');
     await a.selectOption('#mp-team','BLUE');await a.waitForFunction(()=>HoverMultiplayer.room.players.every(p=>p.team==='BLUE'));
@@ -32,12 +32,12 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
    const before=await a.evaluate(()=>HoverMultiplayer.game.craft.position.z);await a.keyboard.down('ArrowUp');await a.waitForTimeout(500);await a.keyboard.up('ArrowUp');
    const after=await a.evaluate(()=>HoverMultiplayer.game.craft.position.z);assert(Math.abs(after-before)>5);
    await b.waitForFunction(z=>Math.abs(Object.values(HoverMultiplayer.game.players.players)[0].Position.z-z)<300,after);
-   if(mode==='modern'){
+   if(mode==='modern'&&!process.env.HOVER_NEON_TEST){
     const item=await a.evaluate(()=>{const g=HoverMultiplayer.game,p=g.world.pods.find(p=>p.sound==='OBT_JUMP');if(!p)throw Error('No jump pod');g.craft.position.copy(p.location);g.craft.velocity.set(0,0,0);return {x:p.location.x,z:p.location.z};});
     await a.waitForFunction(()=>HoverMultiplayer.game.craft.springCount>0);
     await b.waitForFunction(pos=>!HoverMultiplayer.game.world.pods.some(p=>p.location.x===pos.x&&p.location.z===pos.z),item);
     await a.evaluate(()=>{const c=HoverMultiplayer.game.craft;c.wallCount=1;c.placeWall();});await b.waitForFunction(()=>HoverMultiplayer.game.world.tempWalls.length>0);
-   } else {
+   } else if(mode==='retro') {
     await navigationClick(a,'#modern-wide');await a.waitForFunction(()=>document.querySelector('#flag_counts').width===150);
    }
    const flags=await a.evaluate(()=>HoverMultiplayer.game.world.flags.filter(f=>f.team!==HoverMultiplayer.game.craft.team).map(f=>({x:f.location.x,y:f.location.y,z:f.location.z})));
@@ -52,6 +52,6 @@ const {chromium}=require('playwright-core'),assert=require('node:assert/strict')
   for(const p of pages){await p.waitForSelector('#mp-scores');assert.equal(await p.evaluate(()=>HoverMultiplayer.room),null);assert.match(await p.locator('#mp-scores tbody').innerText(),/Pilot 0\s+9\s+2/);}
   console.log('PASS lobby close and cumulative scores on both clients');
   assert.deepEqual(errors,[]);assert.deepEqual(missing,[]);
-  fs.writeFileSync('verification/multiplayer-browser-results.json',JSON.stringify({base,players:2,rounds,teamChoice:true,persistentLobby:true,movement:true,items:true,walls:true,flags:true,finalScores:true,errors,missing},null,2)+'\n');
+  fs.writeFileSync(process.env.HOVER_NEON_TEST?'verification/neon-multiplayer-results.json':'verification/multiplayer-browser-results.json',JSON.stringify({base,players:2,rounds,teamChoice:true,persistentLobby:true,movement:true,items:!process.env.HOVER_NEON_TEST,walls:!process.env.HOVER_NEON_TEST,flags:true,finalScores:true,errors,missing},null,2)+'\n');
  }catch(e){for(const p of pages)console.log('FAILSTATE',await p.evaluate(()=>({room:HoverMultiplayer.room,status:document.getElementById('mp-status')?.textContent,view:Hover.router.currentView.id,playing:Hover.router.currentView.playing,game:!!HoverMultiplayer.game,connected:HoverMultiplayer.game?.connected})));throw e;}finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});

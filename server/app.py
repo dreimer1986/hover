@@ -16,7 +16,7 @@ import time
 from aiohttp import web, WSMsgType
 
 MAPS = json.loads(Path(__file__).with_name('maps.json').read_text())
-VERSION = '0.5.0'
+VERSION = '0.5.1'
 try:
     from .crafts import validate as validate_craft, POLICY as CRAFT_POLICY
 except ImportError:
@@ -181,7 +181,7 @@ class Service:
             else:
                 if room['host'] != c.id: raise ValueError('Only the host may set the rotation')
                 rotation = args[0]
-                if not isinstance(rotation, list) or len(rotation) > 3 or any(type(m) is not int or str(m) not in MAPS for m in rotation) or len(set(rotation)) != len(rotation): raise ValueError('Invalid rotation')
+                if not isinstance(rotation, list) or len(rotation) > len(MAPS) or any(type(m) is not int or str(m) not in MAPS for m in rotation) or len(set(rotation)) != len(rotation): raise ValueError('Invalid rotation')
                 room['rotation'] = rotation
             await self.broadcast(room, 'lobby', self.info(room))
             return True
@@ -313,7 +313,7 @@ class Service:
             if not all(p.lobby_ready and p.disconnected_at is None for p in room['players']):
                 raise ValueError('All players must be ready and connected')
             if room['votes']:
-                counts = {m: sum(v == m for v in room['votes'].values()) for m in (44, 46, 47)}
+                counts = {m: sum(v == m for v in room['votes'].values()) for m in map(int, MAPS)}
                 best = max(counts.values())
                 if counts.get(room['maze'], 0) != best:
                     room['maze'] = next(m for m in counts if counts[m] == best)

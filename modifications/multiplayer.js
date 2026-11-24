@@ -23,7 +23,7 @@
     </div>
     <div id="mp-lobby" hidden><p id="mp-room"></p><ul id="mp-players"></ul>
       <div class="modern-options"><label>Team<select id="mp-team"><option value="RED">${t('Rot','Red')}</option><option value="BLUE">${t('Blau','Blue')}</option></select></label>
-      <label>Arena<select id="mp-arena"><option value="44">1 · ${t('Stadt','City')}</option><option value="46">2 · ${t('Kanalisation','Sewer')}</option><option value="47">3 · ${t('Burg','Castle')}</option></select></label>
+      <label>Arena<select id="mp-arena"><option value="44">1 · ${t('Stadt','City')}</option><option value="46">2 · ${t('Kanalisation','Sewer')}</option><option value="47">3 · ${t('Burg','Castle')}</option><option value="48">4 · Neon Causeway</option></select></label>
       <label>${t('Grafik','Graphics')}<select id="mp-mode"><option value="modern">Modern</option><option value="retro">Retro</option></select></label>
       <label>${t('Flaggen pro Team','Flags per team')}<select id="mp-flags"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label></div>
       <label>Hovercraft<select id="mp-craft"></select></label>
@@ -37,7 +37,7 @@
     <p id="mp-status" role="status" aria-live="polite"></p>`;
   const $=id=>panel.querySelector('#'+id)||document.getElementById(id)||HoverEnhanced.controls.get(id);
   $('modern-launcher').querySelector('.modern-card').appendChild(panel);
-  const comfort=document.createElement('div');comfort.id='mp-comfort';comfort.innerHTML=`<button id="mp-ready">${t('Bereit','Ready')}</button><label>${t('Kartenabstimmung','Map vote')}<select id="mp-vote"><option value="44">1 · City</option><option value="46">2 · Sewer</option><option value="47">3 · Castle</option></select></label><button id="mp-vote-send">${t('Abstimmen','Vote')}</button><label>${t('Kartenrotation (Gastgeber)','Map rotation (host)')}<select id="mp-rotation"><option value="">${t('Aus','Off')}</option><option value="44,46,47">1 → 2 → 3</option><option value="47,46,44">3 → 2 → 1</option></select></label><p id="mp-vote-status"></p>`;
+  const comfort=document.createElement('div');comfort.id='mp-comfort';comfort.innerHTML=`<button id="mp-ready">${t('Bereit','Ready')}</button><label>${t('Kartenabstimmung','Map vote')}<select id="mp-vote"><option value="44">1 · City</option><option value="46">2 · Sewer</option><option value="47">3 · Castle</option><option value="48">4 · Neon Causeway</option></select></label><button id="mp-vote-send">${t('Abstimmen','Vote')}</button><label>${t('Kartenrotation (Gastgeber)','Map rotation (host)')}<select id="mp-rotation"><option value="">${t('Aus','Off')}</option><option value="44,46,47,48">1 → 2 → 3 → 4</option><option value="48,47,46,44">4 → 3 → 2 → 1</option></select></label><p id="mp-vote-status"></p>`;
   $('mp-lobby').prepend(comfort);
   const chat=document.createElement('div');chat.id='mp-quick';chat.hidden=true;chat.innerHTML=`<span id="mp-ping"></span><select id="mp-message" aria-label="${t('Schnellnachricht','Quick message')}"></select><button id="mp-send">${t('Senden','Send')}</button><span id="mp-chat-log" role="status"></span>`;document.getElementById('modern-toolbar').append(chat);
   const messages={hello:t('Hallo!','Hello!'),ready:t('Bereit!','Ready!'),help:t('Brauche Hilfe!','Need help!'),defend:t('Verteidigen!','Defend!'),attack:t('Angreifen!','Attack!'),thanks:t('Danke!','Thanks!'),gg:t('Gutes Spiel!','Good game!')};
@@ -142,7 +142,7 @@
     const waiting=room.phase==='waiting',host=room.host===playerId;
     $('mp-ready').disabled=!waiting||busy;$('mp-ready').setAttribute('aria-pressed',String(!!room.players.find(p=>p.id===playerId)?.lobbyReady));$('mp-ready').textContent=room.players.find(p=>p.id===playerId)?.lobbyReady?t('Nicht mehr bereit','Not ready'):t('Bereit','Ready');
     $('mp-rotation').disabled=!host||!waiting;$('mp-rotation').value=(room.rotation||[]).join(',');$('mp-vote-send').disabled=!waiting;
-    $('mp-vote-status').textContent=Object.entries(room.votes||{}).map(([id,map])=>(room.players.find(p=>p.id===id)?.name||'?')+': '+({44:1,46:2,47:3}[map])).join(' · ');
+    $('mp-vote-status').textContent=Object.entries(room.votes||{}).map(([id,map])=>(room.players.find(p=>p.id===id)?.name||'?')+': '+({44:1,46:2,47:3,48:4}[map])).join(' · ');
     $('mp-host-settings').hidden=!host;
     $('mp-edit-name').value=room.name||'';$('mp-edit-public').checked=!!room.public;
     $('mp-share').disabled=$('mp-update-name').disabled=!waiting||busy;

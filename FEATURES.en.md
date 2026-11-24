@@ -47,3 +47,5 @@ Workshop, records, backups, training and multiplayer have separate views. The or
 [ReactOS Silver](NEW-ASSETS.en.md) is a balanced fourth craft. **☰ → Custom maps** supports importing, previewing, storing, exporting and playing maps in Modern/Retro. [Guide and cyberpunk example](MAPS.en.md).
 
 The new height-aware AI applies to every arena in the extended edition. It uses stairs and collects jump pickups when needed for elevated targets. Elevated flag locations are shared between red and blue, including multiplayer. Archived original editions remain unchanged.
+
+Neon Causeway is map 4 in the normal single-player sequence and starts automatically after map 3. Multiplayer offers it directly in selection, voting and rotation. Update the NAS server to 0.5.1 for this arena.

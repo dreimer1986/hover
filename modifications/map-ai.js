@@ -2,7 +2,7 @@
 (function(){
  'use strict';
  function install(world){
-  const graph=world.beaconGraph,imported=world.map.MazeId>=10000,margin=imported?260:196,nodes=[],seen=new Set();
+  const graph=world.beaconGraph,imported=world.map.MazeId===48||world.map.MazeId>=10000,margin=imported?260:196,nodes=[],seen=new Set();
   function add(x,y,z){const p=new THREE.Vector3(x,y+97,z),floor=world.getGroundHeightBelowPoint(p);if(floor<=-1000||Math.abs(floor-y)>64)return;p.y=floor+96;const key=[p.x,p.y,p.z].map(Math.round).join(',');if(!seen.has(key)){seen.add(key);nodes.push(p);}}
   for(const p of world.map.Beacons)add(p.X,p.Y,p.Z);
   if(!imported)for(const floor of world.map.Floors){const points=floor.Points.slice(0,-1),y=points[0].Y;if(y<10)continue;const x=points.reduce((s,p)=>s+p.X,0)/points.length,z=points.reduce((s,p)=>s+p.Z,0)/points.length;add(x,y,z);for(let i=0;i<points.length;i++){const a=points[i],b=points[(i+1)%points.length],mx=(a.X+b.X)/2,mz=(a.Z+b.Z)/2,d=Math.hypot(x-mx,z-mz),f=Math.min(1,180/(d||1));add(mx+(x-mx)*f,y,mz+(z-mz)*f);add(mx-(x-mx)*f,y,mz-(z-mz)*f);}}
@@ -64,7 +64,7 @@
      if(!next&&!chaser&&craft.springCount===0)for(const pod of world.pods.filter(p=>p.sound==='OBT_JUMP').sort((a,b)=>a.location.distanceTo(craft.position)-b.location.distanceTo(craft.position))){const goal=pod.location.clone();goal.y=world.getGroundHeightBelowPoint(goal.clone().add(new THREE.Vector3(0,2,0)))+96;const candidate=nav.route(craft.position,goal);if(candidate){target={pod,location:pod.location};next=candidate;break;}}
      path=next||[];index=0;replan=next?(chaser?2:Infinity):5;
     }
-    while(index<path.length-1&&!path[index].jumpTo&&craft.position.distanceTo(path[index])<(world.map.MazeId>=10000?300:120))index++;
+    while(index<path.length-1&&!path[index].jumpTo&&craft.position.distanceTo(path[index])<((world.map.MazeId===48||world.map.MazeId>=10000)?300:120))index++;
     let waypoint=path[index];if(!waypoint){craft.update(dt,0,0);return;}
     if(target?.pod&&craft.position.distanceTo(target.pod.location)<128){const pod=target.pod;if(world.pods.includes(pod)){craft.addSpring();pod.afterHit.call(pod);pod.remove();world.pods.splice(world.pods.indexOf(pod),1);}target=null;replan=0;craft.update(dt,0,0);return;}
     if(waypoint.jumpTo&&craft.position.distanceTo(waypoint)<160){const landing=waypoint.jumpTo,angle=Math.atan2(-(landing.x-craft.position.x),-(landing.z-craft.position.z)),delta=Math.atan2(Math.sin(angle-craft.angle),Math.cos(angle-craft.angle));if(Math.abs(delta)<.12&&craft.onGround&&craft.springCount>0){craft.jump();index++;waypoint=path[index];}else{craft.update(dt,Math.max(-1,Math.min(1,-(delta-craft.turnRate*5)*2)),0);return;}}
