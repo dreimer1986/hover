@@ -192,3 +192,16 @@ Bedienung / Usage: [Karten DE](MAPS.md) · [Maps EN](MAPS.en.md) · [Assets DE](
 
 - [x] Lesbarere Beleuchtung und getrennte Neon-Leuchtmasken für Neon Causeway in Modern/Retro und mobilem Renderer / More readable lighting and separate neon emissive masks for Neon Causeway in Modern/Retro and the mobile renderer.
 - [ ] Räumliche Karten-Lichtquellen im Kartenformat und Editor vorsehen; Shader und Leistungsbudget für mobile Geräte prüfen / Add spatial map lights to the map format and editor; evaluate shaders and mobile performance budget.
+
+## 12. Neue Spielideen / New gameplay ideas
+
+Zur Umsetzung freigegeben / Authorized:
+- [ ] Multiplayer-Bots zum Auffüllen oder für gemeinsame Partien gegen KI / Multiplayer bots to fill slots or play cooperatively against AI.
+- [ ] Einstellbare KI-Stärke unabhängig vom Schiff, Einzelspieler und Multiplayer / Adjustable AI difficulty independent of craft, single player and multiplayer.
+
+Weitere Vorschläge, noch nicht zur Umsetzung freigegeben / Further suggestions, not yet authorized:
+- [ ] Geisterschiff der eigenen Bestzeit tatsächlich aufzeichnen und abspielen / Record and replay a ghost of the player's best run.
+- [ ] Zuschauermodus mit Wechsel zwischen Spielern / Spectator mode with player switching.
+- [ ] Team-Symbole zusätzlich zu Farben an Flaggen, Radar und Schiffen / Team symbols alongside colours on flags, radar and crafts.
+- [ ] Optionale Herausforderungen, etwa ohne Sprung-Extras oder mit Zielzeit / Optional challenges such as no jump pickups or target times.
+- [ ] Battle-Modus mit passenden Regeln und Wertung; offene ursprüngliche Neon-Causeway-Karte dafür aufheben / Battle mode with suitable rules and scoring; preserve the original open Neon Causeway layout for it.

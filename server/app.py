@@ -16,7 +16,7 @@ import time
 from aiohttp import web, WSMsgType
 
 MAPS = json.loads(Path(__file__).with_name('maps.json').read_text())
-VERSION = '0.5.2'
+VERSION = '0.6.0'
 try:
     from .crafts import validate as validate_craft, POLICY as CRAFT_POLICY
 except ImportError:
@@ -68,6 +68,7 @@ def select_flags(locations, count):
 
 class Client:
     def __init__(self, ws):
+        self.bot = False
         self.ws = ws
         self.id = secrets.token_hex(8)
         self.room = None
@@ -86,6 +87,24 @@ class Client:
                 await asyncio.wait_for(self.ws.send_json(data), 2)
             except (TimeoutError, ConnectionError, RuntimeError):
                 await self.ws.close()
+
+
+class Bot(Client):
+    """A lobby participant simulated by its host using the normal browser physics."""
+    def __init__(self, room, team, index):
+        super().__init__(None)
+        self.bot = True
+        self.id = 'bot_' + self.id
+        self.room, self.team = room, team
+        self.name = f'Bot {team[0]}{index}'
+        self.profile = 0
+        self.lobby_ready = True
+
+    async def send(self, data):
+        if self.room and data.get('event') in ('awardPod', 'onHit', 'hitByBullet', 'bulletDestroyed'):
+            owner = next((p for p in self.room['players'] if p.id == self.room['host'] and not p.bot), None)
+            if owner:
+                await owner.send({'event': 'botEvent', 'args': [self.id, data['event'], data['args']]})
 
 
 class Service:
@@ -108,7 +127,8 @@ class Service:
                 'name': room['name'], 'public': room['public'], 'rotation': room.get('rotation', []), 'votes': room.get('votes', {}),
                 'crafts': [{k: m[k] for k in ('hash', 'id', 'name')} for m in room['crafts'].values()],
                 'flagCount': room['flagCount'], 'retro': room['retro'], 'lastResult': room['lastResult'],
-                'players': [{'id': c.id, 'name': c.name, 'team': c.team, 'ready': c.ready, 'lobbyReady': c.lobby_ready, 'connected': c.disconnected_at is None, 'profile': c.profile} for c in room['players']]}
+                'aiDifficulty': room.get('aiDifficulty', 'normal'),
+                'players': [{'bot': c.bot, 'id': c.id, 'name': c.name, 'team': c.team, 'ready': c.ready, 'lobbyReady': c.lobby_ready, 'connected': c.disconnected_at is None, 'profile': c.profile} for c in room['players']]}
 
     async def leave(self, client):
         self.sessions.pop(client.resume_token, None)
@@ -119,17 +139,17 @@ class Service:
             return
         room['players'].remove(client)
         room.get('votes', {}).pop(client.id, None)
-        if not room['players']:
+        if not any(not p.bot for p in room['players']):
             self.rooms.pop(room['code'], None)
             return
         if room['host'] == client.id:
-            room['host'] = room['players'][0].id
+            room['host'] = next(p.id for p in room['players'] if not p.bot)
         if room['phase'] in ('countdown', 'loading', 'playing'):
             # Explicitly end interrupted rounds rather than leave a frozen lobby
             # or grant a win merely because a network connection disappeared.
             room['phase'] = 'waiting'
             room['lastResult'] = 'aborted'
-            for player in room['players']: player.lobby_ready = False
+            for player in room['players']: player.lobby_ready = player.bot
             await self.broadcast(room, 'roundAborted', self.info(room))
         await self.broadcast(room, 'lobby', self.info(room))
 
@@ -169,7 +189,7 @@ class Service:
                 if not target: raise ValueError('Unknown player')
                 await target.send({'event': 'kicked', 'args': []})
                 await self.leave(target)
-                await target.ws.close()
+                if target.ws: await target.ws.close()
                 return True
             if room['phase'] != 'waiting': raise ValueError('Wait until the round ends')
             if method == 'setReady':
@@ -211,7 +231,7 @@ class Service:
                     'players': [], 'phase': 'waiting', 'created': time.monotonic(), 'flags': [], 'pods': [], 'bullets': {},
                     'name': name.strip(), 'public': public, 'crafts': {},
                     'round': 0, 'flagCount': flags, 'retro': False, 'lastResult': None,
-                    'rotation': [], 'votes': {}, 'scores': {}, 'teamWins': {'RED': 0, 'BLUE': 0}}
+                    'aiDifficulty': 'normal', 'rotation': [], 'votes': {}, 'scores': {}, 'teamWins': {'RED': 0, 'BLUE': 0}}
             # An unjoined reservation is bound to this socket and expires too.
             room['owner'] = c.id
             self.rooms[code] = room
@@ -270,7 +290,7 @@ class Service:
         if method == 'leave':
             await self.leave(c)
             return True
-        if method in ('chooseTeam', 'configureRoom', 'closeLobby'):
+        if method in ('chooseTeam', 'configureRoom', 'configureBots', 'closeLobby'):
             room = c.room
             if not room or room['phase'] != 'waiting':
                 raise ValueError('Wait until the round has ended')
@@ -290,7 +310,25 @@ class Service:
                     if str(maze) not in MAPS or type(count) is not int or not 3 <= count <= 6 or type(retro) is not bool:
                         raise ValueError('Invalid round settings')
                     room.update(maze=maze, flagCount=count, retro=retro)
-                    for player in room['players']: player.lobby_ready = False
+                    for player in room['players']: player.lobby_ready = player.bot
+                elif method == 'configureBots':
+                    red, blue, difficulty = args
+                    if type(red) is not int or type(blue) is not int or not 0 <= red <= 4 or not 0 <= blue <= 4 or difficulty not in ('easy', 'normal', 'hard'):
+                        raise ValueError('Invalid bot settings')
+                    humans = [p for p in room['players'] if not p.bot]
+                    if len(humans) + red + blue > room['capacity'] or any(sum(p.team == team for p in humans) + count > 4 for team, count in [('RED', red), ('BLUE', blue)]):
+                        raise ValueError('Bots need free lobby/team slots (maximum four per team)')
+                    for team, count in [('RED', red), ('BLUE', blue)]:
+                        bots = [p for p in room['players'] if p.bot and p.team == team]
+                        for bot in bots[count:]:
+                            room['players'].remove(bot)
+                            bot.room = None
+                        for i in range(len(bots), count):
+                            bot = Bot(room, team, i + 1)
+                            room['players'].append(bot)
+                            room['scores'][bot.id] = {'id': bot.id, 'name': bot.name, 'flags': 0, 'wins': 0}
+                    room['aiDifficulty'] = difficulty
+                    for player in room['players']: player.lobby_ready = player.bot
                 else:
                     result = {'rounds': room['round'], 'teamWins': room['teamWins'], 'players': list(room['scores'].values())}
                     room['phase'] = 'closed'
@@ -334,14 +372,7 @@ class Service:
             room = c.room
             if not room or room['phase'] != 'loading' or c.ready:
                 raise ValueError('Unexpected spawn request')
-            spawns = [s for s in MAPS[str(room['maze'])]['Spawns'] if s['Team'] == c.team]
-            index = [p for p in room['players'] if p.team == c.team].index(c)
-            # Maps have fewer red spawns than some team sizes; use another
-            # existing traversable spawn instead of inventing coordinates.
-            spawn = (spawns[index] if index < len(spawns) else MAPS[str(room['maze'])]['Spawns'][-1]) | {'Team': c.team}
-            c.state = {'Position': vector(spawn), 'Velocity': {'X': 0, 'Y': 0, 'Z': 0}, 'AngleY': 0,
-                       'EngineState': 0, 'TurnState': 0, 'ProtectionTime': 0, 'MaxSpeedModifier': 1,
-                       'MaxSpeedModifierTime': 0, 'CloakTime': 0, 'DisabledTime': 0, 'Health': 100, 'CapturedFlags': 0}
+            spawn = self.spawn_state(room, c)
             await c.send({'event': 'spawnAt', 'args': [spawn]})
             for flag in room['flags']:
                 await c.send({'event': 'placeFlagAt', 'args': [flag]})
@@ -357,6 +388,26 @@ class Service:
         if c.room and c.room['phase'] == 'waiting':
             return [] if method == 'setCraftState' else False
         room = self.playing(c)
+        if method in ('setBotStates', 'botAction'):
+            if c.id != room['host'] or c.bot:
+                raise ValueError('Only the host may simulate bots')
+            def get_bot(ident):
+                bot = next((p for p in room['players'] if p.id == ident and p.bot), None)
+                if not bot: raise ValueError('Unknown bot')
+                return bot
+            if method == 'setBotStates':
+                batch = args[0]
+                if not isinstance(batch, list) or len(batch) > 7 or len({entry['id'] for entry in batch}) != len(batch):
+                    raise ValueError('Invalid bot state batch')
+                for entry in batch:
+                    await self.call(get_bot(entry['id']), 'setCraftState', [entry['state']])
+                return True
+            ident, action, payload, state = args
+            if action not in ('capturedFlag', 'uncapturedFlag', 'hitPod') or not isinstance(payload, list) or len(payload) != 1:
+                raise ValueError('Invalid bot action')
+            bot = get_bot(ident)
+            await self.call(bot, 'setCraftState', [state])
+            return await self.call(bot, action, payload)
         if method == 'setCraftState':
             state = args[0]
             result = {'Position': vector(state['Position']), 'Velocity': vector(state['Velocity'], 10000)}
@@ -394,7 +445,7 @@ class Service:
                         room['scores'][participant.id]['wins'] += 1
             await self.broadcast(room, 'onFlagCaptured' if capture else 'onFlagUncaptured', vector(flag))
             if won:
-                for player in room['players']: player.lobby_ready = False
+                for player in room['players']: player.lobby_ready = player.bot
                 rotation = room.get('rotation', [])
                 if rotation: room['maze'] = rotation[(rotation.index(room['maze']) + 1) % len(rotation)] if room['maze'] in rotation else rotation[0]
                 await self.broadcast(room, 'roundEnded', self.info(room))
@@ -449,6 +500,17 @@ class Service:
             return True
         raise ValueError('Unknown method')
 
+    def spawn_state(self, room, c):
+        spawns = [s for s in MAPS[str(room['maze'])]['Spawns'] if s['Team'] == c.team]
+        index = [p for p in room['players'] if p.team == c.team].index(c)
+        # Maps have fewer red spawns than some team sizes; use another
+        # existing traversable spawn instead of inventing coordinates.
+        spawn = (spawns[index] if index < len(spawns) else MAPS[str(room['maze'])]['Spawns'][-1]) | {'Team': c.team}
+        c.state = {'Position': vector(spawn), 'Velocity': {'X': 0, 'Y': 0, 'Z': 0}, 'AngleY': 0,
+                   'EngineState': 0, 'TurnState': 0, 'ProtectionTime': 0, 'MaxSpeedModifier': 1,
+                   'MaxSpeedModifierTime': 0, 'CloakTime': 0, 'DisabledTime': 0, 'Health': 100, 'CapturedFlags': 0}
+        return spawn
+
     async def launch(self, room):
         room['phase'] = 'loading'
         room['round'] += 1
@@ -458,6 +520,9 @@ class Service:
         for player in room['players']:
             player.ready = False
             player.state = None
+            if player.bot:
+                self.spawn_state(room, player)
+                player.ready = True
         data = MAPS[str(room['maze'])]
         room['flags'] = [dict(f, captured=False, captor=None) for f in select_flags(data['Flags'], room['flagCount'])]
         room['pods'] = [dict(p, PodType=secrets.randbelow(8) + 1, active=True) for p in data['Pods']]
@@ -490,7 +555,7 @@ class Service:
                         raise ValueError('Invalid message')
                     if len(msg.data.encode()) > 16384 and data['method'] != 'shareCraft':
                         raise ValueError('Message too large')
-                    if data['method'] not in ('ping', 'resume', 'setReady', 'voteMap', 'rotation', 'kick', 'quickMessage', 'listRooms', 'shareCraft', 'getCraft', 'selectCraft', 'renameLobby', 'createGame', 'join', 'leave', 'chooseTeam', 'configureRoom', 'closeLobby', 'beginRoom') and c.room and data.get('round') != c.room['round']:
+                    if data['method'] not in ('ping', 'resume', 'setReady', 'voteMap', 'rotation', 'kick', 'quickMessage', 'listRooms', 'shareCraft', 'getCraft', 'selectCraft', 'renameLobby', 'createGame', 'join', 'leave', 'chooseTeam', 'configureRoom', 'configureBots', 'closeLobby', 'beginRoom') and c.room and data.get('round') != c.room['round']:
                         raise ValueError('Stale round')
                     result = await self.call(c, data['method'], data['args'])
                     await c.send({'id': ident, 'result': result})
@@ -501,7 +566,7 @@ class Service:
                 c.disconnected_at = time.monotonic()
                 if c.room['phase'] == 'countdown':
                     c.room['phase'] = 'waiting'
-                    for player in c.room['players']: player.lobby_ready = False
+                    for player in c.room['players']: player.lobby_ready = player.bot
                 await self.broadcast(c.room, 'lobby', self.info(c.room))
             self.clients.discard(c)
             for code, room in list(self.rooms.items()):
@@ -520,7 +585,7 @@ class Service:
                 for code, room in list(self.rooms.items()):
                     if (not room['players'] or room['phase'] == 'loading') and now - room['created'] > 600:
                         for client in list(room['players']):
-                            await client.ws.close(code=1000, message=b'Room expired')
+                            if client.ws: await client.ws.close(code=1000, message=b'Room expired')
                         self.rooms.pop(code, None)
         task = asyncio.create_task(reap())
         yield

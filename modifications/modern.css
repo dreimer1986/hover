@@ -269,3 +269,19 @@ html:not(.modern-wide) .modern #dash-top { transform:scale(var(--preference-hud,
 #craft-preview .craft-stats-help { text-align:left; }
 #homeView { padding-top:45px; }
 #practice-guide[hidden] { display:none !important; }
+
+/* Lobby: disabled host settings recede; actions and player text share baselines. */
+#mp-panel select:disabled, #mp-panel input:disabled { background:#211529; border-color:#3d2b46; color:#aa9ab4; cursor:not-allowed; opacity:1; box-shadow:none; }
+#mp-settings-owner { color:#bba9c8; font-size:13px; line-height:1.5; margin:0 0 14px; }
+#mp-settings-owner:empty { display:none; }
+#mp-comfort { align-items:flex-end; }
+#mp-comfort > button { align-self:flex-end; margin:0 0 12px; }
+#mp-comfort > label { margin:0; }
+#mp-comfort > label select { margin-bottom:12px; }
+#mp-vote-status { flex-basis:100%; margin:0; }
+#mp-vote-status:empty { display:none; }
+#mp-panel #mp-players li { display:flex; align-items:center; gap:10px; min-height:44px; }
+#mp-panel #mp-players li button { margin:0; flex-shrink:0; }
+
+#mp-bots button { align-self:flex-end; margin-bottom:12px; padding:12px 18px; }
+#mp-bots-help { font-size:13px; color:#bba9c8; line-height:1.5; }

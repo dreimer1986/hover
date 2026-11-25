@@ -26,7 +26,7 @@
       <label>Arena<select id="mp-arena"><option value="44">1 · ${t('Stadt','City')}</option><option value="46">2 · ${t('Kanalisation','Sewer')}</option><option value="47">3 · ${t('Burg','Castle')}</option><option value="48">4 · Neon Causeway</option></select></label>
       <label>${t('Grafik','Graphics')}<select id="mp-mode"><option value="modern">Modern</option><option value="retro">Retro</option></select></label>
       <label>${t('Flaggen pro Team','Flags per team')}<select id="mp-flags"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label></div>
-      <label>Hovercraft<select id="mp-craft"></select></label>
+      <p id="mp-settings-owner" role="note"></p><div id="mp-bots" class="modern-options"><label>${t('Bots · Rot','Bots · Red')}<select id="mp-bots-red">${[0,1,2,3,4].map(n=>`<option>${n}</option>`).join('')}</select></label><label>${t('Bots · Blau','Bots · Blue')}<select id="mp-bots-blue">${[0,1,2,3,4].map(n=>`<option>${n}</option>`).join('')}</select></label><label>${t('KI-Stärke','AI difficulty')}<select id="mp-ai"><option value="easy">${t('Leicht','Easy')}</option><option value="normal" selected>Normal</option><option value="hard">${t('Schwer','Hard')}</option></select></label><button id="mp-bots-apply">${t('Bots / KI übernehmen','Apply bots / AI')}</button></div><p id="mp-bots-help">${t('Bots belegen freie Spielerplätze (höchstens vier je Team) und sind automatisch bereit. Der Gastgeber muss die Partie im Browser geöffnet lassen.','Bots occupy free player slots (at most four per team) and are ready automatically. The host must keep the match open in the browser.')}</p><label>Hovercraft<select id="mp-craft"></select></label>
       <div id="mp-host-settings"><label>${t('Lobbyname','Lobby name')}<input id="mp-edit-name" maxlength="40"></label><label class="mp-checkbox"><input id="mp-edit-public" type="checkbox">${t('Öffentlich','Public')}</label><button id="mp-update-name" type="button">${t('Lobbydaten speichern','Save lobby settings')}</button><button id="mp-share" type="button">${t('Eigene Schiffe teilen / aktualisieren','Share / refresh custom crafts')}</button></div>
       <label>${t('Einladungslink','Invitation link')}<input id="mp-invite" readonly></label>
       <button id="mp-begin" type="button">${t('Runde starten','Start round')}</button>
@@ -126,7 +126,7 @@
       instance.spawnPod=function(data){spawnPod.call(this,data);this.world.pods[this.world.pods.length-1].location.y=data.Y;};
       const placeFlag=instance.placeFlagAt;
       instance.placeFlagAt=function(data){placeFlag.call(this,data);this.world.flags[this.world.flags.length-1].networkLocation={X:data.X,Y:data.Y,Z:data.Z};};
-      instance.onReady.register(()=>patchWorld(instance));
+      instance.onReady.register(()=>{patchWorld(instance);patchBots(instance);});
     }
   };
   function renderLobby(){
@@ -138,12 +138,18 @@
     if(!room)return;
     panel.hidden=false;
     $('mp-room').textContent=`${room.name||t('Lobby','Lobby')} · ${room.code} · ${room.players.length}/${room.capacity} · ${t('Runde','Round')} ${room.round+1}`;
-    $('mp-players').replaceChildren(...room.players.map(p=>{const li=document.createElement('li');li.textContent=`${p.name} · ${p.team==='RED'?t('Rot','Red'):t('Blau','Blue')}${p.id===room.host?' ★':''} · ${p.lobbyReady?'✓':t('nicht bereit','not ready')}${p.connected===false?' · offline':''}`;if(room.host===playerId&&p.id!==playerId){const kick=document.createElement('button');kick.textContent=t('Entfernen','Remove');kick.onclick=()=>guarded(()=>rpc('kick',p.id));li.append(kick);}return li;}));
+    $('mp-players').replaceChildren(...room.players.map(p=>{const li=document.createElement('li');li.textContent=`${p.name} · ${p.team==='RED'?t('Rot','Red'):t('Blau','Blue')}${p.bot?t(' · KI',' · AI'):''}${p.id===room.host?' ★':''} · ${p.lobbyReady?'✓':t('nicht bereit','not ready')}${p.connected===false?' · offline':''}`;if(room.host===playerId&&p.id!==playerId){const kick=document.createElement('button');kick.textContent=t('Entfernen','Remove');kick.onclick=()=>guarded(()=>rpc('kick',p.id));li.append(kick);}return li;}));
     const waiting=room.phase==='waiting',host=room.host===playerId;
     $('mp-ready').disabled=!waiting||busy;$('mp-ready').setAttribute('aria-pressed',String(!!room.players.find(p=>p.id===playerId)?.lobbyReady));$('mp-ready').textContent=room.players.find(p=>p.id===playerId)?.lobbyReady?t('Nicht mehr bereit','Not ready'):t('Bereit','Ready');
     $('mp-rotation').disabled=!host||!waiting;$('mp-rotation').value=(room.rotation||[]).join(',');$('mp-vote-send').disabled=!waiting;
     $('mp-vote-status').textContent=Object.entries(room.votes||{}).map(([id,map])=>(room.players.find(p=>p.id===id)?.name||'?')+': '+({44:1,46:2,47:3,48:4}[map])).join(' · ');
-    $('mp-host-settings').hidden=!host;
+    $('mp-host-settings').hidden=!host;$('mp-bots-apply').hidden=!host;
+    for(const id of ['mp-bots-red','mp-bots-blue','mp-ai','mp-bots-apply'])$(id).disabled=!host||!waiting||busy;
+    $('mp-bots-red').value=room.players.filter(p=>p.bot&&p.team==='RED').length;
+    $('mp-bots-blue').value=room.players.filter(p=>p.bot&&p.team==='BLUE').length;
+    $('mp-ai').value=room.aiDifficulty||'normal';
+    $('mp-settings-owner').textContent=!host?t('Arena, Grafik, Flaggenzahl, Bots, KI-Stärke und Rotation legt der Gastgeber fest. Über die Kartenabstimmung kannst du eine Arena vorschlagen.','The host chooses the arena, graphics, flag count, bots, AI difficulty and rotation. Use the map vote to suggest an arena.'):!waiting?t('Die Rundeneinstellungen sind während der Partie gesperrt.','Round settings are locked during the match.'):'';
+    for(const id of ['mp-arena','mp-flags','mp-mode','mp-rotation','mp-bots-red','mp-bots-blue','mp-ai'])$(id).setAttribute('aria-describedby','mp-settings-owner');
     $('mp-edit-name').value=room.name||'';$('mp-edit-public').checked=!!room.public;
     $('mp-share').disabled=$('mp-update-name').disabled=!waiting||busy;
     $('mp-team').disabled=!waiting||busy;
@@ -197,6 +203,7 @@
   $('mp-send').onclick=()=>rpc('quickMessage',$('mp-message').value).catch(e=>status(e.message));
   setInterval(async()=>{if(!room||reconnecting)return;const start=performance.now();try{await rpc('ping');$('mp-ping').textContent=Math.round(performance.now()-start)+' ms';}catch(_){}},5000);
   $('mp-begin').onclick=()=>guarded(()=>rpc('beginRoom'));
+  $('mp-bots-apply').onclick=()=>{const red=Number($('mp-bots-red').value),blue=Number($('mp-bots-blue').value),difficulty=$('mp-ai').value;guarded(()=>rpc('configureBots',red,blue,difficulty));};
   $('mp-finish').onclick=()=>guarded(()=>rpc('closeLobby'));
   $('mp-leave').onclick=()=>guarded(async()=>{await rpc('leave');disconnect();status(t('Lobby verlassen.','Left lobby.'));});
   window.addEventListener('pagehide',disconnect);
@@ -216,7 +223,7 @@
       if(window.HoverAudio)await new Promise(resolve=>Hover.audio.loadSounds(resolve));
       if(generation!==launchGeneration||!room)return;
       Hover.router.navigate('multiplayer-room',{trigger:false});
-      Hover.router.setCurrentView(new Hover.views.GameView({gameId:room.code,mazeId:room.maze,retro:room.retro,playerName:$('mp-name').value.trim(),craftProfile:Hover.Profiles.fromId(room.players.find(p=>p.id===playerId).profile)}));
+      Hover.router.setCurrentView(new Hover.views.GameView({gameId:room.code,mazeId:room.maze,retro:room.retro,aiDifficulty:room.aiDifficulty,playerName:$('mp-name').value.trim(),craftProfile:Hover.Profiles.fromId(room.players.find(p=>p.id===playerId).profile)}));
       setTimeout(()=>{if(game&&generation===launchGeneration)game.useMazeId(room.maze);},0);return;
     }
     if(event==='roundEnded'){
@@ -229,15 +236,50 @@
       panel.querySelector('tbody').replaceChildren(...result.players.sort((a,b)=>b.flags-a.flags).map(p=>{const tr=document.createElement('tr');for(const value of [p.name,p.flags,p.wins]){const td=document.createElement('td');td.textContent=value;tr.appendChild(td);}return tr;}));
       status(t('Lobby beendet. Danke fürs Spielen!','Lobby ended. Thanks for playing!'));return;
     }
+    if(event==='botEvent'&&game&&room?.host===playerId){
+      const [id,kind,data]=args,craft=game.players.players[id]?.craftObj;if(!craft?.networkBotId)return;
+      if(kind==='awardPod'){const pos=data[0],pod=game.world.pods.find(p=>Math.hypot(p.location.x-pos.X,p.location.y-pos.Y,p.location.z-pos.Z)<10);if(pod){pod.onHit(craft);pod.remove();game.world.pods.splice(game.world.pods.indexOf(pod),1);}}
+      else if(kind==='onHit'){const v=data[0].Velocity;craft.velocity.set(v.X,v.Y,v.Z);}
+      else if(kind==='hitByBullet'){const bullet=game.world.getBulletById(data[0]);if(bullet?.isAlive()){bullet.onHitCraft(craft);bullet.life=-1;}}
+      else if(kind==='bulletDestroyed')game.bulletDestroyed(...data);
+      return;
+    }
     if(event==='awardPod'&&game){const pos=args[0],world=game.world,pod=world.pods.find(p=>Math.hypot(p.location.x-pos.X,p.location.y-pos.Y,p.location.z-pos.Z)<10);if(pod){pod.onHit(game.craft);pod.remove();world.pods.splice(world.pods.indexOf(pod),1);}return;}
     if(game&&typeof game[event]==='function')game[event](...args);
   }
+  function ownedBot(craft){return !!craft.networkBotId&&room?.host===playerId;}
+  function patchBots(instance){
+    if(room?.host!==playerId||!room.players.some(p=>p.bot))return;
+    HoverMaps.collisionIndex(instance.world);if(!instance.world.customNavigation)HoverMapAI.install(instance.world);
+    const update=instance.onPlayerUpdated;
+    instance.onPlayerUpdated=function(player){
+      const bot=room?.players.find(p=>p.id===player.ConnectionId&&p.bot);
+      if(!bot)return update.call(this,player);
+      if(!player.craftObj.networkBotId){
+        update.call(this,player);player.craftObj.networkBotId=bot.id;
+        HoverMapAI.drive(this.world,[player.controller],room.aiDifficulty);
+        const drive=player.controller.update;
+        player.controller.update=dt=>{if(!this.connected||room?.host!==playerId)return;this.world.checkForFlagCaptures(player.craftObj,player.craftObj.team==='red'?'blue':'red');this.world.checkForPodHits(player.craftObj);drive(dt);};
+      }
+      player.craftObj.setText(player.Name);
+    };
+    const send=instance.sendUpdate;let pendingBots=false;
+    instance.sendUpdate=function(){
+      send.call(this);if(pendingBots||!this.connected||room?.host!==playerId)return;
+      const batch=Object.values(this.players.players).filter(p=>p.craftObj?.networkBotId).map(p=>({id:p.ConnectionId,state:p.craftObj.getStateUpdate()}));
+      if(!batch.length)return;pendingBots=true;rpc('setBotStates',batch).catch(e=>{if(room?.phase==='playing')status(e.message);}).finally(()=>pendingBots=false);
+    };
+  }
   function patchWorld(instance) {
     const world = instance.world, requests = new Set();
-    function request(method, position) {
-      const key = method + ':' + position.x + ':' + position.z;
+    function request(method, position, craft=instance.craft) {
+      const key = (craft.networkBotId||'player') + ':' + method + ':' + position.x + ':' + position.z;
       if (requests.has(key)) return;
       requests.add(key);
+      if(ownedBot(craft)){
+        const flag=world.flags.find(f=>f.location===position);
+        rpc('botAction',craft.networkBotId,method,[flag?.networkLocation||{X:position.x,Y:position.y,Z:position.z}],craft.getStateUpdate()).catch(()=>{}).finally(()=>setTimeout(()=>requests.delete(key),200));return;
+      }
       // Send the current position first; collision callbacks may precede the
       // regular 15 Hz update, especially just after a sharp turn/jump.
       rpc('setCraftState', instance.craft.getStateUpdate()).then(() => {
@@ -248,17 +290,17 @@
         .catch(() => {}).finally(() => { setTimeout(() => requests.delete(key), 200); });
     }
     world.checkForFlagCaptures = (craft, enemyTeam) => {
-      if (!craft.player || !instance.connected) return;
+      if ((!craft.player&&!ownedBot(craft)) || !instance.connected) return;
       const flag = world.findFlag(craft.position, 192, false, enemyTeam);
-      if (flag) request('capturedFlag', flag.location);
+      if (flag) request('capturedFlag', flag.location, craft);
       const own = world.findFlag(craft.position, 192, false, craft.team);
       if (own && own.location.clone().sub(craft.position).normalize().dot(craft.velocity.clone().normalize())>.5) craft.velocity.multiplyScalar(-.6);
     };
     const checkPods = world.checkForPodHits;
     world.checkForPodHits = function(craft, suppress) {
       if (suppress) return checkPods.call(world, craft, true);
-      if (!craft.player || !instance.connected) return;
-      for (const pod of world.pods) if (pod.location.distanceTo(craft.position)<128) request('hitPod', pod.location);
+      if ((!craft.player&&!ownedBot(craft)) || !instance.connected) return;
+      for (const pod of world.pods) if (pod.location.distanceTo(craft.position)<128) request('hitPod', pod.location, craft);
     };
     // Flag-return pads also affect remote extrapolated crafts in the old engine.
     // Only a local player's pad contact may request a shared flag restoration.
@@ -266,10 +308,10 @@
       if (!pad.onAbove || !String(pad.onAbove).includes('uncapture')) continue;
       const original = pad.onAbove;
       pad.onAbove = function(craft) {
-        if (!craft.player) return;
+        if (!craft.player&&!ownedBot(craft)) return;
         const flags = world.flags.filter(f => f.captured && f.team !== craft.team);
         const saved = flags.map(f => f.uncapture);
-        flags.forEach(f => { f.uncapture = () => request('uncapturedFlag', f.location); });
+        flags.forEach(f => { f.uncapture = () => request('uncapturedFlag', f.location, craft); });
         try { original.call(this, craft); } finally { flags.forEach((f,i) => { f.uncapture = saved[i]; }); }
       };
     }

@@ -53,8 +53,9 @@
   graph.beacons=nodes;graph.getUniquePath=position=>{for(const goal of nodes){const path=route(position,goal);if(path?.length)return [position.clone(),...path,position.clone()];}return [position.clone(),position.clone()];};
   world.customNavigation={walk,route,jumpRoute,nodes,edges};
  }
- function drive(world){
-  for(const drone of world.drones){const craft=drone.craft,chaser=!!drone.target;let target=null,path=[],index=0,replan=0,last=craft.position.clone(),stuck=0;
+ function drive(world,drones=world.drones,difficulty='normal'){
+  const tuning=window.HoverAI?.levels[difficulty]||{speed:300,turnSpeed:80};
+  for(const drone of drones){const craft=drone.craft,chaser=!!drone.target;let target=null,path=[],index=0,replan=0,last=craft.position.clone(),stuck=0;
    drone.update=function(dt){
     const nav=world.customNavigation;replan-=dt;
     if(!target||target.captured||(target.pod&&!world.pods.includes(target.pod))||replan<=0){
@@ -66,12 +67,13 @@
     }
     while(index<path.length-1&&!path[index].jumpTo&&craft.position.distanceTo(path[index])<((world.map.MazeId===48||world.map.MazeId>=10000)?300:120))index++;
     let waypoint=path[index];if(!waypoint){craft.update(dt,0,0);return;}
-    if(target?.pod&&craft.position.distanceTo(target.pod.location)<128){const pod=target.pod;if(world.pods.includes(pod)){craft.addSpring();pod.afterHit.call(pod);pod.remove();world.pods.splice(world.pods.indexOf(pod),1);}target=null;replan=0;craft.update(dt,0,0);return;}
+    if(target?.pod&&craft.position.distanceTo(target.pod.location)<128){const pod=target.pod;if(craft.networkBotId){world.checkForPodHits(craft);craft.update(dt,0,0);return;}if(world.pods.includes(pod)){craft.addSpring();pod.afterHit.call(pod);pod.remove();world.pods.splice(world.pods.indexOf(pod),1);}target=null;replan=0;craft.update(dt,0,0);return;}
     if(waypoint.jumpTo&&craft.position.distanceTo(waypoint)<160){const landing=waypoint.jumpTo,angle=Math.atan2(-(landing.x-craft.position.x),-(landing.z-craft.position.z)),delta=Math.atan2(Math.sin(angle-craft.angle),Math.cos(angle-craft.angle));if(Math.abs(delta)<.12&&craft.onGround&&craft.springCount>0){craft.jump();index++;waypoint=path[index];}else{craft.update(dt,Math.max(-1,Math.min(1,-(delta-craft.turnRate*5)*2)),0);return;}}
     const dx=waypoint.x-craft.position.x,dz=waypoint.z-craft.position.z,distance=Math.hypot(dx,dz),desired=Math.atan2(-(dx-craft.velocity.x*.35),-(dz-craft.velocity.z*.35));let delta=desired-craft.angle;delta=Math.atan2(Math.sin(delta),Math.cos(delta));
     // Anticipate existing rotational inertia; use normal physics, never teleport.
     const error=delta-craft.turnRate*5,turn=Math.max(-1,Math.min(1,-error*2)),speed=Math.hypot(craft.velocity.x,craft.velocity.z);
-    const targetSpeed=Math.abs(delta)>.7?80:Math.min(300,Math.max(60,distance*.5));
+    const cap=!craft.onGround||Math.abs(craft.velocity.y)>1?300:Math.min(tuning.speed,distance<1800?300:tuning.speed);
+    const targetSpeed=Math.abs(delta)>.7?tuning.turnSpeed:Math.min(cap,Math.max(60,distance*.5));
     const throttle=Math.abs(delta)>1.1?0:speed<targetSpeed?.4:0;drone.navigationState={target:target?.location,path,index,delta,speed,targetSpeed,turn};
     craft.update(dt,turn,throttle);
     if(craft.position.distanceTo(last)<dt*5)stuck+=dt;else stuck=0;last.copy(craft.position);

@@ -10,7 +10,25 @@ def floor(x1,z1,x2,z2,y=0):floors.append({'Points':[point(x1,z1,y),point(x1,z2,y
 def block(x1,z1,x2,z2,y0=0,y1=1024):
  for a,b in [((x1,z1),(x1,z2)),((x1,z2),(x2,z2)),((x2,z2),(x2,z1)),((x2,z1),(x1,z1))]:wall(*a,*b,y0,y1)
  floor(x1,z1,x2,z2,y1)
-floor(0,0,size,size)
+# Three recessed courtyards with three walkable 64-unit steps.
+pits=[(15360,2048,18432,5120),(15360,28672,18432,31744),(15360,15360,18432,18432)]
+rectangles=[(0,0,size,size)]
+for px,pz,qx,qz in pits:
+ next_rectangles=[]
+ for x,z,u,v in rectangles:
+  a,b,c,d=max(x,px),max(z,pz),min(u,qx),min(v,qz)
+  if a>=c or b>=d:next_rectangles.append((x,z,u,v));continue
+  for box in [(x,z,a,v),(c,z,u,v),(a,z,c,b),(a,d,c,v)]:
+   if box[0]<box[2] and box[1]<box[3]:next_rectangles.append(box)
+ rectangles=next_rectangles
+for box in rectangles:floor(*box)
+for x,z,u,v in pits:
+ for step in range(3):
+  inset=step*256;a,b,c,d=x+inset,z+inset,u-inset,v-inset;y=-(step+1)*64
+  for start,end in [((a,b),(a,d)),((a,d),(c,d)),((c,d),(c,b)),((c,b),(a,b))]:wall(*start,*end,y,y+64,step=True)
+  if step==2:floor(a,b,c,d,y)
+  else:
+   for box in [(a,b,c,b+256),(a,d-256,c,d),(a,b+256,a+256,d-256),(c-256,b+256,c,d-256)]:floor(*box,y)
 for a,b in [((0,0),(0,size)),((0,size),(size,size)),((size,size),(size,0)),((size,0),(0,0))]:wall(*a,*b,0,2560)
 # A continuous upper ring with two cross-city bridges, not dead-end ledges.
 floor(4096,4096,size-4096,8192,upper);floor(4096,size-8192,size-4096,size-4096,upper)
@@ -36,8 +54,45 @@ for orientation in range(4):
  stairs.append(orientation)
 # Wide upper landings connect the stairs to the cross and ring.
 for box in [(12288,14336,15360,16384),(18432,17408,21504,19456),(14336,18432,16384,21504),(17408,12288,19456,15360)]:floor(*box,upper)
-# Lower-level blocks establish routes, cover and distinct districts.
-for x,z in [(2048,11264),(2048,22528),(28672,11264),(28672,22528),(10240,2048),(22528,2048),(10240,28672),(22528,28672),(10240,24576),(24576,10240)]:block(x,z,x+2048,z+2048,0,1024)
+# Nine ground-floor districts. Doorways are offset and stair approaches stay clear.
+ground_doors=[]
+def partition(axis,at,gaps):
+ gaps=sorted(gaps);merged=[]
+ for lo,hi in gaps:
+  if merged and lo<=merged[-1][1]:merged[-1]=(merged[-1][0],max(hi,merged[-1][1]))
+  else:merged.append((lo,hi))
+ cursor=0
+ for lo,hi in merged+[(size,size)]:
+  if lo>cursor:
+   if axis=='x':wall(at,cursor,at,lo,0,1152)
+   else:wall(cursor,at,lo,at,0,1152)
+  if hi>lo:
+   middle=(lo+hi)/2
+   for delta in [-512,512]:ground_doors.append((at+delta,middle) if axis=='x' else (middle,at+delta))
+  cursor=hi
+partition('x',10240,[(5120,6912),(15616,17408),(26368,28160),(19072,21888)])
+partition('x',23552,[(6656,8448),(18176,19968),(28416,30208),(11904,14720)])
+partition('z',10240,[(5120,6912),(15872,17920),(26624,28416),(11904,14720)])
+partition('z',23552,[(7168,8960),(11776,13568),(28672,30464),(19072,21888)])
+# L-shaped cover in the corner districts breaks diagonal end-to-end views.
+for x,z,dx,dz in [(3072,3072,4096,3072),(3072,30720,4096,-3072),(30720,3072,-4096,3072),(30720,30720,-4096,-3072)]:
+ wall(x,z,x+dx,z,0,1152);wall(x,z,x,z+dz,0,1152)
+# Alternating upper-floor partitions create connected rooms and winding corridors.
+upper_doors=[]
+for i,x in enumerate([10240,14848,20480,24576]):
+ for z0 in [4096,25600]:
+  if i%2==0:wall(x,z0,x,z0+2304,upper,upper+1024);door=z0+3200
+  else:wall(x,z0+1792,x,z0+4096,upper,upper+1024);door=z0+896
+  upper_doors.extend([(x-512,door),(x+512,door)])
+for i,z in enumerate([10240,14848,20480,24576]):
+ for x0 in [4096,25600]:
+  if i%2==0:wall(x0,z,x0+2304,z,upper,upper+1024);door=x0+3200
+  else:wall(x0+1792,z,x0+4096,z,upper,upper+1024);door=x0+896
+  upper_doors.extend([(door,z-512),(door,z+512)])
+for x,z0,z1,door in [(11264,15360,17152,17792),(22016,16640,18432,16000)]:
+ wall(x,z0,x,z1,upper,upper+1024);upper_doors.extend([(x-512,door),(x+512,door)])
+for z,x0,x1,door in [(11264,15360,17152,17792),(22016,16640,18432,16000)]:
+ wall(x0,z,x1,z,upper,upper+1024);upper_doors.extend([(door,z-512),(door,z+512)])
 # Upper railings leave all four stair approaches and bridge connections open.
 for x in [4096,size-4096]:wall(x,4096,x,size-4096,upper,upper+320)
 for z in [4096,size-4096]:wall(4096,z,size-4096,z,upper,upper+320)
@@ -47,7 +102,7 @@ flags=[]
 for team,x in [('RED',6144),('BLUE',27648)]:
  for z in [6144,12288,21504,27648]:flags.append(dict(point(x,z,upper+1),Team=team))
  for z in [16384,19456]:flags.append(dict(point(x,z,1),Team=team))
-pods=[point(x,z,96) for x,z in [(10240,10240),(23552,23552),(12288,24576),(24576,12288),(6144,16384),(27648,19456)]]+[point(x,z,upper+96) for x,z in [(6144,6144),(27648,6144),(6144,27648),(27648,27648),(16896,16896)]]
+pods=[point(x,z,96) for x,z in [(8192,5120),(5120,8704),(8192,26624),(26624,8192),(28672,17408),(18432,26624),(12288,17408),(21504,16384)]]+[point(x,z,upper+96) for x,z in [(8704,7168),(23040,7168),(8704,26624),(23040,27648),(7168,18432),(26624,17408),(16896,13312),(19456,16896)]]
 beacons=[point(x,z) for x,z in [(6144,9216),(6144,16384),(6144,24576),(11264,6144),(22528,6144),(27648,9216),(27648,16384),(27648,24576),(11264,27648),(22528,27648),(13312,7680),(20480,26112),(7680,20480),(26112,13312)]]
 # Upper-floor waypoints are retained for a future multi-storey navigation extension.
 beacons += [point(x,z,upper) for x,z in [(6144,6144),(27648,6144),(6144,27648),(27648,27648),(6144,16896),(27648,16896),(16896,6144),(16896,27648),(16896,16896)]]
@@ -59,8 +114,24 @@ for orientation in range(4):
   x,z=[(13312,v),(20480,size-v),(v,20480),(size-v,13312)][orientation]
   beacons.append(point(x,z,(step+1)*64))
 for x,z in [(13312,14848),(20480,18944),(14848,20480),(18944,13312),(13312,16896),(20480,16896),(16896,20480),(16896,13312),(16896,9216),(16896,24576),(9216,16896),(24576,16896)]:beacons.append(point(x,z,upper))
+# Additional navigation points cover doorways, rooms and stepped recesses.
+beacons += [point(x,z) for x,z in ground_doors]
+beacons += [point(x,z,upper) for x,z in upper_doors]
+beacons += [point(x,z) for x,z in [(6144,8192),(6144,24576),(8192,16896),(16896,9216),(16896,24576),(24576,16896),(27648,8192),(27648,24576),(2048,8192),(2048,24576),(31744,8192),(31744,24576)]]
+for x,z,u,v in pits:
+ for step in range(3):
+  inset=step*256+128;y=-(step+1)*64
+  for px,pz in [((x+u)/2,z+inset),((x+u)/2,v-inset),(x+inset,(z+v)/2),(u-inset,(z+v)/2)]:beacons.append(point(px,pz,y))
+# Remove old ground points inside recesses; add their actual supporting height.
+for p in beacons:
+ if p['Y']==0:
+  for x,z,u,v in pits:
+   if x<=p['X']<=u and z<=p['Z']<=v:
+    inset=min(p['X']-x,u-p['X'],p['Z']-z,v-p['Z']);p['Y']=-64*min(3,int(inset//256)+1)
+beacons=list({(p['X'],p['Y'],p['Z']):p for p in beacons}.values())
+assert all(((p['X']-f['X'])**2+(p['Y']-f['Y'])**2+(p['Z']-f['Z'])**2)**.5>=1024 for p in pods for f in flags)
 def image(name):return 'data:image/png;base64,'+base64.b64encode((ROOT/'modifications/maps/assets'/name).read_bytes()).decode()
-result={'format':'hover-map','version':1,'name':'Neon Causeway','author':'Hover archive project','description':'33,792 × 33,792 units, 50% longer sides than a 22,528-unit stock arena. Four stair flights connect the ground city to a continuous upper ring and cross-bridges at 1,536 units. / Vier Treppen verbinden die untere Stadt mit Ring und Brücken im zweiten Stock.','assets':{'wall':image('cyber-panel.png'),'floor':image('cyber-panel.png'),'sky':image('city-panorama.png')},'maze':{'Walls':walls,'Floors':floors,'Spawns':[dict(p,Team='RED') for p in red]+[dict(p,Team='BLUE') for p in blue],'Flags':flags,'Pods':pods,'Beacons':beacons}}
+result={'format':'hover-map','version':1,'name':'Neon Causeway','author':'Hover archive project','description':'33,792 × 33,792 units, 50% longer sides than a 22,528-unit stock arena. Districts and winding upper corridors, four stairs, three recessed courtyards and separate item locations. / Bezirke und verwinkelte obere Gänge, vier Treppen, drei abgesenkte Höfe und eigene Itemplätze.','assets':{'wall':image('cyber-panel.png'),'floor':image('cyber-panel.png'),'sky':image('city-panorama.png')},'maze':{'Walls':walls,'Floors':floors,'Spawns':[dict(p,Team='RED') for p in red]+[dict(p,Team='BLUE') for p in blue],'Flags':flags,'Pods':pods,'Beacons':beacons}}
 out=ROOT/'modifications/maps/Neon-Causeway.hovermap.json';out.write_text(json.dumps(result,separators=(',',':')));print(out,len(walls),'walls',len(floors),'floors',out.stat().st_size,'bytes')
 
 # Keep the bundled multiplayer arena's authoritative object locations in sync.
