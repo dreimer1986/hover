@@ -12,6 +12,8 @@ Separate music, engine and effects sliders accompany HUD size, chase distance, t
 
 In **Bindings & controller**, select an action and press its new key/button. Duplicate assignments are swapped. Controller menus always use D-pad/left stick to navigate, A to confirm and B to return. Left/right changes selects and sliders. A opens an on-screen keyboard for text fields. Gameplay bindings are configurable separately. **Back/Select** opens the large map by default.
 
+During play, **V** toggles wide view, **C** chase view and **F** fullscreen. These keyboard actions are also rebindable. Existing assignments are preserved; new actions receive unused keys on conflicts. Browser shortcuts with Ctrl/Alt/Cmd remain available.
+
 ## Training and workshop
 
 **☰ → Training → Start training** opens a separate small arena; select Retro first if desired. Drive, jump, cloak, place a wall, collect a pickup and finally collect the blue flags. Prompts explain inventory, duration gauges and radar. There are no opponents.

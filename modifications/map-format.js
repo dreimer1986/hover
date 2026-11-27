@@ -23,7 +23,7 @@
    for(let i=0;i<vertices.length;i++)for(let j=i+2;j<vertices.length;j++){if(i===0&&j===vertices.length-1)continue;const a=vertices[i],b=vertices[(i+1)%vertices.length],c=vertices[j],d=vertices[(j+1)%vertices.length];if(cross(a,b,c)*cross(a,b,d)<0&&cross(c,d,a)*cross(c,d,b)<0)throw Error('Self-intersecting floor');}
    return {Texture:'CUSTOM_FLOOR',Points};
   });
-  const Spawns=array(m.Spawns,7,32).map(team),Flags=array(m.Flags,12,48).map(team),Pods=array(m.Pods,0,128).map(point),Beacons=array(m.Beacons,8,256).map(point);
+  const Spawns=array(m.Spawns,7,32).map(team),Flags=array(m.Flags,12,48).map(team),Pods=array(m.Pods,0,128).map(point),Beacons=array(m.Beacons,8,512).map(point);
   if(Spawns.filter(p=>p.Team==='RED').length<1||Spawns.filter(p=>p.Team==='BLUE').length<6||['RED','BLUE'].some(t=>Flags.filter(p=>p.Team===t).length<6))throw Error('Need one red/six blue spawns and six flags per team');
   function onFloor(p){return Floors.some(f=>{if(p.Y<f.Points[0].Y||p.Y>f.Points[0].Y+256)return false;const sides=f.Points.slice(0,-1).map((v,i)=>cross(v,f.Points[i+1],p)).filter(x=>Math.abs(x)>1e-6);return !sides.length||sides.every(x=>Math.sign(x)===Math.sign(sides[0]));});}
   if([...Spawns,...Flags,...Pods,...Beacons].some(p=>!onFloor(p)))throw Error('Spawn, flag, pickup or beacon has no supporting floor');

@@ -27,7 +27,7 @@ Pause, Training, Bestzeiten, Controller-Menüs, Werkstatt-Testfahrt, Sicherung u
 
 Auf [hover.dreimer.de](https://hover.dreimer.de/) **Multiplayer** wählen, Namen eingeben, Lobby erstellen oder per Raumcode beitreten. Teams selbst wählen; der Gastgeber legt Arena, Grafik und Flaggenzahl fest. Nach jeder Runde bleibt die Lobby geöffnet. **Lobby beenden · Punkte** zeigt die Endabrechnung.
 
-Der Python-/WebSocket-Server läuft ohne Microsoft-Dienste im Docker-Container auf **8080/TCP**, öffentlich hinter einem HTTPS-Reverse-Proxy. [Installation und Aktualisierung auf Synology](SERVER.md) · [Container v0.6.0 herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.6.0).
+Der Python-/WebSocket-Server läuft ohne Microsoft-Dienste im Docker-Container auf **8080/TCP**, öffentlich hinter einem HTTPS-Reverse-Proxy. [Installation und Aktualisierung auf Synology](SERVER.md) · [Container v0.6.1 herunterladen](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.6.1).
 
 
 ## Lokal starten

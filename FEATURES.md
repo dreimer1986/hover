@@ -12,6 +12,8 @@ Musik, Motor und Effekte lassen sich getrennt regeln. Dazu kommen HUD-Größe, A
 
 Unter **Tastenbelegung & Controller** eine Aktion auswählen, dann die gewünschte Taste drücken. Doppelte Belegungen werden getauscht. Controller-Menüs: Steuerkreuz/linker Stick navigiert, A bestätigt, B geht zurück; links/rechts ändert Auswahllisten und Regler. Für Textfelder öffnet A eine Bildschirmtastatur. Menübedienung verwendet stets diese festen Tasten; die Belegungen darunter betreffen das Spiel. **Back/Select** öffnet standardmäßig die große Karte.
 
+Im Spiel schalten **V** die Großansicht, **C** die Außenansicht und **F** das Vollbild um. Diese Tastaturaktionen lassen sich ebenfalls neu belegen. Vorhandene Belegungen werden übernommen; bei Konflikten erhalten die neuen Aktionen freie Tasten. Browser-Tastenkombinationen mit Strg/Alt/Cmd bleiben frei.
+
 ## Training und Werkstatt
 
 **☰ → Training → Training starten** öffnet eine eigene kleine Arena. Optional vorher Retro aktivieren. Fahre los, springe, tarne dich, platziere eine Wand, sammle ein Extra und schließlich die blauen Flaggen. Anzeigen erklären Vorrat, Dauer und Radar. Es gibt keine Gegner in der Übung.

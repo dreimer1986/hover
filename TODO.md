@@ -208,3 +208,32 @@ Weitere Vorschläge, noch nicht zur Umsetzung freigegeben / Further suggestions,
 
 - [x] Lobby: gesperrte Gastgeberfelder erkennbar machen, Aktionen und Spielerzeilen ausrichten / Lobby: clearly distinguish disabled host settings, align actions and player rows.
 - [x] Neon Causeway für Flaggen umbauen: Bezirke, obere Trennwände, abgesenkte Höfe und separate Itemplätze; offene Fassung erhalten / Rework Neon Causeway for flags: districts, upper partitions, recessed courtyards and separate pickup positions; preserve the open layout.
+
+## 13. Wünsche aus Hover.txt / Requests from Hover.txt (27.11.2026)
+
+Quelle: [vollständige Notizen](docs/planning/Hover-2026-11-27.txt). „Port“ meint **POD**. Schiffswerte und Punktesystem sind auf ausdrücklichen Wunsch ebenfalls **auf später verschoben**. / Source: [complete original notes](docs/planning/Hover-2026-11-27.txt). “Port” means **POD**. Craft handling and the point system are explicitly **deferred** too.
+
+### Aktuelle Arbeit / Current work
+- [x] Neon Causeway: Raumgrößen mit Originalarenen vergleichen, kleinere Abschnitte, verwinkelte Wege auf beiden Ebenen, massive Gebäudeblöcke und abwechslungsreiche Grundrisse statt großer leerer Flächen / Compare room sizes with stock arenas; smaller sections, winding routes on both levels, solid buildings and varied footprints rather than large empty areas.
+- [x] Wände und Treppen mit tatsächlichem Volumen; Unterführungen dürfen bleiben; bestehende Itemplätze möglichst erhalten und sinnvoll ergänzen; KI-Erreichbarkeit prüfen / Give walls and stairs actual volume; underpasses may remain; retain and supplement pickup locations where possible; verify AI access.
+- [x] Belegbare Tastenkürzel für Großansicht, Außenansicht und Vollbild, zusätzlich zur Karte / Rebindable wide-view, chase-view and fullscreen shortcuts alongside the map shortcut.
+- [x] Kartenwerkzeuge, nutzbare Kartenquellen und futuristische Itemideen recherchieren; Ergebnisse dokumentieren / Research map-authoring tools, reusable sources and futuristic item ideas; document findings.
+
+[Recherche / Research](docs/planning/IDEAS.md)
+
+### Schiffswerte und Punkte — später / Craft handling and points — later
+- [ ] Gemeinsam ein RPG-artiges System entwerfen, mit POD als Referenz: Investierte Punkte sollen echte Vorteile kaufen; Null darf nicht die beste Einstellung für einen bewerteten Vorteil sein / Design an RPG-style system together, with POD as a reference: spending points must buy advantages; zero must not be the best setting for a rated benefit.
+- [ ] Sinnvolles Gesamtbudget und Wertebereiche festlegen: deutliche Spezialisten mit Schwächen gegenüber ausgeglichenen Allroundern; keine Übermacht durch extreme Werte / Establish a meaningful total budget and ranges: specialists with weaknesses versus balanced all-rounders; prevent overpowering extremes.
+- [ ] Bestehende fünf Physikwerte und ihre Vor-/Nachteile überprüfen; Budget nicht bloß durch neue Beschriftungen schönrechnen; Umgang mit vorhandenen Importen vor Umsetzung entscheiden / Reassess the five physics parameters and their tradeoffs; do not merely relabel the budget; decide compatibility for saved imports before implementation.
+- [ ] Modiabhängige Balance prüfen: Chicago derzeit für Rennen zu langsam, schnelles Originalschiff und ReactOS Silver klar im Vorteil; drei weitere vom Nutzer erwähnte Modelle später konkret auswählen / Review mode-specific balance: Chicago is currently too slow for racing; the fast stock craft and ReactOS Silver have an advantage; identify the user's three additional models later.
+
+### Modi — später / Modes — later
+- [ ] Rennen auf eigenen interessanten Strecken, keine bloßen Kreise: geordnete, richtungsabhängige Checkpoints, Runden/Ziel, Varianten mit und ohne Waffen / Racing on dedicated interesting tracks rather than simple circles: ordered directional checkpoints, laps/finish, armed and unarmed variants.
+- [ ] Rennwaffen bevorzugt mit zeitweiligen Nachteilen statt dauerhaft zerstörten Schiffen: Verlangsamung, gestörte Lenkung, kurzer Motorausfall; Wirkungsdauer, Gegenmittel und Fairness festlegen / Prefer temporary race penalties over permanently destroyed crafts: slowdown, scrambled steering, brief engine disable; define durations, counterplay and fairness.
+- [ ] Battle auf aufbewahrter offener Karte: Waffen einsammeln, mehrere futuristische Waffenarten, Lebensbalken statt Ballons, Schild als Abwehr und Sprung zum Ausweichen; abwechslungsreiche, auch asymmetrische Arenen / Battle on the preserved open map: collectible futuristic weapon types, health bars rather than balloons, shields and evasive jumps; varied, potentially asymmetric arenas.
+- [ ] Bewaffnetes Flaggen-Spiel als eigene Variante, klassisches unbewaffnetes Spiel erhalten. Zerstörte Schiffe respawnen und verlieren gesammelte Flaggen; Entscheidung offen: am Abschussort ablegen oder an ursprünglichen Ort zurücksetzen / Armed flag collection as a separate variant, retaining classic unarmed play. Destroyed crafts respawn and lose collected flags; decide between dropping flags at the destruction site and resetting them to their spawn.
+- [ ] Futuristische Entsprechungen zu Item-Rollen aus Mario Kart bewerten: Projektile/Strahlen, Schild, Sprung, Störeffekte; keine Nintendo-Figuren, Panzer oder Assets übernehmen / Evaluate futuristic equivalents of Mario Kart item roles: projectiles/beams, shields, jumps and disruption; do not copy Nintendo characters, shells or assets.
+
+### Kartenwerkzeuge — Umsetzung zuletzt / Map tools — implement last
+- [ ] Erst vorhandenen Editor plus Importadapter erproben. Falls ungeeignet, eigenen Editor mit zoombarer Draufsicht, Höhen und optionaler 3D-Bearbeitung entwickeln / First trial an existing editor plus import adapter. If unsuitable, build a zoomable top-down editor with heights and optional 3D editing.
+- [ ] Nutzbare externe Karten/Bauteile samt Lizenzen prüfen; keine beliebigen Fremdkarten als direkt Hover-kompatibel behandeln / Assess reusable maps/modules and licences; do not assume arbitrary external maps are directly compatible with Hover.

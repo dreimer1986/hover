@@ -40,3 +40,7 @@ Neon Causeway verwendet ab 0.5.2 eine eigene, hellere Materialbeleuchtung: besse
 Neon Causeway enthält nun neun untere Bezirke, versetzte Durchgänge und zusätzliche Trennwände auf der oberen Ebene. Drei Höfe sind um 192 Einheiten abgesenkt und über drei 64er-Stufen erreichbar. Vier Haupttreppen verbinden weiterhin beide Ebenen. Extras stehen auf eigenen Positionen mindestens 1.024 Einheiten von jedem Flaggenplatz entfernt. Die längsten Sichtachsen werden auf beiden Ebenen unterbrochen.
 
 Die bisherige offene Fassung bleibt [hier als importierbare Datei erhalten](models/maps/Neon-Causeway-open-battle-layout.hovermap.json), als Grundlage für einen späteren Battle-Modus. Battle-Spielregeln sind noch nicht implementiert. Die feste Karte 4 und das Beispiel im Importmenü verwenden die neue Flaggenkarte. Bereits gespeicherte eigene Kopien werden nicht überschrieben; bei Bedarf das aktuelle Beispiel erneut laden.
+
+## Massive Stadtarchitektur ab 0.6.1
+
+256 Einheiten dicke Trennwände, 18 massive Gebäudeblöcke mit abgeschrägten Ecken und zusätzliche obere Raumteiler verkleinern die freien Abschnitte. Die vier Treppen besitzen geschlossene Seiten und eine Unterseite; unter dem höheren Teil bleiben 512 Einheiten Durchfahrtshöhe. Die 16 bisherigen Itemplätze bleiben bestehen, vier weitere ergänzen die Nebenstraßen. Das Kartenformat erlaubt jetzt bis zu 512 KI-Wegpunkte. Die offene Battle-Vorlage bleibt unverändert erhalten.

@@ -59,7 +59,7 @@
  'Ursprünglicher Startbildschirm, Schiffsvorschau und originale Schiffswerte.',
  'Touch, Tastatur und Standard-Controller; Großansicht und Vollbild bleiben am PC optional.',
  'Große Radarübersicht mit M, Controller-Back-Taste oder Touch; zum Fahren wieder schließen.',
- 'Drei Arenen in Modern und Retro, 3–6 Flaggen je Team und automatischer Einzelspieler-Kartenfortschritt.',
+ 'Vier Arenen in Modern und Retro, 3–6 Flaggen je Team und automatischer Einzelspieler-Kartenfortschritt.',
  'Die Mitte des O schaltet die Levelauswahl ein und aus, mit Originalklängen für Sieg und Niederlage.',
  'Multiplayer mit Teamwahl, Lobby über mehrere Runden, wechselnden Karten und abschließenden Punkten.',
  'Korrigierte Darstellung bei verschiedenen Pixeldichten, Retro-HUD und Ergebnisdialoge.',
@@ -76,12 +76,13 @@
  'Senkrechtes Burgermenü und eigene Ansichten für Werkstatt, Training, Bestzeiten, Sicherung und Multiplayer; zentrierte Vorschau.',
  'Lobby mit klar erkennbaren Gastgeberfeldern und ausgerichteten Aktionen; Bots je Team, unabhängige KI-Stärke und verwinkelte Neon-Causeway-Karte mit abgesenkten Höfen und eigenen Itemplätzen.',
  'Ausgewogenes viertes Schiff ReactOS Silver mit abgerundeter Geometrie und Flügellogos; Kartenimport/-export im Einzelspieler mit zweistöckiger Cyberpunk-Beispielkarte und neuer KI für alle erweiterten Arenen. Erhöhte Flaggenplätze stehen beiden Teams offen. Neon Causeway ist Karte 4 nach Karte 3 sowie im Multiplayer auswählbar; hellere Fahrwege und Treppen mit getrennten Neon-Leuchtmasken.',
+ 'Großansicht (V), Außenansicht (C) und Vollbild (F) mit belegbaren Tasten; massive Gebäude, Wände und Treppen sowie dichtere obere Gänge in Neon Causeway.',
  'Beide Original-Webfassungen und Store-Pakete bleiben separat erhalten.'
  ]:[
  'Original home screen, craft preview and original craft statistics.',
  'Touch, keyboard and standard controllers; expanded view and fullscreen remain optional on desktop.',
  'Large radar with M, the controller Back button or touch; close it to resume driving.',
- 'Three arenas in Modern and Retro, 3–6 flags per team and automatic single-player progression.',
+ 'Four arenas in Modern and Retro, 3–6 flags per team and automatic single-player progression.',
  'The centre of the O toggles level selection with original victory/defeat sounds.',
  'Multiplayer with team selection, persistent lobbies, changing maps and final scores.',
  'Corrected rendering across pixel densities, Retro HUD and result dialogs.',
@@ -98,6 +99,7 @@
  'Vertical hamburger menu and separate workshop, training, records, backup and multiplayer views; centered preview.',
  'Lobby with clear host-only controls and aligned actions; bots per team, independent AI difficulty and a winding Neon Causeway layout with recessed courtyards and separate pickup locations.',
  'Balanced fourth craft ReactOS Silver with rounded geometry and wing logos; custom single-player map import/export with a two-storey cyberpunk example and new AI across all extended arenas. Elevated flag locations are shared between teams. Neon Causeway is map 4 after map 3 and selectable in multiplayer; brighter roads and stairs with separate neon emissive masks.',
+ 'Rebindable wide view (V), chase view (C) and fullscreen (F); solid buildings, walls and stairs with denser upper corridors in Neon Causeway.',
  'Both original web releases and Store packages remain separately preserved.'
  ];
  const summary=document.createElement('summary');summary.textContent=de?'Was wurde erweitert?':'What has changed?';details.appendChild(summary);
