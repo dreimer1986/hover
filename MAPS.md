@@ -34,3 +34,9 @@ Grenzen: 16 MiB Paket, 2.048 Wände, 1.024 Bodenpolygone, 50.000 Einheiten Seite
 Erzeugen des Beispiels: `python3 scripts/build_cyber_map.py`. [Herkunft der Texturen](NEW-ASSETS.md).
 
 Neon Causeway verwendet ab 0.5.2 eine eigene, hellere Materialbeleuchtung: besser sichtbare dunkle Flächen, eine getrennte Leuchtmaske für cyanfarbene/magentafarbene Streifen und eine reduzierte Entfernungsabdunklung im Modern-Modus. Retro und der vereinfachte mobile Renderer werden ebenfalls aufgehellt. Die Originaltexturen, der Stadthimmel und die Beleuchtung anderer Arenen bleiben erhalten. Das sind Materialeffekte, keine zusätzlichen räumlichen Lampen oder dynamischen Schatten.
+
+## Verwinkelte Fassung ab 0.6.0
+
+Neon Causeway enthält nun neun untere Bezirke, versetzte Durchgänge und zusätzliche Trennwände auf der oberen Ebene. Drei Höfe sind um 192 Einheiten abgesenkt und über drei 64er-Stufen erreichbar. Vier Haupttreppen verbinden weiterhin beide Ebenen. Extras stehen auf eigenen Positionen mindestens 1.024 Einheiten von jedem Flaggenplatz entfernt. Die längsten Sichtachsen werden auf beiden Ebenen unterbrochen.
+
+Die bisherige offene Fassung bleibt [hier als importierbare Datei erhalten](models/maps/Neon-Causeway-open-battle-layout.hovermap.json), als Grundlage für einen späteren Battle-Modus. Battle-Spielregeln sind noch nicht implementiert. Die feste Karte 4 und das Beispiel im Importmenü verwenden die neue Flaggenkarte. Bereits gespeicherte eigene Kopien werden nicht überschrieben; bei Bedarf das aktuelle Beispiel erneut laden.

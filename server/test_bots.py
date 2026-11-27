@@ -18,6 +18,11 @@ class BotTests(MultiplayerTests):
         self.assertEqual(room['phase'], 'playing')
         self.assertIn('error', await self.rpc(host, 'configureBots', 0, 0, 'normal'))
         state = dict(bot.state)
+        pod = room['pods'][0]
+        state['Position'] = {k: pod[k] for k in ('X', 'Y', 'Z')}
+        self.assertTrue((await self.rpc(host, 'botAction', bot.id, 'hitPod', [pod], state))['result'])
+        self.assertFalse(pod['active'])
+        self.assertFalse((await self.rpc(host, 'botAction', bot.id, 'hitPod', [pod], state))['result'])
         flag = next(f for f in room['flags'] if f['Team'] == 'RED')
         self.assertFalse((await self.rpc(host, 'botAction', bot.id, 'capturedFlag', [flag], state))['result'])
         for flag in room['flags']:

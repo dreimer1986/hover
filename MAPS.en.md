@@ -34,3 +34,9 @@ Limits: 16 MiB package, 2,048 walls, 1,024 floor polygons, 50,000-unit side span
 Build the example with `python3 scripts/build_cyber_map.py`. [Texture provenance](NEW-ASSETS.en.md).
 
 Since 0.5.2, Neon Causeway uses brighter per-material lighting: more readable dark surfaces, a separate emissive mask for cyan/magenta strips and reduced distance darkening in Modern mode. Retro and the simplified mobile renderer are also brighter. Source textures, the city sky and lighting in other arenas are retained. These are material effects, not additional spatial lamps or dynamic shadows.
+
+## Winding layout from 0.6.0
+
+Neon Causeway now contains nine lower districts, offset doorways and additional upper-floor partitions. Three courtyards are recessed by 192 units and accessible over three 64-unit steps. Four main stairs still connect both levels. Pickups have separate locations at least 1,024 units from every flag location. Long sightlines are interrupted on both floors.
+
+The previous open layout remains [available as an importable file](models/maps/Neon-Causeway-open-battle-layout.hovermap.json), as a basis for a future battle mode. Battle rules are not implemented yet. Bundled map 4 and the import-menu example use the new capture-the-flag layout. Existing user-stored copies are not overwritten; load the current example again if desired.

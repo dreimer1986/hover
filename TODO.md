@@ -1,6 +1,6 @@
 # Geplante Erweiterungen / Planned improvements
 
-**Stand / Updated: 24.11.2026 · v0.5.2.** Punkte 1–7 sind implementiert. Die offenen Abnahmepunkte zum veröffentlichten Stand wurden auf Wunsch des Nutzers geschlossen; damit werden keine zusätzlichen, hier nicht dokumentierten Testläufe behauptet. Karteneditor, Rennen, Standalone-Version und weitere offene Funktionen bleiben spätere Vorhaben. / Items 1–7 are implemented. Outstanding acceptance items for the published release were closed at the user's request; this does not claim additional undocumented test runs. The map editor, racing, standalone edition and other unchecked features remain future work.
+**Stand / Updated: 27.11.2026 · v0.6.0.** Punkte 1–7 sind implementiert. Die offenen Abnahmepunkte zum veröffentlichten Stand wurden auf Wunsch des Nutzers geschlossen; damit werden keine zusätzlichen, hier nicht dokumentierten Testläufe behauptet. Karteneditor, Rennen, Standalone-Version und weitere offene Funktionen bleiben spätere Vorhaben. / Items 1–7 are implemented. Outstanding acceptance items for the published release were closed at the user's request; this does not claim additional undocumented test runs. The map editor, racing, standalone edition and other unchecked features remain future work.
 
 Vorgeschlagene Reihenfolge / Suggested order: Einstellungen und Pause → vollständige Controller-Bedienung → Werkstatt-Testfahrt → Multiplayer-Komfort → Bestzeiten → Karteneditor. Rennstrecken zunächst technisch erproben, dann Zeitfahren, danach Multiplayer-Rennen; Renn-KI zuletzt und separat. / Settings and pause → full controller navigation → workshop test drive → multiplayer usability → personal records → map editor. Validate track feasibility first, then time trials, multiplayer races, and finally racing AI as a separate project.
 
@@ -196,8 +196,8 @@ Bedienung / Usage: [Karten DE](MAPS.md) · [Maps EN](MAPS.en.md) · [Assets DE](
 ## 12. Neue Spielideen / New gameplay ideas
 
 Zur Umsetzung freigegeben / Authorized:
-- [ ] Multiplayer-Bots zum Auffüllen oder für gemeinsame Partien gegen KI / Multiplayer bots to fill slots or play cooperatively against AI.
-- [ ] Einstellbare KI-Stärke unabhängig vom Schiff, Einzelspieler und Multiplayer / Adjustable AI difficulty independent of craft, single player and multiplayer.
+- [x] Multiplayer-Bots zum Auffüllen oder für gemeinsame Partien gegen KI / Multiplayer bots to fill slots or play cooperatively against AI.
+- [x] Einstellbare KI-Stärke unabhängig vom Schiff, Einzelspieler und Multiplayer / Adjustable AI difficulty independent of craft, single player and multiplayer.
 
 Weitere Vorschläge, noch nicht zur Umsetzung freigegeben / Further suggestions, not yet authorized:
 - [ ] Geisterschiff der eigenen Bestzeit tatsächlich aufzeichnen und abspielen / Record and replay a ghost of the player's best run.
@@ -205,3 +205,6 @@ Weitere Vorschläge, noch nicht zur Umsetzung freigegeben / Further suggestions,
 - [ ] Team-Symbole zusätzlich zu Farben an Flaggen, Radar und Schiffen / Team symbols alongside colours on flags, radar and crafts.
 - [ ] Optionale Herausforderungen, etwa ohne Sprung-Extras oder mit Zielzeit / Optional challenges such as no jump pickups or target times.
 - [ ] Battle-Modus mit passenden Regeln und Wertung; offene ursprüngliche Neon-Causeway-Karte dafür aufheben / Battle mode with suitable rules and scoring; preserve the original open Neon Causeway layout for it.
+
+- [x] Lobby: gesperrte Gastgeberfelder erkennbar machen, Aktionen und Spielerzeilen ausrichten / Lobby: clearly distinguish disabled host settings, align actions and player rows.
+- [x] Neon Causeway für Flaggen umbauen: Bezirke, obere Trennwände, abgesenkte Höfe und separate Itemplätze; offene Fassung erhalten / Rework Neon Causeway for flags: districts, upper partitions, recessed courtyards and separate pickup positions; preserve the open layout.

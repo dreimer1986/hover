@@ -51,3 +51,13 @@ Die neue höhenabhängige KI gilt für alle Arenen der erweiterten Fassung. Sie 
 Neon Causeway ist Karte 4 der normalen Einzelspieler-Reihenfolge und startet automatisch nach Karte 3. Im Multiplayer ist sie direkt auswählbar und Teil der Kartenabstimmung und Rotation. Dafür den NAS-Server auf 0.5.1 aktualisieren.
 
 Neon Causeway ist ab 0.5.2 heller abgestimmt, mit deutlicheren Fahrwegen und Treppen, gezielt leuchtenden Neonstreifen und weniger Entfernungsabdunklung. Gilt auch für Retro und den vereinfachten mobilen Renderer.
+
+## KI-Stärke und Multiplayer-Bots
+
+Im Hauptmenü lässt sich die **KI-Stärke** unabhängig vom Schiff auf **Leicht, Normal oder Schwer** stellen. Die Auswahl bleibt gespeichert und gilt auch für importierte Karten und Retro. Die Stufen ändern das Fahrtempo der Gegner und ihr Tempo beim Einlenken; normale Kollisionsphysik, Flaggenregeln und das Einsammeln von Sprung-Extras gelten weiterhin. Engstellen und Sprünge begrenzen das Tempo zusätzlich. Bestzeiten unterscheiden die KI-Stufe.
+
+In der Multiplayer-Lobby wählt der Gastgeber die Zahl der Bots für Rot und Blau sowie die KI-Stärke und bestätigt mit **Bots / KI übernehmen**. Bots belegen reguläre Plätze; insgesamt höchstens acht Teilnehmer und vier je Team. Bei einer kleinen Lobby gegebenenfalls mit höherem Spielerlimit neu erstellen. Bots sind automatisch bereit. So sind auch eine Partie allein gegen Bots oder mehrere menschliche Spieler gemeinsam gegen das andere Bot-Team möglich. Zum Freimachen von Plätzen kann der Gastgeber Bots entfernen oder ihre Anzahl reduzieren.
+
+Bots sammeln Flaggen und Extras, nutzen Treppen und erforderliche Sprünge. Sie erhalten Flaggenpunkte und Rundensiege in der gemeinsamen Abrechnung. Ihre Fahrphysik läuft im Browser des Gastgebers; dieser muss die Partie geöffnet und aktiv halten. Der Server prüft die Bot-Berechtigung, Sammelabstände, Flaggen und Punkte. Wie bei menschlicher Bewegung ist dies kein vollständig serverseitiger Anti-Cheat-Modus. Bei einem Gastgeber-Austritt endet die aktuelle Runde, ein verbleibender Mensch übernimmt die Lobby und kann die nächste Runde mit Bots starten. Ohne Menschen bleibt keine Bot-Lobby bestehen.
+
+Gäste sehen die Vorgaben des Gastgebers mit abgedunkelten, gesperrten Steuerelementen und einem erklärenden Hinweis. Die Kartenabstimmung bleibt verfügbar.

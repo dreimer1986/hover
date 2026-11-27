@@ -51,3 +51,13 @@ The new height-aware AI applies to every arena in the extended edition. It uses 
 Neon Causeway is map 4 in the normal single-player sequence and starts automatically after map 3. Multiplayer offers it directly in selection, voting and rotation. Update the NAS server to 0.5.1 for this arena.
 
 Neon Causeway has brighter lighting from 0.5.2, with clearer roads and stairs, targeted emissive neon strips and reduced distance darkening. Retro and the simplified mobile renderer are covered too.
+
+## AI difficulty and multiplayer bots
+
+The home screen offers **Easy, Normal or Hard AI difficulty**, independently of the selected craft. This setting persists and also applies to imported maps and Retro. Difficulty changes opponent driving speed and turning pace; normal collision physics, flag rules and collecting jump pickups still apply. Narrow approaches and jumps constrain speed further. Personal records distinguish difficulty.
+
+In a multiplayer lobby, the host selects red/blue bot counts and difficulty, then chooses **Apply bots / AI**. Bots occupy normal slots: at most eight participants overall and four per team. Recreate a small lobby with a larger player limit if necessary. Bots are ready automatically. This permits solo play against bots or several humans cooperating against a bot team. Hosts can remove bots or reduce their count to free slots.
+
+Bots collect flags and pickups, use stairs and perform required jumps. Their flag points and round wins appear in the shared score table. The host browser runs their normal craft physics and must remain open and active. The server checks bot-control permissions, pickup distances, flags and scores. As with human movement, this is not fully server-authoritative anti-cheat. When the host leaves, the current round aborts, a remaining human becomes host and can start another round with bots. No bot-only lobby is left behind.
+
+Guests see dimmed, disabled host settings with an explanatory note. Map voting remains available.

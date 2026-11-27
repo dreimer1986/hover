@@ -15,18 +15,20 @@ The extended edition is the default on desktop and mobile. It includes:
 - Four arenas in Modern and Retro, including Neon Causeway as map 4, three to six flags per team and automatic single-player map progression.
 - A hidden single-player level selector: press the centre of the **O** in the Hover logo to unlock it. Without unlocking, games start on map 1.
 - Multiplayer lobbies for up to eight players with team selection, changing arenas, Modern/Retro and cumulative final scores across rounds.
+- AI difficulty independent of craft; multiplayer bots to fill slots or cooperate against AI.
 - German or English controls based on browser language, and shared audio output for music, engine and effects.
 
 Desktop controls: arrow keys, Space and A/S/D. Fullscreen requires a button press and browser support; expanded view also works without the fullscreen API. Landscape orientation is recommended on phones.
 
 
-Pause, training, personal records, controller menus, workshop test drives, backups and offline package: [User guide](FEATURES.en.md). Multiplayer 0.5.2 adds readiness, countdown, ping, map votes/rotation, quick messages and reconnection.
+Pause, training, personal records, controller menus, workshop test drives, backups and offline package: [User guide](FEATURES.en.md). Multiplayer supports readiness, countdown, ping, map votes/rotation, quick messages and reconnection.
 
 ## Multiplayer and NAS
 
 Open [hover.dreimer.de](https://hover.dreimer.de/), choose **Multiplayer**, enter a name and create a lobby or join using a room code. Choose your team; the host selects the arena, graphics and flag count. The lobby stays open after each round. **End lobby · Scores** displays the final totals.
 
-The Python/WebSocket server runs without Microsoft services in a Docker container on **8080/TCP**, exposed through an HTTPS reverse proxy. [Synology installation and updates](SERVER.en.md) · [Download container v0.5.2](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.5.2).
+The Python/WebSocket server runs without Microsoft services in a Docker container on **8080/TCP**, exposed through an HTTPS reverse proxy. [Synology installation and updates](SERVER.en.md) · [Download container v0.6.0](https://github.com/dreimer1986/hover/releases/tag/multiplayer-v0.6.0).
+
 
 ## Run locally
 
